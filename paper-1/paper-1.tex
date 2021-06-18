@@ -159,6 +159,82 @@
 
 \section{Introduction}
 Here is the introduction about why Max and Scheme are so cool.
+
+Max (also known as Max/MSP) is a programming environment for
+creating interactive music and multi-media programs through
+a visual "patching" programming language, 
+similar in appearance to a modular synthesizer
+and accessible to non-programmer users. 
+First created in the mid 1980's by Miller Puckette while at IRCAM,
+it is now developed and sold by the San Francisco software company Cycling 74,
+and is widely used in both academic and commercial music contexts as well
+as in multi-media installations. %%citation?%%
+A rich library of Max objects exists, both built in and available as open-source 
+extensions, enabling users to rapidly create interactive systems with gestural 
+input from physical sources such as MIDI controllers, custom hardward 
+(over UDP networks), and on screen widgets. 
+
+%% TODO visual example of a Max patch with various inputs %% 
+
+One powerful feature of Max is its ability to be programmed
+while the engine is playing music. Patches can be re-programmed in "edit-mode"
+without necessarily interrupting patch activity (depending on the design
+of the program), and this can
+even be performed live, an activy known as "live-coding", which has given
+birth to an entire musical sub-culture of live programming performances
+with tools such as Max, SuperCollider, Csound, and others. 
+%% citation%%
+This approach to music making overlaps with the related discipline of 
+"algorithmic music", in which programmatic algorithms are used
+not just for affecting musical parameters such as volume and timber, 
+but also for the generation of musical semantic content such as notes
+and rhythms.
+
+In both the fields of live-coding and algorithmic music, the ability for
+the performer/composer to schedule events in the future with high temporal
+accuracy is of major benefit. While this is possible in the Max visual
+programming language, it is cumbersome and thus the implementation is not
+optimal for live-coding or algorithmic music work where the speed with which
+the user can accomplish this is an important consideration (i.e., fast
+enough not to bore an audience or to be frustrating while composing).
+
+In addition to the Max visual programming language, Max can be extended
+by creating new Max objects (refered to as "externals") in C or C++ 
+using the Max SDK and API, and can also be programmed in text-based 
+languages through Max visual objects that embed language
+interpreters. Max provides one such interpreter through its support for 
+JavaScript in the 'js' object, and others contributed by 3rd parties
+exist, such as for Lua, Python, and Ruby. 
+
+Scheme for Max (a.k.a S4M) is an open-source external developed by the 
+authors that embeds the s7 Scheme interpreter, created by Bill Schottstaedt at
+the CCRMA at Stanford University. Similar in functionality to the built
+in js object, the s4m object enables the user to program Max in Scheme,
+with facilities to interact with the Max engine and environment through
+a foreign function interface implemented in C and calling the Max API functions.
+
+We believe that s4m extends Max in a way that is highly valuable to 
+the algorithmic composer and live-coding performer and is of great benefit
+to the broader Max user community. The ability to update
+a running Scheme program during playback is a major benefit
+and is a capability has been, while technically possible, impractical
+with pre-existing text language solutions such as JavaScript. The semantics
+of Scheme bear a striking similarity to Max, and thus one can even use
+Max visual widgets and messages to generate small Scheme programs in the
+patcher. However, the most notable benefit is the ease with which the user 
+can create and schedule functions for evaluation in the future, with 
+input into these functions coming from Max patching widgets.
+
+This paper provides an examination of the problem of musical scheduling
+in computer music, and an overview of the Max platform and its solutions to this problem, 
+along with a discussion of the limitations of these solutions.
+It then introduces Scheme for Max and examines how the use of Scheme
+overcomes these limitations elegantly, and provides details of
+the implementations of scheduling in S4M, both at the Scheme and
+C programming levels. Finally, it concludes with discussion of future
+possibilities with Scheme for Max. 
+
+
 \section{Conclusion}
 Well that was cool, I wonder how I should conclude such a thing???
 
