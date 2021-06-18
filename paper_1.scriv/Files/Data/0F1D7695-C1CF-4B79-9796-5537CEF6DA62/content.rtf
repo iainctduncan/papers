@@ -1,0 +1,114 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;\f2\froman\fcharset0 TimesNewRomanPS-ItalicMT;
+\f3\fswiss\fcharset0 Helvetica;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red253\green183\blue144;}
+{\*\expandedcolortbl;;\csgenericrgb\c99400\c71900\c56300;}
+\pard\tx720\sl312\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs28 \cf0 Section - Feature, Scheduling Events\
+\
+
+\f1\b0 Music being a fundamentally temporal art form, facilities for scheduling events in the future are a core part of any computer music platform. The ability to do this flexibly in a high level language is thus a powerful tool for the composer, and this is an area in which the linguistic features of Scheme bring notable advantages. To understand scheduling events with Scheme for Max, we first must understand the facilities in Max for event scheduling, both in the patcher and in C code. \
+\
+The Max scheduler thread handles all events intended to be run with high temporal accuracy. Facilities do exist for scheduling events in the low priority thread, however as temporal accuracy of this thread is never guaranteed, this is not yet supported in Scheme for Max and will not be discussed. At a patcher level, users can schedule a Max message (number, symbol, or list of both) for the future by sending it to a 
+\f0\b pipe
+\f1\b0  object. The amount of time by which it is delayed is specified either in milliseconds, or in a tempo relative format based on a 480 ticks-per-quarter-note division, as determined by the Max master transport tempo. The 
+\f0\b pipe
+\f1\b0  object\'92s delay time time can be set dynamically by sending a numerical message to the right inlet of 
+\f0\b pipe
+\f1\b0 , and messages sent to the left inlet will then be passed out the pipe outlet(s) after the specified time. The pipe object also supports quantization, in which the delay time can be adjusted to match a musical time boundary (i.e. on the next 16\super th\nosupersub  note boundary given the current master tempo). (Example)\
+\
+While the pipe object functions adequately, it has several limitations. The most notable is that it also splits list input into individual elements, sending them out individual outlets. This thus requires the user to specify how many atoms will be in an incoming list message in advance, and should the user wish to delay a list itself, it must then be reassembled. Alternatively, an exterior storage mechanism can be used to allow the outgoing pipe message to refetch the original list from another object after delay. For the use case of delaying arbitrary list messages, where the list represents an event to be scheduled and its arguments, this is cumbersome and thus sub-optimal.\
+\
+On a C level (i.e. in code for an external), our facilities are even more cumbersome. API functions exist to create 
+\f2\i clocks
+\f1\i0 , which trigger execute of a specified callback method after a given amount of time. However, this callback method must be a function that receives a single argument, normally a pointer to the instantiation of the external Max object that is using the delay call. The programmer must manage memory allocation for the clock object, and create some facility for working around the signature limitation of the delayed function.\
+\
+Scheme for Max succeeds in overcoming these limitations with an elegant and flexible system for scheduling events as Scheme function calls. The Scheme function 
+\f0\b delay
+\f1\b0  accepts a time value in milliseconds and a function, returning a unique handle to the scheduled event. The function is evaluated in the global context after the time has elapsed, unless the scheduling is cancelled by calling 
+\f0\b cancel-delay 
+\f1\b0 with the handle. A similar functions, 
+\f0\b delay-t 
+\f1\b0 and 
+\f0\b delay-qt
+\f1\b0 , exist for specifying the delay time in tempo-relative ticks or quantized ticks respectively. This allows the user of Scheme for Max to easily schedule anything that can be expressed in a Scheme function. As Scheme For  Max also provides a mechanism for sending an arbitrary Max message to any named Max object (through the scripting name attribute of Max objects), this enables the user to schedule 
+\f2\i any
+\f1\i0  Max action in the future with a few lines of code. \
+\
+Internally, this is implemented by having the 
+\f0\b s4m
+\f1\b0  object store the function to be delayed in a dedicated hash-table, keyed by a unique callback handle generated with the 
+\f0\b gensym
+\f1\b0  function from s7. This handle is then passed to a C function (through the FFI), which creates a data structure to store the delay handle and a reference to host 
+\f0\b s4m
+\f1\b0  object. In C, a clock is instantiated, with the method to delay specified as the generic s4m delay callback, (\cb2 INSERT\cb1 ) and the single argument for it as a void pointer to this data structure. Thus when the generic s4m delay callback executes (in C), it can cast from the void pointer to the callback structure, retrieving the pointer to the s4m instance, and the unique callback handle. The reference to the instantiated s7 interpreter is fetched from the s4m instances data structure, and this is used to call a generic delay handling function in Scheme, passing the callback handle as an argument. Finally, the generic Scheme function  uses this handle to fetch from the hash-table the originally stored function, and this is evaluated. The important point is that all of this hidden entirely from the user, who is able to schedule arbitrarily complex events in minimal code.\
+\
+A further point should be made regarding the advantages of this approach to scheduling. A common scenario in computer music is that a composer/performer will have processes (algorithms, sequencers, etc.) that are run programmatically, and also abstract elements with which they interact live during performance or playback, and which are used by the processes. These interactions frequently consist of changing settings (variables) during the performance expressively - a simple example might be changing the speed, volume, or frequency of an element used in producing sound. A challenge facing users of any computer music system is how to elegantly handle the cases of both wanting to schedule an event that uses a variable 
+\f2\i as it is now
+\f1\i0  versus 
+\f2\i as it will be after the delay time. 
+\f1\i0 I may which to \'93play this note in 4 bars with the filter cutoff setting as I have my dial right now\'94, or conversely \'93however the dial is once we get there\'94. Both of these are musically useful, but managing this at the Max patcher level is difficult, particularly the former. Scheduling with Scheme For Max solves both of theses cases elegantly as we are able to use lexical closures for the former, and delayed evaluation for the second. We are even able to mix these in the same function. \
+\
+For example, let us imagine we have we wish to schedule an event to use a setting that I am controlling with a visual slider control. We create a Scheme global variable (let us call it 
+\f0\b slider-1
+\f1\b0 ), to store this setting. To interact with it graphically, it\'92s a simple matter of sending the GUI slider output to a message object with the message 
+\f0\b set! slider-var $1
+\f1\b0 , and passing this to the 
+\f0\b s4m
+\f1\b0  object, which will evaluate the s-expr 
+\f0\b (set! slider-var 127)
+\f1\b0  when the slider is at the top of it\'92s range (assuming common midi values of 0-127 are specified as the slider range). We thus have a global variable under dynamic user control. When we wish to schedule an event for the future (let\'92s imagine we have a function called 
+\f0\b play-note
+\f1\b0  that will use it), we use a lambda function to capture the current value in a lexical closure, which we can do as:\
+\
+\pard\tx720\sl312\slmult1\pardirnatural\partightenfactor0
+
+\f3\fs24 \cf0 <$Scr_Cs::1>
+\f4\fs28 (delay 2000 (lambda() (play-note slider-var)))
+\f3\fs24 <!$Scr_Cs::1>
+\f0\b\fs28 \
+\
+\pard\tx720\sl312\slmult1\pardirnatural\partightenfactor0
+
+\f1\b0 \cf0 Conversely, if we want the opposite, we can create a lambda that evaluates a symbolic list, resulting in use of the values pointed to by the symbols at execution time (the future):\
+
+\f0\b \
+\pard\tx720\sl312\slmult1\pardirnatural\partightenfactor0
+
+\f3\b0\fs24 \cf0 <$Scr_Cs::1>
+\f4\fs28 (delay 2000 (lambda() (eval \'91(play-note slider-var)))
+\f3\fs24 <!$Scr_Cs::1>
+\f0\b\fs28 \
+\
+\pard\tx720\sl312\slmult1\pardirnatural\partightenfactor0
+
+\f1\b0 \cf0 As s7 Scheme also includes first-class support for environments, it is even possible for us to schedule events to execute at a later time, in the environment of some object we have made. A common practice in the author\'92s use is creating musical sequencers as message receiving objects. They are implemented through builder functions that return a lambda, and this is used with symbolic messages for real-time control. The sequencer implementation captures its own internal environment (produced by a let statement in the builder function), and makes this available to the rest of the program for dynamic manipulation of the sequencer\'92s internals. So if we wanted to schedule a function from outside one of these objects, with the intention that in the future it will run as if it is a method of the object, we are able to schedule a lamba function that evaluates a symbolic list, with the evaluation context specified to be the environment of the sequencer object.\
+
+\f0\b \
+\pard\tx720\tx1080\tx1440\tx1800\tx2160\li720\pardirnatural\partightenfactor0
+
+\f3\b0\fs24 \cf0 <$Scr_Ps::0>
+\f4\fs28 ; create sequencer, with name \'91seq-1, which is a function\
+(define seq-1 (make-step-sequencer \'91seq-1 :seq-data ....))\
+\
+; start playback by sending message to seq-1\
+(seq-1 \'91start)\
+\
+; schedule an event to run in seq-1\'92s environment\
+; using our dial value as it will be in the future\
+(delay 1000 (lambda()(eval \'91(set :time-factor dial-value) (seq-1 \'91get-env)))\
+\pard\tx720\sl312\slmult1\pardirnatural\partightenfactor0
+
+\f3\fs24 \cf0 <!$Scr_Ps::0>
+\f1\fs28 \
+Finally, this facility makes it possible to elegantly create 
+\f2\i self-scheduling
+\f1\i0  
+\f2\i processes
+\f1\i0 , sometimes also called 
+\f2\i temporal recursion
+\f1\i0  in the algorithmic composition nomenclature. These are functions producing musical output that then re-schedule themselves for their next iteration. As Scheme allows us to refer to a function for a recursive call in its own body, this is trivial to achieve with the above facilties. Below are examples of a process scheduling itself both with arguments and without:\
+\
+\
+}

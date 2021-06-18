@@ -1,0 +1,187 @@
+<html>
+
+<head>
+<title>paper_1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- NOTE: margin property = top-right-bottom-left -->
+<style type="text/css">
+
+	body {background-color: #e2e2e2}
+    
+    p.topLevelItemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 30px;
+    	}
+    	
+    p.folderTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Times, Times New Roman, Palatino, Cochin, Serif;
+    	font-size: 18px;
+    	}
+    
+    p.itemTitle {
+    	margin: 30px 0px 5px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	font-weight: bold;
+    	}
+    	
+    p.itemText {
+    	margin: 0px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    	
+    p.itemTextStart {
+    	margin: 30px 0px 10px 0px;
+    	font-family: Helvetica, Arial, Sans-Serif;
+    	font-size: 12px;
+    	}
+    
+    .page {border: 1px solid #c0c0c0; background: #fff}
+    
+    hr {
+        border: none;
+        height: 1px;
+        color: #d4d4d4;
+        background-color: #d4d4d4;
+      	}
+      	
+    hr.afterTitle {
+    	margin-top: -3px;
+    }
+      	
+    hr.afterText {
+    	margin-top: 30px;
+    }
+      	
+    ul {
+      	list-style-type: none;
+      	padding-left: 30px;
+      	}
+      	
+</style>
+
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+
+<!-- Top margin -->
+<!-- Not needed, because of the padding above titles. -->
+<!--<tr><td height="15px"></td></tr>-->
+
+<tr>
+
+<!-- 42 + 30 of list indent = 72 - one inch. -->
+<!-- Actually that ends up too much, so we do 25 + 30 = 55px. -->
+<td width="25px">
+
+<td valign="top">
+
+<ul>
+<li>
+<p class="topLevelItemTitle">Thesis rough</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTitle">1 Intro TODO</p>
+<p class="itemText">Section - Intro and Abstract TODO</p>
+</li>
+<li>
+<p class="itemTitle">2 Max Background</p>
+<p class="itemText">Section 2 - Background on Max/MSP</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In order to understand the role filled by Scheme for Max, it is necessary for us to understand in some detail the Max music programming environment in which it runs.<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Max, previously named Max/MSP, is the predominant visual programming environment for creating interactive multi-media in music academia, as well as in commercial music circles through "Max for Live", an extension to the Ableton Live digital audio workstation embedding Max in Ableton Live. Created...</p>
+</li>
+<li>
+<p class="itemTitle">3 Scripting Max</p>
+<p class="itemText">Section 2 -<span class="Apple-converted-space">  </span>Scripting and Extending Max</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">While visually programming Max (placing objects on the patcher canvas and connecting them with patch cords) is the most common paradigm for programming in Max, there exist several other options for programming interactive systems in the Max environment. The intent of Scheme for Max is to provide a compelling addition to these options, thus to appreciate where S4M succeeds, some awareness of the advantages and limitations of the others is necessary. Some ...</p>
+</li>
+<li>
+<p class="itemTitle">4 Feature - Timing</p>
+<p class="itemText">Section -<span class="Apple-converted-space">  </span>Scheme for Max Timing</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In this section, we will examine we will examine the features and functionality provided by s4m, especially relative to similar options, such as using the js object, as that is the most similar alternative and is by far the most widely used of the available embedded interpreters for Max. Overcoming the limitations of JavaScript in Max was the predominant motivating factor in developing Scheme for Max</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Timing Accuracy<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">One of the challenges of embedding an interp...</p>
+</li>
+<li>
+<p class="itemTitle">5 Feature - Live code &amp; hot reloading</p>
+<p class="itemText">Section - Feature: Live Coding and Interactive Development</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">A major and growing sub-movement within the computer music community is that of “live-coding”, in which performances include real-time alteration of music producing code during musical playback, sometimes with code displayed visually for the audience on projected screens, etc. To a lisp user, this paradigm will be familiar as it is no different from interactive development at the REPL while a program is running in the interpreter. The t...</p>
+</li>
+<li>
+<p class="itemTitle">6 Feature -Scheduling events</p>
+<p class="itemText">- importance of schedling future events</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">appropriateness of the language for scheduling future functions</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- ability to schedule closures for context in which function is defined as well as in environment in which it will run</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- do we want the variable as it is now, or as it will be in some environment</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">- support for first class environments</p>
+</li>
+<li>
+<p class="itemTitle">7 Implementation TODO</p>
+<p class="itemText">Section - Implementation Details</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">In this section, we will look at a high-level at the implementation of the s4m object, the Max external provided by Scheme For Max. </p>
+</li>
+</ul>
+<hr class="afterText"/>
+
+<li>
+<p class="topLevelItemTitle">Paper</p>
+</li>
+<hr class="afterTitle"/>
+<ul>
+<li>
+<p class="itemTextStart">Introduction</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1"></p>
+</li>
+<li>
+<p class="itemTitle">Background</p>
+<p class="itemText">Subsection Max/MSP</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">\section{Background - Programming Music in Max/MSP}</span></p></p>
+<p class="itemText"><p class="p2"><span class="s1"></span><br></p></p>
+<p class="itemText"><p class="p1"><span class="s1">\subsection{The Max Environment}</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">Cycling 74’s Max (previously named Max/MSP) is the predominant visual programming environment<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">for interactive multi-media in music academia, as well as in commercial music circles through "Max</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>for Live", a version of Max embedded in the Ableton Live digital audio workstation. Created<span class="Apple-converted-space"> </span></span></p></p>
+<p class="itemText"><p class="p1"><span class="s1">originally by Miller Puckette in {year} while working at IRCAM, Max was created so that composers</span></p></p>
+<p class="itemText"><p class="p1"><span class="s1"><span class="Apple-converted-space"> </span>of inte...</p>
+</li>
+</ul>
+</ul>
+
+</td>
+<td width="55px">
+</td>
+</tr>
+
+<!-- Bottom margin -->
+<tr><td height="15px"></td></tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+- importance of schedling future events
+
+appropriateness of the language for scheduling future functions
+- ability to schedule closures for context in which function is defined as well as in environment in which it will run
+- do we want the variable as it is now, or as it will be in some environment
+- support for first class environments

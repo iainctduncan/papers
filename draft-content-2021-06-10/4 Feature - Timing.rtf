@@ -1,0 +1,32 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+\stshfdbch0{\fonttbl\f0\froman\fcharset0 TimesNewRomanPS-BoldMT{\*\falt Times New Roman Bold};\f1\froman\fcharset0 TimesNewRomanPSMT{\*\falt Times New Roman};}
+{\colortbl;\red255\green255\blue255;}
+{\stylesheet {\s0 Normal;}}
+{\*\expandedcolortbl;;}
+{\info
+{\author }
+{\creatim\yr2021\mo6\dy11\hr7\min52\sec48\timesinceref645115968}
+{\revtim\yr2021\mo6\dy11\hr7\min52\sec48\timesinceref645115968}}\margl1440\margr1440\margb1440\margt1440\paperw12240\paperh15840\viewkind1
+\pard\tx720\sl312\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs28 \cf0 Section -  Scheme for Max Timing
+\f1\b0 \
+\
+In this section, we will examine we will examine the features and functionality provided by s4m, especially relative to similar options, such as using the js object, as that is the most similar alternative and is by far the most widely used of the available embedded interpreters for Max. Overcoming the limitations of JavaScript in Max was the predominant motivating factor in developing Scheme for Max\
+\
+
+\f0\b Timing Accuracy \
+
+\f1\b0 One of the challenges of embedding an interpreter in a Max external is that of handling the Max threading model.  As previously mentioned, Max objects may receive messages at any time from either the high or low priority threads, for example in the low-priority thread from a GUI event and in the high-priority thread from MIDI input, a metronome object, or other scheduler-originating events. Facilities exist in Max to move messages into one or the other threads by sending messages through the \'93delay\'94, \'93defer\'94, and \'93deferlow\'94 objects, but the external author cannot count on users using these to prevent threading issues. Furthermore, documentation on exactly how threads are implemented in Max and when they may switch is scarce as Max is not open-source. For an embedded interpreter this is problematic, as one can possibly have a thread context switch during an unprotected operation, such as while the garbage collector for the embedded interpreter is running, potentially causing data corruption. \
+\
+For the js object, the implementation forces all js object operations to the low priority thread, presumably by defer calls at the C level, though as the js object is closed-source this is conjecture. While the js object provides rich facilities for interacting with the Max engine through the Max API, the result of this is that any timing critical operations are not reliable. The low-priority thread is also responsible for redrawing the Max visual interface and interacting with the file system. Thus user activity such as working with an object that does any file i/o, or even switching or resizing windows, can result in timing hiccups when a js operation is blocked. This renders the js object unpractical for developing any event sequencers - one can never know if timing will be reliable. This is a notable shortcoming in the Max environment, as the development of complex sequencers is a common use case for Max, but is also a use case where the benefits of being able to work in a textual language are strong.   \
+\
+Scheme for Max overcomes this by allowing the user to choose which thread the s4m object will run in through the @thread attribute, with internal promotion or deferral handled accordingly. This does mean that for a high-priority s4m object, file input is also handled in the high-priority thread, potentially causing Max to block if a large source file is read by the s4m object (i.e.,  if a \'93read \{filename\}\'94 message is sent to a high-priority s4m object during patch playback). However, as the s4m object can also receive code as string messages, evaluating it in real time as it is received, this is not hard to avoid if the user, for some reason, must be able to read in a large source file while a piece is playing. An s4m object (or other object) can read the source file from the low-priority thread, and send a message to the high-priority s4m instance, which will immediately place the string message containing the code on to the high-priority scheduler queue and consume said message on the next scheduler (high-priority) pass. This ability to lock the s4m object to either thread in effect allows the user to create an \'93actor model\'94 in which multiple s4m objects cooperate, potentially in different threads, sending each other messages.\
+\
+Empirical testing of complex sequencing code (12-16 tracks), complete with code redefinitions during playback, has proven reliable. Provided the Max engine is configured with enough overall audio latency to ensure the s7 garbage collector can complete its work in the latency buffer (requiring typically not more than 2ms additional latency), timing is as accurate as from any other Max patching objects. This was verified in personal tests with 16 tracks of sequenced data recorded into a digital audio workstation, while altering code in the interpreter during playback. Recorded audio was examined, and no additional timing jitter was noted compared to sequencing from core objects (such as the metronome). While using Scheme for Max in this manner does thus require increasing the size of the audio output buffer to allow 2ms extra rendering time, this is well within acceptable ranges, with electronic musicians commonly working with 10-20ms of latency to allow use of high-fidelity digital audio synthesizers.   \
+\
+\
+ 
+\f0\b \
+\
+}

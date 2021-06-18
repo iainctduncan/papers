@@ -1,0 +1,3 @@
+Max background stuff to write
+
+- how the patcher works
