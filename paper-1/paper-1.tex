@@ -81,6 +81,9 @@
 %% the next command will enable that style.
 %%\citestyle{acmauthoryear}
 
+\usepackage{listings}
+\lstset{basicstyle=\tiny}
+
 %%
 %% end of the preamble, start of the body of the document source.
 \begin{document}
@@ -434,7 +437,7 @@ and is statically linked with the C code of the s4m object.
 The s7 foreign function interface enables one to define new Scheme functions in C 
 for calling into C from Scheme, and to call any Scheme code from C (for C-to-Scheme calls). 
 The interpreter is instantiated
-in the s4m object's constructor ("s4m_new" as per the Max naming conventions), and
+in the s4m object's constructor ("s4m\_new" as per the Max naming conventions), and
 a reference to it is stored in the s4m object's data structure.
 Additionally, during initialization the external creates a Scheme-side variable 
 that holds a pointer to the instantiated s4m object itself. This way,
@@ -463,7 +466,7 @@ s4m object's reference to its s7 interpreter and the s7 API to build
 Scheme argument lists and call into Scheme, getting back s7\_pointers that
 are then converted back to Max atoms. In both cases, helper
 functions that convert Max atoms to s7 objects and vice versa are used, 
-implemented in the s4m object as "max_atom_to_s7_obj" and "s7_obj_to_max_atom"
+implemented in the s4m object as "max\_atom\_to\_s7\_obj" and "s7\_obj\_to\_max\_atom"
 respectfully. The code example below shows sample functions for both directions.
 
 \begin{verbatim}
@@ -637,7 +640,7 @@ such as the creation and eventual playback of some unknown number of delayed eve
 
 It should also be mentioned that there exists within Max a facility for creating
 new instances of Max sub-patches on demand, designed with the express purpose of
-overcoming this barrier. One can use the \textbg{poly} object to create polyphonic
+overcoming this barrier. One can use the \textbf{poly} object to create polyphonic
 patches. However, this involves complex patching, so we will not examine this further here,
 save to comment that this again becomes very cumbersome when dealing
 with a potentially large and unknown number of events, each with arbitrary numbers
@@ -653,13 +656,13 @@ is the focus of the remains of this paper.
 \section{Comparison with the Max JavaScript object}
 
 We can see that the visual patching language of Max is not well suited to implementing
-our use case of a perfomer wanting to schedule an event with gestural inputs meant
-variously for present and future use. 
+our use case of a perfomer wanting to schedule large numbers of events with arbitrary numbers of
+parameters and gestural inputs meant variously for present and future use. 
 However, Max does provide an alternative programming solution through its
 \textbf{js} object, which embeds a JavaScript (ECMA5) interpreter in the Max environment.
 The user is able to load JavaScript code in the js object from a file given as an argument to the object,
 and this code can interact with the Max environment and with object inlets and outlets,
-similar to how one can in C code used in a Max external.
+similar to how one can do so in C code in a Max external.
 This does allow one to create functions and variables, and does have a facility
 for delayed execution through the JavaScript \textbf{Task} object. 
 Thus technically it could be used to solve our use case.
@@ -671,7 +674,7 @@ The js object in Max is not an ideal solution to our problem for several reasons
 The most serious
 is that it is limited to running only in the Max low-priority GUI thread. As this
 thread is also used for Max file i/o and graphic redrawing, the result is that latency
-is high and timing accuracy is unpredictable and often poor.
+is potentially high and indeterminate, meaning musical timing accuracy is unpredictable and often poor.
 The human ear is very sensitive to time, and perceives events separated by 20 ms as discreet
 events. 
 % citeation
@@ -689,7 +692,7 @@ code to be evaluated in strings and passing this message to a JavaScript functio
 that uses the JavaScript ``eval" function. However, compared to the previously 
 described dynamic code evaluation facilities in S4M, this is again cumbersome. 
 This is of particular significance to algorithmic performers, 
-for example in the ``live-coding" oevre, who might
+for example in the ``live-coding" scene, who might
 want to not just schedule a pre-written function, but create a new function 
 and schedule it while a piece plays.
 
@@ -704,127 +707,127 @@ of Scheme, JavaScript is thus sub-optimal for generating code in Max messages.
 Given the above, we can see that the problem of elegantly implementing 
 a delayed event system that can differentiate between current and future values
 for variables derived from real-time input gestures is well suited to solutions 
-in S4M. Scheme is notable for the conciseness with which one can create an anonymous function
+using S4M. Scheme is notable for the conciseness with which one can create an anonymous function
 and store a reference to this function (taking along its environment) in some data
-store to be retrieved an arbitrary point in time. Further, it is straightforward
+store to be retrieved at an arbitrary point in time. Further, it is straightforward
 to differentiate in the function between variables that should
 be used with their value as they are at function definition time versus
 as they are at eventual evaluation time. The underlying host system is required only to 
-implement the ability to execute a callback at some time in the future, if 
-the callback is able to retrieve some indicator of the correct function stored.
+implement the ability to execute a callback at some time in the future, so long as 
+the callback has a means to retrieve some reference to the function stored.
 Scheme for Max brings this facility to the Max environment.
 
 
 \subsection{Clock Implementation in Max}
 
-To discuss the implementation of scheduled functions in S4m, we must first show
-the implementation of objects in C and the facilities for delaying functions.
+To discuss the implementation of scheduled functions in S4M, we must first examine
+briefly the implementation of Max externals in C and the aforementioned 
+facilities for delaying functions.
 
-At a high level, a Max external for message handling must implement the following:
+At a high level, a Max external must implement the following:
 \begin{itemize}
-\item a data structure to hold state used by the object
-\item a main function used to create the class in C
-\item a new function that acts as a constructor for instances
-\item any methods that will be bound to messages as event handlers
+\item A data structure to hold state used by the object
+\item A class building function used to create the class in C
+\item An instance constructor function 
+\item Any methods that will be bound to messages as event handlers
 \end{itemize}
 
-A sample of a minimal external that holds an integer and updates the integer
-on receipt of an 'int' message is below.
+A sample of a minimal external for an object called ``mynum" 
+that holds an integer, updates the integer on receipt of an int 
+message, and posts the value to the console on receipt of a bang
+message is shown below.
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 
-// simplified example from the Max SDK documentation
-
-// data structure for our class, contains instance data
-typedef struct _simp {
-    t_object s_obj;     // member for the actual instance 
-    long s_value;       // state variable for the integer
-} t_simp;
+// data structure of instance fields for our class
+typedef struct _mynum {
+    t_object obj;     // obligatory member for the actual instance 
+    long value;       // state variable for the integer
+} t_mynum;
 
 // global pointer to our class definition that is setup in ext_main()
-static t_class *s_simp_class; 
+static t_class *mynum_class; 
 
-// ext_main, the setup function that builds the s_simp class
+// ext_main, the obligatory setup function that builds the mynum class
 void ext_main(void *r){
     t_class *c;
-    c = class_new("simp", (method)simp_new, (method)NULL, sizeof(t_simp), 0L, 0);
+    c = class_new("mynum", (method)mynum_new, (method)NULL, sizeof(t_mynum), 0L, 0);
     // bind handlers for the messages we want to be able to receive
-    class_addmethod(c, (method)simp_int, "int", A_LONG, 0);
-    class_addmethod(c, (method)simp_bang, "bang", 0);
+    class_addmethod(c, (method)mynum_int, "int", A_LONG, 0);
+    class_addmethod(c, (method)mynum_bang, "bang", NULL, 0);
     class_register(CLASS_BOX, c);
-    s_simp_class = c;
+    mynum_class = c;
 }
 
 // constructor for our object
-// the value returned gets stored in the s_obj field of our t_simp struct
-void *simp_new(){
-    t_simp *x = (t_simp *)object_alloc(s_simp_class);
-    x->s_value = 0;
+// the value returned by the below gets stored in the obj field of our t_mynum struct
+void *mynum_new(){
+    t_mynum *x = (t_mynum *)object_alloc(mynum_class);
+    x->value = 0;
     return x;
 }
 
 // a method handler for int messages that updates the internal state
-void simp_int(t_simp *x, long n){
-    x->s_value = n;
+void mynum_int(t_mynum *x, long n){
+    x->value = n;
 }
 
-// a method handler for bang messages, post the internal in to console
-void simp_bang(t_simp *x){
-    post("value is %ld",x->s_value);
+// a method handler for bang messages, post the internal int to console
+void mynum_bang(t_mynum *x){
+    post("value is %ld",x->value);
 }
 
-\end{verbatim}
+\end{lstlisting}
+
 
 We can see that the pattern for adding functionality to our class is to
-add state variables to the t\_simp structure, and add methods that are
+add state variables to the t\_mynum structure, and add methods as
 functions expecting a pointer to our object as the first argument,
-normally named 'x'. In the example above, a 'bang' message causes our
+traditionally named ``x". In the example above, a bang message causes our
 object to run, with the side effect of posting the stored value. A more
 realistic example would likely output the stored value, but this adds more code
 and is not necessary for our demonstration of scheduling.
 
-Let us imagine instead that the 'bang' message should delay the activity
-(posting) by 1000ms. We can use the Max clock facility for high-accuracy
-delay. (An older, and more flexible, facility exists as well but as it is
-less accurate temporally, it is not used in S4M) 
+Let us imagine instead that the bang message should delay the activity
+(posting to the console) by 1000 ms. We can use the Max clock facility for high-accuracy
+delay. (An older, and actually more flexible, facility exists as well but as it is
+less accurate temporally, it is not used in S4M.) 
 
-We create a clock object, which takes as arguments a pointer and a function
-reference, with the pointer normally used to hold a reference to our instantiated
+We will create a clock object, which takes as arguments a void pointer and a function
+reference, with the void pointer normally used to hold a reference to our instantiated
 object. The standard method for doing this in Max (taken from the SDK documentation)
 is to use a clock object that gets added to our data structure, and to add the act
 of starting the clock to the bang handler.
 
-\begin{verbatim}
-
+\begin{lstlisting}[language=C]
 // Max standard clock use
 
-// data structure for our class, contains instance data
-typedef struct _simp {
-    t_object  m_obj;          // member for the actual instance 
-    long      m_value;        // state variable for the integer
-    void      *m_clock;       // will hold clock pointer
-} t_simp;
+typedef struct _myint {
+    t_object  obj;          // member for the actual instance 
+    long      value;        // state variable for the integer
+    void      *clock;       // will hold clock pointer
+} t_myint;
 
-/ update the constructor to make a clock
-void *simp_new(){
-    t_simp *x = (t_simp *)object_alloc(s_simp_class);
-    x->s_value = 0;
-    // create a clock bound to the simp_callback method
-    x->m_clock = clock_new(x, (method)simp_callback); 
+// update the constructor to make a clock
+void *myint_new(){
+    t_myint *x = (t_myint *)object_alloc(myint_class);
+    x->value = 0;
+    // create a clock bound to the myint_callback method
+    x->clock = clock_new(x, (method)myint_callback); 
     return x;
 }
 
 // update the bang handler to start the clock
-void simp_bang(t_simp *x){
-  clock_fdelay(clock, 1000);
+void myint_bang(t_myint *x){
+  clock_fdelay(x->clock, 1000);
 }
 
-// our callback that will run from the clock
-void simp_callback(t_simp x){
-    post("value is %ld",x->s_value);
+// our callback that will be triggered by the clock
+void myint_callback(t_myint x){
+    post("in the future, the value is %ld",x->value);
 }
+\end{lstlisting}
 
-\end{verbatim}
 
 From the above we can see that, while accurate, the clock functionality is limited -
 the callback must be a a single-arity function expecting a pointer, normally to the object.
@@ -833,56 +836,52 @@ the callback must be a a single-arity function expecting a pointer, normally to 
 \subsection{Implementation in Scheme for Max}
 
 Scheme for Max builds on the clock facility provided by the Max API to allow scheduling
-Scheme procedures. These functions are limited to zero-arity signatures, but as
+Scheme functions. The delayed functions are limited to zero-arity signatures, but as
 creation of lambda functions in Scheme is trivial, this is of no practical significance to 
-user.  
+user. To the user of S4M, scheduling the execution of a function is simple:
 
-To the user of S4M, scheduling the execution of a procedure is simple:
-
-\begin{verbatim}
-; schedule a function for 1000ms in the future
-; it will send the int 99 out outlet 0
+\begin{lstlisting}[language=lisp]
+; schedule a function for 1000 ms in the future
+; it will send the int 99 out outlet 0 of the s4m object
 (delay 1000 (lambda()(out 0 99)))
-\end{verbatim}
+\end{lstlisting}
 
-In addition to scheduling the function, the delay function also returns a unique
-symbolic handle that can be used to cancel a delayed function before it runs.
+In addition to scheduling the function, the \textbf{delay} function also returns a unique
+symbolic handle that can be used to cancel a delayed function before it executes.
 
-\begin{verbatim}
+\begin{lstlisting}[language=lisp]
 ; delay and store the handle
 (define handle 
   (delay 1000 (lambda()(out 0 99))))
 
 ; cancel it
 (cancel-delay handle)
-\end{verbatim}
+\end{lstlisting}
 
 The Scheme implementation of this is straightforward:
+
 \begin{itemize}
-\item the delay procecure creates a unique symbolic handle, and stores the procedure
-  in a hash-table, keyed by the handle
-\item it then calls an internal Scheme procedure, 's4m-schedule-delay', which is implemented
-  in C using the s7 foreign function interface (FFI) and takes as arguments
-  the delay time and the symbolic handle
-\item s4m-schedule-delay creates a clock, with a callback that will receive the handle
-\item when the clock callback runs, it uses the FFI to call the scheme procedure s4m-execute-callback,
-  which also takes the symbolic handle as an argument.
-\item s4m-execute-callback, defined in Scheme, receives the handle, retrieves the procedure
-  from the hash-table (deleting it in the process), and runs the procedure.
+\item The \textbf{delay} function (in Scheme) creates a unique symbolic handle, and stores the 
+  function passed to it in a hash-table, keyed by this handle.
+\item It then calls \textbf{s4m-schedule-delay}, which is implemented
+  in C and takes as arguments the delay time and the symbolic handle. It will handle 
+  clock creation.
+\item When the clock callback runs after the time has elapsed, it calls (from C) the Scheme function 
+  \textbf{s4m-execute-callback}, which uses the handle received as an argument 
+  to retrieve the delayed function from the Scheme hash-table and call it.
 \end{itemize}
 
 Cancelling a delay function consists of merely replacing the callback registered
 in the hash-table with the value \#false, in effect letting the clock fire harmlessly.
-
-The s7 Scheme code for this is show below. It uses an s7's 'gensym' function to create the
+The s7 Scheme code for this is shown below. It uses an s7's \textbf{gensym} function to create the
 symbolic handle that is guaranteed to be unique to this instance of the interpreter.
 
-\begin{verbatim}
+\begin{lstlisting}[language=lisp]
 
-; internal registry of callbacks 
+; registry of delayed functions, by handle 
 (define s4m-callback-registry (hash-table))
 
-; procedure to register a callback by a handle and return handle
+; function to register a callback by a handle and return handle
 (define (s4m-register-callback cb-function)
   (let ((key (gensym)))
     (set! (s4m-callback-registry key) cb-function)
@@ -894,7 +893,7 @@ symbolic handle that is guaranteed to be unique to this instance of the interpre
     cb-function))
 
 ; internal function to get a callback from the registry and run it
-; this gets called from C code when the Max clock runs
+; this gets called from C code when the Max clock fires
 (define (s4m-execute-callback key)
   ; get the func, note that this might return false if was cancelled
   (let ((cb-fun (s4m-get-callback key)))
@@ -907,7 +906,7 @@ symbolic handle that is guaranteed to be unique to this instance of the interpre
       (catch #t 
         (lambda () (cb-fun)) (lambda err-args (post "ERROR:" err-args))))))
 
-; public function to delay a function by time ms (int or float)
+; public function to delay a function by time in ms (int or float)
 ; returns the gensym callback key, which can be used to cancel it
 (define (delay time fun)
   ; register the callback and return the handle
@@ -916,39 +915,41 @@ symbolic handle that is guaranteed to be unique to this instance of the interpre
     (s4m-schedule-delay time cb-handle)
     cb-handle))
 
-\end{verbatim}
+\end{lstlisting}
 
-The implementation in the C code for the S4M external is more involvedto
-work around the signature limitations of the clock facilities in Max.
-
-When the s4m-schedule-delay function is run, receiving the symbolic handle
+The implementation in C is more involved to work around the signature 
+limitations of the clock facilities in Max.
+When the \textbf{s4m-schedule-delay} function is run, receiving the symbolic handle
 and delay time as arguments, the following occurs:
 
 \begin{itemize}
-\item a data structure (t\_s4m\_clock\_callback) is dynamically allocated and used to store a
-reference to the s4m object and to the handle
-\item a Max clock is created, passing in a void pointer to this structure
-  and a generic clock callback, and the clock's timer is started
-\item the clock\_callback struct is also stored in a C hashtable (Max's hashtab implementation),
-  keyed by the handle, so that cancellation or object deletion can find all clocks
-\item when the generic clock callback function runs, it uses the pointer argument get the
-  the delay handle and the instatiated s4m object, through which it 
-  can get the s7 interpreter pointer 
-\item the interpreter and handle are then used to call the Scheme function
-  s4m-execute-callback, running our Scheme procedure
-\item the callback then removes the clock reference from the C hashtable,
-  deletes the clock, and frees the memory allocated for the callback info struct.
+\item A \textbf{t\_s4m\_clock\_callback} data structure is dynamically allocated and used to store a
+  reference to the s4m object and to the symbolic handle.
+\item A Max clock is created, passing in a void pointer to this structure
+  and binding to a generic clock callback function in C. The clock's timer is started
+\item The clock callback struct is also stored in a C hashtable (Max's hashtab implementation),
+  keyed by the handle, so that cancellation or object deletion can use this to find all clocks.
+\item When the generic clock callback function runs (time has elapsed), it uses the pointer argument to get the
+  the delay handle and the instantiated s4m object, through which it 
+  can also get the s7 interpreter pointer. 
+\item The s7 interpreter and handle are then used to call the Scheme function
+  \textbf{s4m-execute-callback,} which will run our delayed Scheme function as previously explained.
+\item The generic C callback then removes the clock reference from the C hashtable,
+  deletes the clock, and frees the memory allocated for the callback struct.
 \end{itemize}
 
+Additionally, there exists clean up functionality triggered on a reset message or 
+s4m object destruction which finds all outstanding clocks, cancels them, and frees the memory allocated.
+This is not shown as it does not materially change the process used.
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 
 // the struct for the s4m object, with most elements removed
 typedef struct _s4m {
     t_object obj;
     // pointer to the s7 interpreter (initialization of which is not shown)
     s7_scheme *s7;
-    // a Max hash table for storing clocks
+    // a Max hash table for storing clocks (for reset clean-up)
     t_hashtab *clocks;     
 } t_s4m;
 
@@ -958,7 +959,7 @@ typedef struct _s4m_clock_callback {
    t_symbol *handle; 
 } t_s4m_clock_callback;
 
-// schedule delay, registered in object setup to be run from Scheme as s4m-schedule-delay
+// schedule delay FFI definition, called from Scheme as s4m-schedule-delay
 static s7_pointer s7_schedule_delay(s7_scheme *s7, s7_pointer args){
     t_s4m *x = get_max_obj(s7);
 
@@ -974,16 +975,17 @@ static s7_pointer s7_schedule_delay(s7_scheme *s7, s7_pointer args){
 
     // allocate memory for our clock_callback struct and populate
     // NB: this gets cleaned up by the receiver in the clock callback above
-    t_s4m_clock_callback *clock_cb_info = (t_s4m_clock_callback *)sysmem_newptr(sizeof(t_s4m_clock_callback));
+    t_s4m_clock_callback *clock_cb_info = 
+        (t_s4m_clock_callback *)sysmem_newptr(sizeof(t_s4m_clock_callback));
     clock_cb_info->obj = *x;
     clock_cb_info->handle = gensym(cb_handle_str);
 
-    // make a clock, setting our callback info struct as the owner, as void pointer
+    // make a clock, setting our callback info struct as the owner, as a void pointer
     // when the callback method fires, it will retrieve this pointer as an arg 
     // and use it to get the handle for calling into scheme  
     void *clock = clock_new( (void *)clock_cb_info, (method)s4m_clock_callback);
 
-    // store the clock ref in the s4m clocks hashtab (used to get at them for cancelling) 
+    // store the clock ref in the s4m clocks hashtab (used to get at them for reset cancelling) 
     hashtab_store(x->clocks, gensym(cb_handle_str), clock); 
 
     // schedule it, this is what actually kicks off the timer
@@ -994,13 +996,13 @@ static s7_pointer s7_schedule_delay(s7_scheme *s7, s7_pointer args){
 }
 
 // the generic clock callback, this fires after being scheduled with clock_fdelay 
-// gets access to the handle and s4m obj through the clock_callback struct 
+// it gets access to the handle and s4m obj through the clock_callback struct 
 void s4m_clock_callback(void *arg){
     t_s4m_clock_callback *ccb = (t_s4m_clock_callback *) arg;
     t_s4m *x = &(ccb->obj);
     t_symbol handle = *ccb->handle; 
   
-    // call into scheme with the handle, where scheme will call the registered delayed function
+    // call into Scheme with the handle, where Scheme will call the registered delayed function
     // we must build a Scheme list through the FFI to use as the arguments
     s7_pointer *s7_args = s7_nil(x->s7);
     s7_args = s7_cons(x->s7, s7_make_symbol(x->s7, handle.s_name), s7_args); 
@@ -1015,31 +1017,106 @@ void s4m_clock_callback(void *arg){
     sysmem_freeptr(arg);
 }
 
-// the s4m object's free method, called by Max internals on object deletion
-// it must cancel and free any outstanding allocated clocks
-void s4m_free(t_s4m *x){ 
-    //  ... various other cleanups trimmed ...
+// clean up methods for s4m reset and delete not shown
 
-    // clocks must all be stopped and deleted. 
-    // iterate through the hashtab to stop them 
-    hashtab_funall(x->clocks, (method) s4m_cancel_clock_entry, x);
-    // this will free all the clocks
-    object_free(x->clocks); 
-} 
+\end{lstlisting}
 
-// iterator used above to cancel a clock
-void s4m_cancel_clock_entry(t_hashtab_entry *e, void *arg){
-    if (e->key && e->value) {
-        clock_unset(e->value);    
-    }
-}
+\section{Limitations and Future Work}
 
-\end{verbatim}
+The scheduling system describe does have several limitations worth noting.
+The s7 Scheme implementation includes a mark-and-sweep garbage collector 
+that must run occasionally, pausing other processing. The garbage collector
+can, however, be paused and run on demand. Tests on the author's
+system appeared to show garbage collection taking an average of 1 to 2 ms per pass
+in a substantial application - a 16 track sequencer written entirely in S4M
+with the computer also processing audio for the 16 tracks with commercial
+software synthesizers, and the GC being run deliberately every 100 ms
+to prevent any one GC pass from having a large amount to clean up. 
+In personal tests, this configuration recorded and the output
+examined in a recording platform to check for timing discrepencies. The
+results of these preliminary tests were that timing was unaffected by the 
+garbage collector so long as the host (Max/MSP) was configured to have
+a large enough output buffer to allow the GC to run within this buffer.
+Using Max with an output buffer of 256 samples produces an output latency
+of approximately 6-8ms (depending on the Max signal vector as well), which
+was determined to be large enough for the GC to run while still also being
+low enough for acceptable real time performance. With software synthesis
+loads at closer to the maximum possible on the author's computer,
+an output buffer of 512 samples (~11 ms output latency) was necessary to prevent
+any timing errors. This is encouraging as these buffer sizes are not atypical
+for commercial music production on digital audio workstations. 
+
+In addition to output latency, there is the factor of internal latency.
+Max, like many computer music platforms stemming from the Music N family
+of computer music langauges, calculates audio in vectors of samples, with
+each vector calculated in one processing pass, and (normally) control
+rate passes conducted also a maximum of once per audio vector pass. The
+size of the signal vector has a large effect on performance, with larger
+vectors requiring significantly less CPU. However, as note onsets originating
+from control messages (the normal scenario) must thus be aligned with 
+singal vector boundaries, this produces delays of note onsets by up to
+the time delta of one vector, a.k.a. timing "slop". If desired, one
+can run Max with a signal vector size of 1 sample to produce so called
+"sample-accurate" timing, but this uses significantly more CPU, and thus
+requires (usually) a longer output buffer. However, it should be noted
+that the Max scheduler internally compensates for this slop. The mechanism
+by which it does this is unfortunately not publically documented or available
+in code, but one can presume that it is some variant of the pattern 
+whereby scheduled events are aware of when they are supposed to be running
+and if they in turn schedule events, the scheduling of subsequent events
+is shifted by some known amount based on the theoretical accurate time
+of an event. The author also conducted personal tests of this, and determined
+that so long as the overall output latency is large enough to allow
+the GC to run in time, self-scheduling events in a long piece do stay
+accurate in that slop gaps do not accumulate over the piece - even
+10 minutes on, note onsets stay accurate to within the signal vector
+of samples.
+
+These tests demonstrated that Scheme for Max is usable as a
+timing source for processing intensive music production so long as some
+reasonable latency is acceptable. Improving the s7 garbage collection
+implementation for lower latency use is a potential area for future work. 
+
+S4M does not implement DSP calculations at this time, running only in 
+the Max contro/message thread. Max does have an audio configuration option
+whereby the control thread and DSP thread are shared in a round-robin
+execution pattern. It is worth exploring whether the Scheme interpreter
+could be run productively in the DSP loop in this configuration. It is
+unlikely that it would be productive to create CPU intensive synthesis
+(requiring filling the whole vector per pass), but it is possible that
+productive work could be done once per DSP pass in the DSP routine.
+This would create the equivalent of the control-rate as it is implemented
+in Csound, where rather than control rate calculations being triggered
+solely by events, there is also the facility to create lower resolution
+audio signals as control signals. This can be useful for automating parameters
+sound acceptable at lower sample rates, such as pitch curves, and is
+an area that will be explored in subsequent releases of S4M.
 
 
 \section{Conclusion}
-Well that was cool, I wonder how I should conclude such a thing???
+Scheme for Max is a project that brings a new way of working with
+timed events to the Max platform. The author believes this will be
+of significant benefit to those working in the fields of algorithmic
+music and live coding, and will also be useful to the more general Max 
+user base as a way to script Max in a high level language for any
+tasks requiring high timing accuracy. In the author's experience, 
+working in Scheme within Max has been musically productive, with the
+language well suited both to expressing musical concepts and to working
+with the Max platform. The ability to update Max from a dynamic language
+in real-time has been especially productive for building complex sequencing
+and algorithmic composition tools.
 
+Future plans for the project include a version for the open source
+Pure Data platform, similar in Max in many ways and created by Miller Puckette,
+the original author of Max. Scheme for Pd is now in beta release, available
+as source code, with binary releases planned for July 2021. In addition
+to this, experimental work on running Scheme in the DSP loop is planned,
+as well as the creation of portability layers in Scheme to allow one to run 
+the same Scheme code on S4M, S4PD, or Common Music (which also uses s7).
+It is hoped that through these additional run-times, the project can become 
+a valuable addition to the larger computer music community, enabling
+use in contexts where the commercial Max platform is not practical
+or accessible to many users.
 
 
 %%
@@ -1047,14 +1124,21 @@ Well that was cool, I wonder how I should conclude such a thing???
 %% (and NOT an unnumbered section). This ensures the proper
 %% identification of the section in the article metadata, and the
 %% consistent spelling of the heading.
-%%\begin{acks}
-%%To Bill, for creating s7 Scheme, and Rick, for his inspirational
-%%book, "Notes from the Metalevel".
-%%\end{acks}
+\begin{acks}
+Scheme For Max would not exist without the work of many people. 
+Bill Schottstaedt created Common Lisp Music and the s7 Scheme implementation,
+and has been invaluable as a source of advice on s7. Heinrich Taube
+created Common Music and has been an inspiration through his seminal book
+on algorithmic composition with Lisp, "Notes from the Metalevel".
+Luigi Castelli and Alex Harker helped with programming questions
+and build assistance. 
+S4M of course also depends on Max and thus owes a huge debt to 
+Miller Puckette and David Zicarelli. And finally, Andrew Schloss has
+been a source of encouragement and support through the years of 
+exploration that led to the Scheme For Max project.
 
-My test citation \cite{Cohen07} is here.
+\end{acks}
 
-My test citation \cite{Abril07} is here.
 
 %%
 %% If your work has an appendix, this is the place to put it.
