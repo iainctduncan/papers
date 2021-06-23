@@ -172,12 +172,15 @@ implementation of this facility is discussed.
 
 \section{Introduction}
 
-%% edited, needs citations and a diagram
 Max (also known as Max/MSP) is a programming environment for creating interactive 
 music and multi-media programs through a visual programming language accessible 
-to non-programmers.  Programs, or ``patches" in the Max nomenclature, are created by placing
+to non-programmers. Max was created to make it possible for users
+to go beyond the limits of commercial music sequencing tools, creating
+interactive environments of arbitrary complexity and sophistication.
+\cite{Zicarelli2002}
+Programs, or ``patches" in the Max nomenclature, are created by placing
 visual boxes representing Max objects on a canvas and connecting them visually with
-``patch-cords", a paradigm similar to that of modular synthesizers and familiar to many musicians.
+``patch cords", a paradigm similar to that of modular synthesizers and familiar to many musicians.
 First created in the mid 1980's by Miller Puckette while at IRCAM 
 (Institut de recherche et coordination acoustique/musique), 
 Max is now developed and sold by the San Francisco software company Cycling '74,
@@ -194,10 +197,11 @@ One powerful feature of Max is its ability to be programmed
 while the engine is playing music. Patches can be altered 
 without necessarily interrupting patch activity (depending on the design
 of the program), and this can
-even be performed live, an activity known as ``live-coding", which has given
-birth to an emerging musical sub-culture of live programming performances
+even be performed live, an activity known as ``live-coding", which has
+emerged since the early 2000's as its own musical sub-culture of 
+live programming performances
 with tools such as Max, SuperCollider, Csound, and others. 
-%% TODO citation%%
+\cite{Roberts18}
 This approach to music making overlaps with the related discipline of 
 algorithmic music, in which programmatic algorithms are used
 not just for affecting musical parameters such as volume, pitch, and timbre, 
@@ -227,7 +231,7 @@ Bill Schottstaedt at the  Center for Computer Research in Music and Acoustics
 from TinyScheme, s7 is a Scheme dialect designed for use in computer music
 platforms and is used in various music programs such as the Snd editor and the
 Common Music algorithmic composition platform. 
-%% TODO citation for s7 here
+\cite{Schottstaedt2021} 
 Similar in functionality to the built
 in \textbf{js} object, the \textbf{s4m} object enables the user to program Max in Scheme,
 and provides Scheme functions to interact with the Max engine and environment through
@@ -260,7 +264,7 @@ the current limitations of, and future possibilities for, Scheme for Max.
 \subsection{The Max Environment}
 
 Max is a visual programming environment for interactive multi-media, 
-used widely in music academia as well as in commercial music circles through "Max for Live", 
+used widely in music academia as well as in commercial music circles through Max for Live, 
 a version of Max embedded in the Ableton Live digital audio workstation. 
 Max patches are created by placing visual boxes on a canvas 
 and connecting them graphically with ``patch cords", where a box may be
@@ -277,6 +281,7 @@ various forms of real-time input, such as keyboard and mouse events, connected e
 events, as well as by scheduled events through Max objects such as the \textbf{metronome,} which sends
 out messages at regular time intervals. Messages are 
 stored internally as lists of Max ``atoms", which may be symbols, integers, or floating point numbers. 
+\cite{Puckette2002}
 There also exists a Max object for visually displaying and altering messages called the \textbf{message-box},
 which allows messages to be typed directly in to the object in the visual patcher, and then sent by clicking the box.  
 Execution follows a depth-first and right-to-left order, enabling the programmer to deterministically 
@@ -297,7 +302,6 @@ colored patch cords (though MSP objects may additionally receive control message
 S4M executes only at the event/message level and does not implement DSP operations, MSP is not 
 discussed further here. 
 
-%% section done except citations
 
 
 \subsection{Max Message and Object Implementation} 
@@ -365,7 +369,7 @@ with functions and the engine creates an instantiated data structure on each not
 the instrument from a score - in effect the instruments act as object builders and note-events 
 become objects that exist for the duration of the note played.
 
-% cite CSound %
+% TODO: cite Dannenburg on this point  %
 
 %% done %%
 %% perhaps cite SDK documentation? or eric lyon book? %%
@@ -374,33 +378,32 @@ become objects that exist for the duration of the note played.
 
 While Max is a commercial, closed-source product, it includes a software development kit for 
 extending Max by writing a Max “external”. An external is a compiled plug-in that defines the  
-prototype class (data structure and methods) used to create new objects in the patcher.  
+prototype (data structure and methods) used to create new objects in the patcher.  
 Externals are developed in C or C++ in an object-oriented manner, the C API using data 
-structures and pointers to simulate class-based programming and the more recent C++ API using C++ classes.
+structures and pointers to simulate class-based programming with dynamic binding,
+and the more recent C++ API using C++ classes \cite{Zicarelli2002}.
 A typical external will implement a class that provides some object state for instantiated
 objects along with constructor and destructor functions, and  
 methods for sending and receiving Max messages through the object’s inlets and outlets.
+Methods are bound dynamically to the object prototypes
 The SDK and API also provide a rich body of functions for interacting with the overall Max
 environment, thus these methods may also trigger side-effects through these facilities.
 
 As externals are compiled plug-ins, they do not need to be distributed as source-code, and
 are most typically made available as binaries for Windows and OSX. Extending Max through externals has 
-been possible since very early versions of Max, thus thousands of 3rd party externals 
-now exist, both open and closed source, of which Scheme For Max is one.
-
-%% cite the object database??
-%% done %%
+been possible since very early versions of Max in the late 1980's
+thus thousands of 3rd party externals 
+now exist \cite{MaxObjects2021}, both open and closed source, of which Scheme For Max is one.
 
 
 \subsection{Lisp in Computer Music}
-%% done, needs finalcopy edit and citation%%
 
 Scheme For Max is far from the first Lisp-based computer music tool, or even
 the first real-time music tool in Lisp. There is a rich history of Lisp in music, 
-ranging from Common Lisp Music, created by Bill Schottstaedt in the 1980's, to more recent
-systems such as Common Music 3, %% cite taube %%
-Nyquist, %% cite dannenburg %% 
-and Extempore (and its predecessor Impromptu). %% cite impromptu paper
+ranging from Common Lisp Music, created by Bill Schottstaedt in the late 1980's
+\cite{Wang17} and Heinrich Taube's Common Music in 1991 \cite{Taube91},
+to Dannenburg's Nyquist in 1997 \cite{Dannenberg97},
+and Impromptu (later rewritten as Extempore) \cite{Sorensen2010}. 
 Nor is Scheme for Max unique in providing a Lisp
 based extension facility to a commercial music platform - the author unknowingly
 programmed in Lisp in the early 1990's while using the Cakewalk sequencer,
@@ -413,20 +416,30 @@ is arguably the most widely used truly programmable
 music platform, and certainly the most widely deployed through its use in 
 the very successful Ableton Live digital audio workstation, as Max For Live.
 
-In contrast with S4M, systems such as Common Music, Nyquist, and Extempore
-all run as stand-alone applications, with events originating from them often destined
-for other systems for translation into audio. While these systems are, like Max, also capable
-of receiving gestural input, they must, in essence, `be their own boss" - they provide
+In contrast with S4M, systems such as Common Lisp Music, Common Music, Nyquist, and Extempore
+all run as stand-alone applications, with events originating from them either
+rendered as audio internally or destined for other systems for rendering to audio. 
+While these systems are, like Max, also capable
+of receiving gestural input, they must, in essence, ``be their own boss" - they provide
 their own scheduler and timing clocks and act as the principal engine from which temporal
 events originate. If they are to be used alongside another temporal engine, the two
 must be synchronized and events sent back and forth over network connections of some kind.
 
-There have also been previous Max externals created to allow one to use Lisp in Max. 
-However, these have been implemented as object that act as proxies to 
-external Lisp processes rather than interpreters fully embedded and running in the Max process.
-This difference means that in contrast to these offerings, the S4M interpreter has full 
-access to the Max C API and can call API functions through foreign function interface
-calls, with the results of said calls being exactly the same as if the functions were called in C. 
+There have also been previous Max externals created to allow one to use Lisp in Max in various ways.
+Brad Garton authored MaxLispJ, an external that provides a Common Lisp interpreter 
+(Armed Bear Common Lisp) embedded through the Java runtime that can be used within Max 
+via the \textbf{mxj} object \cite{Garton2011}.
+MOZ'Lib, by Julien Vincenot, takes another approach, in which the Max external
+acts as a proxy to an externally running Steel Bank Common Lisp process,
+a similar approach to that used by Cycling '74 for their \textbf{Node for Max} object (for Node.JS/ECMA6), 
+thus enabling the outside process to execute long-running work without blocking Max \cite{Vincenot2017}.
+
+In contrast to these, S4M embeds a light-weight Scheme interpreter directly in a Max
+C external with no intermediate or external runtime, possible because s7 is implemented entirely
+in ANSI C and is statically linked during compilation of S4M. 
+This means the \textbf{s4m} object has direct C-level access to the Max C API 
+through foreign function interface calls, with the results of said calls being exactly 
+the same as if the functions were called in C, save execution time. 
 The ramification of this is that S4M is unique among Max Lisp projects in being
 able to operate within the native Max scheduling system, enabling highly accurate
 timing and retaining deterministic control flow within a patcher. (i.e., There
@@ -441,7 +454,6 @@ that is used as a shared data store between multiple patcher objects.
 
 
 \section{implementation of the Scheme for Max external}
-% STATUS: in progress
 
 This section provides a high-level overview of the implementation of the \textbf{s4m} 
 object provided by the Scheme for Max external.
@@ -685,13 +697,12 @@ and in fact, the desire to work with Max this way, combined with disatisfaction 
 limitations of the Max JavaScript implementation was the reason for development of S4M.
 
 The \textbf{js} object in Max is not an ideal solution to our problem for several reasons. 
-The most serious
-is that it is limited to running only in the Max low-priority GUI thread. As this
+The most serious is that it is limited to running only in the Max low-priority GUI thread \cite{Cycling74}.
+ As this
 thread is also used for Max file i/o and graphic redrawing, the result is that latency
 is potentially high and indeterminate, meaning musical timing accuracy is unpredictable and often poor.
 The human ear is very sensitive to time, and perceives events separated by 20 ms as discrete
-events. 
-% citeation
+events. \
 Delays of tens of milliseconds are enough to sound like errors in playback
 of highly rhythmic music. This means that it takes little other activity in the
 GUI thread to delay our scheduled events enough to be audibly incorrect. 
@@ -1056,10 +1067,8 @@ void s4m_clock_callback(void *arg){
 
 The scheduling system describe does have several limitations worth noting.
 The s7 Scheme implementation includes a tracing garbage collector 
-that must run occasionally, pausing other processing. 
-%% cite bil email
-The garbage collector
-can, however, be paused and run on demand. Tests on the author's
+that must run occasionally, pausing other processing \cite{Matheussen2020}.
+The garbage collector can, however, be paused and run on demand. Tests on the author's
 system, with the garbage collector forced to run every 100ms to prevent
 significant build up, showed the garbage collection taking an average of 1 to 2 ms per pass
 when run in a substantial application (a 16 track sequencer written entirely in S4M
@@ -1078,7 +1087,8 @@ low enough to be acceptable for real time performance. With software synthesis
 loads at closer to the maximum possible on the author's computer,
 an output buffer of 512 samples (~11 ms output latency) was necessary to prevent
 any timing errors. This is encouraging as these buffer sizes are not atypical
-for commercial music production on digital audio workstations. 
+for commercial music production on digital audio workstations and are widely
+considered in acceptable ranges for real-time music systems \cite{Brandt1998}.
 
 In addition to output latency, there is the factor of internal latency.
 Max, like many computer music programming environments, generates audio 
@@ -1094,12 +1104,13 @@ However, the more recent scheduling facilities in Max, including the
 clock facilities used by S4M, are designed to compensate for this jitter,
 maintaining long term temporal accuracy despite note onset delays. The mechanism
 by which this is done is unfortunately not publically documented or available
-in open-source code, but one can assume that it is some variant of the pattern 
+in open-source code, but one can assume that it is some variant of the common pattern 
 whereby scheduled events are aware of when they are supposed to be running
-and if they in turn schedule subsequent events, the time for these subsequent
+(``logical-time"), and if they in turn schedule subsequent events, the time for these subsequent
 events will be shifted to compensate for the jitter, based 
-on the theoretical accurate time of the scheduling event, rather than its
-actual (post-jitter) time. The author also conducted personal tests of 
+on the logical time of the scheduling event, rather than its
+actual (post-jitter) real time \cite{Anderson1986}.
+The author also conducted personal tests of 
 this compensation, comparing both high and low signal vector sizes to produce
 variable delays in note onsets, and it was determined
 that so long as the overall output latency is again large enough to allow
