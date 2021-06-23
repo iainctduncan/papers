@@ -124,8 +124,18 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-  We are confident that scheduling musical events as
-  Scheme procedures using Max/MSP and Scheme for Max is the bomb.
+Scheme for Max (S4M) is an open source project that enables embedding 
+s7 Scheme interpreters in the Max/MSP visual programming environment,
+the most widely adopted programming platform for computer music.
+S4M enables users of Max to program Max in Scheme Lisp, a language particularly 
+well suited to expressing musical concepts, and provides facilities for 
+real-time dynamic code evaluation (a.k.a. ``live-coding") within the
+Max environment. Of particular note is its appropriateness for flexibly
+and accurately scheduling future musical events, a capability not
+adequately supported thus far in Max. This is accomplished by scheduling
+Scheme procedures integrated with the Max scheduler, and the 
+implementation of this facility is discussed.
+
 \end{abstract}
 
 %%
@@ -165,27 +175,27 @@
 %% edited, needs citations and a diagram
 Max (also known as Max/MSP) is a programming environment for creating interactive 
 music and multi-media programs through a visual programming language accessible 
-to non-programmers.  Programs, or ``patches" in the Max nomeclature, are created by placing
+to non-programmers.  Programs, or ``patches" in the Max nomenclature, are created by placing
 visual boxes representing Max objects on a canvas and connecting them visually with
 ``patch-cords", a paradigm similar to that of modular synthesizers and familiar to many musicians.
 First created in the mid 1980's by Miller Puckette while at IRCAM 
 (Institut de recherche et coordination acoustique/musique), 
-Max is now developed and sold by the San Francisco software company Cycling 74,
+Max is now developed and sold by the San Francisco software company Cycling '74,
 and is widely used in both academic and commercial music contexts as well
 as in multi-media installations. A rich library of Max objects exists, 
 both provided with Max and available as open-source 
 extensions, enabling users to rapidly create interactive systems with gestural 
-input from physical sources such as on screen widgets, physical MIDI controllers,
+input from physical sources such as on screen widgets, physical electronic instruments,
 and custom hardware communicating over serial networks.
 
 %% TODO visual example of a Max patch with various inputs %% 
 
 One powerful feature of Max is its ability to be programmed
-while the engine is playing music. Patches can be altered in 
+while the engine is playing music. Patches can be altered 
 without necessarily interrupting patch activity (depending on the design
 of the program), and this can
-even be performed live, an activty known as ``live-coding", which has given
-birth to an entire musical sub-culture of live programming performances
+even be performed live, an activity known as ``live-coding", which has given
+birth to an emerging musical sub-culture of live programming performances
 with tools such as Max, SuperCollider, Csound, and others. 
 %% TODO citation%%
 This approach to music making overlaps with the related discipline of 
@@ -202,7 +212,7 @@ optimal for live-coding or algorithmic music where the speed with which
 the user can accomplish this is an important consideration (i.e., fast
 enough not to bore an audience or to be frustrating while composing).
 
-In addition to the Max visual patching language, Max can be extended
+In addition to the Max visual patching language, Max can be programmed
 by creating new Max objects (``externals" in the Max nomenclature) in C or C++ 
 using the Max SDK and API, and can also be programmed in text-based 
 languages through regular Max objects that themselves provide embeddded language
@@ -221,7 +231,7 @@ Common Music algorithmic composition platform.
 Similar in functionality to the built
 in \textbf{js} object, the \textbf{s4m} object enables the user to program Max in Scheme,
 and provides Scheme functions to interact with the Max engine and environment through
-a foreign function interface implemented in C and using the Max C API.
+a foreign function interface implemented in C using the Max C SDK and API.
 
 The author believes that S4M extends Max in a way that is highly valuable to 
 the algorithmic musician and live-coding performer and is also of significant 
@@ -230,33 +240,30 @@ a running Scheme program during playback is a major benefit
 and is a capability that has been, while technically possible, impractical
 with pre-existing solutions such as JavaScript. Additionally, the syntax
 of Scheme bears a convenient similarity to Max message syntax, and thus 
-one can even use Max visual widgets and messages to generate small Scheme programs in the
-patcher. However, the most interesting benefit is the ease with which the user 
+one can easily use Max visual widgets and messages to generate small Scheme programs in the
+patcher. However, potentially the most interesting benefit is the ease with which the user 
 can create and schedule functions for evaluation in the future, with 
 input into these functions coming from Max patching widgets, and flexible control
 over the current and future evaluation context of the functions and variables used.
 
-This paper provides an overview of the problem of musical scheduling
-in computer music, and of the Max platform and its solutions to this problem, 
-along with a discussion of the limitations of these solutions.
+This paper provides an overview of the Max platform and the problem of musical scheduling
+in computer music, as well as the existing Max solutions to this problem, 
+and a discussion of the limitations of these solutions.
 It then introduces Scheme for Max and examines how the use of Scheme
 overcomes these limitations elegantly, and provides details of
-the implementations of scheduling in S4M, both at the Scheme and
-C programming levels. Finally, it concludes with discussion of future
-possibilities and directions of study with Scheme for Max. 
+the implementation of scheduling in S4M, both at the Scheme and
+C programming levels. Finally, it concludes with discussion of 
+the current limitations of, and future possibilities for, Scheme for Max. 
 
 \section{Background - Programming Music in Max/MSP}
 
 \subsection{The Max Environment}
 
-Max is a visual programming environment for interactive multi-media in music academia,
-as well as in commercial music circles through "Max for Live", a version of Max embedded 
-in the Ableton Live digital audio workstation. Max was originally
-created so that composers of interactive computer music could change their pieces without the 
-assistance of a programmer.
-%% TODO citation %%
-As previously mentioned, Max patches are created by placing visual boxes on a canvas 
-and connecting them graphically with visual patch cords, where a box may be
+Max is a visual programming environment for interactive multi-media, 
+used widely in music academia as well as in commercial music circles through "Max for Live", 
+a version of Max embedded in the Ableton Live digital audio workstation. 
+Max patches are created by placing visual boxes on a canvas 
+and connecting them graphically with ``patch cords", where a box may be
 any of the Max object types installed on the user's system. A box placed on the patcher
 results in the instantiation of an object in memory from a prototypical class for the object, with
 text fields typed in the visual patching box used as constructor arguments. 
@@ -266,27 +273,28 @@ object triggers execution in one or more
 receiving objects, who may in turn send on messages to other similarly connected objects. 
 
 Patch activity, in the form of messages moving through the graph, can be initiated by 
-various forms of real-time input, such as keyboard and mouse events, MIDI input, and networking 
-events, as well as by scheduled events through Max objects such as the metronome, which sends
+various forms of real-time input, such as keyboard and mouse events, connected electronic instruments, and networking 
+events, as well as by scheduled events through Max objects such as the \textbf{metronome,} which sends
 out messages at regular time intervals. Messages are 
-stored internally as lists of Max atoms, which may be symbols, integers, or floating point numbers. 
-There also exists a Max object for visually displaying and altering messages called the message-box,
-which allows messages to by typed directly in to object in the visual patcher, and sent by clicking the box.  
-Execution follows a depth first and right-to-left order, enabling the programmer to deterministically 
+stored internally as lists of Max ``atoms", which may be symbols, integers, or floating point numbers. 
+There also exists a Max object for visually displaying and altering messages called the \textbf{message-box},
+which allows messages to be typed directly in to the object in the visual patcher, and then sent by clicking the box.  
+Execution follows a depth-first and right-to-left order, enabling the programmer to deterministically 
 control the execution flow with the visual layout of the patch cords. (i.e., A source object sending 
 messages out to multiple receiving sub-graphs results in the right hand message path completing 
-execution before moving left, rather than spawning two concurrent threads of execution.) When 
-patching, messages can be inspected by sending them to a print object (which prints to the Max console),
-to a message-box object (which will update its visual display of the message) 
-or though a built in debugger using a feature Max calls "probing”.
+execution to the bottom before moving left, rather than spawning two concurrent threads of execution.) When 
+patching, messages can be inspected by sending them to a \textbf{print} object (which prints to the Max console),
+to a \textbf{message-box} object (which will update its visual display of the message) 
+or though a built in visual debugger using a feature Max calls ``probing”.
 
-In addition to the event-based message execution model, Max also supports a stream-based digital 
-audio execution model, originally provided separately as a product called MSP, but now included 
+In addition to the this event-based message execution model, also called ``control messages", Max 
+supports a stream-based digital 
+audio execution model, originally provided separately as a product called ``MSP", but now included 
 as part of the single Max product.
-MSP activity normally runs in a separate thread from the event and message Max operations, and uses a  
+MSP activity normally runs in a separate thread from the event/message Max operations, and uses a  
 a separate class of objects that pass constant streams of digital audio to each other through differently 
-coloured patch cords, though MSP objects may additionally receive messages for controlling paramaters. As  
-S4M executes only the event/message level and does not implement DSP operations, MSP is not 
+colored patch cords (though MSP objects may additionally receive control messages for controlling paramaters). As  
+S4M executes only at the event/message level and does not implement DSP operations, MSP is not 
 discussed further here. 
 
 %% section done except citations
@@ -297,16 +305,17 @@ discussed further here.
 Internally, Max messages are data entities consisting of a symbol that acts
 as a Smalltalk-style message selector and an optional array of Max atoms. 
 Each atom entity contains a member for the atom type and another for its value, 
-where the type may be any of integer, float, or symbol. 
+where the type may be any of \textbf{int,} \textbf{float,} or \textbf{symbol}. 
 Note that while the message selector symbol is always present at the C level,
 in the visual patcher the selector may be implicit and hidden from the user. 
 (i.e., the message originating from a message box that appears to contain only an integer
 will actually consist of the selector ``int" followed by an atom storing the numerical value.)
-The symbol ``bang" in Max is a special symbol that can be used for a one-element message 
+The symbol ``bang" is a special symbol that can be used for a one-element message 
 that essentially means ``run", and the act of triggering execution by sending a bang
 message from the \textbf{bang} object is called ``banging" in the nomenclature.
 Taken together, this means that in Max there are five kinds of messages: 
-bang, symbol, int, float, and list. (The bang message is technically a symbol message
+\textbf{bang}, \textbf{symbol}, \textbf{int}, \textbf{float}, and \textbf{list}. 
+(The bang message is technically a symbol message
 of ``bang", but this is essentially treated as a type of its own in the nomenclature.) 
 %% cite puckette CMJ winter 2002 %% 
 
@@ -317,28 +326,28 @@ In order for the receiving object to do anything, it must
 be sent a message with a message selector for which it has a bound method,
 a situation referred to in the nomenclature as ``responding to the message". Most objects
 have a principal activity that typically ends with outputing the result of their calculation, and this is
-often triggered by sending the object a single bang message or by sending a value to 
+often triggered by sending the object a single \textbf{bang} message or by sending a value to 
 their first, or ``hot", inlet. In addition, they may respond to other messages to change internal state
-data or configuration, for example the ``set" message is commonly implemented to update internal
+data or configuration - for example the ``set" message is commonly implemented to update internal
 state without outputting any result. The end result of object methods run on receipt of a message falls broadly
 into three (non-exclusive) categories: the object may update some internal state, it may send a
-message or messages out of its ``outlets", and it may cause a side effect in the broader
+message or messages out of its outlets, and it may cause a side effect in the broader
 Max environment, such as printing to the console or updating a global data element such as
 an audio buffer.
 
 As an example, in the patcher screen-shot below we see a \textbf{message-box} object that will update
 its state (and visual display) with the symbols ``hello" and ``world" when sent the message 
-``set hello world". Near it is a circular \textbf{bang} object, which when clicked will send the
-\textbf{message-box} the ``bang" message, causing it to output the message ``list hello world".
+\textbf{set hello world}. Near it is a circular \textbf{bang} object, which when clicked will send the
+\textbf{message-box} the \textbf{bang} message, causing it to output the message \textbf{list hello world}.
 This message will be received by the \textbf{zl.len} object, which counts the number of elements 
 in any lists it receives, immediately outputting the count. The three columns in the screen-shot
-show the patch as it is prior to any clicks, as it is after clicking message-box 1,
-and as it is after clicking both message-box 1 and the bang.
+show the patch as it is prior to any clicks, as it is after clicking \textbf{message-box} 1,
+and as it is after clicking both \textbf{message-box} 1 and the \textbf{bang}.
 
 %% figure one, a sample Max patch
 
 Objects are not limited to interacting with other objects through messages passing in to inlets and out of 
-outlets. A C API exists that enables objects to query and control various engine components (e.g. 
+outlets. A C API exists that enables objects to query and control various engine components (e.g., 
 the transport mechanism), and it is also possible for objects to send messages to other objects 
 directly or through the scheduler queues, without the sending and receiving objects 
 necessarily being connected visually in the patcher. Fundamentally however, the same mechanism
@@ -351,10 +360,12 @@ programming the visual patcher (a.k.a. ``patching"), we are in effect programmin
 object instantiations rather than classes. In fact, in the Max engine, the act of creating
 a new visual-box and placing it on the patcher canvas does indeed instantiate an object, creating
 a fresh copy of the prototype's data structure and adding it to a graph of other objects.
-This is in contrast to computer music languages such as Csound, where the user programs instruments 
+This is in contrast to computer music languages such as CSound, where the user programs instruments 
 with functions and the engine creates an instantiated data structure on each note-event sent to 
-the synthesizer - in effect the instruments act as object builders and note-events become objects
-that exist for the duration of the note played.
+the instrument from a score - in effect the instruments act as object builders and note-events 
+become objects that exist for the duration of the note played.
+
+% cite CSound %
 
 %% done %%
 %% perhaps cite SDK documentation? or eric lyon book? %%
@@ -364,15 +375,17 @@ that exist for the duration of the note played.
 While Max is a commercial, closed-source product, it includes a software development kit for 
 extending Max by writing a Max “external”. An external is a compiled plug-in that defines the  
 prototype class (data structure and methods) used to create new objects in the patcher.  
-Externals are developed in C or C++ in an object oriented manner, the C API using data 
+Externals are developed in C or C++ in an object-oriented manner, the C API using data 
 structures and pointers to simulate class-based programming and the more recent C++ API using C++ classes.
 A typical external will implement a class that provides some object state for instantiated
 objects along with constructor and destructor functions, and  
-methods for receiving and sending Max messages through the object’s inlets and outlets. 
+methods for sending and receiving Max messages through the object’s inlets and outlets.
+The SDK and API also provide a rich body of functions for interacting with the overall Max
+environment, thus these methods may also trigger side-effects through these facilities.
 
-As externals are compiled plug-ins, they do not need to be distributed as source-code, but
-can be made available as binaries for Windows and OSX. Extending Max through externals has 
-been possible since very early versions of Max, and thus thousands of 3rd party externals 
+As externals are compiled plug-ins, they do not need to be distributed as source-code, and
+are most typically made available as binaries for Windows and OSX. Extending Max through externals has 
+been possible since very early versions of Max, thus thousands of 3rd party externals 
 now exist, both open and closed source, of which Scheme For Max is one.
 
 %% cite the object database??
@@ -384,92 +397,93 @@ now exist, both open and closed source, of which Scheme For Max is one.
 
 Scheme For Max is far from the first Lisp-based computer music tool, or even
 the first real-time music tool in Lisp. There is a rich history of Lisp in music, 
-ranging from Common Lisp Music, created by Bill S. in the 1980's, to more recent
-systems such as Common Music 3 %% cite taube %%
-Nyquist %% cite dannenburg %% 
-and Extempore (formerly named Impromptu). %% cite impromptu paper
+ranging from Common Lisp Music, created by Bill Schottstaedt in the 1980's, to more recent
+systems such as Common Music 3, %% cite taube %%
+Nyquist, %% cite dannenburg %% 
+and Extempore (and its predecessor Impromptu). %% cite impromptu paper
 Nor is Scheme for Max unique in providing a Lisp
-based extension facility to a commercial music platformk - the author unknowingly
-programmed in Lisp in the early 1990's while using the Cakewalk MIDI sequencer,
+based extension facility to a commercial music platform - the author unknowingly
+programmed in Lisp in the early 1990's while using the Cakewalk sequencer,
 which came with an embedded Lisp interpreter in the form of the 
 Cakewalk Application Language (CAL).
 
 However, Scheme for Max is unique in bringing a fully-fledged Scheme interpreter
 to the Max environment as a first-class Max object. This is significant in that Max
 is arguably the most widely used truly programmable
-music platform, and certainly the most widely deployed through its use as ``Max For Live" 
-in the very successful ``Ableton Live" digital audio workstation. 
+music platform, and certainly the most widely deployed through its use in 
+the very successful Ableton Live digital audio workstation, as Max For Live.
 
 In contrast with S4M, systems such as Common Music, Nyquist, and Extempore
 all run as stand-alone applications, with events originating from them often destined
 for other systems for translation into audio. While these systems are, like Max, also capable
-of receiving gestural input, they must, in essence, "be their own boss" - they provide
+of receiving gestural input, they must, in essence, `be their own boss" - they provide
 their own scheduler and timing clocks and act as the principal engine from which temporal
 events originate. If they are to be used alongside another temporal engine, the two
 must be synchronized and events sent back and forth over network connections of some kind.
 
-There have have also been previous externals created to allow one to use Lisp in Max. 
-However, these have been proxies to external Lisp processes rather than interpreters embedded
-in a Max external.
+There have also been previous Max externals created to allow one to use Lisp in Max. 
+However, these have been implemented as object that act as proxies to 
+external Lisp processes rather than interpreters fully embedded and running in the Max process.
 This difference means that in contrast to these offerings, the S4M interpreter has full 
 access to the Max C API and can call API functions through foreign function interface
 calls, with the results of said calls being exactly the same as if the functions were called in C. 
 The ramification of this is that S4M is unique among Max Lisp projects in being
 able to operate within the native Max scheduling system, enabling highly accurate
 timing and retaining deterministic control flow within a patcher. (i.e., There
-is no hidden networking layer with communication to an outside process, thus making
-calls actually asynchronous.)
+is no hidden networking layer with communication to an outside process, which 
+makes operations fundamentally asynchronous even if this is hidden from the user visually.)
 This provides the user with opportunities to use Scheme for tasks beyond
-what is possible with pre-existing options. For example, we are in effect able 
-are able to say "do this Max-internal thing based on other internal Max state at such a time,
-as determined by the Max scheduler". An examples of this might be to control
-the Max transport mechanism based on activity in a table that is used as a 
-shared data store by various patcher objects. 
+what is possible with pre-existing options. For example, we are in effect 
+able to say ``do this Max-internal thing based on other internal Max state at such a time,
+as determined by the Max scheduler". An example of this could be to control
+the Max transport mechanism at a certain music time, based on data in a table 
+that is used as a shared data store between multiple patcher objects. 
 
 
 \section{implementation of the Scheme for Max external}
 % STATUS: in progress
 
-This section provides a high-level overview of the implementation of the S4M external.
+This section provides a high-level overview of the implementation of the \textbf{s4m} 
+object provided by the Scheme for Max external.
 
 The s7 interpreter is implemented in a single C file (with header file), 
-and is statically linked with the C code of the s4m object. 
+and is statically linked with the C code of the \textbf{s4m} object. 
 The s7 foreign function interface enables one to define new Scheme functions in C 
-for calling into C from Scheme, and to call any Scheme code from C (for C-to-Scheme calls). 
+for calling into C from Scheme, and to call any Scheme code from C. 
 The interpreter is instantiated
-in the s4m object's constructor ("s4m\_new" as per the Max naming conventions), and
-a reference to it is stored in the s4m object's data structure.
+in the \textbf{s4m} object's constructor (\textbf{s4m\_new} as per the Max naming conventions), and
+a reference to it is stored in the \textbf{s4m} object's data structure.
 Additionally, during initialization the external creates a Scheme-side variable 
-that holds a pointer to the instantiated s4m object itself. This way,
+that holds a pointer to the instantiated \textbf{s4m} object itself. Thus
 both C functions that are called from Scheme and C functions called in response to Max
-messages have access to both the s4m Max object and its associated s7 interpreter.
-There is always one and only one s7 interpreter per s4m object instance, and
-as s7 is thread safe, many s4m objects can be created in a Max patch, including
-in both the low and high priority threads. (Max runs a high priority "scheduler" 
-thread and a low priority "UI" thread. Each s4m object runs in only
-the high or low thread, but never both, with incoming messages from the opposite
-thread defered or promoted accordingly.)
+messages have access to both the \textbf{s4m} Max object and its associated s7 interpreter.
+There is always one and only one s7 interpreter per \textbf{s4m} object instance, and
+as s7 is thread safe, many \textbf{s4m} objects can be created in a Max patch, including
+in both the low and high priority threads. (Max runs both a high-priority ``scheduler" 
+thread and a low-priority "UI" thread for event/message flow. Each \textbf{s4m} object 
+runs in only one of these, chosen via an optional constructor argument, and incoming messages
+from the opposite thread are deferred or promoted accordingly.)
 
-Scheme-to-C calls are accomplished by defining a C function and binding
-it to a Scheme function name. The function must take as arguments
-a pointer to the s7 instance and an s7\_pointer
+Scheme-to-C calls are accomplished by defining a C function, and binding
+it to a Scheme function name in the initialization routine. 
+The function must take as arguments a pointer to the s7 interpreter instance and an \textbf{s7\_pointer}
 that is a reference to a Scheme list of the arguments used in the Scheme call.
 In the body of the function, C functions from the s7 API are used to get 
 individual arguments from this list, the work is done for the function 
 (which may include additional calls back into Scheme or Max API calls),
-and finally an s7\_pointer is retured which becomes the return value of the 
+and finally an \textbf{s7\_pointer} is returned, which becomes the return value of the 
 function in Scheme.
 
-C-to-Scheme calls are handled similarly: the C function, normally a method
-of the s4m object that runs in response to a Max message, uses the
-s4m object's reference to its s7 interpreter and the s7 API to build
-Scheme argument lists and call into Scheme, getting back s7\_pointers that
-are then converted back to Max atoms. In both cases, helper
+C-to-Scheme calls are handled similarly: the C function (normally a method
+of the \textbf{s4m} object that runs in response to a Max message) uses the
+\textbf{s4m} object's reference to its s7 interpreter and the s7 API to build
+Scheme argument lists and call into Scheme, getting back an \textbf{s7\_pointer} that
+is then converted to one or more Max atoms. In both cases, helper
 functions that convert Max atoms to s7 objects and vice versa are used, 
-implemented in the s4m object as "max\_atom\_to\_s7\_obj" and "s7\_obj\_to\_max\_atom"
+implemented as \textbf{max\_atom\_to\_s7\_obj} and \textbf{s7\_obj\_to\_max\_atom}
 respectfully. The code example below shows sample functions for both directions.
 
-\begin{verbatim}
+\begin{lstlisting}[language=C]
 
 // a C function that is called from Scheme as (post . args)
 // it logs to the Max console through the Max API "post" function
@@ -488,6 +502,7 @@ void s4m_clock_callback(void *arg){
     t_symbol handle = *ccb->handle; 
     
     // create an argument list for calling into Scheme
+    // x is the s4m object, x->s7 the interpreter reference
     s7_pointer *s7_args = s7_nil(x->s7);
     s7_args = s7_cons(x->s7, s7_make_symbol(x->s7, handle.s_name), s7_args);
 
@@ -497,39 +512,39 @@ void s4m_clock_callback(void *arg){
     // ... clean up trimmed... 
 }
 
-\end{verbatim}
+\end{lstlisting}
 
-When an s4m object is created in the patcher, it can optionally be given
-a filename of a Scheme file as an argument. If this is given, this Scheme 
+When an \textbf{s4m} object is created in the patcher, it can optionally be given
+the filename of a Scheme file as an argument. If this is given, the
 file is found by searching the Max search path, and is then loaded on 
-instantiation of the s4m object using the standard Scheme ``load" function.
+instantiation using the standard Scheme \textbf{load} function.
 Editing this argument in the patcher box always resets the
-interpreter, as it forces Max to recreate the s4m object entirely. Additionally,
-the ``reset" message can be sent to the s4m object, and this results in 
+interpreter, as it forces Max to recreate the \textbf{s4m} object entirely. Additionally,
+the \textbf{reset} message can be sent to the \textbf{s4m} object, and this results in 
 the interpreter being destroyed and recreated, reloading the argument file,
 without destroying the Max object instantiation.
 
 To evaluate Scheme code dynamically from the Max patcher, two input facilities
 are available. If an s4m object receives a Max message consisting of the 
-message selector ``eval-string" and a single symbol atom, 
+message selector \textbf{eval-string} and a single symbol atom, 
 this is taken as a request to evaluate the symbol argument as Scheme code. 
 Thus in Max, the user can build messages
 with Scheme syntax or receive code as strings over the network, and by
 using Max objects to convert this into one single quoted symbol, prepended
-with the selector symbol ``eval-string", the code can be evaluated dynamically.
+with the selector symbol \textbf{eval-string}, the code can be evaluated dynamically.
 This enables users to add run-time code that is possibly long 
-(i.e., too long to conveniently type into a Max message box) by
+(i.e., too long to conveniently type into a Max \textbf{message-box}) by
 sending it from a text editor or command line utility to Max over the 
 local network. 
 
 The second facility for dynamic code evaluation in S4M is more unusual.
 In a Max external, there exists a binding option to catch any previously
 uncaught messages, so that a message with an unrecognized selector 
-can be handled by a generic dispatching method. This facility is used to 
+can be handled by a generic dispatching method. In S4M, this is used to 
 catch any message that is not already reserved, with any additional 
-arguments passed in as a Max list of atoms.  The s4m object interprets
-the message to mean ``evaluate this selector plus its additional atoms 
-as if it is a Scheme list enclosed by parentheses".
+arguments passed in as a Max list of atoms.  The \textbf{s4m} object interprets
+the message to mean \textit{``evaluate this selector plus its additional atoms 
+as if it is a Scheme list enclosed by parentheses"}.
 Because both Max and Scheme uses white-space as separators and very little
 in the way of diacritical syntax, this enables a wide variety
 of simple Scheme calls to be made with little ceremony. The
@@ -540,26 +555,27 @@ with the Max message interpolation facility, it enables the user to very
 easily assemble Max widgets that trigger Scheme functions. Most anything that
 can be expressed in a single s-expression without inner nesting can be used.
 In the figure below,
-we see a number box outputting to a message using Max's variable interpolation
-(the \$1). Clicking the bang above the number box will result in a message of 
-``set! foobar 74" being sent to the s4m object, with will then call
-into Scheme with the code "(set! foobar 74)".
+we see a \textbf{number-box} outputting to a \textbf{message-box} using Max's 
+variable interpolation (the \textbf{\$1}). 
+Clicking the \textbf{bang} above the \textbf{number-box} will result in a message of 
+\textbf{set! foobar 74} being sent to the \textbf{s4m} object, which will then call
+into Scheme with the code \textbf{(set! foobar 74)}.
 
 %% TODO Max patch of making number message 
 
-In addition to both of these, the s4m object also implements a ``read" message,
-where sending ``read {filename}" to the object will result in the filename
-being found on the Max search path and a call to the Scheme ``load" function,
+In addition to both of these, the \textbf{s4m} object implements a \textbf{read} message,
+where sending \textbf{read filename} to the object will result in the full filename
+being found on the Max search path and used in a call to the Scheme \textbf{load} function,
 without resetting the s7 interpreter.
 
-Takin the above together, we see that users have a wide variety of code input options:
-they can change the main file in the s4m box if they want a rebooted interpreter,
-they can send read messages if they want to load files without losing 
+Taking the above together, we see that users have a wide variety of code input options:
+they can change the main file in the \textbf{s4m} box if they want a rebooted interpreter,
+they can send \textbf{read} messages if they want to load files without losing 
 interpreter state, and they can send code itself either as strings or as Scheme
 one-liners implemented as Max messages. The result is that it is straightforward
 for users to keep parts of their Scheme program active and running
-while working on other parts that are redefined on the fly, a workflow that is
-very convenient to algorithmic musicians, but not at all practical with existing
+while working on other parts that are being redefined on the fly (perhaps while music plays!),
+a workflow that is very convenient to algorithmic musicians, but not at all practical with existing
 Max options. Of particular note, this enables the user to
 conveniently create new functions and schedule them for future evaluation,
 as discussed in the next section.
@@ -572,7 +588,7 @@ or static amplitude, but absent rhythm, there is no music.
 Thus a core problem in computer music programming environments is that of providing a flexible 
 means of triggering events in time. Further, in platforms intended to support both
 live and algorithmic musical interaction, a viable solution must enable the performer
-to interact with scheduled events satisfactorally, both programmatically and gesturally. 
+to interact with scheduled events easily, both programmatically and gesturally. 
 
 One of the major advantages of Max compared to other computer music platforms 
 is the ease with which the user can create interactive environments in which the performer's actions 
@@ -598,14 +614,14 @@ The author proposes that this problem is one not well solved in the Max environm
 to Scheme for Max. Max does provide facilities to delay Max messages by some
 amount of time. In the context of visual patcher programming, users can schedule 
 a Max message (number, symbol, or list of both) for future processing by sending it through a 
-\textbf{pipe} object. The amount of time by which it is delayed is specified as an argument of 
-the pipe object, and can be expressed in milliseconds or in a tempo 
+\textbf{pipe} object. The amount of time by which it is delayed is specified as an argument to 
+the \textbf{pipe} object, and can be expressed in milliseconds or in a tempo 
 relative format with the actual time determined by the Max master transport tempo. 
-The pipe object’s delay time can also be set dynamically by sending a numerical message
-to the right inlet of pipe. Any messages sent to the left inlet will be passed out
-the pipe outlet(s) after the specified time. 
+The \textbf{pipe} object’s delay time can also be set dynamically by sending a numerical message
+to the right inlet. Any messages sent to the left inlet will be passed out
+the outlet(s) after the specified time. 
 
-While moving events in to the future with the pipe object is simple to program 
+While moving events in to the future with the \textbf{pipe} object is simple to program 
 in the patcher and functions adequately, 
 it has several limitations. The most immediately noticeable is that it also splits 
 list messages into individual elements, sending them out individual outlets. 
@@ -615,24 +631,24 @@ be in an incoming list message in advance and to reasssemble the message manuall
 If the length of the list is unknown (i.e., the event uses an arbitrary number
 of parameters), the solution is more complex and requires 
 an exterior storage mechanism to be used to allow the outgoing 
-pipe message to refetch the original list from another object after delay. Using
-the pipe object for delaying complex events is thus cumbersome. 
+message to refetch the original list from another object after delay. Using
+the \textbf{pipe} object for delaying complex events is thus cumbersome. 
 
 A larger problem is that of how to capture gestural values for use in the delayed
 events. Max's visual patching language is fundamentally modelled similarly to a modular
-synthesizer - there is one instance for each visual object, and messages can only
+synthesizer - there is one instance in memory of each visual object, and messages can only
 pass through them one at a time. Creating visual programs where execution of 
 delayed events will trigger cascades of messages through objects that are also 
-being used in the interim becomes notoriously complex and there exists no straight-forward
-facility to express ``make a new container for this variable as it is now so that
-we can fetch it later". A naive solution would use a visual patcher object to store 
+being used in the interim becomes notoriously complex and there exists no straightforward
+facility to express \textit{``make a new container for this variable as it is now so that
+we can fetch it later"}. A naive solution would use a visual patcher object to store 
 the variable's state at trigger time for use later, however this only works
 if there is only one scheduled event - adding more scheduled events requires adding
-additional storage objects for each event, and as each object in the visual patcher
+an additional storage objects per concurrently scheduled event, and as each object in the visual patcher
 represents an object instantiation rather than a class, this rapidly becomes
-baroque. This programming-with-instances paradigm
+baroque. This ``programming-with-instances" paradigm
 is very convenient when we want to ensure there is only ever one instance of a given function, such
-as in the design of a classical monophonic synthesizer, but difficult in a poly-phonic time context
+as in the design of a classical monophonic synthesizer, but difficult in a polyphonic time context
 such as the creation and eventual playback of some unknown number of delayed events.
 
 %% figure of pipe use
@@ -649,9 +665,7 @@ of parameters.
 In the C API however, Max does provide a highly accurate facility for delaying
 the execution of a C callback function, through the Max ``clock'' API. Scheme
 for Max builds on this to provide an acccurate, flexible, and high-level means 
-for scheduling future events, without the problems mentioned above, and this 
-is the focus of the remains of this paper.
-
+for scheduling future events, without the problems described.
 
 \section{Comparison with the Max JavaScript object}
 
@@ -660,46 +674,50 @@ our use case of a perfomer wanting to schedule large numbers of events with arbi
 parameters and gestural inputs meant variously for present and future use. 
 However, Max does provide an alternative programming solution through its
 \textbf{js} object, which embeds a JavaScript (ECMA5) interpreter in the Max environment.
-The user is able to load JavaScript code in the js object from a file given as an argument to the object,
+The user is able to load JavaScript code from a file given as an argument to the object,
 and this code can interact with the Max environment and with object inlets and outlets,
 similar to how one can do so in C code in a Max external.
 This does allow one to create functions and variables, and does have a facility
 for delayed execution through the JavaScript \textbf{Task} object. 
 Thus technically it could be used to solve our use case.
-In many respects the js object is functionally similar to S4M, and in fact, the desire to 
-work with Max this way, combined with disatisfaction with the limitations of the js
-object was the impetus for development of S4M.
+In many respects the \textbf{js} object is functionally similar to the \textbf{s4m} object,
+and in fact, the desire to work with Max this way, combined with disatisfaction with the
+limitations of the Max JavaScript implementation was the reason for development of S4M.
 
-The js object in Max is not an ideal solution to our problem for several reasons. 
+The \textbf{js} object in Max is not an ideal solution to our problem for several reasons. 
 The most serious
 is that it is limited to running only in the Max low-priority GUI thread. As this
 thread is also used for Max file i/o and graphic redrawing, the result is that latency
 is potentially high and indeterminate, meaning musical timing accuracy is unpredictable and often poor.
-The human ear is very sensitive to time, and perceives events separated by 20 ms as discreet
+The human ear is very sensitive to time, and perceives events separated by 20 ms as discrete
 events. 
 % citeation
 Delays of tens of milliseconds are enough to sound like errors in playback
 of highly rhythmic music. This means that it takes little other activity in the
 GUI thread to delay our scheduled events enough to be audibly incorrect. 
 For some purposes, this is acceptable, but for the creation of accurate 
-musical sequencers or algorithmic music engines, the js object is unreliable. 
+musical sequencers or algorithmic music engines, the \textbf{js} object is unreliable. 
 
-Secondly, the js object provides no convenient facilities for loading new code
-during playback, similar to what was previously described. 
+Secondly, the \textbf{js} object provides no convenient facilities for loading new code
+during playback such as was previously described for S4M.
 The object reads in a single source file at instantiation time.
-One could technically add dynamic code evaluation to the JS object by wrapping
+One could technically add dynamic code evaluation by wrapping
 code to be evaluated in strings and passing this message to a JavaScript function
-that uses the JavaScript ``eval" function. However, compared to the previously 
-described dynamic code evaluation facilities in S4M, this is again cumbersome. 
-This is of particular significance to algorithmic performers, 
-for example in the ``live-coding" scene, who might
-want to not just schedule a pre-written function, but create a new function 
-and schedule it while a piece plays.
+that uses the JavaScript \textbf{eval} function, much as S4M does with the
+\textbf{eval-string} message. However, this pattern is not common and well-supported
+in the JavaScript milieu the way it is in Lisp languages, as it poses a serious security risk in a 
+web development context, which is the use case driving JavaScript linguistic
+evolution, literature, and tooling.
 
-Finally, the js object gives us JavaScript's implementation of anonymous functions
+Finally, the \textbf{js} object gives us JavaScript's implementation of anonymous functions
 and closures, which while usable, are verbose in terms of syntax, and require
 diacritical syntax that is not easily used in Max messages. When compared to the syntax
 of Scheme, JavaScript is thus sub-optimal for generating code in Max messages.
+
+This is of particular significance to algorithmic performers, 
+for example in the live-coding scene, who might
+want to not just schedule a pre-written function, but create a new function 
+and schedule it while a piece plays.
 
 
 \section{Scheduling events in Scheme for Max}
@@ -707,7 +725,7 @@ of Scheme, JavaScript is thus sub-optimal for generating code in Max messages.
 Given the above, we can see that the problem of elegantly implementing 
 a delayed event system that can differentiate between current and future values
 for variables derived from real-time input gestures is well suited to solutions 
-using S4M. Scheme is notable for the conciseness with which one can create an anonymous function
+using Scheme. Scheme is notable for the conciseness with which one can create an anonymous function
 and store a reference to this function (taking along its environment) in some data
 store to be retrieved at an arbitrary point in time. Further, it is straightforward
 to differentiate in the function between variables that should
@@ -725,23 +743,25 @@ briefly the implementation of Max externals in C and the aforementioned
 facilities for delaying functions.
 
 At a high level, a Max external must implement the following:
+
 \begin{itemize}
 \item A data structure to hold state used by the object
 \item A class building function used to create the class in C
-\item An instance constructor function 
+\item An instance constructor function called when objects are added to a patch
 \item Any methods that will be bound to messages as event handlers
 \end{itemize}
 
-A sample of a minimal external for an object called ``mynum" 
-that holds an integer, updates the integer on receipt of an int 
-message, and posts the value to the console on receipt of a bang
-message is shown below.
+A sample of code for a minimal external is shown below,
+for an object called \textbf{mynum}. The object holds an integer as state,
+updates the integer on receipt of an \textbf{int} 
+message, and posts the value to the console on receipt of a \textbf{bang}
+message.
 
 \begin{lstlisting}[language=C]
 
 // data structure of instance fields for our class
 typedef struct _mynum {
-    t_object obj;     // obligatory member for the actual instance 
+    t_object obj;     // obligatory member for the mynum instance 
     long value;       // state variable for the integer
 } t_mynum;
 
@@ -762,6 +782,7 @@ void ext_main(void *r){
 // constructor for our object
 // the value returned by the below gets stored in the obj field of our t_mynum struct
 void *mynum_new(){
+    // pointers to the object defined are traditionally called "x"
     t_mynum *x = (t_mynum *)object_alloc(mynum_class);
     x->value = 0;
     return x;
@@ -781,26 +802,26 @@ void mynum_bang(t_mynum *x){
 
 
 We can see that the pattern for adding functionality to our class is to
-add state variables to the t\_mynum structure, and add methods as
+add state variables to the \textbf{t\_mynum} structure, and add methods as
 functions expecting a pointer to our object as the first argument,
-traditionally named ``x". In the example above, a bang message causes our
-object to run, with the side effect of posting the stored value. A more
+traditionally named ``x". In the example above, a \textbf{bang} message causes our
+object to run, with the side effect of posting the stored value to the console. A more
 realistic example would likely output the stored value, but this adds more code
 and is not necessary for our demonstration of scheduling.
 
-Let us imagine instead that the bang message should delay the activity
+Let us imagine instead that the \textbf{bang} message should delay the activity
 (posting to the console) by 1000 ms. We can use the Max clock facility for high-accuracy
 delay. (An older, and actually more flexible, facility exists as well but as it is
-less accurate temporally, it is not used in S4M.) 
+less accurate temporally, it is not used.) 
 
-We will create a clock object, which takes as arguments a void pointer and a function
+We will create a \textbf{clock} object, which takes as arguments a void pointer and a function
 reference, with the void pointer normally used to hold a reference to our instantiated
-object. The standard method for doing this in Max (taken from the SDK documentation)
-is to use a clock object that gets added to our data structure, and to add the act
-of starting the clock to the bang handler.
+object (x). The standard method for doing this in Max (taken from the SDK documentation)
+is to add a \textbf{clock} object to our classes data structure, and to add the act
+of starting the clock to the \textbf{bang} handler.
 
 \begin{lstlisting}[language=C]
-// Max standard clock use
+// typical Max clock use
 
 typedef struct _myint {
     t_object  obj;          // member for the actual instance 
@@ -822,7 +843,7 @@ void myint_bang(t_myint *x){
   clock_fdelay(x->clock, 1000);
 }
 
-// our callback that will be triggered by the clock
+// the callback that will be triggered by the clock
 void myint_callback(t_myint x){
     post("in the future, the value is %ld",x->value);
 }
@@ -830,7 +851,8 @@ void myint_callback(t_myint x){
 
 
 From the above we can see that, while accurate, the clock functionality is limited -
-the callback must be a a single-arity function expecting a pointer, normally to the object.
+the callback must be a single-arity function expecting a pointer, and this
+is normally to the object.
 
 
 \subsection{Implementation in Scheme for Max}
@@ -846,8 +868,9 @@ user. To the user of S4M, scheduling the execution of a function is simple:
 (delay 1000 (lambda()(out 0 99)))
 \end{lstlisting}
 
-In addition to scheduling the function, the \textbf{delay} function also returns a unique
-symbolic handle that can be used to cancel a delayed function before it executes.
+In addition to scheduling the function, \textbf{delay} also returns a unique
+symbolic handle representing the scheduled instance, and this can be used to 
+cancel the execution of the scheduled function.
 
 \begin{lstlisting}[language=lisp]
 ; delay and store the handle
@@ -872,7 +895,7 @@ The Scheme implementation of this is straightforward:
 \end{itemize}
 
 Cancelling a delay function consists of merely replacing the callback registered
-in the hash-table with the value \#false, in effect letting the clock fire harmlessly.
+in the hash-table with the value \textbf{\#false}, letting the clock fire harmlessly.
 The s7 Scheme code for this is shown below. It uses an s7's \textbf{gensym} function to create the
 symbolic handle that is guaranteed to be unique to this instance of the interpreter.
 
@@ -908,14 +931,18 @@ symbolic handle that is guaranteed to be unique to this instance of the interpre
 
 ; public function to delay a function by time in ms (int or float)
 ; returns the gensym callback key, which can be used to cancel it
-(define (delay time fun)
+(define (delay delay-time fun)
   ; register the callback and return the handle
   (let ((cb-handle (s4m-register-callback fun)))
     ; call the C FFI and return the handle
-    (s4m-schedule-delay time cb-handle)
+    (s4m-schedule-delay delay-time cb-handle)
     cb-handle))
 
 \end{lstlisting}
+
+The convention used in S4M is to name private internal functions with the
+prefix \textbf{s4m-}. The S4M user need only understand how to call
+\textbf{delay,} and knows not to name anything in user code with the \textbf{s4m-} prefix.
 
 The implementation in C is more involved to work around the signature 
 limitations of the clock facilities in Max.
@@ -924,22 +951,23 @@ and delay time as arguments, the following occurs:
 
 \begin{itemize}
 \item A \textbf{t\_s4m\_clock\_callback} data structure is dynamically allocated and used to store a
-  reference to the s4m object and to the symbolic handle.
-\item A Max clock is created, passing in a void pointer to this structure
-  and binding to a generic clock callback function in C. The clock's timer is started
+  reference to the \textbf{s4m} object and to the symbolic handle passed from Scheme.
+\item A Max \textbf{clock} is created, passing in a void pointer to clock callback structure
+  and binding the clock to a generic clock callback function in C. The clock's timer is started
 \item The clock callback struct is also stored in a C hashtable (Max's hashtab implementation),
   keyed by the handle, so that cancellation or object deletion can use this to find all clocks.
-\item When the generic clock callback function runs (time has elapsed), it uses the pointer argument to get the
-  the delay handle and the instantiated s4m object, through which it 
-  can also get the s7 interpreter pointer. 
+\item When the generic clock callback function runs (time has elapsed), it uses the pointer argument to get 
+  the delay handle and the instantiated \textbf{s4m} object, through which it 
+  can also get the s7 interpreter pointer.
 \item The s7 interpreter and handle are then used to call the Scheme function
   \textbf{s4m-execute-callback,} which will run our delayed Scheme function as previously explained.
 \item The generic C callback then removes the clock reference from the C hashtable,
   deletes the clock, and frees the memory allocated for the callback struct.
 \end{itemize}
 
-Additionally, there exists clean up functionality triggered on a reset message or 
-s4m object destruction which finds all outstanding clocks, cancels them, and frees the memory allocated.
+Additionally, there exists clean up functionality triggered on a \textbf{reset} message or 
+\textbf{s4m} object destruction which fetches from the hashtable all outstanding clocks, 
+cancels them, and frees the memory allocated.
 This is not shown as it does not materially change the process used.
 
 \begin{lstlisting}[language=C]
@@ -961,6 +989,8 @@ typedef struct _s4m_clock_callback {
 
 // schedule delay FFI definition, called from Scheme as s4m-schedule-delay
 static s7_pointer s7_schedule_delay(s7_scheme *s7, s7_pointer args){
+    // as this is called from Scheme, we must find x by fetching it
+    // from the Scheme variable set in initialization
     t_s4m *x = get_max_obj(s7);
 
     // get the arguments we need (time and handle) from the s7 args list
@@ -996,7 +1026,8 @@ static s7_pointer s7_schedule_delay(s7_scheme *s7, s7_pointer args){
 }
 
 // the generic clock callback, this fires after being scheduled with clock_fdelay 
-// it gets access to the handle and s4m obj through the clock_callback struct 
+// it gets access to the handle and s4m obj through the clock_callback struct
+// this is the C callback that runs for every delayed Scheme function 
 void s4m_clock_callback(void *arg){
     t_s4m_clock_callback *ccb = (t_s4m_clock_callback *) arg;
     t_s4m *x = &(ccb->obj);
@@ -1021,103 +1052,119 @@ void s4m_clock_callback(void *arg){
 
 \end{lstlisting}
 
-\section{Limitations and Future Work}
+\section{Limitations and Future Improvements}
 
 The scheduling system describe does have several limitations worth noting.
-The s7 Scheme implementation includes a mark-and-sweep garbage collector 
-that must run occasionally, pausing other processing. The garbage collector
+The s7 Scheme implementation includes a tracing garbage collector 
+that must run occasionally, pausing other processing. 
+%% cite bil email
+The garbage collector
 can, however, be paused and run on demand. Tests on the author's
-system appeared to show garbage collection taking an average of 1 to 2 ms per pass
-in a substantial application - a 16 track sequencer written entirely in S4M
-with the computer also processing audio for the 16 tracks with commercial
-software synthesizers, and the GC being run deliberately every 100 ms
-to prevent any one GC pass from having a large amount to clean up. 
-In personal tests, this configuration recorded and the output
-examined in a recording platform to check for timing discrepencies. The
+system, with the garbage collector forced to run every 100ms to prevent
+significant build up, showed the garbage collection taking an average of 1 to 2 ms per pass
+when run in a substantial application (a 16 track sequencer written entirely in S4M
+with the computer also generating audio for the tracks with commercial
+software synthesizers).  
+The audio rendered was recorded and examined
+examined in a digital audio workstation to check for timing discrepancies. The
 results of these preliminary tests were that timing was unaffected by the 
-garbage collector so long as the host (Max/MSP) was configured to have
-a large enough output buffer to allow the GC to run within this buffer.
+garbage collector so long as Max was configured with 
+a large enough output buffer to allow the collector to run within the 
+latency period of this buffer.
 Using Max with an output buffer of 256 samples produces an output latency
 of approximately 6-8ms (depending on the Max signal vector as well), which
-was determined to be large enough for the GC to run while still also being
-low enough for acceptable real time performance. With software synthesis
+was large enough for the collector to run without issue, but is 
+low enough to be acceptable for real time performance. With software synthesis
 loads at closer to the maximum possible on the author's computer,
 an output buffer of 512 samples (~11 ms output latency) was necessary to prevent
 any timing errors. This is encouraging as these buffer sizes are not atypical
 for commercial music production on digital audio workstations. 
 
 In addition to output latency, there is the factor of internal latency.
-Max, like many computer music platforms stemming from the Music N family
-of computer music langauges, calculates audio in vectors of samples, with
-each vector calculated in one processing pass, and (normally) control
+Max, like many computer music programming environments, generates audio 
+in vectors of samples, with
+each vector generated from one processing pass, and (normally) control
 rate passes conducted also a maximum of once per audio vector pass. The
-size of the signal vector has a large effect on performance, with larger
-vectors requiring significantly less CPU. However, as note onsets originating
+size of this signal vector thus has a large effect on performance, with larger
+vectors requiring significantly less CPU use. As audio rendering of note onsets originating
 from control messages (the normal scenario) must thus be aligned with 
-singal vector boundaries, this produces delays of note onsets by up to
-the time delta of one vector, a.k.a. timing "slop". If desired, one
-can run Max with a signal vector size of 1 sample to produce so called
-"sample-accurate" timing, but this uses significantly more CPU, and thus
-requires (usually) a longer output buffer. However, it should be noted
-that the Max scheduler internally compensates for this slop. The mechanism
-by which it does this is unfortunately not publically documented or available
-in code, but one can presume that it is some variant of the pattern 
+signal vector boundaries, this produces delays of note onsets by up to
+the time period of one vector, a phenomenon known as ``timing jitter" in the nomenclature.
+However, the more recent scheduling facilities in Max, including the 
+clock facilities used by S4M, are designed to compensate for this jitter,
+maintaining long term temporal accuracy despite note onset delays. The mechanism
+by which this is done is unfortunately not publically documented or available
+in open-source code, but one can assume that it is some variant of the pattern 
 whereby scheduled events are aware of when they are supposed to be running
-and if they in turn schedule events, the scheduling of subsequent events
-is shifted by some known amount based on the theoretical accurate time
-of an event. The author also conducted personal tests of this, and determined
-that so long as the overall output latency is large enough to allow
+and if they in turn schedule subsequent events, the time for these subsequent
+events will be shifted to compensate for the jitter, based 
+on the theoretical accurate time of the scheduling event, rather than its
+actual (post-jitter) time. The author also conducted personal tests of 
+this compensation, comparing both high and low signal vector sizes to produce
+variable delays in note onsets, and it was determined
+that so long as the overall output latency is again large enough to allow
 the GC to run in time, self-scheduling events in a long piece do stay
-accurate in that slop gaps do not accumulate over the piece - even
-10 minutes on, note onsets stay accurate to within the signal vector
-of samples.
+accurate in that jitter does not accumulate over the piece - 
+note onsets stay accurate to within the delay of one signal vector of samples,
+regardless of the length of the piece of music.
 
-These tests demonstrated that Scheme for Max is usable as a
-timing source for processing intensive music production so long as some
-reasonable latency is acceptable. Improving the s7 garbage collection
-implementation for lower latency use is a potential area for future work. 
+These tests demonstrated that Scheme for Max is usable as a highly accurate
+timing source for processing-intensive music production so long as some
+reasonable latency is used, but that at low latencies the gargbage
+collector will interfere with timing by generating audio under-runs.
+Improving or replacing the s7 garbage collection implementation for 
+lower latency use is a potential area for future work. 
 
-S4M does not implement DSP calculations at this time, running only in 
-the Max contro/message thread. Max does have an audio configuration option
-whereby the control thread and DSP thread are shared in a round-robin
+A second limitation is that S4M does not implement DSP calculations at this
+time, running only in the Max event/message thread. 
+Max does have an audio configuration option
+whereby the event thread and DSP thread are shared in a round-robin
 execution pattern. It is worth exploring whether the Scheme interpreter
-could be run productively in the DSP loop in this configuration. It is
-unlikely that it would be productive to create CPU intensive synthesis
-(requiring filling the whole vector per pass), but it is possible that
-productive work could be done once per DSP pass in the DSP routine.
-This would create the equivalent of the control-rate as it is implemented
-in Csound, where rather than control rate calculations being triggered
+could be run productively in the DSP loop in this configuration. While it is
+unlikely that S4M will be suitable for processing-intensive audio synthesis
+(requiring filling the whole vector per pass), it is possible that
+other productive work could be done once per DSP pass.
+This could be used to create the equivalent in Max of the ``control-rate"
+as it is implemented in CSound, where rather than control rate calculations being triggered
 solely by events, there is also the facility to create lower resolution
-audio signals as control signals. This can be useful for automating parameters
+continuous signals that can be used to modulate audio signals. 
+This can be useful for automating parameters that 
 sound acceptable at lower sample rates, such as pitch curves, and is
-an area that will be explored in subsequent releases of S4M.
+an area that will be explored in subsequent work on S4M.
 
 
 \section{Conclusion}
-Scheme for Max is a project that brings a new way of working with
-timed events to the Max platform. The author believes this will be
+The Scheme for Max project brings a new way of working 
+to the Max platform, especially with regard to flexible and accurate 
+scheduling of future events.  The author believes this will be
 of significant benefit to those working in the fields of algorithmic
 music and live coding, and will also be useful to the more general Max 
-user base as a way to script Max in a high level language for any
-tasks requiring high timing accuracy. In the author's experience, 
-working in Scheme within Max has been musically productive, with the
+user base as a way to script Max in a high level language that runs in
+the high-priority thread. In the author's experience, 
+working in Scheme within Max has been highly productive, with the
 language well suited both to expressing musical concepts and to working
-with the Max platform. The ability to update Max from a dynamic language
-in real-time has been especially productive for building complex sequencing
-and algorithmic composition tools.
+with the Max platform. The ability to update code during play-back
+has been an especially productive workflow for building complex 
+sequencing and algorithmic composition tools.
 
-Future plans for the project include a version for the open source
-Pure Data platform, similar in Max in many ways and created by Miller Puckette,
-the original author of Max. Scheme for Pd is now in beta release, available
+Future plans for the project include a version for the open-source
+Pure Data platform, similar to Max in many ways and created also by Miller Puckette,
+the original author of Max. \textbf{Scheme For Pure Data} is now in beta release, available
 as source code, with binary releases planned for July 2021. In addition
-to this, experimental work on running Scheme in the DSP loop is planned,
+to this, experimental work on running Scheme for control rate DSP is planned,
 as well as the creation of portability layers in Scheme to allow one to run 
-the same Scheme code on S4M, S4PD, or Common Music (which also uses s7).
+the same Scheme code on S4M, S4Pd, or Common Music (which also uses s7).
+There have been successful ports of s7, Pure Data, and CSound to Web Assembly, 
+thus it seems likely that work from the project will be useable for web audio as well.
 It is hoped that through these additional run-times, the project can become 
 a valuable addition to the larger computer music community, enabling
 use in contexts where the commercial Max platform is not practical
-or accessible to many users.
+or financially accessible.
 
+Scheme For Max can be obtained on GitHub, with links to documentation,
+demonstration videos, and various tutorials linked from the main page.
+
+https://github.com/iainctduncan/scheme-for-max
 
 %%
 %% The acknowledgments section is defined using the "acks" environment
@@ -1132,7 +1179,7 @@ created Common Music and has been an inspiration through his seminal book
 on algorithmic composition with Lisp, "Notes from the Metalevel".
 Luigi Castelli and Alex Harker helped with programming questions
 and build assistance. 
-S4M of course also depends on Max and thus owes a huge debt to 
+S4M of course depends on Max and thus owes a huge debt to 
 Miller Puckette and David Zicarelli. And finally, Andrew Schloss has
 been a source of encouragement and support through the years of 
 exploration that led to the Scheme For Max project.
