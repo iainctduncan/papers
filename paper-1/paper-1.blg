@@ -1,0 +1,69 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper-1.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: paper-1.bib
+Warning--I didn't find a database entry for "Dannenberg97"
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty year in Cycling74
+Warning--empty organization in Cycling74
+Warning--unrecognized DOI value [doi:10.2307/3680259]
+Warning--empty publisher in Brandt1998
+Warning--empty address in Brandt1998
+Warning--page numbers missing in both pages and numpages fields in Brandt1998
+Warning--empty organization in Garton2011
+Warning--empty organization in MaxObjects2021
+Warning--empty organization in Matheussen2020
+Warning--empty organization in Schottstaedt2021
+Warning--unrecognized DOI value [doi:10.1145/1932682.1869526]
+Warning--unrecognized DOI value [doi:10.2307/3680913]
+Warning--empty address in Wang17
+You've used 14 entries,
+            5959 wiz_defined-function locations,
+            1726 strings with 22038 characters,
+and the built_in function-call counts, 14076 in all, are:
+= -- 1841
+> -- 368
+< -- 2
++ -- 108
+- -- 148
+* -- 893
+:= -- 1427
+add.period$ -- 66
+call.type$ -- 14
+change.case$ -- 74
+chr.to.int$ -- 14
+cite$ -- 24
+duplicate$ -- 1272
+empty$ -- 893
+format.name$ -- 164
+if$ -- 3338
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 32
+newline$ -- 187
+num.names$ -- 116
+pop$ -- 413
+preamble$ -- 1
+purify$ -- 194
+quote$ -- 0
+skip$ -- 488
+stack$ -- 0
+substring$ -- 1054
+swap$ -- 141
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 350
+warning$ -- 13
+while$ -- 129
+width$ -- 0
+write$ -- 307
+(There were 14 warnings)

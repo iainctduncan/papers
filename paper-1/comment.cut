@@ -1,1 +1,12 @@
-To Robert, for the bagels and explaining CMYK and color spaces.
+Scheme For Max would not exist without the work of many people.
+Bill Schottstaedt created Common Lisp Music and the s7 Scheme implementation,
+and has been invaluable as a source of advice on s7. Heinrich Taube
+created Common Music and has been an inspiration through his seminal book
+on algorithmic composition with Lisp, "Notes from the Metalevel".
+Luigi Castelli and Alex Harker helped with programming questions
+and build assistance.
+S4M of course depends on Max and thus owes a huge debt to
+Miller Puckette and David Zicarelli. And finally, Andrew Schloss has
+been a source of encouragement and support through the years of
+exploration that led to the Scheme For Max project.
+

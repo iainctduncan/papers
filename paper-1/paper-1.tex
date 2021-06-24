@@ -91,7 +91,7 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{Scheduling Musical Events as Procedures with Scheme for Max}
+\title{Scheduling Musical Events in Max/MSP with Scheme for Max}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -102,7 +102,7 @@
 \author{Iain C.T. Duncan}
 %%\authornote{Both authors contributed equally to this research.}
 \email{iainctduncan@gmail.com}
-\affiliation{%
+\affiliation{
   \institution{University of Victoria}
   \streetaddress{}
   \city{Victoria}
@@ -191,7 +191,13 @@ extensions, enabling users to rapidly create interactive systems with gestural
 input from physical sources such as on screen widgets, physical electronic instruments,
 and custom hardware communicating over serial networks.
 
-%% TODO visual example of a Max patch with various inputs %% 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.5\linewidth]{fig-1}
+  \caption{A Max patch with a keyboard value transposed by a dial and sent to MIDI output.}
+  \Description{}
+\end{figure}
+
 
 One powerful feature of Max is its ability to be programmed
 while the engine is playing music. Patches can be altered 
@@ -321,7 +327,7 @@ Taken together, this means that in Max there are five kinds of messages:
 \textbf{bang}, \textbf{symbol}, \textbf{int}, \textbf{float}, and \textbf{list}. 
 (The bang message is technically a symbol message
 of ``bang", but this is essentially treated as a type of its own in the nomenclature.) 
-%% cite puckette CMJ winter 2002 %% 
+\cite{Puckette2002}
 
 Activity in an object (represented visually by a single visual box in the patch) is triggered
 by sending the object a Max message, most commonly from an object connected to it
@@ -339,7 +345,7 @@ message or messages out of its outlets, and it may cause a side effect in the br
 Max environment, such as printing to the console or updating a global data element such as
 an audio buffer.
 
-As an example, in the patcher screen-shot below we see a \textbf{message-box} object that will update
+As an example, in the patcher screen-shot above we see a \textbf{message-box} object that will update
 its state (and visual display) with the symbols ``hello" and ``world" when sent the message 
 \textbf{set hello world}. Near it is a circular \textbf{bang} object, which when clicked will send the
 \textbf{message-box} the \textbf{bang} message, causing it to output the message \textbf{list hello world}.
@@ -348,7 +354,12 @@ in any lists it receives, immediately outputting the count. The three columns in
 show the patch as it is prior to any clicks, as it is after clicking \textbf{message-box} 1,
 and as it is after clicking both \textbf{message-box} 1 and the \textbf{bang}.
 
-%% figure one, a sample Max patch
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.5\linewidth]{fig-2}
+  \caption{Message flow at various stages}
+  \Description{.}
+\end{figure}
 
 Objects are not limited to interacting with other objects through messages passing in to inlets and out of 
 outlets. A C API exists that enables objects to query and control various engine components (e.g., 
@@ -448,9 +459,19 @@ makes operations fundamentally asynchronous even if this is hidden from the user
 This provides the user with opportunities to use Scheme for tasks beyond
 what is possible with pre-existing options. For example, we are in effect 
 able to say ``do this Max-internal thing based on other internal Max state at such a time,
-as determined by the Max scheduler". An example of this could be to control
-the Max transport mechanism at a certain music time, based on data in a table 
-that is used as a shared data store between multiple patcher objects. 
+as determined by the Max scheduler". In the example below, a Scheme function
+is scheduled that will read a rehearsal mark from the table \textbf{mark-table},
+moving the global transport to that position in 4 bars time. As the table
+is a shared data object, other Max objects (or patchers) could write to this
+rehearsal mark table without awareness of S4M.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.75\linewidth]{fig-3-transport}
+  \caption{S4M patch that moves the transport in 4 bars time to a mark read from a table}
+  \Description{.}
+\end{figure}
+
 
 
 \section{implementation of the Scheme for Max external}
@@ -547,7 +568,12 @@ with the selector symbol \textbf{eval-string}, the code can be evaluated dynamic
 This enables users to add run-time code that is possibly long 
 (i.e., too long to conveniently type into a Max \textbf{message-box}) by
 sending it from a text editor or command line utility to Max over the 
-local network. 
+local network. In figure 4, the left hand side shows code being sent
+from a \textbf{text} object, prepared as an \textbf{eval-string} message, and sent to
+the \textbf{s4m} object. A \textbf{udpreceive} object also receives code as strings
+on network port 7777. (The author uses a Python script triggered
+from a macro to send blocks of Scheme code from the Vim editor as
+over port 7777.)
 
 The second facility for dynamic code evaluation in S4M is more unusual.
 In a Max external, there exists a binding option to catch any previously
@@ -566,14 +592,20 @@ this facility is of significant utility to the Max programmer, as combined
 with the Max message interpolation facility, it enables the user to very
 easily assemble Max widgets that trigger Scheme functions. Most anything that
 can be expressed in a single s-expression without inner nesting can be used.
-In the figure below,
-we see a \textbf{number-box} outputting to a \textbf{message-box} using Max's 
+In figure 4, we see a \textbf{number-box} outputting to a \textbf{message-box} using Max's 
 variable interpolation (the \textbf{\$1}). 
-Clicking the \textbf{bang} above the \textbf{number-box} will result in a message of 
-\textbf{set! foobar 74} being sent to the \textbf{s4m} object, which will then call
-into Scheme with the code \textbf{(set! foobar 74)}.
+Clicking the \textbf{bang} above the \textbf{number-box} or changing the number in 
+the box will result in a message of 
+\textbf{set-volume X} being sent to the \textbf{s4m} object, which will then call
+into Scheme with the code \textbf{(set-volume X)}.
 
-%% TODO Max patch of making number message 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.75\linewidth]{fig-4-code-sends}
+  \caption{S4M patch with 3 ways of sending Scheme code to the interpreter}
+  \Description{.}
+\end{figure}
+
 
 In addition to both of these, the \textbf{s4m} object implements a \textbf{read} message,
 where sending \textbf{read filename} to the object will result in the full filename
@@ -698,11 +730,11 @@ limitations of the Max JavaScript implementation was the reason for development 
 
 The \textbf{js} object in Max is not an ideal solution to our problem for several reasons. 
 The most serious is that it is limited to running only in the Max low-priority GUI thread \cite{Cycling74}.
- As this
-thread is also used for Max file i/o and graphic redrawing, the result is that latency
+As this thread is also used for Max file i/o and graphic redrawing, the result is that latency
 is potentially high and indeterminate, meaning musical timing accuracy is unpredictable and often poor.
 The human ear is very sensitive to time, and perceives events separated by 20 ms as discrete
-events. \
+events. 
+% TODO: maybe a citation here??
 Delays of tens of milliseconds are enough to sound like errors in playback
 of highly rhythmic music. This means that it takes little other activity in the
 GUI thread to delay our scheduled events enough to be audibly incorrect. 
@@ -746,6 +778,7 @@ implement the ability to execute a callback at some time in the future, so long 
 the callback has a means to retrieve some reference to the function stored.
 Scheme for Max brings this facility to the Max environment.
 
+% TODO figure of future events
 
 \subsection{Clock Implementation in Max}
 
