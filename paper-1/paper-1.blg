@@ -6,7 +6,6 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: paper-1.bib
-Warning--I didn't find a database entry for "Dannenberg97"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=200001) to 20 items from 10.
@@ -25,45 +24,45 @@ Warning--empty organization in Schottstaedt2021
 Warning--unrecognized DOI value [doi:10.1145/1932682.1869526]
 Warning--unrecognized DOI value [doi:10.2307/3680913]
 Warning--empty address in Wang17
-You've used 14 entries,
+You've used 15 entries,
             5959 wiz_defined-function locations,
-            1726 strings with 22038 characters,
-and the built_in function-call counts, 14076 in all, are:
-= -- 1841
-> -- 368
+            1732 strings with 22133 characters,
+and the built_in function-call counts, 15205 in all, are:
+= -- 2028
+> -- 388
 < -- 2
-+ -- 108
-- -- 148
-* -- 893
-:= -- 1427
-add.period$ -- 66
-call.type$ -- 14
-change.case$ -- 74
-chr.to.int$ -- 14
-cite$ -- 24
-duplicate$ -- 1272
-empty$ -- 893
-format.name$ -- 164
-if$ -- 3338
++ -- 115
+- -- 156
+* -- 956
+:= -- 1526
+add.period$ -- 71
+call.type$ -- 15
+change.case$ -- 79
+chr.to.int$ -- 15
+cite$ -- 25
+duplicate$ -- 1373
+empty$ -- 965
+format.name$ -- 172
+if$ -- 3642
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 32
-newline$ -- 187
-num.names$ -- 116
-pop$ -- 413
+missing$ -- 36
+newline$ -- 196
+num.names$ -- 124
+pop$ -- 444
 preamble$ -- 1
-purify$ -- 194
+purify$ -- 208
 quote$ -- 0
-skip$ -- 488
+skip$ -- 520
 stack$ -- 0
-substring$ -- 1054
-swap$ -- 141
+substring$ -- 1148
+swap$ -- 152
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 350
+type$ -- 366
 warning$ -- 13
-while$ -- 129
+while$ -- 139
 width$ -- 0
-write$ -- 307
-(There were 14 warnings)
+write$ -- 325
+(There were 13 warnings)

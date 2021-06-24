@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{14}
+\begin{thebibliography}{15}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -75,6 +75,19 @@
   Operating Systems}. In \bibinfo{booktitle}{\emph{International Computer Music
   Conference}}.
 \newblock
+
+
+\bibitem[\protect\citeauthoryear{Dannenberg}{Dannenberg}{1997}]%
+        {Dannenberg97}
+\bibfield{author}{\bibinfo{person}{Roger~B Dannenberg}.}
+  \bibinfo{year}{1997}\natexlab{}.
+\newblock \showarticletitle{The Implementation of Nyquist, A Sound Synthesis
+  Language}.
+\newblock \bibinfo{journal}{\emph{Computer Music Journal}}
+  \bibinfo{volume}{21}, \bibinfo{number}{3} (\bibinfo{year}{1997}),
+  \bibinfo{pages}{71--82}.
+\newblock
+\showISSN{0148-9267}
 
 
 \bibitem[\protect\citeauthoryear{Garton}{Garton}{2011}]%

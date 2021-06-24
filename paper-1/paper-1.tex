@@ -493,7 +493,7 @@ messages have access to both the \textbf{s4m} Max object and its associated s7 i
 There is always one and only one s7 interpreter per \textbf{s4m} object instance, and
 as s7 is thread safe, many \textbf{s4m} objects can be created in a Max patch, including
 in both the low and high priority threads. (Max runs both a high-priority ``scheduler" 
-thread and a low-priority "UI" thread for event/message flow. Each \textbf{s4m} object 
+thread and a low-priority ``UI" thread for event/message flow. Each \textbf{s4m} object 
 runs in only one of these, chosen via an optional constructor argument, and incoming messages
 from the opposite thread are deferred or promoted accordingly.)
 
@@ -1102,7 +1102,7 @@ The scheduling system describe does have several limitations worth noting.
 The s7 Scheme implementation includes a tracing garbage collector 
 that must run occasionally, pausing other processing \cite{Matheussen2020}.
 The garbage collector can, however, be paused and run on demand. Tests on the author's
-system, with the garbage collector forced to run every 100ms to prevent
+system, with the garbage collector forced to run every 100 ms to prevent
 significant build up, showed the garbage collection taking an average of 1 to 2 ms per pass
 when run in a substantial application (a 16 track sequencer written entirely in S4M
 with the computer also generating audio for the tracks with commercial
@@ -1114,21 +1114,22 @@ garbage collector so long as Max was configured with
 a large enough output buffer to allow the collector to run within the 
 latency period of this buffer.
 Using Max with an output buffer of 256 samples produces an output latency
-of approximately 6-8ms (depending on the Max signal vector as well), which
+of approximately 6-8 ms (depending on the Max signal vector as well), which
 was large enough for the collector to run without issue, but is 
 low enough to be acceptable for real time performance. With software synthesis
 loads at closer to the maximum possible on the author's computer,
 an output buffer of 512 samples (~11 ms output latency) was necessary to prevent
 any timing errors. This is encouraging as these buffer sizes are not atypical
 for commercial music production on digital audio workstations and are widely
-considered in acceptable ranges for real-time music systems \cite{Brandt1998}.
+considered as being in acceptable ranges for real-time music systems \cite{Brandt1998}.
 
 In addition to output latency, there is the factor of internal latency.
 Max, like many computer music programming environments, generates audio 
 in vectors of samples, with
 each vector generated from one processing pass, and (normally) control
-rate passes conducted also a maximum of once per audio vector pass. The
-size of this signal vector thus has a large effect on performance, with larger
+rate passes conducted also a maximum of once per audio vector pass. 
+% TODO could add citation here
+The size of this signal vector thus has a large effect on performance, with larger
 vectors requiring significantly less CPU use. As audio rendering of note onsets originating
 from control messages (the normal scenario) must thus be aligned with 
 signal vector boundaries, this produces delays of note onsets by up to
