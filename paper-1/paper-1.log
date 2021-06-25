@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.18)  23 JUN 2021 18:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.18)  24 JUN 2021 19:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -717,21 +717,18 @@ Underfull \vbox (badness 2698) has occurred while \output is active []
 <fig-2.png, id=115, 812.03375pt x 448.67625pt>
 File: fig-2.png Graphic file (type png)
 <use fig-2.png>
-Package pdftex.def Info: fig-2.png  used on input line 359.
+Package pdftex.def Info: fig-2.png  used on input line 358.
 (pdftex.def)             Requested size: 197.91124pt x 109.34813pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4.4]
 [5.5 <./fig-2.png>]
-<fig-3-transport.png, id=135, 521.95pt x 261.97874pt>
+<fig-3-transport.png, id=136, 521.95pt x 261.97874pt>
 File: fig-3-transport.png Graphic file (type png)
 <use fig-3-transport.png>
-Package pdftex.def Info: fig-3-transport.png  used on input line 470.
+Package pdftex.def Info: fig-3-transport.png  used on input line 465.
 (pdftex.def)             Requested size: 296.86687pt x 149.00563pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [6.6]
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
@@ -741,41 +738,46 @@ File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )
 [7.7 <./fig-3-transport.png>]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 5
-23.
+18.
 
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 523.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 518.
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 5
-34.
+29.
 
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <6> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 534.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 529.
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <6> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 538.
-
-Underfull \vbox (badness 1163) has occurred while \output is active []
-
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 533.
  [8.8]
-<fig-4-code-sends.png, id=194, 866.23625pt x 460.72125pt>
+<fig-4-code-sends.png, id=196, 866.23625pt x 460.72125pt>
 File: fig-4-code-sends.png Graphic file (type png)
 <use fig-4-code-sends.png>
-Package pdftex.def Info: fig-4-code-sends.png  used on input line 604.
+Package pdftex.def Info: fig-4-code-sends.png  used on input line 599.
 (pdftex.def)             Requested size: 296.86687pt x 157.89449pt.
 
-[9.9 <./fig-4-code-sends.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[9.9 <./fig-4-code-sends.png>] [10.10]
+<fig-5-pipe.png, id=208, 687.56876pt x 316.18124pt>
+File: fig-5-pipe.png Graphic file (type png)
+<use fig-5-pipe.png>
+Package pdftex.def Info: fig-5-pipe.png  used on input line 695.
+(pdftex.def)             Requested size: 197.91124pt x 91.00995pt.
+ [11.11 <./fig-5-pipe.png>]
+<fig-6-s4m-delay.png, id=217, 761.84625pt x 567.11874pt>
+File: fig-6-s4m-delay.png Graphic file (type png)
+<use fig-6-s4m-delay.png>
+Package pdftex.def Info: fig-6-s4m-delay.png  used on input line 779.
+(pdftex.def)             Requested size: 197.91124pt x 147.31758pt.
 
- [10.10]
-Underfull \vbox (badness 6396) has occurred while \output is active []
+Underfull \vbox (badness 4779) has occurred while \output is active []
 
- [11.11]
-[12.12] [13.13]
+ [12.12 <./fig-6-s4m-delay.png>] [13.13]
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
@@ -783,17 +785,17 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 File: lstlang2.sty 2020/03/24 1.8d listings language file
 )
 [14.14] [15.15]
-Overfull \hbox (22.17693pt too wide) in paragraph at lines 1062--1063
+Overfull \hbox (22.17693pt too wide) in paragraph at lines 1063--1064
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][] 
  []
 
-
-Overfull \hbox (22.17693pt too wide) in paragraph at lines 1080--1081
+[16.16]
+Overfull \hbox (22.17693pt too wide) in paragraph at lines 1081--1082
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[16.16] [17.17] Processing 'acks' comment.
+[17.17] [18.18] Processing 'acks' comment.
 \openout3 = `comment.cut'.
 
 
@@ -801,16 +803,16 @@ Comment 'acks' writing to comment.cut. Straight input of comment.cut.
 (./comment.cut) (./paper-1.bbl
 LaTeX Info: Redefining \tempurl on input line 65.
 LaTeX Info: Redefining \tempurl on input line 100.
-LaTeX Info: Redefining \tempurl on input line 112.
-LaTeX Info: Redefining \tempurl on input line 125.
+LaTeX Info: Redefining \tempurl on input line 116.
+LaTeX Info: Redefining \tempurl on input line 127.
 LaTeX Info: Redefining \tempurl on input line 140.
- [18.18]
-LaTeX Info: Redefining \tempurl on input line 166.
-LaTeX Info: Redefining \tempurl on input line 182.
+LaTeX Info: Redefining \tempurl on input line 155.
+LaTeX Info: Redefining \tempurl on input line 181.
 LaTeX Info: Redefining \tempurl on input line 197.
 LaTeX Info: Redefining \tempurl on input line 212.
 LaTeX Info: Redefining \tempurl on input line 227.
-LaTeX Info: Redefining \tempurl on input line 241.
+LaTeX Info: Redefining \tempurl on input line 242.
+LaTeX Info: Redefining \tempurl on input line 256.
 )
 (/usr/local/texlive/2021basic/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
@@ -820,16 +822,16 @@ File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 )
 [19.19] (./paper-1.aux)
 Package rerunfilecheck Info: File `paper-1.out' has not changed.
-(rerunfilecheck)             Checksum: A4EB689F091B1C2491C786E353EE43C0;3429.
+(rerunfilecheck)             Checksum: 8C2F7D301E9B971531FA1C636C91A44E;3430.
  ) 
 Here is how much of TeX's memory you used:
- 18825 strings out of 479963
- 284933 string characters out of 5883836
- 936970 words of memory out of 5000000
- 35542 multiletter control sequences out of 15000+600000
- 424406 words of font info for 205 fonts, out of 8000000 for 9000
+ 18855 strings out of 479963
+ 285507 string characters out of 5883836
+ 931547 words of memory out of 5000000
+ 35565 multiletter control sequences out of 15000+600000
+ 424570 words of font info for 207 fonts, out of 8000000 for 9000
  480 hyphenation exceptions out of 8191
- 85i,12n,131p,840b,1999s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,12n,131p,840b,1943s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021basic/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts
 1.enc}</usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/
@@ -856,10 +858,10 @@ al/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/
 local/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></u
 sr/local/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfti0600.pfb>
 
-Output written on paper-1.pdf (19 pages, 497334 bytes).
+Output written on paper-1.pdf (19 pages, 568391 bytes).
 PDF statistics:
- 616 PDF objects out of 1000 (max. 8388607)
- 546 compressed objects within 6 object streams
- 281 named destinations out of 1000 (max. 500000)
- 55461 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 627 PDF objects out of 1000 (max. 8388607)
+ 553 compressed objects within 6 object streams
+ 284 named destinations out of 1000 (max. 500000)
+ 55471 words of extra memory for PDF output out of 61914 (max. 10000000)
 

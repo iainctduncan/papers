@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{15}
+\begin{thebibliography}{16}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -100,6 +100,21 @@
 \url{http://sites.music.columbia.edu/brad/maxlispj/}
 \showURL{%
 Retrieved Jan, 2011 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Lazzarini}{Lazzarini}{2013}]%
+        {Lazzarini2013}
+\bibfield{author}{\bibinfo{person}{Victor Lazzarini}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{The Development of Computer Music Programming
+  Systems}.
+\newblock \bibinfo{journal}{\emph{Journal of New Music Research}}
+  \bibinfo{volume}{42}, \bibinfo{number}{1} (\bibinfo{year}{2013}),
+  \bibinfo{pages}{97--110}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1080/09298215.2013.778890}
+\showDOI{\tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Manzo}{Manzo}{2021}]%

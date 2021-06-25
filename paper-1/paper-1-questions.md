@@ -53,4 +53,5 @@ Conclusion:
 - could add more on justifaction for using it in the max environment
 
 - to do, define control pass
+- do I need to be pedantic about procedure vs function and param vs argument?
 

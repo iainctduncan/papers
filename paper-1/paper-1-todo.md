@@ -4,8 +4,8 @@ Paper TODO:
 - spell check whole thing
 - check all "
 - double check the citations
-- add the nyquest citation, it didn't get in there somehow
   - same one can be used for Csound
+  - or add Lazzarini
 
 Misc maybe?:
 - foot note midi?

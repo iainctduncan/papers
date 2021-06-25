@@ -309,7 +309,6 @@ S4M executes only at the event/message level and does not implement DSP operatio
 discussed further here. 
 
 
-
 \subsection{Max Message and Object Implementation} 
 
 Internally, Max messages are data entities consisting of a symbol that acts
@@ -378,12 +377,7 @@ a fresh copy of the prototype's data structure and adding it to a graph of other
 This is in contrast to computer music languages such as CSound, where the user programs instruments 
 with functions and the engine creates an instantiated data structure on each note-event sent to 
 the instrument from a score - in effect the instruments act as object builders and note-events 
-become objects that exist for the duration of the note played.
-
-% TODO: cite Dannenburg on this point  %
-
-%% done %%
-%% perhaps cite SDK documentation? or eric lyon book? %%
+become objects that exist for the duration of the note played \cite{Lazzarini2013}.
 
 \subsection{Max Externals}
 
@@ -422,7 +416,8 @@ which came with an embedded Lisp interpreter in the form of the
 Cakewalk Application Language (CAL).
 
 However, Scheme for Max is unique in bringing a fully-fledged Scheme interpreter
-to the Max environment as a first-class Max object. This is significant in that Max
+to the Max environment as a first-class Max object, implemented and running
+identically to any built-in object. This is significant in that Max
 is arguably the most widely used truly programmable
 music platform, and certainly the most widely deployed through its use in 
 the very successful Ableton Live digital audio workstation, as Max For Live.
@@ -695,8 +690,12 @@ is very convenient when we want to ensure there is only ever one instance of a g
 as in the design of a classical monophonic synthesizer, but difficult in a polyphonic time context
 such as the creation and eventual playback of some unknown number of delayed events.
 
-%% figure of pipe use
-%% figure of naive solution
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.5\linewidth]{fig-5-pipe}
+  \caption{Delaying a list message with the pipe object}
+  \Description{.}
+\end{figure}
 
 It should also be mentioned that there exists within Max a facility for creating
 new instances of Max sub-patches on demand, designed with the express purpose of
@@ -732,10 +731,7 @@ The \textbf{js} object in Max is not an ideal solution to our problem for severa
 The most serious is that it is limited to running only in the Max low-priority GUI thread \cite{Cycling74}.
 As this thread is also used for Max file i/o and graphic redrawing, the result is that latency
 is potentially high and indeterminate, meaning musical timing accuracy is unpredictable and often poor.
-The human ear is very sensitive to time, and perceives events separated by 20 ms as discrete
-events. 
-% TODO: maybe a citation here??
-Delays of tens of milliseconds are enough to sound like errors in playback
+The human ear is very sensitive to time, with delays of tens of milliseconds enough to sound like errors in playback
 of highly rhythmic music. This means that it takes little other activity in the
 GUI thread to delay our scheduled events enough to be audibly incorrect. 
 For some purposes, this is acceptable, but for the creation of accurate 
@@ -778,7 +774,12 @@ implement the ability to execute a callback at some time in the future, so long 
 the callback has a means to retrieve some reference to the function stored.
 Scheme for Max brings this facility to the Max environment.
 
-% TODO figure of future events
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.5\linewidth]{fig-6-s4m-delay}
+  \caption{Delaying a mixed list message, with dial input as is and as will be}
+  \Description{.}
+\end{figure}
 
 \subsection{Clock Implementation in Max}
 
@@ -1118,7 +1119,7 @@ of approximately 6-8 ms (depending on the Max signal vector as well), which
 was large enough for the collector to run without issue, but is 
 low enough to be acceptable for real time performance. With software synthesis
 loads at closer to the maximum possible on the author's computer,
-an output buffer of 512 samples (~11 ms output latency) was necessary to prevent
+an output buffer of 512 samples (approx. 11 ms output latency) was necessary to prevent
 any timing errors. This is encouraging as these buffer sizes are not atypical
 for commercial music production on digital audio workstations and are widely
 considered as being in acceptable ranges for real-time music systems \cite{Brandt1998}.
@@ -1127,15 +1128,14 @@ In addition to output latency, there is the factor of internal latency.
 Max, like many computer music programming environments, generates audio 
 in vectors of samples, with
 each vector generated from one processing pass, and (normally) control
-rate passes conducted also a maximum of once per audio vector pass. 
-% TODO could add citation here
+rate passes conducted also a maximum of once per audio vector pass \cite{Puckette2002}.
 The size of this signal vector thus has a large effect on performance, with larger
 vectors requiring significantly less CPU use. As audio rendering of note onsets originating
 from control messages (the normal scenario) must thus be aligned with 
 signal vector boundaries, this produces delays of note onsets by up to
 the time period of one vector, a phenomenon known as ``timing jitter" in the nomenclature.
 However, the more recent scheduling facilities in Max, including the 
-clock facilities used by S4M, are designed to compensate for this jitter,
+clock facilities used by S4M, are implemented to compensate for this jitter,
 maintaining long term temporal accuracy despite note onset delays. The mechanism
 by which this is done is unfortunately not publically documented or available
 in open-source code, but one can assume that it is some variant of the common pattern 

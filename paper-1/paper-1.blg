@@ -24,45 +24,45 @@ Warning--empty organization in Schottstaedt2021
 Warning--unrecognized DOI value [doi:10.1145/1932682.1869526]
 Warning--unrecognized DOI value [doi:10.2307/3680913]
 Warning--empty address in Wang17
-You've used 15 entries,
+You've used 16 entries,
             5959 wiz_defined-function locations,
-            1732 strings with 22133 characters,
-and the built_in function-call counts, 15205 in all, are:
-= -- 2028
-> -- 388
+            1741 strings with 22297 characters,
+and the built_in function-call counts, 16350 in all, are:
+= -- 2219
+> -- 408
 < -- 2
-+ -- 115
-- -- 156
-* -- 956
-:= -- 1526
-add.period$ -- 71
-call.type$ -- 15
-change.case$ -- 79
-chr.to.int$ -- 15
-cite$ -- 25
-duplicate$ -- 1373
-empty$ -- 965
-format.name$ -- 172
-if$ -- 3642
++ -- 122
+- -- 164
+* -- 1020
+:= -- 1626
+add.period$ -- 76
+call.type$ -- 16
+change.case$ -- 84
+chr.to.int$ -- 16
+cite$ -- 26
+duplicate$ -- 1474
+empty$ -- 1037
+format.name$ -- 180
+if$ -- 3948
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 36
-newline$ -- 196
-num.names$ -- 124
-pop$ -- 444
+missing$ -- 40
+newline$ -- 207
+num.names$ -- 132
+pop$ -- 473
 preamble$ -- 1
-purify$ -- 208
+purify$ -- 222
 quote$ -- 0
-skip$ -- 520
+skip$ -- 552
 stack$ -- 0
-substring$ -- 1148
-swap$ -- 152
+substring$ -- 1248
+swap$ -- 163
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 366
+type$ -- 382
 warning$ -- 13
-while$ -- 139
+while$ -- 149
 width$ -- 0
-write$ -- 325
+write$ -- 345
 (There were 13 warnings)
