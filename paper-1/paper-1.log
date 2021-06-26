@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.18)  25 JUN 2021 18:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.18)  26 JUN 2021 14:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -41,6 +41,8 @@ Package acmart Info: Explicitly selecting natbib mode on input line 134.
 Package acmart Info: Not using anonymous mode on input line 142.
 Package acmart Info: Not using timestamp mode on input line 150.
 Package acmart Info: Not using authordraft mode on input line 160.
+Package acmart Info: Using anonymous mode on input line 169.
+Package acmart Info: Using review mode on input line 169.
 Class acmart Info: Using format acmsmall, number 1 on input line 169.
 Class acmart Info: Using fontsize 10pt on input line 253.
 
@@ -516,30 +518,33 @@ rs
 \f@nch@O@olf=\skip73
 \f@nch@O@orf=\skip74
 )
+\ACM@linecount@bx=\box58
+\ACM@linecount@bxht=\skip75
+\ACM@linecount=\count302
 \@folio@wd=\dimen189
 \@folio@ht=\dimen190
 \@folio@voffset=\dimen191
 
 Special comment 'acks')
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count302
-\lst@gtempboxa=\box58
+\lst@mode=\count303
+\lst@gtempboxa=\box59
 \lst@token=\toks35
-\lst@length=\count303
+\lst@length=\count304
 \lst@currlwidth=\dimen192
-\lst@column=\count304
-\lst@pos=\count305
+\lst@column=\count305
+\lst@pos=\count306
 \lst@lostspace=\dimen193
 \lst@width=\dimen194
-\lst@newlines=\count306
-\lst@lineno=\count307
+\lst@newlines=\count307
+\lst@lineno=\count308
 \lst@maxwidth=\dimen195
 
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count308
-\lst@skipnumbers=\count309
-\lst@framebox=\box59
+\c@lstnumber=\count309
+\lst@skipnumbers=\count310
+\lst@framebox=\box60
 )
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2020/03/24 1.8d listings configuration
@@ -547,15 +552,15 @@ File: listings.cfg 2020/03/24 1.8d listings configuration
 Package: listings 2020/03/24 1.8d (Carsten Heinz)
 Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 89.
 
-\c@theorem=\count310
+\c@theorem=\count311
 
 Excluding comment 'screenonly' Include comment 'printonly'
-Include comment 'anonsuppress'
+Excluding comment 'anonsuppress' Excluding comment 'acks'
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.d
 ef
 File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count311
-\l__pdf_internal_box=\box60
+\l__color_backend_stack_int=\count312
+\l__pdf_internal_box=\box61
 ) (./paper-1.aux)
 \openout1 = `paper-1.aux'.
 
@@ -615,7 +620,7 @@ Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 ing.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count312
+\c@section@level=\count313
 )
 LaTeX Info: Redefining \ref on input line 89.
 LaTeX Info: Redefining \pageref on input line 89.
@@ -627,16 +632,16 @@ LaTeX Info: Redefining \nameref on input line 89.
 
 (/usr/local/texlive/2021basic/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count313
+\scratchcounter=\count314
 \scratchdimen=\dimen196
-\scratchbox=\box61
-\nofMPsegments=\count314
-\nofMParguments=\count315
+\scratchbox=\box62
+\nofMPsegments=\count315
+\nofMParguments=\count316
 \everyMPshowfont=\toks36
-\MPscratchCnt=\count316
+\MPscratchCnt=\count317
 \MPscratchDim=\dimen197
-\MPnumerator=\count317
-\makeMPintoPDFobject=\count318
+\MPnumerator=\count318
+\makeMPintoPDFobject=\count319
 \everyMPtoPDFconversion=\toks37
 )
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.s
@@ -687,7 +692,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count319
+\c@lstlisting=\count320
 Excluding 'CCSXML' comment.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
@@ -700,7 +705,7 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-<fig-1.png, id=77, 396.48125pt x 380.42125pt>
+<fig-1.png, id=73, 396.48125pt x 380.42125pt>
 File: fig-1.png Graphic file (type png)
 <use fig-1.png>
 Package pdftex.def Info: fig-1.png  used on input line 197.
@@ -711,13 +716,13 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [1.1{/usr/local/texlive/2021basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 ] [2.2 <./fig-1.png>]
-<fig-youtube.png, id=108, 460.8417pt x 250.0542pt>
+<fig-youtube.png, id=105, 460.8417pt x 250.0542pt>
 File: fig-youtube.png Graphic file (type png)
 <use fig-youtube.png>
 Package pdftex.def Info: fig-youtube.png  used on input line 260.
 (pdftex.def)             Requested size: 395.8225pt x 214.78676pt.
  [3.3 <./fig-youtube.png>] [4.4]
-<fig-2-message-flow.png, id=122, 806.01125pt x 434.62375pt>
+<fig-2-message-flow.png, id=119, 806.01125pt x 434.62375pt>
 File: fig-2-message-flow.png Graphic file (type png)
 <use fig-2-message-flow.png>
 Package pdftex.def Info: fig-2-message-flow.png  used on input line 366.
@@ -726,7 +731,7 @@ Package pdftex.def Info: fig-2-message-flow.png  used on input line 366.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6.6]
-<fig-3-transport.png, id=149, 521.95pt x 261.97874pt>
+<fig-3-transport.png, id=146, 521.95pt x 261.97874pt>
 File: fig-3-transport.png Graphic file (type png)
 <use fig-3-transport.png>
 Package pdftex.def Info: fig-3-transport.png  used on input line 476.
@@ -758,7 +763,7 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <6> not available
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <6> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 544.
  [8.8]
-<fig-4-code-sends.png, id=198, 781.92125pt x 368.37625pt>
+<fig-4-code-sends.png, id=195, 781.92125pt x 368.37625pt>
 File: fig-4-code-sends.png Graphic file (type png)
 <use fig-4-code-sends.png>
 Package pdftex.def Info: fig-4-code-sends.png  used on input line 609.
@@ -767,7 +772,7 @@ Package pdftex.def Info: fig-4-code-sends.png  used on input line 609.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9.9 <./fig-4-code-sends.png>] [10.10]
-<fig-5-pipe.png, id=211, 687.56876pt x 316.18124pt>
+<fig-5-pipe.png, id=208, 687.56876pt x 316.18124pt>
 File: fig-5-pipe.png Graphic file (type png)
 <use fig-5-pipe.png>
 Package pdftex.def Info: fig-5-pipe.png  used on input line 707.
@@ -776,7 +781,7 @@ Package pdftex.def Info: fig-5-pipe.png  used on input line 707.
 Underfull \vbox (badness 2698) has occurred while \output is active []
 
  [12.12]
-<fig-6-s4m-delay.png, id=224, 761.84625pt x 567.11874pt>
+<fig-6-s4m-delay.png, id=221, 761.84625pt x 567.11874pt>
 File: fig-6-s4m-delay.png Graphic file (type png)
 <use fig-6-s4m-delay.png>
 Package pdftex.def Info: fig-6-s4m-delay.png  used on input line 791.
@@ -809,9 +814,6 @@ LaTeX Info: Redefining \tempurl on input line 140.
 LaTeX Info: Redefining \tempurl on input line 155.
 LaTeX Info: Redefining \tempurl on input line 181.
 LaTeX Info: Redefining \tempurl on input line 197.
-
-Underfull \vbox (badness 4660) has occurred while \output is active []
-
  [19.19]
 LaTeX Info: Redefining \tempurl on input line 212.
 LaTeX Info: Redefining \tempurl on input line 227.
@@ -825,55 +827,48 @@ File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 )
 [20.20] (./paper-1.aux)
-
-Package rerunfilecheck Warning: File `paper-1.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `paper-1.out':
-(rerunfilecheck)             Before: 5F2469890C7BE543198DCBFF432F5CEE;3431
-(rerunfilecheck)             After:  16A86243C462562859E2B31A2B519121;3310.
+Package rerunfilecheck Info: File `paper-1.out' has not changed.
+(rerunfilecheck)             Checksum: 16A86243C462562859E2B31A2B519121;3310.
  ) 
 Here is how much of TeX's memory you used:
- 18861 strings out of 479963
- 285738 string characters out of 5883836
- 943080 words of memory out of 5000000
+ 18870 strings out of 479963
+ 285798 string characters out of 5883836
+ 948091 words of memory out of 5000000
  35568 multiletter control sequences out of 15000+600000
- 424686 words of font info for 209 fonts, out of 8000000 for 9000
+ 425011 words of font info for 214 fonts, out of 8000000 for 9000
  480 hyphenation exceptions out of 8191
- 85i,12n,131p,844b,1945s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{section*.12} has been referenced but does not exi
-st, replaced by a fixed one
-
-{/usr/local/texlive/2021basic/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.
-enc}</usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
-x10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmbx6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021basic/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021basic/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021basic/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2021bas
-ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/202
-1basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/
-2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texli
-ve/2021basic/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/te
-xlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local
-/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/lo
-cal/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr
-/local/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfti0600.pfb>
-Output written on paper-1.pdf (20 pages, 1870592 bytes).
+ 85i,16n,131p,844b,2010s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2021basic/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts
+1.enc}</usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbx6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021basic/texmf-dist/font
+s/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021basic/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021basic/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021basic/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021ba
+sic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/202
+1basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
+/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texl
+ive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/t
+exlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/loca
+l/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/l
+ocal/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></us
+r/local/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb><
+/usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfti0600.pf
+b>
+Output written on paper-1.pdf (20 pages, 1878617 bytes).
 PDF statistics:
  632 PDF objects out of 1000 (max. 8388607)
- 555 compressed objects within 6 object streams
- 285 named destinations out of 1000 (max. 500000)
- 55476 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 554 compressed objects within 6 object streams
+ 284 named destinations out of 1000 (max. 500000)
+ 55468 words of extra memory for PDF output out of 61914 (max. 10000000)
 
