@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.18)  24 JUN 2021 19:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.18)  25 JUN 2021 18:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**paper-1
+**paper-1.tex
 (./paper-1.tex
 LaTeX2e <2021-06-01> patch level 1
 L3 programming layer <2021-06-01>
@@ -703,7 +703,7 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 <fig-1.png, id=77, 396.48125pt x 380.42125pt>
 File: fig-1.png Graphic file (type png)
 <use fig-1.png>
-Package pdftex.def Info: fig-1.png  used on input line 196.
+Package pdftex.def Info: fig-1.png  used on input line 197.
 (pdftex.def)             Requested size: 197.91124pt x 189.89668pt.
 
 
@@ -711,96 +711,96 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 [1.1{/usr/local/texlive/2021basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 ] [2.2 <./fig-1.png>]
-Underfull \vbox (badness 2698) has occurred while \output is active []
-
- [3.3]
-<fig-2.png, id=115, 812.03375pt x 448.67625pt>
-File: fig-2.png Graphic file (type png)
-<use fig-2.png>
-Package pdftex.def Info: fig-2.png  used on input line 358.
-(pdftex.def)             Requested size: 197.91124pt x 109.34813pt.
-
+<fig-youtube.png, id=108, 460.8417pt x 250.0542pt>
+File: fig-youtube.png Graphic file (type png)
+<use fig-youtube.png>
+Package pdftex.def Info: fig-youtube.png  used on input line 260.
+(pdftex.def)             Requested size: 395.8225pt x 214.78676pt.
+ [3.3 <./fig-youtube.png>] [4.4]
+<fig-2-message-flow.png, id=122, 806.01125pt x 434.62375pt>
+File: fig-2-message-flow.png Graphic file (type png)
+<use fig-2-message-flow.png>
+Package pdftex.def Info: fig-2-message-flow.png  used on input line 366.
+(pdftex.def)             Requested size: 197.91124pt x 106.71918pt.
+ [5.5 <./fig-2-message-flow.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [4.4]
-[5.5 <./fig-2.png>]
-<fig-3-transport.png, id=136, 521.95pt x 261.97874pt>
+ [6.6]
+<fig-3-transport.png, id=149, 521.95pt x 261.97874pt>
 File: fig-3-transport.png Graphic file (type png)
 <use fig-3-transport.png>
-Package pdftex.def Info: fig-3-transport.png  used on input line 465.
+Package pdftex.def Info: fig-3-transport.png  used on input line 476.
 (pdftex.def)             Requested size: 296.86687pt x 149.00563pt.
- [6.6]
+
+[7.7 <./fig-3-transport.png>]
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )
-[7.7 <./fig-3-transport.png>]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 5
-18.
+29.
 
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 518.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 529.
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 5
-29.
+40.
 
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <6> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 529.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 540.
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <6> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 533.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 544.
  [8.8]
-<fig-4-code-sends.png, id=196, 866.23625pt x 460.72125pt>
+<fig-4-code-sends.png, id=198, 781.92125pt x 368.37625pt>
 File: fig-4-code-sends.png Graphic file (type png)
 <use fig-4-code-sends.png>
-Package pdftex.def Info: fig-4-code-sends.png  used on input line 599.
-(pdftex.def)             Requested size: 296.86687pt x 157.89449pt.
+Package pdftex.def Info: fig-4-code-sends.png  used on input line 609.
+(pdftex.def)             Requested size: 296.86687pt x 139.86076pt.
 
-[9.9 <./fig-4-code-sends.png>] [10.10]
-<fig-5-pipe.png, id=208, 687.56876pt x 316.18124pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9.9 <./fig-4-code-sends.png>] [10.10]
+<fig-5-pipe.png, id=211, 687.56876pt x 316.18124pt>
 File: fig-5-pipe.png Graphic file (type png)
 <use fig-5-pipe.png>
-Package pdftex.def Info: fig-5-pipe.png  used on input line 695.
+Package pdftex.def Info: fig-5-pipe.png  used on input line 707.
 (pdftex.def)             Requested size: 197.91124pt x 91.00995pt.
  [11.11 <./fig-5-pipe.png>]
-<fig-6-s4m-delay.png, id=217, 761.84625pt x 567.11874pt>
+Underfull \vbox (badness 2698) has occurred while \output is active []
+
+ [12.12]
+<fig-6-s4m-delay.png, id=224, 761.84625pt x 567.11874pt>
 File: fig-6-s4m-delay.png Graphic file (type png)
 <use fig-6-s4m-delay.png>
-Package pdftex.def Info: fig-6-s4m-delay.png  used on input line 779.
+Package pdftex.def Info: fig-6-s4m-delay.png  used on input line 791.
 (pdftex.def)             Requested size: 197.91124pt x 147.31758pt.
 
-Underfull \vbox (badness 4779) has occurred while \output is active []
-
- [12.12 <./fig-6-s4m-delay.png>] [13.13]
+[13.13 <./fig-6-s4m-delay.png>] [14.14]
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 (/usr/local/texlive/2021basic/texmf-dist/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2020/03/24 1.8d listings language file
 )
-[14.14] [15.15]
-Overfull \hbox (22.17693pt too wide) in paragraph at lines 1063--1064
+[15.15] [16.16]
+Overfull \hbox (22.17693pt too wide) in paragraph at lines 1076--1077
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][] 
  []
 
-[16.16]
-Overfull \hbox (22.17693pt too wide) in paragraph at lines 1081--1082
+
+Overfull \hbox (22.17693pt too wide) in paragraph at lines 1094--1095
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[17.17] [18.18] Processing 'acks' comment.
-\openout3 = `comment.cut'.
-
-
-Comment 'acks' writing to comment.cut. Straight input of comment.cut.
-(./comment.cut) (./paper-1.bbl
+[17.17] [18.18] (./paper-1.bbl
 LaTeX Info: Redefining \tempurl on input line 65.
 LaTeX Info: Redefining \tempurl on input line 100.
 LaTeX Info: Redefining \tempurl on input line 116.
@@ -809,6 +809,10 @@ LaTeX Info: Redefining \tempurl on input line 140.
 LaTeX Info: Redefining \tempurl on input line 155.
 LaTeX Info: Redefining \tempurl on input line 181.
 LaTeX Info: Redefining \tempurl on input line 197.
+
+Underfull \vbox (badness 4660) has occurred while \output is active []
+
+ [19.19]
 LaTeX Info: Redefining \tempurl on input line 212.
 LaTeX Info: Redefining \tempurl on input line 227.
 LaTeX Info: Redefining \tempurl on input line 242.
@@ -820,48 +824,56 @@ File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 (/usr/local/texlive/2021basic/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
 )
-[19.19] (./paper-1.aux)
-Package rerunfilecheck Info: File `paper-1.out' has not changed.
-(rerunfilecheck)             Checksum: 8C2F7D301E9B971531FA1C636C91A44E;3430.
+[20.20] (./paper-1.aux)
+
+Package rerunfilecheck Warning: File `paper-1.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `paper-1.out':
+(rerunfilecheck)             Before: 5F2469890C7BE543198DCBFF432F5CEE;3431
+(rerunfilecheck)             After:  16A86243C462562859E2B31A2B519121;3310.
  ) 
 Here is how much of TeX's memory you used:
- 18855 strings out of 479963
- 285507 string characters out of 5883836
- 931547 words of memory out of 5000000
- 35565 multiletter control sequences out of 15000+600000
- 424570 words of font info for 207 fonts, out of 8000000 for 9000
+ 18861 strings out of 479963
+ 285738 string characters out of 5883836
+ 943080 words of memory out of 5000000
+ 35568 multiletter control sequences out of 15000+600000
+ 424686 words of font info for 209 fonts, out of 8000000 for 9000
  480 hyphenation exceptions out of 8191
- 85i,12n,131p,840b,1943s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2021basic/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts
-1.enc}</usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbx6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021basic/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021basic/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021basic/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021basi
-c/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2021b
-asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2
-021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texliv
-e/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/tex
-live/2021basic/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/
-texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/loc
-al/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/
-local/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></u
-sr/local/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfti0600.pfb>
+ 85i,12n,131p,844b,1945s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{section*.12} has been referenced but does not exi
+st, replaced by a fixed one
 
-Output written on paper-1.pdf (19 pages, 568391 bytes).
+{/usr/local/texlive/2021basic/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.
+enc}</usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmb
+x10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmbx6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr9.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2021basic/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2021basic/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2021basic/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2021basic/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021basic/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021basic/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2021bas
+ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/202
+1basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/
+2021basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texli
+ve/2021basic/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/te
+xlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local
+/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/lo
+cal/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr
+/local/texlive/2021basic/texmf-dist/fonts/type1/public/cm-super/sfti0600.pfb>
+Output written on paper-1.pdf (20 pages, 1870592 bytes).
 PDF statistics:
- 627 PDF objects out of 1000 (max. 8388607)
- 553 compressed objects within 6 object streams
- 284 named destinations out of 1000 (max. 500000)
- 55471 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 632 PDF objects out of 1000 (max. 8388607)
+ 555 compressed objects within 6 object streams
+ 285 named destinations out of 1000 (max. 500000)
+ 55476 words of extra memory for PDF output out of 61914 (max. 10000000)
 

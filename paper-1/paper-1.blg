@@ -13,7 +13,6 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--empty year in Cycling74
 Warning--empty organization in Cycling74
-Warning--unrecognized DOI value [doi:10.2307/3680259]
 Warning--empty publisher in Brandt1998
 Warning--empty address in Brandt1998
 Warning--page numbers missing in both pages and numpages fields in Brandt1998
@@ -21,20 +20,18 @@ Warning--empty organization in Garton2011
 Warning--empty organization in MaxObjects2021
 Warning--empty organization in Matheussen2020
 Warning--empty organization in Schottstaedt2021
-Warning--unrecognized DOI value [doi:10.1145/1932682.1869526]
-Warning--unrecognized DOI value [doi:10.2307/3680913]
 Warning--empty address in Wang17
 You've used 16 entries,
             5959 wiz_defined-function locations,
-            1741 strings with 22297 characters,
-and the built_in function-call counts, 16350 in all, are:
-= -- 2219
+            1741 strings with 22285 characters,
+and the built_in function-call counts, 16320 in all, are:
+= -- 2213
 > -- 408
 < -- 2
 + -- 122
 - -- 164
-* -- 1020
-:= -- 1626
+* -- 1014
+:= -- 1623
 add.period$ -- 76
 call.type$ -- 16
 change.case$ -- 84
@@ -43,7 +40,7 @@ cite$ -- 26
 duplicate$ -- 1474
 empty$ -- 1037
 format.name$ -- 180
-if$ -- 3948
+if$ -- 3942
 int.to.chr$ -- 2
 int.to.str$ -- 1
 missing$ -- 40
@@ -55,14 +52,14 @@ purify$ -- 222
 quote$ -- 0
 skip$ -- 552
 stack$ -- 0
-substring$ -- 1248
+substring$ -- 1242
 swap$ -- 163
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 382
-warning$ -- 13
+warning$ -- 10
 while$ -- 149
 width$ -- 0
 write$ -- 345
-(There were 13 warnings)
+(There were 10 warnings)
