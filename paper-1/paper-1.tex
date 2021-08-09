@@ -216,11 +216,21 @@ and rhythms.
 
 In both the fields of live-coding and algorithmic music, the ability for
 the performer and composer to schedule events in the future with high temporal
-accuracy is of major benefit. While this is possible in the Max visual
+accuracy is of major benefit. A common scenario is that a solo performer or duo
+is composing electronic music on the fly for a large number of voices --- more than
+the performers have hands. Thus they create abstractions of musical content,
+and request from the system that potentially many of these will begin together
+at some point in the future. For example, a performer may program a drum
+groove that has a large number of interacting lines, but wish the groove
+to only begin playing, and thus be audible, at the beginning of the next 16-bar 
+musical boundary. While this is possible in the Max visual
 patching language, it is cumbersome and thus the implementation is not
 optimal for live-coding or algorithmic music where the speed with which
-the user can accomplish this is an important consideration (i.e., fast
-enough not to bore an audience or to be frustrating while composing).
+the user can accomplish this is an important consideration. In a live
+electronic music context, one of the primary challenges for the perfomers
+is the design of a working system that enables them to create new material on
+stage (making the performances engaging and improvisatory), 
+but in a way that enables them to work fast enough not to bore an audience!
 
 In addition to the Max visual patching language, Max can be programmed
 by creating new Max objects (``externals" in the Max nomenclature) in C or C++ 
@@ -347,7 +357,7 @@ a situation referred to in the nomenclature as ``responding to the message". Mos
 have a principal activity that typically ends with outputting the result of their calculation, and this is
 often triggered by sending the object a single \textbf{bang} message or by sending a value to 
 their first, or ``hot", inlet. In addition, they may respond to other messages to change internal state
-data or configuration - for example the ``set" message is commonly implemented to update internal
+data or configuration --- for example the ``set" message is commonly implemented to update internal
 state without outputting any result. The end result of object methods run on receipt of a message falls broadly
 into three (non-exclusive) categories: the object may update some internal state, it may send a
 message or messages out of its outlets, and it may cause a side effect in the broader
@@ -375,7 +385,7 @@ outlets. A C API exists that enables objects to query and control various engine
 the transport mechanism), and it is also possible for objects to send messages to other objects 
 directly or through the scheduler queues, without the sending and receiving objects 
 necessarily being connected visually in the patcher. Fundamentally however, the same mechanism
-is used - when an object calls a method on another object at the C level, this is still done
+is used --- when an object calls a method on another object at the C level, this is still done
 by creating a data structure of a message selector and optional atom arguments, 
 and then sending this to the receiving object through a generic message sending function.
 
@@ -386,7 +396,7 @@ a new visual-box and placing it on the patcher canvas does indeed instantiate an
 a fresh copy of the prototype's data structure and adding it to a graph of other objects.
 This is in contrast to computer music languages such as Csound, where the user programs instruments 
 with functions and the engine creates an instantiated data structure on each note-event sent to 
-the instrument from a score - in effect the instruments act as object builders and note-events 
+the instrument from a score --- in effect the instruments act as object builders and note-events 
 become objects that exist for the duration of the note played \cite{Lazzarini2013}.
 
 \subsection{Max Externals}
@@ -419,11 +429,13 @@ ranging from Common Lisp Music, created by Bill Schottstaedt in the late 1980's
 \cite{Wang17} and Heinrich Taube's Common Music in 1991 \cite{Taube91},
 to Dannenberg's Nyquist in 1997 \cite{Dannenberg97},
 and Impromptu (later rewritten as Extempore) \cite{Sorensen2010}. 
-Nor is Scheme For Max unique in providing a Lisp
-based extension facility to a commercial music platform - the author unknowingly
+Nor is Scheme For Max unique in providing a Lisp-family
+extension facility to a larger music platform --- the author unknowingly
 programmed in Lisp in the early 1990's while using the Cakewalk sequencer,
 which came with an embedded Lisp interpreter in the form of the 
-Cakewalk Application Language (CAL).
+Cakewalk Application Language (CAL)! There also exist Lisp-family client interfaces
+to the open-source SuperCollider music platform, including Overtone (Clojure),
+rsc3 (r6rs Scheme), and cl-collider (Common Lisp).
 
 However, Scheme For Max is unique in bringing a fully-fledged Scheme interpreter
 to the Max environment as a first-class Max object, implemented and running
@@ -436,7 +448,7 @@ In contrast with S4M, systems such as Common Lisp Music, Common Music, Nyquist, 
 all run as stand-alone applications, with events originating from them either
 rendered as audio internally or destined for other systems for rendering to audio. 
 While these systems are, like Max, also capable
-of receiving gestural input, they must, in essence, ``be their own boss" - they provide
+of receiving gestural input, they must, in essence, ``be their own boss" --- they provide
 their own scheduler and timing clocks and act as the principal engine from which temporal
 events originate. If they are to be used alongside another temporal engine, the two
 must be synchronized and events sent back and forth over network connections of some kind.
@@ -471,7 +483,9 @@ internal engine parameter accordingly". In the example below, a Scheme function
 is scheduled that will, in 4 bars time, read a rehearsal mark from the table \textbf{mark-table},
 advancing the global transport to that position. As the table
 is a shared data object, other Max objects (or patchers) could write to this
-rehearsal mark table without awareness of S4M.
+rehearsal mark table without awareness of S4M. (Note: this is a safe operation
+from Scheme code as table access is done through thread-safe Max SDK functions 
+that handle synchronization and locking for us.)
 
 \begin{figure}[H]
   \centering
@@ -481,14 +495,43 @@ rehearsal mark table without awareness of S4M.
 \end{figure}
 
 
+\section{rationale for the choice of s7 scheme}
+
+The design of the Max external system means that, technically, any interpreter
+that can be embedded in a C host could be used. The author evaluated several during
+the initial prototyping stages of development, including ECL (Embeddable Common Lisp),
+Gambit, Chicken, Racket, Guile, and s7. The choice to use s7 was based on several 
+factors, including the ease of embedding, its license, and its use in other computer music tools (and
+thus its design suitability for computer music).
+
+The s7 interpreter is implemented in a single C file (with header file), 
+and is statically linked with the C code of the \textbf{s4m} object. Embedding is
+as simple as linking to the s7 library and including a single file. In this 
+regard, it is similar to Guile, and in fact, is linguistically similar to Guile 1.8.
+However, while Guile is reciprocally licensed with the GPL, s7 is liberally licensed 
+under the BSD license. As the creation and sale of commercially externals is part of the Max 
+milieu, the author felt this was more likely to result in uptake within the Max community.
+
+Racket, Chicken, and Gambit were also potential contenders. In all three cases, the
+complexity of embedding was significantly higher, and in at least one case (Chicken),
+thread-safety for multiple interpreters in the same Max patch appeared problematic.
+In addition, documented examples of common embedding use cases were less available
+than with s7.
+
+Finally, s7 was created for computer music, and as a result is used in other computer music
+environments, such as Common Music. As a result, there is a rich body of code, especially
+from Common Music, that can be used or studied by users. There is also a small, but active, 
+online community of music programmers using s7, communicating through the CM-dist mailing
+list hosted at the Stanford computer music center, CCRMA. The author of s7, Bill
+Schottstaedt, has been an enthusiastic supporter of the project and has been invaluable
+with technical assistance.  
+
 
 \section{implementation of the Scheme For Max external}
 
 This section provides a high-level overview of the implementation of the \textbf{s4m} 
 object provided by the Scheme For Max external.
 
-The s7 interpreter is implemented in a single C file (with header file), 
-and is statically linked with the C code of the \textbf{s4m} object. 
 The s7 foreign function interface enables one to define new Scheme functions in C 
 for calling into C from Scheme, and to call any Scheme code from C. 
 The interpreter is instantiated
@@ -634,7 +677,7 @@ as discussed in the next section.
 
 \section{Event scheduling in computer music and Max}
 
-Music is fundamentally a temporal art form - there may be music with static pitch
+Music is fundamentally a temporal art form --- there may be music with static pitch
 or static amplitude, but absent rhythm, there is no music.  
 Thus a core problem in computer music programming environments is that of providing a flexible 
 means of triggering events in time. Further, in platforms intended to support both
@@ -687,14 +730,14 @@ the \textbf{pipe} object for delaying complex events is thus cumbersome.
 
 A larger problem is that of how to capture gestural values for use in the delayed
 events. Max's visual patching language is fundamentally modelled similarly to a modular
-synthesizer - there is one instance in memory of each visual object, and messages can only
+synthesizer --- there is one instance in memory of each visual object, and messages can only
 pass through them one at a time. Creating visual programs where execution of 
 delayed events will trigger cascades of messages through objects that are also 
 being used in the interim becomes notoriously complex and there exists no straightforward
 facility to express \textit{``make a new container for this variable as it is now so that
 we can fetch it later"}. A naive solution would use a visual patcher object to store 
 the variable's state at trigger time for use later, however this only works
-if there is only one scheduled event - adding more scheduled events requires adding
+if there is only one scheduled event --- adding more scheduled events requires adding
 an additional storage objects per concurrently scheduled event, and as each object in the visual patcher
 represents an object instantiation rather than a class, this rapidly becomes
 baroque. This ``programming-with-instances" paradigm
@@ -1164,7 +1207,7 @@ this compensation, comparing both high and low signal vector sizes to produce
 variable delays in note onsets, and it was determined
 that so long as the overall output latency is again large enough to allow
 the GC to run in time, self-scheduling events in a long piece do stay
-accurate in that jitter does not accumulate over the piece - 
+accurate in that jitter does not accumulate over the piece --- 
 note onsets stay accurate to within the delay of one signal vector of samples,
 regardless of the length of the piece of music.
 
@@ -1210,16 +1253,28 @@ sequencing and algorithmic composition tools.
 Future plans for the project include a version for the open-source
 Pure Data platform, similar to Max in many ways and created also by Miller Puckette,
 the original author of Max. \textbf{Scheme For Pure Data} is now in beta release, available
-as source code, with binary releases planned for July 2021. In addition
-to this, experimental work on running Scheme for control rate DSP is planned,
-as well as the creation of portability layers in Scheme to allow one to run 
-the same Scheme code on S4M, S4Pd, or Common Music (which also uses s7).
-There have been successful ports of s7, Pure Data, and Csound to Web Assembly, 
+as source code, with binary releases planned for August 2021. In addition
+to this, experimental work on running Scheme for control-rate DSP is planned.
+This would entail Scheme executing in the timed audio rendering thread, but
+at a subdivision of the audio sample rate such as every 32 or 64 samples, 
+thus generating streams similar to the way digital audio is rendered, but
+at a lower resolution suitable for use as signal modulators. (The ability
+to run DSP code at a lower sample rate for modulator signals is  
+is called the "control rate" in CSound and other similar audio programming platforms.)
+
+The author also plans to create portability layers in Scheme to allow one to run 
+the same Scheme code on S4M, S4Pd, or Common Music (which also uses s7),
+and potentially in C++ projects through the JUCE audio development framework.
+There have also been successful ports of s7, Pure Data, and Csound to Web Assembly, 
 thus it seems likely that work from the project will be useable for web audio as well.
 It is hoped that through these additional run-times, the project can become 
 a valuable addition to the larger computer music community, enabling
 use in contexts where the commercial Max platform is not practical
 or financially accessible.
+
+As s7 Scheme is open-source itself, another potential area of work
+is improving s7's suitability for real-time use. This could include
+implementation of an incremental garbage collector, for example.
 
 Scheme For Max can be obtained on GitHub, with links to documentation,
 demonstration videos, and various tutorials linked from the main page.
