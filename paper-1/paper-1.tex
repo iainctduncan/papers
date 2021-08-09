@@ -215,7 +215,7 @@ but also for the generation of musical content such as melodies
 and rhythms.
 
 In both the fields of live-coding and algorithmic music, the ability for
-the performer/composer to schedule events in the future with high temporal
+the performer and composer to schedule events in the future with high temporal
 accuracy is of major benefit. While this is possible in the Max visual
 patching language, it is cumbersome and thus the implementation is not
 optimal for live-coding or algorithmic music where the speed with which
@@ -237,13 +237,13 @@ Bill Schottstaedt at the  Center for Computer Research in Music and Acoustics
 from TinyScheme, s7 is a Scheme dialect designed for use in computer music
 platforms and is used in various music programs such as the Snd editor and the
 Common Music algorithmic composition platform \cite{Schottstaedt2021}.
-Similar in functionality to the built
-in \textbf{js} object, the \textbf{s4m} object enables the user to program Max in s7 Scheme,
+Similar in functionality to the built-in \textbf{js} object, 
+the \textbf{s4m} object enables the user to program Max in s7 Scheme,
 and provides Scheme functions to interact with the Max engine and environment through
 a foreign function interface implemented in C using the Max C SDK and API.
 
 The author believes that S4M extends Max in a way that is of significant value to 
-the algorithmic musician and live-coding performer, as well as more generally to
+the algorithmic musician and live-coding performer, as well as more generally 
 to the broader Max community. The ability to update
 a running Scheme program during playback is a major benefit
 and is a capability that has been, while technically possible, impractical
@@ -310,7 +310,7 @@ In addition to this event-based message execution model, also called ``control m
 supports a stream-based digital 
 audio execution model, originally provided separately as a product called ``MSP", but now included 
 as part of the single Max product.
-MSP activity normally runs in a separate thread from the event/message Max operations, and uses a  
+MSP activity normally runs in a separate thread from the event/message Max operations, and uses 
 a separate class of objects that pass constant streams of digital audio to each other through differently 
 colored patch cords (though MSP objects may additionally receive control messages for controlling parameters). As  
 S4M executes only at the event/message level and does not implement DSP operations, MSP is not 
@@ -330,11 +330,13 @@ will actually consist of the selector ``int" followed by an atom storing the num
 The symbol ``bang" is a special symbol that can be used for a one-element message 
 that essentially means ``run", and the act of triggering execution by sending a bang
 message from the \textbf{bang} object is called ``banging" in the nomenclature.
+(Note that there are both messages and objects called ``bang"; the \textbf{bang} 
+object is an object that sends a bang message on receipt of any message.)
 Taken together, this means that in Max there are five kinds of messages: 
 \textbf{bang}, \textbf{symbol}, \textbf{int}, \textbf{float}, and \textbf{list}. 
+\cite{Puckette2002}
 (The bang message is technically a symbol message
 of ``bang", but this is essentially treated as a type of its own in the nomenclature.) 
-\cite{Puckette2002}
 
 Activity in an object (represented visually by a single visual box in the patch) is triggered
 by sending the object a Max message, most commonly from an object connected to it
@@ -352,7 +354,7 @@ message or messages out of its outlets, and it may cause a side effect in the br
 Max environment, such as printing to the console or updating a global data element such as
 an audio buffer.
 
-As an example, in the patcher screenshot above we see a \textbf{message-box} object that will update
+As an example, in the patcher screenshot in figure 3 we see a \textbf{message-box} object that will update
 its state (and visual display) with the symbols ``hello" and ``world" when sent the message 
 \textbf{set hello world}. Near it is a circular \textbf{bang} object, which when clicked will send the
 \textbf{message-box} the \textbf{bang} message, causing it to output the message \textbf{list hello world}.
@@ -597,7 +599,7 @@ this facility is of significant utility to the Max programmer, as combined
 with the Max message interpolation facility, it enables the user to very
 easily assemble Max widgets that trigger Scheme functions. Most anything that
 can be expressed in a single s-expression without inner nesting can be used.
-In figure 4, we see a \textbf{number-box} outputting to a \textbf{message-box} using Max's 
+In figure 5, we see a \textbf{number-box} outputting to a \textbf{message-box} using Max's 
 variable interpolation (the \textbf{\$1}). 
 Clicking the \textbf{bang} above the \textbf{number-box} or changing the number in 
 the box will result in a message of 
@@ -641,7 +643,7 @@ to interact with scheduled events easily, both programmatically and gesturally.
 
 One of the major advantages of Max compared to other computer music platforms 
 is the ease with which the user can create interactive environments in which the performer's actions 
-change musical parameters in real-time in complex ways, enabling 
+change musical parameters in complex ways, enabling 
 musically rich performances. It is, for example, trivial to add GUI elements to change
 musical parameters, and only slightly less trivial to add handlers for MIDI input, 
 so that users can connect to their programs physical devices such as
@@ -871,7 +873,7 @@ Let us imagine instead that the \textbf{bang} message should delay the activity
 delay as it accepts floats for the ms time value. (Note that the actual delay time
 will be offset to the nearest signal vector boundary, determined by the
 users ``Signal Vector Size" audio setting, but subsequent clock calls 
-adjust for this, maintaining long term temporal accuracy at sample rate resolution.)  
+adjust for this, maintaining long-term temporal accuracy at sample rate resolution.)  
 
 We will create a \textbf{clock} object, which takes as arguments a void pointer and a function
 reference, with the void pointer normally used to hold a reference to our instantiated
@@ -1011,7 +1013,7 @@ and delay time as arguments, the following occurs:
 \item A \textbf{t\_s4m\_clock\_callback} data structure is dynamically allocated and used to store a
   reference to the \textbf{s4m} object and to the symbolic handle passed from Scheme.
 \item A Max \textbf{clock} is created, passing in a void pointer to clock callback structure
-  and binding the clock to a generic clock callback function in C. The clock's timer is started
+  and binding the clock to a generic clock callback function in C. The clock's timer is started.
 \item The clock callback struct is also stored in a C hash-table (Max's hashtab implementation),
   keyed by the handle, so that cancellation or object deletion can use this to find all clocks.
 \item When the generic clock callback function runs (time has elapsed), it uses the pointer argument to get 
@@ -1122,7 +1124,7 @@ when run in a substantial application (a 16 track sequencer written entirely in 
 with the computer also generating audio for the tracks with commercial
 software synthesizers).  
 The audio rendered was recorded and examined
-examined in a digital audio workstation to check for timing discrepancies. The
+in a digital audio workstation to check for timing discrepancies. The
 results of these preliminary tests were that timing was unaffected by the 
 garbage collector so long as Max was configured with 
 a large enough output buffer to allow the collector to run within the 
@@ -1130,7 +1132,7 @@ latency period of this buffer.
 Using Max with an output buffer of 256 samples produces an output latency
 of approximately 6-8 ms (depending on the Max signal vector as well), which
 was large enough for the collector to run without issue, but is 
-low enough to be acceptable for real time performance. With software synthesis
+low enough to be acceptable for real-time performance. With software synthesis
 loads at closer to the maximum possible on the author's computer,
 an output buffer of 512 samples (approx. 11 ms output latency) was necessary to prevent
 any timing errors. This is encouraging as these buffer sizes are not atypical
@@ -1149,7 +1151,7 @@ signal vector boundaries, this produces delays of note onsets by up to
 the time period of one vector, a phenomenon known as ``timing jitter" in the nomenclature.
 However, the more recent scheduling facilities in Max, including the 
 clock facilities used by S4M, are implemented to compensate for this jitter,
-maintaining long term temporal accuracy despite note onset delays. The mechanism
+maintaining long-term temporal accuracy despite note onset delays. The mechanism
 by which this is done is unfortunately not publicly documented or available
 in open-source code, but one can assume that it is some variant of the common pattern 
 whereby scheduled events are aware of when they are supposed to be running
@@ -1197,7 +1199,7 @@ to the Max platform, especially with regard to flexible and accurate
 scheduling of future events.  The author believes this will be
 of significant benefit to those working in the fields of algorithmic
 music and live coding, and will also be useful to the more general Max 
-user base as a way to script Max in a high level language that runs in
+user base as a way to script Max in a high-level language that runs in
 the high-priority thread. In the author's experience, 
 working in Scheme within Max has been highly productive, with the
 language well suited both to expressing musical concepts and to working
@@ -1223,6 +1225,7 @@ Scheme For Max can be obtained on GitHub, with links to documentation,
 demonstration videos, and various tutorials linked from the main page.
 
 
+https://github.com//scheme-for-max
 %%
 %% The acknowledgments section is defined using the "acks" environment
 %% (and NOT an unnumbered section). This ensures the proper
