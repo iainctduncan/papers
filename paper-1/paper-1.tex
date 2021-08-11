@@ -22,7 +22,7 @@
 %% in the same archive or directory.)
 %%
 %% The first command in your LaTeX source must be the \documentclass command.
-\documentclass[acmsmall, anonymous, review]{acmart}
+\documentclass[acmsmall]{acmart}
 %% NOTE that a single column version is required for 
 %% submission and peer review. This can be done by changing
 %% the \doucmentclass[...]{acmart} in this template to 
@@ -101,14 +101,14 @@
 %% used to denote shared contribution to the research.
 \author{Iain C.T. Duncan}
 %%\authornote{Both authors contributed equally to this research.}
-\email{iainctduncan@gmail.com}
+\email{iduncan@uvic.ca}
 \affiliation{
   \institution{University of Victoria}
-  \streetaddress{}
+  %%\streetaddress{}
   \city{Victoria}
   \state{BC}
   \country{Canada}
-  \postcode{}
+  %%\postcode{V8P 5C2}
 }
 
 
@@ -1259,8 +1259,8 @@ This would entail Scheme executing in the timed audio rendering thread, but
 at a subdivision of the audio sample rate such as every 32 or 64 samples, 
 thus generating streams similar to the way digital audio is rendered, but
 at a lower resolution suitable for use as signal modulators. (The ability
-to run DSP code at a lower sample rate for modulator signals is  
-is called the "control rate" in CSound and other similar audio programming platforms.)
+to run DSP code at a lower sample rate for modulator signals 
+is called the ``control rate" in CSound and other similar audio programming platforms.)
 
 The author also plans to create portability layers in Scheme to allow one to run 
 the same Scheme code on S4M, S4Pd, or Common Music (which also uses s7),
@@ -1286,20 +1286,22 @@ https://github.com//scheme-for-max
 %% (and NOT an unnumbered section). This ensures the proper
 %% identification of the section in the article metadata, and the
 %% consistent spelling of the heading.
-%%\begin{acks}
-%%Scheme For Max would not exist without the work of many people. 
-%%Bill Schottstaedt created Common Lisp Music and the s7 Scheme implementation,
-%%and has been invaluable as a source of advice on s7. Heinrich Taube
-%%created Common Music and has been an inspiration through his seminal book
-%%on algorithmic composition with Lisp, "Notes from the Metalevel".
-%%Luigi Castelli and Alex Harker helped with programming questions
-%%and build assistance. 
-%%S4M of course depends on Max and thus owes a huge debt to 
-%%Miller Puckette and David Zicarelli. And finally, Andrew Schloss has
-%%been a source of encouragement and support through the years of 
-%%exploration that led to the Scheme For Max project.
-%%
-%%\end{acks}
+\begin{acks}
+Scheme For Max would not exist without the work of many people. 
+Bill Schottstaedt created Common Lisp Music and the s7 Scheme implementation,
+and has been invaluable as a source of advice on s7. Heinrich Taube
+created Common Music and has been an inspiration through his seminal book
+on algorithmic composition with Lisp, "Notes from the Metalevel".
+Luigi Castelli and Alex Harker helped with programming questions
+and build assistance. 
+S4M of course depends on Max and thus owes a huge debt to 
+Miller Puckette and David Zicarelli.
+George Tzanetakis has assisted with this paper.
+And finally, Andrew Schloss has
+been a source of encouragement and support through the years of 
+exploration that led to the Scheme For Max project.
+
+\end{acks}
 
 
 %%
