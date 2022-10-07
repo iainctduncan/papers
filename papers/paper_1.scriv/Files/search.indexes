@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchIndexes Version="1.0">
+    <Documents>
+        <Document ID="C363C175-FF49-44A7-B4D4-26254B6FDDCB">
+            <Title>Bibliography</Title>
+            <Synopsis>Enable “Include in Compile” for this item to place a bibliography in your back matter. You will also want to customise the bibliography style and provide the name of your .bib file (which will need to be maintained separately). </Synopsis>
+            <Text>\bibliographystyle{spiebib} 
+\bibliography{name_of_bib_file}</Text>
+        </Document>
+        <Document ID="29B7380E-FDA3-423A-98C6-A8BF28C80CE5">
+            <Text>General Non-Fiction (LaTeX)
+I. Anonymous 18039
+1
+Contents
+Contents 2
+1 Folder Names as Chapter Titles 1 1.1 HowToUseThisTemplate ...................... 1 1.2 SomeSampleContent ......................... 2
+2 Another Chapter Folder 5 2.1 Anothersection............................. 5
+Appendices 8 SupportingMaterial ............................. 9
+Foreward
+Non-fiction works often feature a foreword or preface. This usually comes after the table of contents, but not always—sometimes the foreword precedes the table of contents. If you need your foreword to come before the table of contents, move the \tableofcontents command in the “Preamble Addendum” document after “Foreword” document. You can also rename “Foreword” to ”Preface” or ”Introduction”, or delete it entirely, depending on your requirements.
+The table of contents is generated automatically by LATEX, using the natural structure of the Draft folder’s outline in Scrivener’s. If you were using Scrivener in a more typical fashion, there would be a long list of instructions here on how to create a table of contents and manually keep it up to date over time.
+2
+Chapter 1
+Folder Names as Chapter Titles
+The goal of this template is make the composition and drafting phase as simple and elegant as possible. It is not meant to turn Scrivener, a rich text editor, into a full-blown LaTeX generator (you’ll need to use MultiMarkdown or Pandoc for that). Instead, this project contains a number of convenience features that could be applied to your work as you wish in an la carte fashion, to alleviate how much code you’d need to type in yourself. For example, if you find handling images to be cumbersome in LaTeX, you can safely leave that up to the template.
+Ultimately, it’s goal is to cater to those that by and large prefer to compose directly in LaTeX itself, and will be approaching Scrivener primarily as an organ- isational and composition tool for constructing a longer .tex file from the smaller snippets written into the Draft folder.
+1.1 How To Use This Template
+1. Inside the “Draft” folder, create a new folder for each chapter and title each folder with the name of the chapter. (You do not need to—and indeed shouldn’t—title the folders “Chapter One” and so on, because chapter num- bering will typically be taken care of automatically by LaTeX.) The first chapter folder has been created for you with the placeholder title “Chapter”.
+2. Create a new text document for each section inside the chapter folders. Sec- tions will be numbered and titled by LaTeX using hierarchical numbering (1.1, 1.2, 1.3).
+3. Nest documents beneath documents to create numbered subsections, subsub- sections and unnumbered paragraphs, at 3rd, 4th and 5th levels of hierarchy respectively.
+1
+CHAPTER 1. FOLDER NAMES AS CHAPTER TITLES 2
+4. If you need to create the occasional unnumbered section, the Informal Chap-
+ter and Informal Section Types are there for you.
+5. If you don’t require a foreword, move the “Foreword” document in the Front Matter folder to the Trash folder. Alternatively, rename it “Preface”, “Ab- stract” or “Introduction” as you require. Any other prefacing materials could be placed between the preamble and the main matter document.
+6. “Notes” and “Ideas” folders have been provided for your convenience, al- though you can replace them or create different top-level folders for your research materials if necessary (these are just regular folders that have had custom icons assigned to them using the Documents&gt;Change Icon feature).
+1.2 Some Sample Content
+Foremost, any LaTeX you type in yourself will be dutifully conveyed to the output. The compile settings also have a few shortcuts you can use to ease typing, or grant yourself a nicer looking working document. Graphics that you place into the editor (linked or embedded) will be exported simply wherever they occur in the text. For more formal figures there are two approaches you can take (you needn’t commit to either exclusively).
+Figures
+Figure 1.1: This is the caption.
+To modify how styled text is converted to LaTeX code, visit the Markup and Styles compile format panes, when editing this project’s ”LaTeX (Memoir Book)” format. The Markup pane itself sets how graphics print themselves, which is the \includegraphics line alone. The stylesheet settings for Figure, Caption and Label determine how the additional syntax is added around that.
+￼
+CHAPTER 1. FOLDER NAMES AS CHAPTER TITLES 3 Equations
+We can also insert equations as discrete items in the binder, making them easy to reference and look up by type. It also means we can refer to them in our writings with the use of simple internal document links (Equation 1.1).
+x2 = 5−√25−4×6 =2 (1.1) 2
+When you need to refer to an equation in the body text (β = (β1, β2, . . . , βn)), you can use the Inline Equation style which will insert the $ and $ codes for you.
+Equations can also be inserted unnumbered
+(  A2 ) P A=2 B&gt;4
+Athran teng ti anu su, thung... ti quolt ma xi rintax yem urfa obrikt frimba flim furng. Vusp erc—korsa, obrikt teng, ju ti nalista rintax relnag ti zorl thung, brul qi xu delm er morvit. Ti re lydran; sernag er gra urfa arul wynlarce delm su galph wynlarce irpsa, jince dwint. Berot sernag groum irpsa epp jince. Sernag dri; er gen relnag ik rintax er, erc su dri, teng groum dwint ju groum relnag. Irpsa lamax erc velar brul flim dwint kurnap irpsa wynlarce clum su menardis yiphras; zorl morvit delm korsa zeuhl fli srung. Wynlarce delm; gen nix, teng su ti ma, dwint su, re furng vo tolaspa obrikt groum lydran xi.
+Here is some verse.
+We do not need much more than a few lines. And then we will be done.
+Erc xi—helk, korsa ma velar vusp gen berot? Arul galph; flim groum su teng twock er velar arul, urfa ma tharn. Quolt cree pank menardis, wynlarce ti sernag su tharn lamax? Tolaspa zorl pank... vo prinquis relnag rintax tolaspa er gronk. Ozlint delm gra; dwint er zorl fli prinquis xi gen qi srung, erc xu whik prinquis irpsa re. Korsa arka morvit, zeuhl gra, zeuhl lamax dri, harle nix velar dri korsa gen. Ma, pank jince wex furng, gra wynlarce clum gronk xu nalista ux arul la menardis teng yem rintax fli.
+Su xi er relnag tolaspa arka—jince erc twock morvit, su ux ozlint korsa ma. Thung epp, yem; yiphras berot la ma vusp su brul prinquis rhull pank vusp relnag erc ma rintax? Qi ik pank delm zorl lamax tolaspa lamax kurnap yem whik ju. Fli morvit—dri su srung gronk cree furng xi. Obrikt gen wex, arul ozlint, ma korsa rintax srung, epp ux, er pank. Lamax ozlint arul epp ju; qi ik ti harle ik. Lamax su ozlint ju ma yem rhull brul rintax re athran flim gra; yiphras rhull wex epp. Er ik epp erk zorl ewayf, ozlint re; wynlarce twock clum, irpsa ewayf er gronk.
+￼￼￼
+CHAPTER 1. FOLDER NAMES AS CHAPTER TITLES 4
+Su galph velar; ewayf, xu anu srung gen wynlarce frimba fli erc kurnap furng, xi kurnap, clum furng erk xi ti harle helk irpsa xu quolt. Gronk teng furng xu obrikt ju—ik clum rintax xu prinquis la. Prinquis zorl ewayf; urfa dri, vo xi, ju fli zeuhl obrikt re gronk teng morvit wex irpsa. Ma nix ewayf lamax. La furng nix brul ewayf sernag korsa yem tharn. Ju teng. Arul vusp er rintax athran, re sernag... ma prinquis. Urfa furng athran jince, gra nix tolaspa la delm; gronk dwint epp yiphras.
+Chapter 2
+Another Chapter Folder
+Begin each new chapter on a new top level folder like this. With LaTeX, the chapter numbering and formatting is handled automatically by the typesetting engine. Scrivener is only responsible for assembling the LaTeX code that will be used to generate these structures.
+If you need parts, or if you don’t need chapters, the automatic assignment of structure to the outline can be adjusted in project settings, under the Section Types pane.
+2.1 Another section
+Whik gronk; thung epp rintax whik jince dwint srung sernag nix la quolt sernag brul jince. Twock, quolt whik tharn dri cree gen... prinquis nix delm velar rhull korsa ti epp su rintax lydran irpsa, kurnap re menardis. Ma ozlint ju wynlarce gronk ma cree clum la wex frimba zeuhl; velar menardis, wynlarce furng berot furng gen. Thung er wynlarce wex tolaspa, srung morvit galph. Gen athran morvit... korsa, morvit menardis kurnap rintax velar teng srung vo frimba. Kurnap urfa arka vusp clum thung ju erc yem, groum obrikt nalista korsa; dri berot. Groum galph; ik, morvit ti gronk zeuhl erc nix. Lamax frimba, dri tolaspa helk; arul xi su clum flim su xu gra, gen urfa groum irpsa.
+Urfa erc prinquis; tharn yem arka, vusp xu erc. Fli xi menardis arka... ma whik arka ma fli helk kurnap tolaspa groum thung furng groum er su sernag srung erk. Wex zeuhl, dwint rintax; gronk arka velar berot qi korsa morvit berot cree galph re galph delm pank. Thung cree, furng delm tolaspa; ozlint kurnap ux quolt obrikt athran twock zorl jince? Re groum; thung su flim kurnap su vo quolt, wex er zorl gen xu ti re. Wynlarce, ti prinquis ux lamax gen wex, wynlarce er la erk lamax rhull?
+Delm vo; berot nix erc twock wynlarce gronk ju? Yem groum whik erk galph 5
+CHAPTER 2. ANOTHER CHAPTER FOLDER 6
+urfa epp; kurnap nalista brul, zeuhl vo. Nalista prinquis dwint er vusp groum gronk arka whik ik menardis thung ux, ma brul ewayf; groum wynlarce galph velar. Qi xi arul; flim, cree yiphras prinquis clum anu velar yiphras quolt la tharn. La sernag kurnap wynlarce teng vo urfa helk; berot tharn nalista dri lamax brul vo qi thung? Galph wex ma epp, twock relnag berot. Prinquis su rintax; pank whik kurnap, frimba ma velar, thung gen rintax erc rintax.
+Ju ti erk gronk ewayf ux, nix prinquis frimba. Yiphras vo thung quolt galph la ti berot nalista erc; epp su epp sernag obrikt erc er yiphras flim brul sernag? Obrikt, whik teng srung nix prinquis xi brul lydran re urfa... groum ti, er harle dri quolt menardis groum qi. Harle gra harle irpsa, la zeuhl. Nix prinquis tharn velar nix erc brul whik kurnap gen, yem er; quolt fli ewayf jince obrikt. Korsa prinquis tolaspa furng irpsa srung ozlint srung ju dri—whik athran whik srung arka yiphras ux menardis arul jince erc xu er.
+Athran teng ti anu su, thung... ti quolt ma xi rintax yem urfa obrikt frimba flim furng. Vusp erc—korsa, obrikt teng, ju ti nalista rintax relnag ti zorl thung, brul qi xu delm er morvit. Ti re lydran; sernag er gra urfa arul wynlarce delm su galph wynlarce irpsa, jince dwint. Berot sernag groum irpsa epp jince. Sernag dri; er gen relnag ik rintax er, erc su dri, teng groum dwint ju groum relnag. Irpsa lamax erc velar brul flim dwint kurnap irpsa wynlarce clum su menardis yiphras; zorl morvit delm korsa zeuhl fli srung. Wynlarce delm; gen nix, teng su ti ma, dwint su, re furng vo tolaspa obrikt groum lydran xi.
+Erc xi—helk, korsa ma velar vusp gen berot? Arul galph; flim groum su teng twock er velar arul, urfa ma tharn. Quolt cree pank menardis, wynlarce ti sernag su tharn lamax? Tolaspa zorl pank... vo prinquis relnag rintax tolaspa er gronk. Ozlint delm gra; dwint er zorl fli prinquis xi gen qi srung, erc xu whik prinquis irpsa re. Korsa arka morvit, zeuhl gra, zeuhl lamax dri, harle nix velar dri korsa gen. Ma, pank jince wex furng, gra wynlarce clum gronk xu nalista ux arul la menardis teng yem rintax fli.
+Su xi er relnag tolaspa arka—jince erc twock morvit, su ux ozlint korsa ma. Thung epp, yem; yiphras berot la ma vusp su brul prinquis rhull pank vusp relnag erc ma rintax? Qi ik pank delm zorl lamax tolaspa lamax kurnap yem whik ju. Fli morvit—dri su srung gronk cree furng xi. Obrikt gen wex, arul ozlint, ma korsa rintax srung, epp ux, er pank. Lamax ozlint arul epp ju; qi ik ti harle ik. Lamax su ozlint ju ma yem rhull brul rintax re athran flim gra; yiphras rhull wex epp. Er ik epp erk zorl ewayf, ozlint re; wynlarce twock clum, irpsa ewayf er gronk.
+Su galph velar; ewayf, xu anu srung gen wynlarce frimba fli erc kurnap furng, xi kurnap, clum furng erk xi ti harle helk irpsa xu quolt. Gronk teng furng xu obrikt ju—ik clum rintax xu prinquis la. Prinquis zorl ewayf; urfa dri, vo xi, ju fli zeuhl obrikt re gronk teng morvit wex irpsa. Ma nix ewayf lamax. La furng nix brul ewayf sernag korsa yem tharn. Ju teng. Arul vusp er rintax athran, re
+CHAPTER 2. ANOTHER CHAPTER FOLDER 7 sernag... ma prinquis. Urfa furng athran jince, gra nix tolaspa la delm; gronk
+dwint epp yiphras.
+A subsection
+Er xu kurnap velar ik ti quolt ozlint. Frimba kurnap ux brul furng; ju tharn helk yem su groum frimba. Srung gronk erk er whik prinquis teng er galph; berot arul lamax erc gra. Relnag ti. Kurnap sernag dwint frimba wynlarce—urfa harle pank su berot arul, zorl harle vo pank. Whik erc—erk jince korsa ma dwint wex nix athran thung ma, twock sernag urfa gen tharn. Ti twock velar, athran yiphras— obrikt clum rhull nalista ozlint ik re korsa. Brul kurnap er sernag obrikt delm erc nix, anu er su tolaspa gen tolaspa nix furng whik la furng korsa? Twock gra harle, yem nix; clum, erk berot gronk rintax gen teng ju, prinquis ma xu, ozlint nalista? Sernag rintax re gen velar tolaspa xi prinquis; su jince erk urfa? Thung clum tolaspa thung ik erk; dwint gra, nalista thung, rhull ux.
+Zorl tharn srung kurnap velar xu wex er dwint gra vo zorl; irpsa cree la vo lydran, dwint jince prinquis teng prinquis. Zorl dri erk nix, ux tolaspa whik, arul er, vo xi anu zeuhl quolt; galph helk korsa flim ma vo. Su er berot gen yem srung whik ux arul dri quolt whik. Helk groum clum; helk yem berot er relnag harle, teng obrikt helk athran quolt wex jince quolt helk harle, relnag lydran furng er ik rintax tharn la. Frimba lydran er; nalista whik lamax menardis ik sernag, delm jince helk morvit gen, erk kurnap flim erc ik athran prinquis pank yiphras erk, vo tolaspa. Arul dwint relnag xi ma, dri dwint harle. Kurnap menardis galph ik gronk sernag gronk delm morvit vusp yiphras jince ju.
+Erk flim anu rhull anu, lydran wex furng morvit delm. Pank nalista, whik nix vusp obrikt dri thung nalista morvit zeuhl, kurnap berot qi prinquis berot. Twock erk erc er... morvit galph ewayf frimba morvit sernag er prinquis? Vo prinquis zeuhl, anu zeuhl la arka erc epp, zeuhl re relnag wynlarce su urfa.
+Su, er velar cree brul yem, gronk helk anu gen athran yiphras ti athran harle ju quolt gen menardis urfa epp ewayf groum. Dwint qi athran sernag anu kurnap arul. Er fli yiphras sernag vo kurnap dwint vusp obrikt rhull gen. Helk yiphras er arul wynlarce korsa arul... korsa tolaspa anu wynlarce lamax srung. Ux ik xu rintax nix. Sernag teng, yiphras erk tolaspa—gen ux velar ik irpsa menardis arul ux obrikt yem zeuhl. Lamax su dri er anu; ewayf er jince, wex er arul flim erk fli. Relnag jince wynlarce jince prinquis. Tharn jince vusp er... gra, korsa yem. Dri la berot ozlint; clum twock, anu rhull dri helk, vusp zorl rintax obrikt wex. Twock lydran arka harle re nalista groum quolt; menardis ma brul qi pank berot dri morvit, erc kurnap delm.
+Appendices
+8
+CHAPTER 2. ANOTHER CHAPTER FOLDER 9 Supporting Material
+Whik gronk; thung epp rintax whik jince dwint srung sernag nix la quolt sernag brul jince. Twock, quolt whik tharn dri cree gen... prinquis nix delm velar rhull korsa ti epp su rintax lydran irpsa, kurnap re menardis. Ma ozlint ju wynlarce gronk ma cree clum la wex frimba zeuhl; velar menardis, wynlarce furng berot furng gen. Thung er wynlarce wex tolaspa, srung morvit galph. Gen athran morvit... korsa, morvit menardis kurnap rintax velar teng srung vo frimba. Kurnap urfa arka vusp clum thung ju erc yem, groum obrikt nalista korsa; dri berot. Groum galph; ik, morvit ti gronk zeuhl erc nix. Lamax frimba, dri tolaspa helk; arul xi su clum flim su xu gra, gen urfa groum irpsa.
+Urfa erc prinquis; tharn yem arka, vusp xu erc. Fli xi menardis arka... ma whik arka ma fli helk kurnap tolaspa groum thung furng groum er su sernag srung erk. Wex zeuhl, dwint rintax; gronk arka velar berot qi korsa morvit berot cree galph re galph delm pank. Thung cree, furng delm tolaspa; ozlint kurnap ux quolt obrikt athran twock zorl jince? Re groum; thung su flim kurnap su vo quolt, wex er zorl gen xu ti re. Wynlarce, ti prinquis ux lamax gen wex, wynlarce er la erk lamax rhull?
+Delm vo; berot nix erc twock wynlarce gronk ju? Yem groum whik erk galph urfa epp; kurnap nalista brul, zeuhl vo. Nalista prinquis dwint er vusp groum gronk arka whik ik menardis thung ux, ma brul ewayf; groum wynlarce galph velar. Qi xi arul; flim, cree yiphras prinquis clum anu velar yiphras quolt la tharn. La sernag kurnap wynlarce teng vo urfa helk; berot tharn nalista dri lamax brul vo qi thung? Galph wex ma epp, twock relnag berot. Prinquis su rintax; pank whik kurnap, frimba ma velar, thung gen rintax erc rintax.
+Ju ti erk gronk ewayf ux, nix prinquis frimba. Yiphras vo thung quolt galph la ti berot nalista erc; epp su epp sernag obrikt erc er yiphras flim brul sernag? Obrikt, whik teng srung nix prinquis xi brul lydran re urfa... groum ti, er harle dri quolt menardis groum qi. Harle gra harle irpsa, la zeuhl. Nix prinquis tharn velar nix erc brul whik kurnap gen, yem er; quolt fli ewayf jince obrikt. Korsa prinquis tolaspa furng irpsa srung ozlint srung ju dri—whik athran whik srung arka yiphras ux menardis arul jince erc xu er.
+Athran teng ti anu su, thung... ti quolt ma xi rintax yem urfa obrikt frimba flim furng. Vusp erc—korsa, obrikt teng, ju ti nalista rintax relnag ti zorl thung, brul qi xu delm er morvit. Ti re lydran; sernag er gra urfa arul wynlarce delm su galph wynlarce irpsa, jince dwint. Berot sernag groum irpsa epp jince. Sernag dri; er gen relnag ik rintax er, erc su dri, teng groum dwint ju groum relnag. Irpsa lamax erc velar brul flim dwint kurnap irpsa wynlarce clum su menardis yiphras; zorl morvit delm korsa zeuhl fli srung. Wynlarce delm; gen nix, teng su ti ma, dwint su, re furng vo tolaspa obrikt groum lydran xi.
+Erc xi—helk, korsa ma velar vusp gen berot? Arul galph; flim groum su teng
+CHAPTER 2. ANOTHER CHAPTER FOLDER 10
+twock er velar arul, urfa ma tharn. Quolt cree pank menardis, wynlarce ti sernag su tharn lamax? Tolaspa zorl pank... vo prinquis relnag rintax tolaspa er gronk. Ozlint delm gra; dwint er zorl fli prinquis xi gen qi srung, erc xu whik prinquis irpsa re. Korsa arka morvit, zeuhl gra, zeuhl lamax dri, harle nix velar dri korsa gen. Ma, pank jince wex furng, gra wynlarce clum gronk xu nalista ux arul la menardis teng yem rintax fli.
+Su xi er relnag tolaspa arka—jince erc twock morvit, su ux ozlint korsa ma. Thung epp, yem; yiphras berot la ma vusp su brul prinquis rhull pank vusp relnag erc ma rintax? Qi ik pank delm zorl lamax tolaspa lamax kurnap yem whik ju. Fli morvit—dri su srung gronk cree furng xi. Obrikt gen wex, arul ozlint, ma korsa rintax srung, epp ux, er pank. Lamax ozlint arul epp ju; qi ik ti harle ik. Lamax su ozlint ju ma yem rhull brul rintax re athran flim gra; yiphras rhull wex epp. Er ik epp erk zorl ewayf, ozlint re; wynlarce twock clum, irpsa ewayf er gronk.
+Su galph velar; ewayf, xu anu srung gen wynlarce frimba fli erc kurnap furng, xi kurnap, clum furng erk xi ti harle helk irpsa xu quolt. Gronk teng furng xu obrikt ju—ik clum rintax xu prinquis la. Prinquis zorl ewayf; urfa dri, vo xi, ju fli zeuhl obrikt re gronk teng morvit wex irpsa. Ma nix ewayf lamax. La furng nix brul ewayf sernag korsa yem tharn. Ju teng. Arul vusp er rintax athran, re sernag... ma prinquis. Urfa furng athran jince, gra nix tolaspa la delm; gronk dwint epp yiphras.
+</Text>
+        </Document>
+        <Document ID="9FFBA333-8432-41C1-91F5-1302DFE283CA">
+            <Title>Non-Fiction Format for LaTeX</Title>
+            <Text>General Non-Fiction (LATEX)
+
+About This Template
+The goal of this template is make the composition and drafting phase as simple and elegant as possible. It is not meant to turn Scrivener, a rich text editor, into a full-blown LaTeX generator (you'll need to use MultiMarkdown or Pandoc for that; consider using the General Non-Fiction template if that is what you are looking for). Instead, this project contains a number of convenience features that could be applied to your work as you wish in an à la carte fashion, to alleviate how much code you'd need to type in yourself. For example, if you find handling images to be cumbersome in LaTeX, you can safely leave that up to the template.
+
+This template caters to those that by and large prefer to compose directly in LaTeX itself, and will be approaching Scrivener primarily as an organisational and composition tool for constructing a longer .tex file from the smaller snippets written into the Draft folder.
+
+When compiled (File ▸ Compile…), this project will generate a bare bones .tex document (using the flexible Memoir class) suitable for many types of work, fiction and non-fiction alike. The template achieves this by using advanced features available to the Plain Text compile file type, including providing the default extension of ".tex" instead of ".txt".
+
+How To Use This Template
+	◆	Inside the “Draft” folder, create a new folder for each chapter and title each folder with the name of the chapter. (LaTeX itself will of course handle all numbering schemes.) The first chapter folder has been created for you with the placeholder title “Chapter”.
+	◆	Create a new text document for each section inside the chapter folders. Sections will be numbered and titled by LaTeX using hierarchical numbering (1.1, 1.2, 1.3).
+	◦	Nest documents beneath documents to create numbered subsections, subsubsections and unnumbered paragraphs, at 3rd, 4th and 5th levels of hierarchy respectively.
+	◦	You can of course also nest folders if you prefer.
+	◆	If you need to create the occasional unnumbered section, the Informal Chapter and Informal Section Types can be manually applied to those sections.
+	◆	If you don’t require a foreword, move the “Foreword” document in the Front Matter folder to the Trash folder. Alternatively, rename it “Preface”, “Abstract” or “Introduction” as you require. Adjust the title, table of contents and other front matter material within this folder, placing any additional front matter sections between the “Begin Document” and “Begin Main Matter” items.
+	◆	“Notes” and “Ideas” folders have been provided for your convenience, although you can replace them or create different top-level folders for your research materials if necessary (these are just regular folders that have had custom icons assigned to them using the Documents ▸ Change Icon feature).
+
+General Writing Tips
+Foremost, any LaTeX you type in yourself will be dutifully conveyed to the output. As such, you can treat the main editor in Scrivener much like you would a dedicated text editor such as TeXShop. You may still prefer to use another editor to construct LaTeX syntax more easily, or take advantage of the syntax highlighting these types of editors can afford. Simply copy and paste the results of your writings into Scrivener when you’re ready to “save” them.
+
+Adjusting Outline Structure
+Scrivener is designed so that you can use the Draft outline flexibly. The default settings for this template are set up to consider all items at the first level within the draft as chapters. Beneath that, all items will be considered sections, subsections and so on down to the \paragraph environment. To adjust these settings, use the Project ▸ Project Settings… menu command, click on the “Section Types” pane, and then the “Default Types by Structure” tab. For example, if you wanted the top level of the Draft to use parts instead of chapters, you could select “Part” (which has already been set up for you) for the Level 1 assignments, and then adjust all greater levels of depth accordingly.
+
+It is also worth noting that under default settings, if you omit a title for a binder item it will become "anonymous", not producing any title material and by extension opting out of being a part of the formal structure of the document as compiled. You could also manually assign an item to the “N/A” section type to cause it to be printed as-is, if you would prefer to give it an casual outlining title.
+
+Compiling
+	◆	The “Front Matter” folder contains some example preamble of the sort that would follow the more rudimentary setup of the document's overall look and feel (that is delegated to the compile Format itself, making it possible to create your own target formats and switch document classes with a single click).
+	◆	A “Back Matter” folder is also provided. Here you can add any back matter you wish to include before the final \end{document} command. Nothing provided in this folder is necessary for a simple document to be typeset.  An example structure has been provided for including an appendix. The folder itself is assigned to the "Appendix" Section Type, which is responsible for titling the section and then starting the formal appendix portion of the document. Within that folder the ordinary structural rules for the Draft folder will be adhered to, meaning you can construct complex appendices with sections, subsections and so forth, based on the hierarchy of the outline. If you do not need an appendix, you can remove this folder.
+
+	◆	To compile:
+	◦	Go to File ▸ Compile…
+	◦	Next to “Compile for”, select “Plain Text (.txt)”.
+	◦	Select the “LaTeX (Memoir Book)” compile format on the left.
+	◦	Ensure that the “Add front matter” button is ticked under the contents list on the right. If you do not do this the resulting .tex file will not properly typeset until the example material has been copied to an area included in the compile (such as the top of the Draft folder). The “Add back matter” feature is optional.
+	◦	Click on “Compile”, open the .tex file in your preferred editor and typeset the document.
+
+	◆	To compile directly to PDF:
+	◦	Go to File ▸ Compile...
+	◦	Double-click the “LaTeX (Memoir Book)” compile format to edit it.
+	◦	Click on the Processing compile format pane.
+	◦	Enable the “Post-Process on command-line” option to enable the built-in script.
+	◦	Optional: click the “Edit Script” button and review the script for any changes you would like to make. The script is set up to use XeLaTeX, you might prefer to use the -pdf switch instead, for pdflatex output.
+	◦	Optional: ensure that the Environment field includes the path to your texbin (for example “/Library/TeX/texbin”, as set up by MacTex).
+	◦	Click the “Save” button, and then “Compile”. Note you will be supplying the name of the intermediary .tex file. The .pdf will use the base name, so “something.tex” will become “something.pdf” in the end.
+
+	◆	To create your own document class variation:
+	◦	Go to File ▸ Compile…
+	◦	Right-click on the “LaTeX (Memoir Book)” compile format on the left, and select Duplicate &amp; Edit Format….
+	◦	Rename the format at the top to match your intended edits.
+	◦	Click on the Text Layout compile format preference pane.
+	◦	Modify the prefix and suffix fields to include you preferred preamble and footer.
+	◦	Since some of the LaTeX code used elsewhere in the settings may require adjustment to work outside of Memoir, you might need to audit the rest of the format's panes and content therein.
+	◦	Click on “Save”.
+
+Sample Document
+See the “Sample PDF” item in the Research folder for an example of a document that has been created using this template.
+
+Final Note
+Scrivener project templates are flexible and are not intended to restrict you to a particular workflow. You can change, delete or move the files and folders contained in the template to suit how you work.
+
+Like all templates in Scrivener, this project was originally created from the “Blank” template. We’ve simply added a few things to the binder and set everything up in ways that should be useful to authors working toward the LaTeX typesetting system. Everything you can do with this project, you could equally do by creating a “Blank” project and setting it up yourself.
+
+You can create your own templates by setting up a skeletal project with the files, folders and settings you would like to use for new projects and using File ▸ Save As Template.
+
+The rest of this guide will go over the numerous convenience features that have been added to this project.
+
+Figures
+To ease typing extensive syntax and managing your images by hand, or to simply grant yourself a nicer looking working document, you can make use of Scrivener’s native inline &amp; linked image handling facilities. Graphics that you place into the editor will be exported as files and syntax will be inserted where the image was placed. For more formal figures there are two approaches you can take (you needn't commit to either exclusively):
+
+	◆	In your text: use the "Figure" paragraph style to have the graphic enclosed in a \begin{figure} \centering ... \end{figure} environment. You can optionally insert a caption below the image (still within the "Figure" paragraph style, so as to keep it within the environment), using the "Caption" character style. Follow the caption with a "Label" styled phrase that is a valid LaTeX style bookmark label, to give this figure a cross-reference you can refer to elsewhere. With an eye on the Format Bar, click into the three different elements below; image, caption and label, to see which styles are applied to them:
+
+#
+This is the caption. latexLogo
+
+The example provided above would generate the following LaTeX syntax when compiled:
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=175pt,height=73pt]{800px-LaTeX_logo.png}
+\caption{This is the caption.} 
+\label{latexLogo}
+\end{figure}
+
+	◆	As a binder item: if you prefer keeping figures in separate chunks in the binder, to facilitate searching and organisation, you can use the "Figure" Section Type setting, placing the graphic in the main editor (un-styled) and supplying the caption as custom metadata in the Inspector. (A document template has been supplied for your convenience, and with an Example Figure item in the “Research” folder for your reference.) When using this technique figure labelling will be handled automatically for you, and captioning will be done in the inspector sidebar. To cross-reference to the figure in the text, refer to the following section on cross-referencing.
+
+Figure Customisation
+To modify how styled text and embedded images are converted to LaTeX code, visit the Markup and Styles compile format panes, when editing this project's "LaTeX (Memoir Book)" format. The Markup pane itself sets how graphics print themselves, which is the \includegraphics line alone. The stylesheet settings for Figure, Caption and Label determine how the additional syntax is added around that.
+
+To modify how images are converted to LaTeX when including them as binder items, visit the Section Layouts compile format pane and adjust the "Figure w/ Caption" layout's Prefix and Suffix tabs. As with styled text, the Markup pane is what is used to insert the graphic itself between the prefix and suffix.
+
+Equations
+A few helpful packages for equation typesetting can be enabled with the Equation Packages module, in the front matter folder. As with figures, equations can be added either to your binder as discrete items using dedicated Section Types, or into the text itself using Styles.
+
+	◆	In your text: use the "Equation" paragraph style to enclose the selected text within a \begin{figure} ... \end{figure} environment. Use the Label character style to supply a target label to the equation, if it should be numbered and be capable of being cross-referenced. Below is an example equation and label; note how the label character style is placed within the equation paragraph itself:
+
+P\left(A=2\middle|\frac{A^2}{B}&gt;4\right) eq:custom-label
+
+The example provided above would generate the following LaTeX syntax when compiled:
+
+\begin{equation}
+P\left(A=2\middle|\frac{A^2}{B}&gt;4\right) \label{eq:custom-label}
+\end{equation}
+
+	◆	As a binder item: for those that prefer to keep major elements as separate binder items, this project has two document templates designed to faciliate the organisation of equations: "Equation" and "Unnumbered Equation". If you will require cross-referencing to refer to your equations, the first option is what you want. Numbered equations will be automatically labelled for you, with that label used by internal document links pointing to it, elsewhere in the Draft. Consequently, you should not supply your own \label{...} code (or use the style) with the equation text itself. Additionally you should not use the Equation style itself, within an Equation document.
+
+Inline equations, embedded in paragraph text, are easily formatted using raw LaTeX, but if you wish to keep your source material clean of syntax, a character style has been provided with this project. Simply paint the equation with the style, and it will add the markers for you.
+
+Tables
+Scrivener cannot convert rich text tables into LaTeX code for you. You will need to provide the proper syntax yourself, however you can focus on the tabular data itself, leaving the boilerplate text to Scrivener by making use of the “Table” Section Type when applied to individual binder items. As with binder figures, you can supply a caption as metadata. A document template has been provided as an example starting point. Working this way means you can make global adjustments to table appearance more easily, by editing the “Table w/ Caption” section layout, in the compile format settings.
+
+Itemised and Enumerated Lists
+As with tables, Scrivener cannot convert its native listing environments to LaTeX. If you would prefer the convenience of these features, for simple lists you could make use of the “Itemized List” and “Enumerated List” styles, included in this template. You will note that simple hanging indent paragraph style will be used in the editor (along with a shaded background to indicate the type of list). When compiled with the provided format, these styles will be enclosed in the proper listing environment, and will prefix each line with the \item code.
+
+Given that basic capability, you could embellish the standard output the compiler produces with your own LaTeX code inside the styled range, and thus produce nested lists.
+
+Creating Your Own Environments
+This template includes a variety of common environments already set up for you, but it is quite likely that you will need to create your own. There are two different approaches, both demonstrated in this template:
+
+	1.	Using Section Types: examples of this approach include the figure, table and equation setups. These are comprised of the following ingredients:
+	a.	A “Section Type” that can be used to flag items in your binder as needing to be associated with a particular environment. If you look at the Table document template, you will see that in the Metadata inspector pane, it has been assigned to the “Table” section type.
+	b.	A “Section Layout” in the compile format settings is what does the heavy lifting. Edit the Format for this project by going to File ▸ Compile…, right-click on the project template's Format in the left sidebar to edit it, and in the “Section Layouts” pane, examine the “Table w/ Captions” layout. The prefix and suffix tabs for this layout are where the actual LaTeX code will be inserted around the text you type in the editor.
+	2.	Using Styles: when environments are more likely to be found within a longer chunk of text, and would not be so useful broken out into their own sections, styles can also be used to insert a prefix and suffix around the text you type. The “Block Quote” or even “Emphasis” styles serve as examples of how this can be done. Visit the “Styles” pane in the compile format settings to examine how prefixes and suffixes are used with them.
+
+Cross-References
+Whenever you create a document link to another document within the compiled output, Scrivener will use an internally generated bookmark label to create an \autoref{...} link to that section. This works for the following Section Types automatically:
+
+	•	Part
+	•	Chapter
+	•	Section
+	•	Subsection
+	•	Subsubsection
+	•	Figure
+	•	Table
+	•	Equation
+
+LaTeX will of course handle the rest of the job, in terms of numbering and correctly labelling the links. To adjust the behaviour of the code produced by Scrivener, modify the link prefix and suffix settings in the Markup compile format pane.
+
+Typographic Punctuation
+If you prefer to use LaTeX style punctuation yourself while writing, then Scrivener will not get in your way in doing so. However if you prefer to use its automatic typographic punctuation features (smart quotes, dashes and ellipses), the compile format has been configured to convert these forms of character punctuation to old style safe ASCII LaTeX methods. If you would rather work in a modern UTF-8 environment where typographic punctuation is acceptable, you could remove or disable the conversions from the Replacements compile format pane.
+
+Notation
+If you opt to include inline annotations and comments in your output, they will be converted to marginal notes and highlights using LaTeX tools for doing so. You may also make use of Scrivener's footnote features, as they will be converted to syntax for you.
+
+Creating an Index
+To an include an index of terms, you will first need to enable the Indexing Packages front matter module, along with the Index itself in the back matter folder. To do so, visit these sections and enable the “Include in Compile” option in the inspector’s Metadata tab.
+
+As for marking indexed terms themselves, you could of course do so by hand, but you can also make use of the Index Term and Index Key styles:
+
+	◆	Use the “Index Term” style to mark the word or phrase, directly in the text, that you wish to add to the index. When compiled, a key based on the selected text will be generated for you.
+	◆	Use the “Index Key” style if the phrase itself doesn’t appear in the text, or if you want direct control over the indexing key itself.
+</Text>
+            <Comments>Given a quirk in how styles work with the text engine, you will need to select the image to see the "Figure" style, rather than merely placing the cursor to the left or right of it.</Comments>
+        </Document>
+        <Document ID="2944DCD6-5FE5-4ACE-A600-BCDFFA0B5CC9">
+            <Text>Section 2 -  Scripting and Extending Max
+
+While visually programming Max (placing objects on the patcher canvas and connecting them with patch cords) is the most common paradigm for programming in Max, there exist several other options for programming interactive systems in the Max environment. The intent of Scheme for Max is to provide a compelling addition to these options, thus to appreciate where S4M succeeds, some awareness of the advantages and limitations of the others is necessary. Some of these are built in to Max itself, and some are externals available from 3rd parties. These options can be broadly categorized as those that either: extend Max by compiling new native objects (C, C++, Gen);  interact with Max programmatically from an outside process (Node4Max, the shell object, various others); or extend Max by embedding an interpreter (JavaScript/JS, Csound, SuperCollider).  It should also be noted that of the embedded interpreter options, some (such as the JS object) provide facilities to interact with Max programmatically through the Max C layer, while others are aimed simply at embedding an alternate computer music environment to which messages are sent and from which audio is received (CSound, SuperCollider). S4M is in the former category, providing an embedded interpreter and rich facilities for interacting with the Max environment. In this section we will examine the most common options, and their advantages and disadvantages.
+
+Compiled Externals
+The oldest method for programming Max outside of the patcher environment is to extend Max by writing an external in C. This has been available as part of Max since its inception, with a newer C++ API (the “min dev kit”) available since TODO. The advantages of this approach are that: one has complete access to the Max environment through a rich and well-documented application programming interface (API); one can write code that executes in any of the Max threads; and the compiled code runs as quickly as any other Max object. It is, in fact, functionally identical to a native Max object. The principal disadvantage is that the programming format used expose the programmer to much of the internal implementation of Max. This requires the developer to understand and work with Max internals in a level of detail far beyond other options. When compared to extending some other platforms, this is onerous and acts as a high barrier to entry. For example, creating an opcode for CSound (an analogous type of extension, but for the CSound music programming language) requires very little code: one writes the DSP routine necessary in C, and can largely be ignorant of how CSound internals works. In comparison, to create a new message or DSP handler in Max, one must understand how Max objects store state and the complex method for inter-object communication, and one must implement a large number of boilerplate methods. In addition, one must understand the Max threading model to avoid creating synchronization issues when methods are accessed from either thread. The result of this situation is that the C and C++ APIs are appropriate only for advanced programmers, and are, generally speaking, only a good solution for building a new object that one will reuse extensively. This approach is not practical for scripting Max with domain specific code created for one particular multi-media piece, and is thus not a viable alternative to visual patcher programming for creating functionality in a Max patch.
+
+External Processes 
+At the opposite end of the spectrum from writing a Max external are options that enable the programmer to write code that is executed in an outside process, with messages to and from this process handled over an internal network. The Node4Max object (provided with Max) falls in this category, as do several other open source offerings such as TODO. In this scenario, a Max External object written in C/C++ acts as a proxy to the external process. Max messages are received by the proxy object, serialized to some format, and transmitted over the network, and vice versa for output. The proxy object thus gives the user the illusion of the object being part of Max’s own environment, but all interaction with the external language fundamentally uses asynchronous remote procedures and data transfer is limited to that which can be serialized and transmitted practically over the network. In the case of Node4Max, the “node.script” object provides facilities to start and stop the external process from within the patcher, and provides facilities within its own API for interacting with Max dictionaries. Messages to the node.script object are serialized to JSON.
+
+The advantages of this approach are that one’s script may use whatever facilities the external process provides (i.e. any Node package installed on the operating system), and any long-running work is executed outside of the Max process and thus has no chance of blocking the rest of  Max processing, potentially resulting in audio drop-outs. Various open-source externals exist for interacting with outside processes, including Bash, Python, Common Lisp, and others. The disadvantages of this approach are several: one cannot use scripts developed on the external process in any timing critical operation; one cannot use them as part of a larger patcher workflow in which the deterministic order of patcher execution is critical; and one cannot interact with the Max environment directly (for example, writing to a table, or sending a message synchronously to some other object). These factors make this kind of scripting appropriate for interacting with the outside world where processing may take some time, such as opening files or making network requests, but unreliable for timing critical operations such as music sequencing or processing real-time MIDI or gestural input, and limited in terms of general control of the Max environment.
+
+Embedded Interpreters
+Given that Max externals are simply compiled from C, an external can host any interpreter that is implemented purely in C and provides an API for interacting with a C host through a foreign function interface. This category includes objects that embed both computer music domain languages, such as CSound, Chuck, and SuperCollider, as well as general purpose languages, such as JavaScript, Python,  and (now) Scheme. 
+
+In the former category, the degree of integration between the hosted language and Max is limited, as the goal of the projects are not to provide an alternate method of scripting Max, but rather to allow audio generation in another computer music language to be used within a larger Max project. For example, the most mature of these is the csound~ object, and object embedding a CSound compiler. From a Max patch, one can send score events (musical event requests) to CSound, and receive audio back from Csound for further processing in Max. A Max external (the csound~ object), hosts and interacts with the CSound compiler using the CSound API, thus providing the ability for Max messages to the csound~ object to be translated into CSound events for processing by the CSound engine.  However, this external does not have the ability to change Max’s environment programmatically from the hosted Csound program, and thus fulfills a different need than Scheme For Max.
+
+In the second category, a general purpose language interpreter is embedded in a Max object, where the provides a foreign function interface between Max functionality, executed as C code in the external, and calls in the host language, evaluated in the embedded interpreter. The Max C API enables such  interactions with the Max environment as reading and writing to tables, buffers, dictionaries, and other internal data structures, interacting with the transport control, sending Max messages to other objects (that are not connected with Max patch cords), and interacting with the Max scheduler, among others. By far the mostly widely used of these is the JS object, a core Max component that embeds an ECMA5 interpreter, and includes a rich API for interacting with the Max SDK through JavaScript wrapper functions. The main purpose of these tools is to enable the Max user to programmatically interact with Max in a high level text-oriented language, thus enabling more elegant implementation of algorithms and programming patterns that are either cumbersome or impossible in the Max visual patching language, such as complex looping constructs and recursion. The purpose of Scheme For Max is to provide one such tool - one that is more musically useful and linguistically appropriate to Max than the existing other options. 
+
+
+</Text>
+            <Notes>Need to add stuff about Java
+
+- JS advantages
+- </Notes>
+        </Document>
+        <Document ID="254840B2-918A-4980-9B4D-C9B3A774FB9A">
+            <Title>Appendices</Title>
+        </Document>
+        <Document ID="96776348-B035-46DA-A5A5-210E99B93774">
+            <Title>Front Matter</Title>
+            <Notes>Note that in the “Metadata” pane of the Inspector, under “Section Type”, the “Default Subdocument Type” is set to “Front Matter”. This setting causes all subdocuments of this folder to use the “Front Matter” section type by default (that is, when “Structure-Based” is selected as the section type).
+
+This saves us from having to manually assign the “Front Matter” section type for each document we place into this folder.
+
+During Compile, documents assigned the “Front Matter” section type will be laid out differently from documents in the main body of the manuscript.</Notes>
+        </Document>
+        <Document ID="3E751865-BAB0-4010-B69D-0045A1717350">
+            <Title>Index</Title>
+            <Synopsis>To enable this section, click the “Include in Compile” icon in the lower right corner of the editor footer bar. You will also want to enable the Indexing Packages module in the Front Matter folder.</Synopsis>
+            <Text>\printindex</Text>
+        </Document>
+        <Document ID="0F1D7695-C1CF-4B79-9796-5537CEF6DA62">
+            <Synopsis>- importance of schedling future events
+
+appropriateness of the language for scheduling future functions
+- ability to schedule closures for context in which function is defined as well as in environment in which it will run
+- do we want the variable as it is now, or as it will be in some environment
+- support for first class environments</Synopsis>
+            <Text>Section - Feature, Scheduling Events
+
+Music being a fundamentally temporal art form, facilities for scheduling events in the future are a core part of any computer music platform. The ability to do this flexibly in a high level language is thus a powerful tool for the composer, and this is an area in which the linguistic features of Scheme bring notable advantages. To understand scheduling events with Scheme for Max, we first must understand the facilities in Max for event scheduling, both in the patcher and in C code. 
+
+The Max scheduler thread handles all events intended to be run with high temporal accuracy. Facilities do exist for scheduling events in the low priority thread, however as temporal accuracy of this thread is never guaranteed, this is not yet supported in Scheme for Max and will not be discussed. At a patcher level, users can schedule a Max message (number, symbol, or list of both) for the future by sending it to a pipe object. The amount of time by which it is delayed is specified either in milliseconds, or in a tempo relative format based on a 480 ticks-per-quarter-note division, as determined by the Max master transport tempo. The pipe object’s delay time time can be set dynamically by sending a numerical message to the right inlet of pipe, and messages sent to the left inlet will then be passed out the pipe outlet(s) after the specified time. The pipe object also supports quantization, in which the delay time can be adjusted to match a musical time boundary (i.e. on the next 16th note boundary given the current master tempo). (Example)
+
+While the pipe object functions adequately, it has several limitations. The most notable is that it also splits list input into individual elements, sending them out individual outlets. This thus requires the user to specify how many atoms will be in an incoming list message in advance, and should the user wish to delay a list itself, it must then be reassembled. Alternatively, an exterior storage mechanism can be used to allow the outgoing pipe message to refetch the original list from another object after delay. For the use case of delaying arbitrary list messages, where the list represents an event to be scheduled and its arguments, this is cumbersome and thus sub-optimal.
+
+On a C level (i.e. in code for an external), our facilities are even more cumbersome. API functions exist to create clocks, which trigger execute of a specified callback method after a given amount of time. However, this callback method must be a function that receives a single argument, normally a pointer to the instantiation of the external Max object that is using the delay call. The programmer must manage memory allocation for the clock object, and create some facility for working around the signature limitation of the delayed function.
+
+Scheme for Max succeeds in overcoming these limitations with an elegant and flexible system for scheduling events as Scheme function calls. The Scheme function delay accepts a time value in milliseconds and a function, returning a unique handle to the scheduled event. The function is evaluated in the global context after the time has elapsed, unless the scheduling is cancelled by calling cancel-delay with the handle. A similar functions, delay-t and delay-qt, exist for specifying the delay time in tempo-relative ticks or quantized ticks respectively. This allows the user of Scheme for Max to easily schedule anything that can be expressed in a Scheme function. As Scheme For  Max also provides a mechanism for sending an arbitrary Max message to any named Max object (through the scripting name attribute of Max objects), this enables the user to schedule any Max action in the future with a few lines of code. 
+
+Internally, this is implemented by having the s4m object store the function to be delayed in a dedicated hash-table, keyed by a unique callback handle generated with the gensym function from s7. This handle is then passed to a C function (through the FFI), which creates a data structure to store the delay handle and a reference to host s4m object. In C, a clock is instantiated, with the method to delay specified as the generic s4m delay callback, (INSERT) and the single argument for it as a void pointer to this data structure. Thus when the generic s4m delay callback executes (in C), it can cast from the void pointer to the callback structure, retrieving the pointer to the s4m instance, and the unique callback handle. The reference to the instantiated s7 interpreter is fetched from the s4m instances data structure, and this is used to call a generic delay handling function in Scheme, passing the callback handle as an argument. Finally, the generic Scheme function  uses this handle to fetch from the hash-table the originally stored function, and this is evaluated. The important point is that all of this hidden entirely from the user, who is able to schedule arbitrarily complex events in minimal code.
+
+A further point should be made regarding the advantages of this approach to scheduling. A common scenario in computer music is that a composer/performer will have processes (algorithms, sequencers, etc.) that are run programmatically, and also abstract elements with which they interact live during performance or playback, and which are used by the processes. These interactions frequently consist of changing settings (variables) during the performance expressively - a simple example might be changing the speed, volume, or frequency of an element used in producing sound. A challenge facing users of any computer music system is how to elegantly handle the cases of both wanting to schedule an event that uses a variable as it is now versus as it will be after the delay time. I may which to “play this note in 4 bars with the filter cutoff setting as I have my dial right now”, or conversely “however the dial is once we get there”. Both of these are musically useful, but managing this at the Max patcher level is difficult, particularly the former. Scheduling with Scheme For Max solves both of theses cases elegantly as we are able to use lexical closures for the former, and delayed evaluation for the second. We are even able to mix these in the same function. 
+
+For example, let us imagine we have we wish to schedule an event to use a setting that I am controlling with a visual slider control. We create a Scheme global variable (let us call it slider-1), to store this setting. To interact with it graphically, it’s a simple matter of sending the GUI slider output to a message object with the message set! slider-var $1, and passing this to the s4m object, which will evaluate the s-expr (set! slider-var 127) when the slider is at the top of it’s range (assuming common midi values of 0-127 are specified as the slider range). We thus have a global variable under dynamic user control. When we wish to schedule an event for the future (let’s imagine we have a function called play-note that will use it), we use a lambda function to capture the current value in a lexical closure, which we can do as:
+
+(delay 2000 (lambda() (play-note slider-var)))
+
+Conversely, if we want the opposite, we can create a lambda that evaluates a symbolic list, resulting in use of the values pointed to by the symbols at execution time (the future):
+
+(delay 2000 (lambda() (eval ‘(play-note slider-var)))
+
+As s7 Scheme also includes first-class support for environments, it is even possible for us to schedule events to execute at a later time, in the environment of some object we have made. A common practice in the author’s use is creating musical sequencers as message receiving objects. They are implemented through builder functions that return a lambda, and this is used with symbolic messages for real-time control. The sequencer implementation captures its own internal environment (produced by a let statement in the builder function), and makes this available to the rest of the program for dynamic manipulation of the sequencer’s internals. So if we wanted to schedule a function from outside one of these objects, with the intention that in the future it will run as if it is a method of the object, we are able to schedule a lamba function that evaluates a symbolic list, with the evaluation context specified to be the environment of the sequencer object.
+
+; create sequencer, with name ‘seq-1, which is a function
+(define seq-1 (make-step-sequencer ‘seq-1 :seq-data ....))
+
+; start playback by sending message to seq-1
+(seq-1 ‘start)
+
+; schedule an event to run in seq-1’s environment
+; using our dial value as it will be in the future
+(delay 1000 (lambda()(eval ‘(set :time-factor dial-value) (seq-1 ‘get-env)))
+
+Finally, this facility makes it possible to elegantly create self-scheduling processes, sometimes also called temporal recursion in the algorithmic composition nomenclature. These are functions producing musical output that then re-schedule themselves for their next iteration. As Scheme allows us to refer to a function for a recursive call in its own body, this is trivial to achieve with the above facilties. Below are examples of a process scheduling itself both with arguments and without:
+
+
+</Text>
+            <Notes>- cover temporal recursion
+</Notes>
+        </Document>
+        <Document ID="63E89604-57A7-4B83-859A-4709615465A4">
+            <Title>Equation</Title>
+            <Text>2 + 2 = 5</Text>
+        </Document>
+        <Document ID="2E518255-8A54-4BFB-BD2F-E943838029E6">
+            <Text>Section -  Scheme for Max Timing
+
+In this section, we will examine we will examine the features and functionality provided by s4m, especially relative to similar options, such as using the js object, as that is the most similar alternative and is by far the most widely used of the available embedded interpreters for Max. Overcoming the limitations of JavaScript in Max was the predominant motivating factor in developing Scheme for Max
+
+Timing Accuracy 
+One of the challenges of embedding an interpreter in a Max external is that of handling the Max threading model.  As previously mentioned, Max objects may receive messages at any time from either the high or low priority threads, for example in the low-priority thread from a GUI event and in the high-priority thread from MIDI input, a metronome object, or other scheduler-originating events. Facilities exist in Max to move messages into one or the other threads by sending messages through the “delay”, “defer”, and “deferlow” objects, but the external author cannot count on users using these to prevent threading issues. Furthermore, documentation on exactly how threads are implemented in Max and when they may switch is scarce as Max is not open-source. For an embedded interpreter this is problematic, as one can possibly have a thread context switch during an unprotected operation, such as while the garbage collector for the embedded interpreter is running, potentially causing data corruption. 
+
+For the js object, the implementation forces all js object operations to the low priority thread, presumably by defer calls at the C level, though as the js object is closed-source this is conjecture. While the js object provides rich facilities for interacting with the Max engine through the Max API, the result of this is that any timing critical operations are not reliable. The low-priority thread is also responsible for redrawing the Max visual interface and interacting with the file system. Thus user activity such as working with an object that does any file i/o, or even switching or resizing windows, can result in timing hiccups when a js operation is blocked. This renders the js object unpractical for developing any event sequencers - one can never know if timing will be reliable. This is a notable shortcoming in the Max environment, as the development of complex sequencers is a common use case for Max, but is also a use case where the benefits of being able to work in a textual language are strong.   
+
+Scheme for Max overcomes this by allowing the user to choose which thread the s4m object will run in through the @thread attribute, with internal promotion or deferral handled accordingly. This does mean that for a high-priority s4m object, file input is also handled in the high-priority thread, potentially causing Max to block if a large source file is read by the s4m object (i.e.,  if a “read {filename}” message is sent to a high-priority s4m object during patch playback). However, as the s4m object can also receive code as string messages, evaluating it in real time as it is received, this is not hard to avoid if the user, for some reason, must be able to read in a large source file while a piece is playing. An s4m object (or other object) can read the source file from the low-priority thread, and send a message to the high-priority s4m instance, which will immediately place the string message containing the code on to the high-priority scheduler queue and consume said message on the next scheduler (high-priority) pass. This ability to lock the s4m object to either thread in effect allows the user to create an “actor model” in which multiple s4m objects cooperate, potentially in different threads, sending each other messages.
+
+Empirical testing of complex sequencing code (12-16 tracks), complete with code redefinitions during playback, has proven reliable. Provided the Max engine is configured with enough overall audio latency to ensure the s7 garbage collector can complete its work in the latency buffer (requiring typically not more than 2ms additional latency), timing is as accurate as from any other Max patching objects. This was verified in personal tests with 16 tracks of sequenced data recorded into a digital audio workstation, while altering code in the interpreter during playback. Recorded audio was examined, and no additional timing jitter was noted compared to sequencing from core objects (such as the metronome). While using Scheme for Max in this manner does thus require increasing the size of the audio output buffer to allow 2ms extra rendering time, this is well within acceptable ranges, with electronic musicians commonly working with 10-20ms of latency to allow use of high-fidelity digital audio synthesizers.   
+
+
+ 
+
+</Text>
+        </Document>
+        <Document ID="E7F5E7EA-64F2-46AE-AE67-930860359873">
+            <Title>Table</Title>
+            <Text>    \begin{tabular}{ll}
+      \textbf{Column 1} &amp; \textbf{Column 2} \\
+      \midline
+	a &amp; b \\
+    \end{tabular}
+</Text>
+        </Document>
+        <Document ID="63DA5298-7934-449F-9518-6F6BFE67FCD9">
+            <Text>Resources
+10-24 pages of acmart small
+
+sample papers:
+http://www.schemeworkshop.org/2013/papers/HemannMuKanren2013.pdf
+http://www.schemeworkshop.org/2016/schemeworkshop2016-art2016.pdf
+https://web.archive.org/web/20170515044225/http://repository.readscheme.org/ftp/papers/sw2002/queinnec-quizzes.pdf
+http://www.schemeworkshop.org/2014/papers/Suchocki2014.pdf</Text>
+        </Document>
+        <Document ID="C4227961-9DD6-4014-BDE8-E2EA488632AE">
+            <Title>Appendix</Title>
+        </Document>
+        <Document ID="B915C13D-C3B5-4152-98E3-59C8F83FBF02">
+            <Title>Example figure</Title>
+            <Synopsis>This is a text file with an image in it. Refer to the help file at the top of the template's binder for an explanation of how this item works, when placed into your draft folder.</Synopsis>
+            <Text>#</Text>
+        </Document>
+        <Document ID="DFE71214-4EC9-41CB-8615-231BF9E22E3B">
+            <Text>Section - Intro and Abstract TODO</Text>
+        </Document>
+        <Document ID="32583951-AA13-486D-AEE8-FD2205DBD3A9">
+            <Title>Background</Title>
+            <Text>Subsection Max/MSP
+
+\section{Background - Programming Music in Max/MSP}
+
+\subsection{The Max Environment}
+Cycling 74’s Max (previously named Max/MSP) is the predominant visual programming environment 
+for interactive multi-media in music academia, as well as in commercial music circles through "Max
+ for Live", a version of Max embedded in the Ableton Live digital audio workstation. Created 
+originally by Miller Puckette in {year} while working at IRCAM, Max was created so that composers
+ of interactive computer music could change their pieces without the assistance of a programmer. Max 
+programs ("patches" in the Max nomenclature) are created by placing visual objects on a canvas ("the 
+patcher"), and connecting them graphically with visual "patch cords". A Max patch consists of a 
+collection of instantiated objects that send messages to each other in a directed graph, producing a 
+data-flow execution model whereby a message from a source object triggers execution in one or more 
+receiving objects, who in turn send on messages to further objects. Patch execution can be initiated by 
+various forms of real-time input, such as keyboard or mouse events, MIDI input, and networking 
+events, as well as by scheduled events through objects such as the metronome. Messages are 
+represented visually as lists of Max atoms, which may be symbols, integers, or floating point numbers, 
+and there exists a Max object for visually displaying and altering messages, the message-box.  
+Execution follows a depth first and right-to-left order, enabling the programmer to deterministically 
+control the execution flow through the visual layout of the patch cords.  (i.e., A source object sending 
+messages out to multiple receiving sub-graphs results in the right hand message path completing 
+execution before moving left, rather than spawning two concurrent threads of execution.)  When 
+patching, messages can be inspected by sending them to a print object (to print to console), to a 
+message-box object (to update the visual object with the message contents), or though a built in 
+debugger (“probing”).
+
+In addition to the event-based message execution model, Max also supports a stream-based digital 
+audio execution model, originally provided separately as MSP, but now included in all Max versions. 
+MSP normally runs in a separate thread from the event and message based Max operations, and uses a  
+a separate class of objects that pass constant streams of digital audio to each other through differently 
+coloured patch cords. MSP objects may additionally receive messages for controlling paramaters. As  
+S4M executes only the event/message level and does not implement DSP operations, MSP is not 
+discussed further here. 
+
+\subsection{Max externals}
+While Max itself is a commercial, closed source tool, it includes a software development kit for 
+extending Max by writing a Max “external”. An external is a compiled class that acts as a prototype 
+for new objects that can be used in patcher programming just as with the built in objects. Externals are
+developed in C or C++ in an object oriented manner: the older C API using data structures and pointers 
+to simulate class-based programming and the more recent C++ API using C++ classes. A typical 
+external will implement a class that provides some (optional) object state for instantiated objects, and 
+methods for receiving and sending Max messages through the object’s inlets and outlets. When the user creates a visual object to the patcher, an instance of the external’s class is instantiated in memory. Thus visual programming in the Max patcher manipulates instantiations of objects, whereas programming at the external level in C is concerned with the creation of classes acting as object prototypes, and the creation and reception of messages, but rarely involves programmatically instantiating objects from Max object classes.
+
+Objects are not limited to interacting with Max through messages passing in to inlets and out of outlets. A C API exists that enables objects to query and control various engine components (e.g. the transport mechanism), and it is also possible for objects to send messages to other objects directly or through the scheduler queues, without the sending and receiving objects 
+necessarily being connected visually in the patcher. 
+
+Extending Max through externals has been possible since very early versions of Max, and thus a rich library of open-source 3rd party extensions exist, of which Scheme For Max is one. 
+
+\subsection{Max Message and Object Implementation} 
+Internally, Max messages are implemented as pairs of data entities consisting of a symbol (required) 
+and an optional array of Max atom structures, where each atom structure contains a member for the 
+atom type and another for its value, and the type may be any of: integer, float, or symbol.  The first element of this pair is always a symbol, and is called  the message selector. In the visual patcher, the
+selector may be implicit or explicit. For example, if one creates a message-box object with an integer 
+as its visual contents, the user can send this message to receiving objects by clicking on the visual message-box, or by sending to the message-box any message (A process referred to as banging, from the bang object, 
+and essentially meaning “run now”). The actual message sent by clicking the message-box will consist 
+of a hidden selector of the symbol “int”, followed by a one item array where the first item is an integer 
+atom. Similarly, banging a message containing multiple integers produces a selector of “list”, followed 
+by an array of atoms. If one explicitly adds the selector “int” or “list” to the beginning of the 
+message-box, the resulting message sent to the next connected object is no different.
+
+In order to respond to Max messages, a Max object must implement a handler method for the selector of the received message, though there is also the facility to handle messages generically, manually 
+dispatching to handler functions. Thus execution in an Max object begins when a selector handler runs, and 
+the message structure enables objects to provide a generic API to any other object that is the same as 
+that used in visual patching. Message handlers are normally declared as returning void, as in normal 
+execution an object does not respond to the object that triggered its execution, but instead passes on 
+further messages out an “outlet”, or has some side effect. Most typically, an object completes its work 
+by either updating state (a “cold” operation) or by executing some calculation and then sending a new 
+message with the results out an outlet (a “hot” operation). Side effects can include updating internal 
+state of an object, writing to accessible shared data structures (such as tables and buffers), or directly 
+calling other objects through their methods. Thus, while the normal flow of execution is for objects to handle messages without returning values, and pass on further messages, it is possible for some objects to directly call methods on other objects, getting back a value. There are also global SDK functions that change the Max internal environment but  do not use the message passing signature. For example, there exists a global transport object, and it is possible for an object to directly change the global transport tempo.
+
+Extending Max thus consists of creating a new module file, that contains a data structure for object state, some boilerplate functions for class and object instantiation and destruction, and a series of message handling functions, with likely some message output functions. The external is compiled using the Max SDK, and can be added to a plugin directory that Max will scan on boot, allowing users to use the external in their patchers as if it was a core Max object. 
+
+Scheme for Max is implemented as an external that embeds the s7 Scheme interpreter, with various message handlers implemented for both object operations (e.g. “reset” or “read”) and handlers that translate Max data structures into s7 structures and then call s7 Scheme functions through the s7 foreign function interface.</Text>
+        </Document>
+        <Document ID="0E74437B-8D47-4F7A-B354-646BD235D05A">
+            <Title>LaTeX Control File</Title>
+            <Text>% This file type can be used to insert custom commands, preamble settings, or whatever material should be printed directly rather than treated as part of the structure of the work.</Text>
+        </Document>
+        <Document ID="B0417A1B-D617-4CBD-900A-14A6AB12C289">
+            <Title>Ideas</Title>
+        </Document>
+        <Document ID="4C1B1D47-4B3A-43AE-B914-1155AD5E84A6">
+            <Title>Unnumbered Equation</Title>
+            <Text>2 + 2 = 5</Text>
+        </Document>
+        <Document ID="9D25DEC1-2D33-4F72-8E1F-FEA706941667">
+            <Title>conf paper notes</Title>
+            <Text>- paper length
+
+</Text>
+        </Document>
+        <Document ID="A46C1D45-E7FC-4CFC-871E-D54B599CCACF">
+            <Text>Section - Implementation Details
+
+In this section, we will look at a high-level at the implementation of the s4m object, the Max external provided by Scheme For Max. </Text>
+        </Document>
+        <Document ID="A74731DD-9D8C-4925-A3B7-2F2F920D8A56">
+            <Title>Figure</Title>
+            <Text>&lt;INSERT IMAGE HERE&gt;</Text>
+        </Document>
+        <Document ID="8B9CB403-6803-4D56-A50A-DF509E6D51E1">
+            <Text>\backmatter</Text>
+        </Document>
+        <Document ID="606E2F6A-318D-44EA-A9BC-81093A72CD2F">
+            <Title>Backgroud, About Max</Title>
+            <Text>In order to understand the role filled by Scheme for Max, it is necessary for us to understand in some detail the Max music programming environment in which it runs. 
+
+Max, previously named Max/MSP, is the predominant visual programming environment for creating interactive multi-media in music academia, as well as in commercial music circles through "Max for Live", an extension to the Ableton Live digital audio workstation embedding Max in Ableton Live. Created originally by Miller Puckette in {year} while working at IRCAM, Max was designed to enable composers of interactive computer music to change their pieces without needing the assistance of a programmer. Max programs ("patches" in the Max nomenclature) are created by placing visual objects on a canvas ("the patcher"), and connecting them in a graph with visual "patch cords". Patches execute by sending messages objects in the patcher in a data-flow execution model, whereby a message from one object (the source) triggers execution in one or more receiving objects, who in turn send on messages to further objects. Patch execution can be triggered by various forms of real-time input (e.g.  keyboard or mouse events, MIDI input,  networking events) or scheduled events (e.g. through the “metronome” object) which produce Max messages that are sent from their input source objects on to the rest of the patcher.  Messages are represented visually as lists of Max atoms, which may be symbols, integers, and floating point numbers.  Messages can be constructed either by the objects that send them, or directly by the programmer using "message" objects. Execution follows a depth first and right-to-left order, enabling the programmer to deterministically control the execution flow through the visual layout of the patch cords.  (i.e., A source object sending messages out to multiple receiving sub-graphs results in the righthand message path completing execution before moving left, rather than spawning two concurrent threads of execution.)
+
+In addition to the event-based message execution model, Max also supports a stream-based digital audio execution model. Objects with names ending in the tilde character are DSP handler objects (“MSP” objects in Max nomenclature), and are connected to each other through special patch cords representing a constant flow of digital audio. Max objects internally are implemented to work either in the DSP execution context or the message execution context (indicated by the presence or absence of the tilde character in the object’s name), but  DSP objects may also receive messages for control.DSP objects may also respond to message input. For example, a gain~ object receives digital audio in its top “inlet”, passing it out the bottom “outlet” after applying a multiplier for altering the signal amplitude;  a message sent to the right hand inlet of the gain~ object changes this multiplier.   S4M executes at the event level with Max messages and thus does not implement DSP operations, however some understanding of Max DSP operations will be necessary to understand the Max threading model and thus some of the advantages of S4M relative to existing scripting solutions.
+
+Max execution is spread across between 2 to 3 threads, depending on various configuration settings. In regular execution, there will be two threads for handling messages, and one for DSP. The message handling threads consist of one high-priority thread. Max may be run with audio output turned off, in which case the DSP thread does not execute. 
+
+
+
+</Text>
+        </Document>
+        <Document ID="07B0D7C6-57CE-4D6F-8AD9-11F06A261A5F">
+            <Title>Notes</Title>
+        </Document>
+        <Document ID="C0C01A25-8CDD-4517-B8AE-1411E129DC33">
+            <Text>Section - Feature: Live Coding and Interactive Development
+
+A major and growing sub-movement within the computer music community is that of “live-coding”, in which performances include real-time alteration of music producing code during musical playback, sometimes with code displayed visually for the audience on projected screens, etc. To a lisp user, this paradigm will be familiar as it is no different from interactive development at the REPL while a program is running in the interpreter. The term live-coding with the music communicty can encompass a variety of levels of code manipulation in real time, ranging from manipulation of scored music events to alterations of the dsp graph of an audio generation program. Scheme for Max aims to support live coding in the Max environment at the musical event level, an area that crosses over with the world of algorithmic composition, in which programs make musical decisions through algorithms and stochastic processes, which themselves may be altered during performance.  Tools that support live-coding are useful also to artists working in Max who don’t intend to perform the live-coding. Being able to manipulate algorithms and sequencing code during playback is of major benefit to any computer music composer. A common scenario in algorithmic composition of any kind is that processes build and mutate data over time, and thus being required to stop and start the piece after any code change is often an unsatisfactory workflow - it may take some not insignificant time for the processes of the piece to get back to the part the composer is working on at any given time. Thus the act of being able to redefine musical code in real-time during playback has major advantages not just to the live-coder, but to any composer working with custom code that manipulates musical events. In this context, Scheme For Max has notable advantages over other options such as JavaScript and we will examine these advantages in this section. While there are other external interpreter objects for Max (Python, Ruby, Lua), all of these have similar implementations and limitations as the JavaScript object, and thus we will refer in our comparison to JS, with comments intended to apply to other language options as well unless otherwise indicated.
+
+There do exist numerous other music programming platforms that allow interactive development during musical playback, and Scheme for Max is not unique in this regard. In fact one of the major inspirations for Scheme for Max (and factors in the decision of which Lisp implementation to use) is “Common Music”, an algorithmic composition platform which also embeds s7 Scheme and provides this facility. Various other Lisp-based live coding and algorithmic composition environments also exist, including the Scheme based Nyquist and Extempore, and the Common Lisp based Common Lisp Music, Incudine and Slippery Chicken. However, all of these are run as stand-alone processes which must either be used for all aspects of music generation, or must send events as MIDI or network data to external audio generation tools. Scheme for Max is unique in bringing Lisp live coding facilities to the Max environment in a way that allows the sequenced events to be not only musical notes, but functions with programmatic access to all of the Max environment. Given the richness of the Max environment, Max’s position as the most popular music programming platform, and its unmatched integration with commercial music tools (through the Max4Live package for Ableton Live), this is a major benefit to the algorithmic composer or live-coding performer. It allows one to programmatically sequence any aspect of the composition and music production. 
+
+Scheme for Max enables interactive development in several ways. Max objects are programmed to support “messages”, wherein an incoming Max message (a space-separated list of symbols or numbers) may have significance to a certain object and thus be implemented as a method on the object. For example, sending the message “set 99” to a number object will update the internal state of the number object (but not send out the number) through it’s internal “set” method. On instantiation, the s4m object instantiates an s7 interpreter, and loads and evaluates any source file given as an object argument. Following instantiation, further code can be sent to the s4m object either through “read” messages, “eval-string” messages, or generic space separated symbolic messages (a Max list in which the first atom is a symbol, the “message selector” in Max nomenclature). We will discuss each of these and how they support interactive work in Max.
+
+Interactive File Loading with the “read” message.
+A “read” message to s4m consists of the “read” symbol and a filename, and will result in the file being loaded in s7 without reseting the interpreter. (A “reset” message is also implemented should one want to reboot the interpreter without recreating the s4m object). One of the advantages of the s7 Scheme implementation is that it has been designed around the needs of the interactive computer music user, where the most likely scenario is a single developer working interactively on some small to medium sized code base for a piece of music work. To this end, developer convenience has been prioritized over linguistic strictness in various places, one such being that the interpreter allows re-defining functions or variables without requiring any special syntax. The result of this is that it is possible for a developer to implement their Scheme code in multiple files, with the main file containing function definitions and state variables that should persist, and the second, used in the “read” message”, containing functions under active development, which may be reloaded anytime by sending the read message. In the author’s experience, developing a complex musical sequencer, this has been a significant convenience as playback functions can be redefined without the requirement of reloading sequence data and sequencer settings to hear the results of the redefinitions instantly. Further, if Max is set to run with a reasonable amount of playback latency (10ms seems to work generally), this reload does not even result in any audible interruption of playback, and could thus be done in a performance situation. This practice is not possible in the Max js object, which supports only a “compile” message that resets the JavaScript interpreter on compile, and represents a significant differentiator for Scheme for Max.
+
+Interactive code interpretation with the eval-string message
+The second interactive development practice supported by Scheme For Max is that of sending the s4m object code in real-time as textual messages, similar to sending code to a Lisp REPL from a terminal or text editor. The s4m object implements an “eval-string” message, consisting of the eval-string symbolic atom followed by a quoted block of Scheme code. This is helpful to the user in several ways. The first is likely the most familiar to Lisp developers: we can simulate a network REPL by receiving string content over the local network using Max objects built for this purpose. One such method is to use the Open Sound Control text protocol for communicating with musical tools over a TCP network. The Max patch can use a “udpreceive” object to receive string messages from a networking port, and build a composite message by passing this through a “prepend eval-string” object to send on a complete “eval-string” message to the s4m object. (TODO image). By doing so, the user can create send Scheme code from any tool capable of sending an OSC message. A recipe for doing this from the Vim editor is available in the Scheme For Max cookbook, comprised of a set of Vim keybindings and a small Python program that uses the OSC library. The developer can select a block of text (or position the cursor on an opening or closing parentheses), execute the bound keystroke, and the code enclosed is sent over the network and interpreted by the s4m object. This allows interactive development in without needing to reload entire files, and can also be used for live-coding to send function calls to Max that may trigger any actions in the Max environment. 
+
+The user can also use the same pattern to create code blocks in Max messages. The message containing parenthesized code must be sent to a “tosymbol” object, which transforms the list of space separated symbols (some of which will include parentheses) into one quoted Max symbol (which may contain spaces). This is followed by the aforementioned “prepend eval-string” message, and then to the s4m object for evaluation. (See examples TODO examples) This pattern is of great convenience during development as it enables the developer to create Max widgets that evaluate test code, with the option to use other Max objects for orchestration of the code snippets in time (e.g. to delay a second operation until the first has had time complete its work.) This facility is used extensively in the Scheme for Max regression test suite. (Example image of regression test)
+
+Technically, the above pattern is possible with the JS object as well, but it is more  cumbersome, and thus is not widely used. One could create a JavaScript callback function in the JS object that receives a string argument, and use JavaScript’s “eval” function to evaluate the string. However, this is made cumbersome by the fact that strings are used widely as identifiers in JavaScript (e.g. object or dictionary keys), and would thus need to be escaped coming from the source, whereas in Scheme, we need only use strings (and thus quotation marks) where we specifically need strings - the vast majority of the time in developing Scheme for Max code we can use quoted symbols or Common Lisp style keywords (which are supported in s7 Scheme).
+
+Interactive coding with plain Max messages
+Perhaps the most interesting and unusual of the Scheme for Max live coding facilities is the option to evaluate regular Max messages as Scheme code when sent directly from Max message objects, a pattern that enables rapid interactive development of user interfaces to Scheme systems with minimal code. To understand this facility, we are required to understand the Max message system in further depth.
+
+Max messages are space separated lists of atoms, where an atom may be a symbol, integer, or float, and where the first atom is considered to be a symbol representing the method to be called with the remaining atoms. (There is not really such a thing as a string type in Max - a symbol may simply contain quotation marks, though this frequently requires escaping to make work properly). A message-object is different from a Max message: the message-object is a visual patcher object that provides facilities for users to work with messages interactively, while a message is a set of data in memory that may be sent to any object. We can type a message into the message-object and doing so sets the internal storage of the message object to store the message typed. Subsequently clicking on (or sending a bang to) the message object will then cause it to send the stored message out its outlet and on to a receiving object, which will trigger execution of the receiving object’s corresponding message handler (if it has one).
+
+Thus in Max, any message that begins with a symbolic selector is interpreted to be a request for the receiving object to call a method similarly named. If an object receives a message beginning with a symbol for which it has no method, it will display an error message that the operation is not supported. While it is up to the object implementer how exactly that method is implemented, the standard is that all subsequent atoms in the message are taken as arguments to the method for the selector. (On a C level, the method is generally named as {obj}_{selector}, for example the handler for the read message in the s4m object is called “s4m_read”, and is bound to the selector read by a call to “class_add_method” in the externals main function which runs on instantiation). A message is internally stored as a pair of datums, the first a pointer to a symbol for the selector, and the second a pointer to an array of atoms which may store any Max type (int, float, symbol). Thus a message of “set foo 1 2.2” sent from one message box to another becomes a data structure of  pointer-to-symbol “set” and pointer-to-atom-array [“foo”, 1, 2.2], and triggers the “set” handler of the receiving message object, which will update its storage and display accordingly.
+(Visual EXAMPLE). 
+
+One might think at first that numeric Max messages are an exception to this pattern, but in fact Max merely hides the selectors for them from view. If we send a Max message of “1” to an object, the message received by the object is again a selector and argument pair, with the selector filled in with the (invisible) “int” selector. Similarly, a message of “1 2 3” will be internally implemented as: selector “list” and argument array [1, 2, 3]. (This can be verified in Max by sending a message box the visual message “list 1 2 3” and observing that the result is identical to sending the visual message “1 2 3” - the message box object simply hides the word “list”. (EXAMPLE MAYBE?). ) 
+
+A major component of programming Max on a visual level is thus the manipulation of Max messages prior to sending them to an object which does some operation with them, the execution of which may or may not result in further messages being sent out. Examples of these message-manipulating objects include the “prepend” object, which inserts an atom at the head of the atom array, and the “tosymbol” object, which takes all the atoms and converts them into one string atom, potentially containing spaces. In a sense, message manipulation objects act as pure functions: they receive a message, and and output a transformed message, with no other side-effects. On the other hand, objects such as the “print” object are terminal and are called purely for their side effects: the received message is printed to the console (our side-effect), and processing ends. There exist also objects that do both, for example triggering audio playback of a file and emitting a message when complete.  
+
+Let us examine now in further detail the syntax of message objects as we work with them in the patcher. The Max message-object syntax has a few additions to space separation: the comma, the semicolon, and the dollar sign. (If a message is meant to contain the literal symbol for these characters, they can be escaped with a backslash.) The comma is used to separate messages: if we set the contents of a message object to “a, b” and connect this to a print object, when we click (or bang) the message box, we will see two rounds of execution of the print object, printing a and then b on separate lines. The semi-colon is a shortcut for the operation of sending a message to a wireless receiver object, an operation we don’t need to delve into beyond knowing it has this meaning. The dollar symbol is the one of interest to us. But before we discuss it, is worth noting that the symbols of single-quote, back-tick, colon, ampersand, question mark, exclamation mark, and @ are of no significance to Max. If we use those in a space separated list of atoms in a message, Max will simply include the character as part of the atom -  :foo is one symbolic atom, as is ‘foo, foo!, foo?, `(foo, and so on. (The experienced Lisper can likely see where this is going…)
+
+The dollar sign, used in a message-object, instructs the object to interpolate contents from a received message into the stored message template and pass on the result. For example, if we wanted to prepend an integer message with the symbol “set”, we could either send it through a “prepend set” object, or send it through a message-object with the contents “set $1”, and the results would equivalent. Thus if we were to send a message of “:my-keyword” (perhaps by clicking on a message box containing this text) to a message box containing “set! ‘key $1”, the receiving message will in turn output “set! ‘key :my-keyword”. (Looking good, looking good…)
+
+As a consequence of these syntax rules, we can see that it is trivial, and quite natural, to generate messages that are textually valid Scheme expressions, though missing the surrounding parentheses. To take advantage of this happy accident, Scheme for Max interprets any incoming message that does not start with a selector used by the object itself (e.g. “reset”, “read”, “scan”) to be a request to evaluate the message as if it were surrounded by parentheses. Thus sending the message: { eval-string “(post :foobar)” } to the s4m object is no different than sending the message { post :foobar }, and both will result in the evaluation of the Scheme expression:  (post :foobar). 
+
+This facility, combined with our ability to re-define functions on the fly, has surprisingly substantial ramifications: we can now construct user interfaces to our Scheme program with nothing more than Max UI objects and message-objects added to a Max patch, and we can build and re-define both how we interact with our widgets and what they do as the piece is playing. Furthermore, because of the fact that the single-quote and colon are of no significance to Max, we have a very natural way to control what is evaluated (or not) as a result of sending such a message to Max. Anything we want interpreted as a symbol gets quoted, any symbol not quoted will be taken to be a reference to a Scheme variable, and when we want to ensure a symbol is just as it appears, we can use a keyword, which always evaluates to itself. In effect, passing a Max message to the s4m object triggers a round of evaluation of a single s-expression, with a syntax that is natural for calling non-nested functions.
+ 
+LEFT OFF: provide some meaty examples of this, including symbol use and keywords,
+
+
+
+
+
+
+
+</Text>
+            <Notes>- need to try out the eval pattern
+- need to get into how when a message passes through the s4m object, it acts as a round of evaluation.
+- need to talk about nesting
+- maybe time to rustle up the chaining macro??
+
+</Notes>
+        </Document>
+        <Document ID="19454B2C-2696-408E-8B82-B78117357709">
+            <Title>Proofing Packages</Title>
+            <Synopsis>Enable "Include in Compile" for this item if you intend to compile with inline annotations or inspector comments. This will add nice looking margin comments, highlighted text and a wider margin area for notes.</Synopsis>
+            <Text>% CriticMarkup Support
+% See document notes in the inspector for compile setting adjustments.
+% Credit goes to Fletcher Penney, of MultiMarkdown, for these methods.
+
+\usepackage{soul}
+\usepackage{xargs}
+\usepackage{todonotes}
+\newcommandx{\cmnote}[2][1=]{\linespread{1.0}\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+
+% Use \ul instead of \underline since we are using soul
+\let\underline\ul
+
+% Use a wider margin for notes
+% Use entire page
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+\settrims{0pt}{0pt}
+
+\setlrmarginsandblock{2.5cm}{5.5cm}{*}
+\setulmarginsandblock{3.5cm}{3.5cm}{*}
+\checkandfixthelayout
+</Text>
+            <Notes>By default, the built-in format will use \marginpar for inline annotations and comments. For best results, edit the compile format to use \cmnote instead:
+
+	1.	Open File ▸ Compile...
+	2.	Double-click on the “LaTeX (Memoir Book)” compile format, highlighted in the left sidebar.
+	3.	In the Replacements pane, click the checkbox beside the line that converts \marginpar to \cmnote.
+	4.	Click “Save”.
+
+</Notes>
+        </Document>
+        <Document ID="73C0BBB7-555C-4DC8-8F32-60BDDA3BE15A">
+            <Title>Bibliography Packages</Title>
+            <Synopsis>Enable "Include in Compile" for this item if you require a bibliography in your document. You will also need to enable the bibliography item in the Back Matter folder.</Synopsis>
+            <Text>\usepackage{natbib}
+</Text>
+        </Document>
+        <Document ID="CCDE5F87-9C20-48DB-B0C1-C2F6D05411A7">
+            <Text>Section 2 - Background on Max/MSP
+
+In order to understand the role filled by Scheme for Max, it is necessary for us to understand in some detail the Max music programming environment in which it runs. 
+
+Max, previously named Max/MSP, is the predominant visual programming environment for creating interactive multi-media in music academia, as well as in commercial music circles through "Max for Live", an extension to the Ableton Live digital audio workstation embedding Max in Ableton Live. Created originally by Miller Puckette in {year} while working at IRCAM, Max was created so that composers of interactive computer music could change their pieces without the assistance of a programmer. Max programs ("patches" in the Max nomenclature) are created by placing visual objects on a canvas ("the patcher"), and connecting them in a graph with visual "patch cords". Max objects in a patcher send messages to each other in a data-flow execution model, whereby a message from one object (the source) triggers execution in one or more receiving objects, who in turn send on messages to further objects. Patch execution can be triggered by various forms of real-time input, such as keyboard or mouse events, MIDI input, and networking events, as well as by scheduled events through objects such as the “metronome”. Max messages can be sent implicitly between objects, when one object is attached to another through a patch cord, or explicitly in dedicated “message” objects. Messages are represented visually as lists of Max atoms, which may be symbols, integers, and floating point numbers.  Execution follows a depth first and right-to-left order, enabling the programmer to deterministically control the execution flow through the visual layout of the patch cords.  (i.e., A source object sending messages out to multiple receiving sub-graphs results in the right hand message path completing execution before moving left, rather than spawning two concurrent threads of execution.)  When patching, messages can be inspected by sending them to a “print” object (to print to console) to a message object (to update the visual object with the message contents).
+
+In addition to the event-based message execution model, Max also supports a stream-based digital audio execution model. Objects with names ending in the tilde character (i.e. “adsr~”) are DSP handler objects (“MSP” objects in Max nomenclature), and are connected to each other through special patch cords representing a constant flow of digital audio. Internally, Max objects are implemented to work either in the DSP execution context or the message execution context (indicated by the presence or absence of the tilde character in the object’s name), but  DSP objects may also receive event (“regular”) messages for controlling various paramaters.  For example, a gain~ object receives digital audio in its top “inlet”, passing it out the bottom “outlet” after applying a multiplier for altering the signal amplitude;  a message sent to the right hand inlet of the gain~ object changes this multiplier, and the gain object will use the received multiplier until receiving another value in the right-hand inlet. Whenever audio processing is turned on, there will be a constant flow of audio between connected DSP objects, though it may be zeros. S4M executes at the event level, using only regular messages and thus does not implement DSP operations, however some awareness of Max DSP operations will be necessary to understand both the advantages and limitations of S4M relative to existing scripting solutions.
+
+Max execution is spread between 2 to 3 threads, depending on various configuration settings. In regular execution, there will be one (optional) DSP thread, and two message handling threads. The high-priority thread (also known as the “scheduler thread”) is intended for any low latency or timing critical events, and is by default used when messages originate from MIDI input or a metronome object. The low-priority (also known as the “main thread” and “GUI thread”) is used for any messages that originate from GUI interaction. The entire Max patcher is run on each of the high and low threads, meaning that an object may be active in any thread.  There are additionally objects for moving messages from one thread to another (“delay”, “pipe”, “defer”, “deferlow”), which internally put the message received onto the queue for the desired thread (e.g. “pipe” puts messages on the scheduler queue to be executed in the high thread after a certain amount of time).
+
+While Max itself is a commercial, closed source tool, it includes a software development kit for extending Max by writing a Max object (called an “external”) in either C or C++, and a rich library of open source 3rd party extensions exist, of which Scheme For Max is one. 
+
+Internally, Max messages are implemented as pair of data entities consisting of a symbol (required) and an optional array of Max atom structures, where each atom structure has a member for the atom type and one for its value.  The first symbol of a message is called the “message selector”, and may be implicit or explicit. For example, if one creates a message object with an integer as the contents, the actual message sent by clicking on this object will consist of a hidden selector of the symbol “int”, followed by a one item array where the first item is an integer atom, while a message containing multiple integers would produce  a selector of “list”, followed by an array of atoms. In order to respond to Max messages, an external must have a handler method for the selector implemented, though there is also the facility to handle messages generically and thus to dispatch uncaught messages to handler functions. Thus execution in an internal begins when a selector handler runs, and the message structure enables objects to provide a generic API to any other object that is the same as that used in visual patching. Message handlers are normally declared as returning void, as in normal execution an object does not respond to the object that triggered its execution, but instead passes on further messages out an “outlet”, or has some side effect. Most typically, an object completes its work by either updating state (a “cold” operation) or by executing some calculation and then sending a new message with the results out an outlet (a “hot” operation). Side effects can include updating internal state of an object, writing to accessible shared data structures (such as tables and buffers), or directly calling other objects through their methods. Thus, while the normal flow of execution is for objects to handle messages without returning values, and pass on further messages, it is possible for some objects to directly call methods on other objects, getting back a value. There are also global SDK functions that change the Max internal environment but  do not use the message passing signature. For example, there exists a global transport object, and it is possible for an object to directly change the global transport tempo.
+
+Extending Max thus consists of creating a new module file, that contains a data structure for object state, some boilerplate functions for class and object instantiation and destruction, and a series of message handling functions, with likely some message output functions. The external is compiled using the Max SDK, and can be added to a plugin directory that Max will scan on boot, allowing users to use the external in their patchers as if it was a core Max object. 
+
+Scheme for Max is implemented as an external that embeds the s7 Scheme interpreter, with various message handlers implemented for both object operations (e.g. “reset” or “read”) and handlers that translate Max data structures into s7 structures and then call s7 Scheme functions through the s7 foreign function interface.
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+</Text>
+        </Document>
+        <Document ID="6EF336BE-794D-414D-B7C2-4AE1BD92AFB9">
+            <Title>Foreward</Title>
+            <Synopsis>An example front matter section. By default this will print as an unnumbered section.</Synopsis>
+        </Document>
+        <Document ID="7F36E1E8-5268-41DE-B900-5541DA073025">
+            <Title>Preamble Modules</Title>
+            <Synopsis>This folder contains some optional "modules" you can enable in the compiled output. They will add additional features to your project. If you have no need of them, they can be safely discarded. Note that some require additional material to be used elsewhere---for example indexing is established in the preamble, but we will need to declare the position of the index itself in the back matter.</Synopsis>
+        </Document>
+        <Document ID="B8855899-B5E1-41B4-B155-C4850A606B7F">
+            <Title>Contents</Title>
+            <Synopsis>Disable "Include in Compile" for this item if do not want a table of contents.</Synopsis>
+            <Text>\tableofcontents
+
+% \listoffigures
+% \listoftables</Text>
+        </Document>
+        <Document ID="E0DB272D-2B84-40D6-9464-27600AAFD77D">
+            <Text>Introduction
+
+</Text>
+        </Document>
+        <Document ID="F1C174F9-60B0-4EA2-BFF4-A3E9297419DD">
+            <Title>Equation Packages</Title>
+            <Synopsis>Enable "Include in Compile" for this item if you require formulae in your document.</Synopsis>
+            <Text>%% Math packages
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+</Text>
+        </Document>
+        <Document ID="FD64525A-22FB-4EDD-BBD0-372BE8E7BFED">
+            <Title>Indexing Packages</Title>
+            <Synopsis>Enable "Include in Compile" for this item to include an index. You will also want to enable and customise the Index section in the Back Matter folder.</Synopsis>
+            <Text>\usepackage{makeidx}
+\makeindex
+</Text>
+        </Document>
+        <Document ID="56407EA7-C110-49D9-9DE0-DB12C632FB0B">
+            <Title>Begin Document</Title>
+            <Synopsis>This should contain preamble specific to the content of this document. Those commands that influence the overall document class, packages and other such settings are located in the compile format. Refer to the help file at the top of the binder for further information.</Synopsis>
+            <Text>\setcounter{page}{1}
+\pagenumbering{roman}
+
+\title{&lt;$projecttitle&gt;}
+\author{&lt;$author&gt;}
+\date{&lt;$date&gt;}
+
+\begin{document}
+
+\maketitle
+\clearpage
+</Text>
+            <Notes>Edit the compile format for this project, under the Text Layout pane, to make general appearance and feature modifications to the preamble.</Notes>
+        </Document>
+        <Document ID="D2CF9B80-9FA0-4746-9A82-508A32070B93">
+            <Title>Begin Main Matter</Title>
+            <Text>\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\mainmatter</Text>
+        </Document>
+    </Documents>
+</SearchIndexes>

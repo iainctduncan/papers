@@ -1,0 +1,16 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdftex 2021.6.15)  18 JUN 2021 07:39
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**samples.dtx
+(./samples.dtx
+! Undefined control sequence.
+l.32 \AtBeginDocument
+                     {%
+? 
+! Emergency stop.
+l.32 \AtBeginDocument
+                     {%
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!

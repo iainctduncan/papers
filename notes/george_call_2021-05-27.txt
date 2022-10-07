@@ -1,0 +1,91 @@
+General stuff
+- how does thesis term work?
+- when MIR start - winter term
+- kadenze course?
+
+Thesis
+- 80-100 pages, 30-40 citations
+- 15000 words approximately
+- intro
+- related work
+- what we have done
+- evaluation of results
+- conclusion
+
+
+To Read
+- checkout Renoise
+- https://www.researchgate.net/publication/2510336_Machine_Tongues_XV_Three_Packages_for_Software_Sound_Synthesis 
+- another paper: https://dl.acm.org/doi/pdf/10.1145/2975980.2975983?casa_token=M5Vj550jaw4AAAAA%3A3WQepBc1BI1RzKUyf-BVVNGbykwtR5W1vVLwpmA-76OrOYSA_RSJ7tS0WhKojHe2EeLNJGPqX3lC_mA
+  - need to go through uvic vpn
+https://www.conference-publishing.com/authors.php?Event=ICFPWS16FARM 
+
+Thoughts about paper
+- https://icfp21.sigplan.org/home/scheme-2021#Call-for-Papers
+- exmaples from IFCP https://www.conference-publishing.com/authors.php?Event=ICFPWS16FARM
+- Papers and experience reports are expected to be 10–24 pages in length using the single-column SIGPLAN acmart style. (For reference, this is about 5–12 pages of the older SIGPLAN 2-column 9pt style.)
+- does not preclude republication in real journal
+- need to do more work explaining Max and what it's built
+- journal version should have 30% more material
+- in this paper write a fair bit about Max/MSP and computer music in journal
+ 
+
+possible topics:
+
+- semantic similarity
+  - message passing syntax matches max message passing
+  - can make objects that work very similarly to how Max works
+  - a max object is not an object with methods that are called 
+    from patch cords in a fire and forget manner
+  - for example, sending a list to an object is actually a message 
+    of 'list 1 2 3', and depends on the receiver implementing a handler
+    for this message
+
+- should I make the macro for daisy chaining function calls?
+
+- niche it fills right now
+  - runs in high thread
+  - can receive dynamic code from max messages (ties in with semantics thing)
+
+
+Call
+- need 15-20 references
+  - 4 or 5 from Scheme
+  - 4 or 5 live coding 
+  - comparison to tidal cycles-> supercollider 
+  - purpose is placing my work in the context of related work: says I'm aware of these things
+
+- ie Max is good up to a point,   
+
+- add more about SC, chuck, live code language
+- bit more commentary on to make connection with literature on scheme
+  - definitely cite Common Music, Nyquist
+  - cite outside of the music domain, Naughty Dog example
+  - ie Scheme  
+
+- intro defines what we are trying to do
+- related work provides the context
+
+- need to have a related work section that cites/explains
+  - typically will have a related work at the begining with cite
+  - look for example of related work, most have at beginnning at 
+
+- fundamental two questions
+  - why do you want to do this
+  - what were the technical challenges
+
+- this paper:
+  - embedding Scheme as a tool for flexibly scheduling future events in a music system  
+  - keep threading and JS comparison, but perhaps smaller
+  - for this paper we can focus on the scheduling over the semantic mapping
+  - for PLC paper what feature of the lanugage are we taking advantage of and why is interesting
+  - keep clear what is implementation and what is semantics
+
+- try example of the orchestrator
+
+- next step:
+  - get it into the format
+  - add some figure
+  - work on the related
+
+

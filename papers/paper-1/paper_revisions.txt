@@ -1,0 +1,14 @@
+
+
+D - MAYBE: add more in the future improvements, perhaps about garbage collector
+D - p. 6: The 'Lisp in Computer Music' section gives a helpful discussion of the use of Lisp for live-coding music. I was surprised to see no mention of Sam Aaron's work on using Clojure for live-coding music.
+D - p. 19, line 902: I'm not sure what 'control rate DSP' means. 
+  Perhaps worth explaining. Also, is there a missing 'a' before 'control rate DSP'?
+
+DONE - p. 7, line 314: "Max objects (or patchers) could write to this rehearsal mark
+  table without awareness of S4M" Might this lead to a race-condition?
+
+DONE  - Do: explain more why scheduling in the future is important
+
+
+- MAYBE: add more on why s7 was chosen

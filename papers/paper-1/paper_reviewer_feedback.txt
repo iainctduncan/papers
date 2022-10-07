@@ -1,0 +1,4 @@
+Feedback to incorporate:
+
+- I have a hard time thinking about how one would use the ability to schedule 
+a musical event for later during a live-coding music session

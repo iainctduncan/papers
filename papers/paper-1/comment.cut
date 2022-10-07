@@ -1,0 +1,14 @@
+Scheme For Max would not exist without the work of many people.
+Bill Schottstaedt created Common Lisp Music and the s7 Scheme implementation,
+and has been invaluable as a source of advice and technical assistance. Heinrich Taube
+created Common Music and has been an inspiration through his seminal book
+on algorithmic composition with Lisp, ``Notes from the Metalevel".
+Luigi Castelli and Alex Harker helped with Max external programming questions
+and build assistance.
+S4M of course depends on Max and thus owes a huge debt to
+Miller Puckette and David Zicarelli.
+George Tzanetakis, my supervisor, assisted with this paper.
+And finally, Andrew Schloss, my other supervior, has
+been a source of encouragement and support through the years of
+exploration that led to the Scheme For Max project.
+

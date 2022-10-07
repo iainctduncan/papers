@@ -1,0 +1,260 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{16}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{'74}{'74}{[n.d.]}]%
+        {Cycling74}
+\bibfield{author}{\bibinfo{person}{Cycling '74}.}
+  \bibinfo{year}{[n.d.]}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Max JS Tutorial 3: JavaScript Tasks,
+  Arguments, and Globals}}.
+\newblock
+\urldef\tempurl%
+\url{https://docs.cycling74.com/max8/tutorials/javascriptchapter03}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Anderson and Kuivila}{Anderson and
+  Kuivila}{1986}]%
+        {Anderson1986}
+\bibfield{author}{\bibinfo{person}{David~P. Anderson} {and}
+  \bibinfo{person}{Ron Kuivila}.} \bibinfo{year}{1986}\natexlab{}.
+\newblock \showarticletitle{Accurately Timed Generation of Discrete Musical
+  Events}.
+\newblock \bibinfo{journal}{\emph{Computer Music Journal}}
+  \bibinfo{volume}{10}, \bibinfo{number}{3} (\bibinfo{year}{1986}),
+  \bibinfo{pages}{48--56}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.2307/3680259}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Brandt and Dannenberg}{Brandt and
+  Dannenberg}{1998}]%
+        {Brandt1998}
+\bibfield{author}{\bibinfo{person}{Eli Brandt} {and} \bibinfo{person}{Roger
+  Dannenberg}.} \bibinfo{year}{1998}\natexlab{}.
+\newblock \showarticletitle{Low-Latency Music Software Using Off-The-Shelf
+  Operating Systems}. In \bibinfo{booktitle}{\emph{ICMC}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Dannenberg}{Dannenberg}{1997}]%
+        {Dannenberg97}
+\bibfield{author}{\bibinfo{person}{Roger~B Dannenberg}.}
+  \bibinfo{year}{1997}\natexlab{}.
+\newblock \showarticletitle{The Implementation of Nyquist, A Sound Synthesis
+  Language}.
+\newblock \bibinfo{journal}{\emph{Computer Music Journal}}
+  \bibinfo{volume}{21}, \bibinfo{number}{3} (\bibinfo{year}{1997}),
+  \bibinfo{pages}{71--82}.
+\newblock
+\showISSN{0148-9267}
+
+
+\bibitem[\protect\citeauthoryear{Garton}{Garton}{2011}]%
+        {Garton2011}
+\bibfield{author}{\bibinfo{person}{Brad Garton}.}
+  \bibinfo{year}{2011}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{maxlispj}}.
+\newblock
+\urldef\tempurl%
+\url{http://sites.music.columbia.edu/brad/maxlispj/}
+\showURL{%
+Retrieved Jan, 2011 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Lazzarini}{Lazzarini}{2013}]%
+        {Lazzarini2013}
+\bibfield{author}{\bibinfo{person}{Victor Lazzarini}.}
+  \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{The Development of Computer Music Programming
+  Systems}.
+\newblock \bibinfo{journal}{\emph{Journal of New Music Research}}
+  \bibinfo{volume}{42}, \bibinfo{number}{1} (\bibinfo{year}{2013}),
+  \bibinfo{pages}{97--110}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1080/09298215.2013.778890}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Manzo}{Manzo}{2021}]%
+        {MaxObjects2021}
+\bibfield{author}{\bibinfo{person}{V.J. Manzo}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{maxobjects.com}}.
+\newblock
+\urldef\tempurl%
+\url{maxobjects.com}
+\showURL{%
+Retrieved Jan 1, 2021 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Matheussen}{Matheussen}{2020}]%
+        {Matheussen2020}
+\bibfield{author}{\bibinfo{person}{Kjetil Matheussen}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Re: [CM] S7s GC (CM-dist mailing list
+  archive)}}.
+\newblock
+\urldef\tempurl%
+\url{https://www.mail-archive.com/cmdist@ccrma.stanford.edu/msg05595.html}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Puckette}{Puckette}{2002}]%
+        {Puckette2002}
+\bibfield{author}{\bibinfo{person}{Miller Puckette}.}
+  \bibinfo{year}{2002}\natexlab{}.
+\newblock \showarticletitle{Max at Seventeen}.
+\newblock \bibinfo{journal}{\emph{Computer Music Journal}}
+  \bibinfo{volume}{26}, \bibinfo{number}{4} (\bibinfo{date}{Dec.}
+  \bibinfo{year}{2002}), \bibinfo{pages}{44--51}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1162/014892602320991365}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Roberts and Wakefield}{Roberts and
+  Wakefield}{2018}]%
+        {Roberts18}
+\bibfield{author}{\bibinfo{person}{Charles Roberts} {and}
+  \bibinfo{person}{Graham Wakefield}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Tensions and Techniques in Live Coding
+  Performance}.
+\newblock In \bibinfo{booktitle}{\emph{The Oxford Handbook of Algorithmic
+  Music}}, \bibfield{editor}{\bibinfo{person}{Alex McLean} {and}
+  \bibinfo{person}{Roger~T. Dean}} (Eds.). \bibinfo{publisher}{Oxford
+  University Press}, \bibinfo{address}{New York, NY}, Chapter~16,
+  \bibinfo{pages}{293}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Schottstaedt}{Schottstaedt}{2021}]%
+        {Schottstaedt2021}
+\bibfield{author}{\bibinfo{person}{Bill Schottstaedt}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{s7}}.
+\newblock
+\urldef\tempurl%
+\url{https://ccrma.stanford.edu/software/snd/snd/s7.html}
+\showURL{%
+Retrieved June 5, 2021 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Sorensen and Gardner}{Sorensen and
+  Gardner}{2010}]%
+        {Sorensen2010}
+\bibfield{author}{\bibinfo{person}{Andrew Sorensen} {and}
+  \bibinfo{person}{Henry Gardner}.} \bibinfo{year}{2010}\natexlab{}.
+\newblock \showarticletitle{Programming with time: cyber-physical programming
+  with Impromptu}.
+\newblock \bibinfo{journal}{\emph{ACM SIGPLAN Notices}} \bibinfo{volume}{45},
+  \bibinfo{number}{10} (\bibinfo{year}{2010}), \bibinfo{pages}{822--834}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1145/1932682.1869526}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Taube}{Taube}{2002}]%
+        {Taube91}
+\bibfield{author}{\bibinfo{person}{Heinrich Taube}.}
+  \bibinfo{year}{2002}\natexlab{}.
+\newblock \showarticletitle{Common Music: A Music Composition Language in
+  Common Lisp and CLOS.}
+\newblock \bibinfo{journal}{\emph{Computer Music Journal}}
+  \bibinfo{volume}{15}, \bibinfo{number}{2} (\bibinfo{year}{2002}),
+  \bibinfo{pages}{21--32}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.2307/3680913}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Vincenot}{Vincenot}{2017}]%
+        {Vincenot2017}
+\bibfield{author}{\bibinfo{person}{Julien Vincenot}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{LISP in Max: Exploratory Computer-Aided Composition
+  in Real-Time}. In \bibinfo{booktitle}{\emph{International Computer Music
+  Conference}}, Vol.~\bibinfo{volume}{2017}. \bibinfo{publisher}{Michigan
+  Publishing, University of Michigan Library}, \bibinfo{address}{Ann Arbor,
+  MI}, \bibinfo{pages}{87--92}.
+\newblock
+\urldef\tempurl%
+\url{http://hdl.handle.net/2027/spo.bbp2372.2017.012}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Wang}{Wang}{2017}]%
+        {Wang17}
+\bibfield{author}{\bibinfo{person}{Ge Wang}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{A History of Programming and Music}.
+\newblock In \bibinfo{booktitle}{\emph{The Cambridge Companion to Electronic
+  Music}}, \bibfield{editor}{\bibinfo{person}{Nick Collins} {and}
+  \bibinfo{person}{Julio D'Escrivan}} (Eds.). \bibinfo{publisher}{Cambridge
+  University Press}, \bibinfo{address}{Cambridge, UK}, Chapter~16,
+  \bibinfo{pages}{55--85}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1017/9781316459874.006}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Zicarelli}{Zicarelli}{2002}]%
+        {Zicarelli2002}
+\bibfield{author}{\bibinfo{person}{David Zicarelli}.}
+  \bibinfo{year}{2002}\natexlab{}.
+\newblock \showarticletitle{How I Learned to Love a Program That Does Nothing}.
+\newblock \bibinfo{journal}{\emph{Computer Music Journal}}
+  \bibinfo{volume}{26}, \bibinfo{number}{4} (\bibinfo{date}{Dec.}
+  \bibinfo{year}{2002}), \bibinfo{pages}{44--51}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1162/014892602320991365}
+\showDOI{\tempurl}
+
+
+\end{thebibliography}

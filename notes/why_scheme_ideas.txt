@@ -1,0 +1,11 @@
+Ideas to explore:
+- secondary dominants as a chain of functions that display in code much as we would see them in musical analysis
+(II V7 (V ‘C))
+(prog :C ‘(IIm7 V7 IM7) :F ‘(IIm7 V7 IM7)
+(prog :C `(IIm7 ,(ttsub V7) IM7)
+(prog I: (IIm7 (ttsub V7) IM7) IV: (IIm7 V7 I)))
+(prog I: (IIm7 . (ttsub of V7 of V) 
+producing a list of chord objects
+the chord prog is a list of symbols, and the symbols mean something in the context of a key - exactly how they are implemented in Scheme
+(prog (in C:)  `(IIm7 |  Vsus7  V7  IM7 |)
+      (mod P5th)  
