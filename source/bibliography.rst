@@ -83,3 +83,6 @@ The theory chapters focus on the sound design and computer music principles in u
 The topics covered include both sound synthesis and event/message oriented aspects of Max programming, with chapters covering topics such as: additive and vector synthesis, substractive synthesis, control signals, and list and message processing.
 
 
+Dybvig, Kent. R. *The Scheme Programming Language, 3rd edition*. MIT Press, Cambridge Massachusetts, 2003.
+The 3rd edition of this work provides 
+

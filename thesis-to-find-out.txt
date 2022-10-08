@@ -1,0 +1,5 @@
+Things I need to find out:
+
+- is there a way to load extra files in the JS object?
+  - can one load files from the file system?
+  - can one reload files from the file system?

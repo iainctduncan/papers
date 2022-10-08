@@ -1,0 +1,21 @@
+Thesis outline
+
+Sections
+- introduction
+- motivation
+  - target user
+  - target context
+  - target use cases
+- justification
+  - why a text language in Max?
+  - why Scheme?
+  - why not use Common Music?
+  - why not use JS in Max?
+- background
+  - about Max
+  - about Scheme
+- related work
+  - JS object in Max
+  - Common Music
+  - Nyquist
+
