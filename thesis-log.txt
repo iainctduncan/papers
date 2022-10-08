@@ -1,0 +1,5 @@
+Log of thesis work
+
+2022-10-07
+- worked on related_work.rst - 1007 words
+
