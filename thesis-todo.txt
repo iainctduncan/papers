@@ -1,0 +1,3 @@
+
+- learn about and mention the jstrigger object
+- learn about and mention the jsui object
