@@ -1,5 +1,16 @@
 Log of thesis work
 
-2022-10-07
+2022-10-10 - working on design.rst
+  - 2641 words 
+
+2022-10-09 - ~1000 words
+- worked on goals
+
+2022-10-08 - 1700 words
+- went over admin requirements
+- worked on annotated bibliography, 1274 words
+- worked on motivation - 448 words
+
+2022-10-07 - 1007 words
 - worked on related_work.rst - 1007 words
 

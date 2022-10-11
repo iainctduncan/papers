@@ -11,6 +11,8 @@ Iain C.T. Duncan
     :maxdepth: 4
     :caption: Contents:
  
+    motivation.rst
+    design.rst
     related_work.rst  
    
 
