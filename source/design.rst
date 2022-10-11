@@ -96,7 +96,7 @@ Having decided to tackle embedding a textual language in Max, we can now ask why
 In the initial research stage of this project (dating back to 2019) I examined options from numerous high-level languages, and reviewed the use of many possible languages in music.
 Non-Lisp candidates included Python, Lua, Ruby, Erlang, Haskell, OCaml, and JavaScript (i.e. in a new implementation), all of which have been used for music projects of different types.
 
-We will examine three categories of advantages: those relating to representing music, those related to the workflow tradeoffs for the programming composer, and those relating to implementation in Max specifically.
+We will examine three areas of advantage: one relating to representing music, one related to the workflow tradeoffs for the programming composer, and one relating to implementation in Max specifically.
 
 Lisp as a programming language for music
 ----------------------------------------
@@ -107,10 +107,10 @@ Symbolic computation and list processing
 ----------------------------------------
 One could make a strong case that the defining characteristic of Lisp is that it is a language for symbolic computation in which the list structure and list processing are not just central to the language, but are the syntax *of the language itself*. 
 Indeed the very name, Lisp, originally came from "list processor".
-In Lisp, the symbol is a data type, represented normally with a leading single quote to indicate we are referring to the symbol itself rather than a variable name.
+In Lisp, the symbol is a data type, represented commonly with a leading single quote to indicate we are referring to the symbol itself rather than a variable name.
 In a Lisp program, we may have a variable named foo, but we also work with the *symbol* 'foo. 
-We have the option of *quoting*, (the single quote) meaning we are asking the interpreter (or technically the compiler, but for the sake of discussion we will assume interpreter) to sskip evaluating the symbol into the contents stored at the memory location.
-In addition to this, Lisp syntax is entirely composed of s-expressions: paranthetical expressions containing lists of symbols and primitives.
+We have the option of *quoting*, (the single quote) meaning we are asking the interpreter (or technically the compiler, but for the sake of discussion we will assume interpreter) to skip evaluating the symbol into the contents stored at the memory location.
+In addition to this, Lisp syntax is entirely composed of s-expressions: parenthetical expressions containing lists of symbols and primitives.
 All of these are lists of symbols: 
 
 .. code: lisp
@@ -121,40 +121,63 @@ All of these are lists of symbols:
 
 However, if we remove the quoting, the syntax ``(foo bar 1)`` becomes a line of code that executes the function bound to the symbol foo, passing it the value stored at bar and the value 1 as arguments.
 The impact of this is difficult to overstate.
-Lisp allows us to trivially make programs that build lists of symbols and primitives, *and these lists themselves can be executed as programs*.
+Lisp allows us to clearly and succinctly make programs that build lists of symbols and primitives, *and these lists themselves can be executed as programs*.
 
-This process is often referred to as dynamic evaluation, and it is not only supported by Lisp.
-We can also build a program in our program in other high level languages, including Python, Ruby, Lua, and JavaScript.
-However, in all of these, the way this is done is to build a string of code, and pass that to an evaluator, or to use variety of helper functions.
-In none of these is programming *on* the symbolic tokens of the language directly supported the way it is in Lisp.
+This process is often referred to as dynamic evaluation, and, to be clear, it is not only supported by Lisp.
+We can also build a program in a program in other high level languages, including Python, Ruby, Lua, and JavaScript.
+However, in all of these, the principal way this is done is to build up a string of code (a messy process at the best of times), and pass this to an evaluator.
+In none of these lanugages is programming *on* the symbolic tokens of the language directly supported the way it is in Lisp.
 The result is that in these other language it is cumbersome, and regarded as something to be used sparingly.
 
 In Lisp, on the other hand, manipulating lists of symbols, and later evaluating them as functions, is the very stuff of which the langauge is made.
-Now, how does this matter?
-Like Lisp, music is heavily concerned with the notions of symbols, and even lists of symbols, representing functions, relationships, and events.
+Now, why does this matter for a prgramming language for music?
+Like Lisp, music is heavily concerned with the notions of symbols, and even lists of symbols, which can representing functions, relationships, and events.
 
-What is the notion of a "chord progression" other than an abstration of a series of symbols representing functional relationships between lower levels of abstracted data?
+For example, one could argue that the notion of a "chord progression" other than an abstration of a series of symbols representing functional relationships between lower levels of abstracted data (the notes).
 If I present you a progression of "I-vi-ii-V7", what does this mean?
 We have a *list* of four items, each denoted by a symbol: "I", "vi", "ii", "V7".
 Each of these symbols represents musical data for a given chord, but by themselves, they don't represent *music* - they need a key *to which the function represented by the chord symbol can be applied*.
 Indeed, "I" must be a *function* - it is a description of something we get when we apply an algorithm to a parameter - namely the tonic key.
 
-In a Lisp language, this can be represented in code that is almost identical to what we would use in musical analysis. 
-``(chords->notes 'C '(I vi ii V7))`` is a perfectly legitimate line of Lisp syntax that could be a function to render into the chord progression given with the tonic as C.
-It could be implemented to return something that looks very familiar to a musicain and on which more of the program can work, such as nested list containing sublits, each containing symbols:
+In a Lisp language, this can be represented in code that is visually compatible (almost identical even!) to what we would use in musical analysis. 
+``(chords->notes 'C '(I vi ii V7))`` is a perfectly legitimate line of Lisp syntax that could be a function to render from a chord progression into a list of notes given a tonic of C.
+It could be implemented to return something that looks very familiar to a musician and on which more of the program can work. 
+A potential return value could be represented by the interactive Lisp interpreter as a nested list containing sublists of symbols:
 ``'( (C E G) (A C E) (D F A) (G B D F))``
 
-Further, because this form of symbolic computation is so central to the language (one of the classic texts is even subtitled "A Gentle Introduction to Symbolic Computation"), Lisps include a myriad of functions for easily manipulating the list. 
-For example, we might transpose a list by applying a transposing function, which might be built by a function building function called "make-transpose", applying it to symbols. 
-This sounds complicated, and indeed, expressing this in languages with Algo derrived syntax is non-trivial, but in a Lisp this is readable and succint:
+Further, because this form of symbolic computation is so central to the language (one of the classic texts is even subtitled "A Gentle Introduction to Symbolic Computation"), Lisps include a large corpus of functions for manipulating and transforming lists. 
+For example, we might transpose a list by applying a transposing function, which itself might be built by a function-building function called "make-transposer", and we might apply this function to a list of symbols. 
+This sounds complicated, and indeed, expressing this in most languages is non-trivial, but in a Lisp this is both readable and succint:
 
 .. code: scheme
   ; apply a transposition function that transposes up 2 to all elements in our chord progression
+  ; the map function maps a function over a list, returning a new list
   (map (make-transposer 2) 
     '( (C E G) (A C E) (D F A) (G B D F)))
+
   ; expressed without first expanding our chord progression
   (map (make-transposer 2)
     (chords->notes 'C '(I vi ii V7)))
+
+This compatibility between the expression of musical data and relationships and the syntax of the Lisp langauges has led to a rich history of Lisp use in musical programming - where musical programming refers to manipulations of abstractions of musical events and data rather than rendering streams of audio samples.
+Examples of Lisp based musical programming environments, both historical and current, include Common Music, Nyquist, Common Lisp Music, MIDI-Lisp, PatchWork, OpenMusic, Extempore, Slippery Chicken, the Bach Prroject, MozLib, and cl-collider.
+
+The results of this compatibility between Lisp and music are several and of major import:
+
+* We have access to a rich historical body of prior work, with code that can be ported to Scheme for Max relatively easily 
+* Code representing musical data can be more succint, lower the sheer amount of code the composer must contend with while working
+* Code that represents functions applied to musical data is not so visually different from code representing note data, and thus
+  the act of moving from working on code to working on musical data is simpler
+
+The last point applies beyond music, and has even given rise to a common saying within the Lisp programming community, that 
+"code is data, data is code". This trait is referred to in the programming lanugage theory (PLT) community as "homoiconicity", a term to which we will be returning quite a bit.
+
+REPL oriented programming - hot code reloading
+----------------------------------------------
+One effect of the homoiconicity of Lisp is that it is easy to send Lisp code to the Lisp interpreter for evaluation, and
+the interpreter can return results of evaluation as output text that is, in turn, usable as code.
+This style of interactive development is sometimes called REPL-oriented programming, where REPL refers to the intepreters Read Evaluat Print Loop.
+With little work, one can add customizations to a text-editor to enable sending blocks of code directly to the S4M Scheme intrepreter over the local network. (TODO: link to the video on this)
 
 
  
