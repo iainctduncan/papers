@@ -11,10 +11,10 @@ Iain C.T. Duncan
     :maxdepth: 4
     :caption: Contents:
  
-    motivation.rst
+    goals.rst
     design.rst
     related_work.rst  
-   
+    features_usage.rst 
 
 
 .. * :ref:`genindex`

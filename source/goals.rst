@@ -1,14 +1,12 @@
-**********
-Motivation
-**********
+**************
+Project Goals
+**************
  
 .. status 
   - 2022-10-08 is at 448 words
 
-
-Project Goals
-=============
-
+Overview
+--------
 Scheme for Max is the result of many years of exploring computer music platforms for composing, producing, and performing music, both commercial and contemporary new music.
 The project design came out of my experiences, both positive and negative, with a wide variety of tools, both commercial and academic.
 Broadly, the goals I set out to achieve with the creation of Scheme for Max are that the tool should:
