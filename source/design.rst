@@ -2,8 +2,11 @@
 Design 
 ********************************************************************************
 
+.. notes
+  needs a conclusion to the section
+
 Overview
----------
+================================================================================
 To achieve the goals of the project, I have created an extension to the Max audio-visual programming language called Scheme for Max (S4M). 
 Scheme for Max embeds the s7 Scheme intepreter as a Max object, enabling users to run s7 Scheme programs within the Max environment.
 User programs are able to interact with other Max objects and the larger Max environment in a variety of ways: 
@@ -18,7 +21,7 @@ The project is extensively documented, with a comprehensive Max help patch, onli
 In the remainder of this section we will examine the various design decisions in detail, discussing why they were taken and how they have worked well to achieve the goals of the project.
 
 Why a Max extension?
----------------------
+================================================================================
 Max is a visually programmed dataflow environment, in which the programmer places visual "objects" on a canvas, connecting them with "patching cables" along which messages and audio are passed between objects. 
 Max is one of the most popular platforms world-wide for making computer music, with thousands of programming elements available from both Cycling 74 and the broader Max community.
 These programming elements enable a wide variety of audio and visual manipulation, including the ability to interact with external hardware and to host commercial software synthesizers and effect plugins.
@@ -74,7 +77,7 @@ Which begs the question, why use a Lisp language rather than something more comm
 In fact, were we satified with using JavaScript, we could simply use the existing JavaScript object (a.k.a. "js") that comes with Max!
 
 Why not just use JavaScript?
--------------------------------------------------------------------------------
+================================================================================
 We will discuss in some depth the linguistic reasons for choosing a a Lisp language, but first let's look at the reasons we can't simply use the JS object to satisfy our goals. 
 At first glance, the JS objects seems to provide what we need.
 It runs in Max, it can send and receive Max messages, t has access to Max externals, it has a scheduler facility (the Task objects), and it's a high-level language with some modern features such as dictionaries and lexical scoping!
@@ -89,17 +92,15 @@ As a result, we have no control over when or for how long the GC may run, potent
 In fact, I did indeed begin my work combining textual programming with commercial environments by attempting to use JavaScript in Max, and overcoming the timing limitations of the JS object is one of the main motivations for the Scheme for Max project.
 
 Why use a Lisp language?
---------------------------------------------------------------------------------
-Having decided to tackle embedding a textual language in Max, we can now ask why choose a Lisp family language.
-(For the purposes of this dicussion I will use "Lisp" to refer to the family of related languages that share the traits we will examine, including Scheme, Common Lisp, and Clojure.)
+================================================================================
+Having decided to tackle embedding a textual language in Max, we can now ask why choose Scheme, a Lisp family language.
+For the purposes of this dicussion I will use "Lisp" when referring to traits shared across the Lisp family of languages (including Scheme, Common Lisp, and Clojure, Racket), and Scheme when referring to the particular choice used in Scheme for Max.
 
 In the initial research stage of this project (dating back to 2019) I examined options from numerous high-level languages, and reviewed the use of many possible languages in music.
 Non-Lisp candidates included Python, Lua, Ruby, Erlang, Haskell, OCaml, and JavaScript (i.e. in a new implementation), all of which have been used for music projects of different types.
 
-We will examine three areas of advantage: one relating to representing music, one related to the workflow tradeoffs for the programming composer, and one relating to implementation in Max specifically.
+We will examine various advantage for the user of working in Lisp, relating to representing music, to the workflow tradeoffs for the programming composer, and to implementation in Max specifically.
 
-Lisp as a programming language for music
-----------------------------------------
 Lisps are unusual  in several ways (compared to the candidate languages mentioned) that make them almost uniquely suited to representing music.
 (To be clear, some of these traits are shared by some of the other candidates, but none of the candidates share all of these traits with Lisps!)
 
@@ -172,12 +173,126 @@ The results of this compatibility between Lisp and music are several and of majo
 The last point applies beyond music, and has even given rise to a common saying within the Lisp programming community, that 
 "code is data, data is code". This trait is referred to in the programming lanugage theory (PLT) community as "homoiconicity", a term to which we will be returning quite a bit.
 
-REPL oriented programming - hot code reloading
+Dynamic code loading and the REPL 
 ----------------------------------------------
-One effect of the homoiconicity of Lisp is that it is easy to send Lisp code to the Lisp interpreter for evaluation, and
-the interpreter can return results of evaluation as output text that is, in turn, usable as code.
-This style of interactive development is sometimes called REPL-oriented programming, where REPL refers to the intepreters Read Evaluat Print Loop.
-With little work, one can add customizations to a text-editor to enable sending blocks of code directly to the S4M Scheme intrepreter over the local network. (TODO: link to the video on this)
+A result of the Lisp is designed, with evaluation of new code a key part of the lanuage, is that the common programming workflow in Lisp incorporates an ongoing process of evaluating new code into the interpreter and examining the interpreter's output, while the program runs. 
+This style of interactive development is sometimes called REPL-oriented or REPL-driven programming, where REPL refers to the intepreters Read Evaluat Print Loop.
+At any point, the programmer can send new expressions to the Lisp interpreter (the "read"), which *evaluates* the expressions, updating the state of the Lisp environment, and then *prints* the return value of evaluating the expressions. 
+The programmer can use Lisp code itself to inspect the current environment, or even to build new functions and expressions to evaluate.
+
+This is closely related to Lisps *macro* facility - a Lisp macro is a block of code that is evaluated (the macro call) and returns new code (the macro expansion) that is then in turn evaluated.  
+
+These facilities - dynamic code evaluation, the REPL, and Lisp macros - are what make Lisp a "highly dynamic" lanuage.
+Taken together they create possibilities for the composer-programmer that are highly productive and are appropriate to the context of a composer programmer and the needs of the algorthmic music maker.
+
+For example, the programmer can separate code into files that contain score data and files that contain functions for altering or creating music, where the functions might be musical transformations of algorithms for generating new content given base score data.
+The files of functions can be incrementally adjusted and reloaded with new definitions without restarting the piece or resetting the score data.
+In Scheme for Max, this is supported with the "read" message, which reads a new file into the interpreter without erasing anything currently running.
+
+This can also be done from text user interface objects in the patch, including the s4m.repl object, which contains a small text window for typing expressions directly in the patch and sending them to the interpreter. 
+And it can even be done from an external text editor, with the editor and a helper program sending selected blocks of code over the local network as OSC (Open Sound Control) messages into Max, where they are then sent on to the interpreter.
+Max itself has a console window to show messages from the Max system, and this is used for the Print stage of the REPL loop so that the results of dynamic evaluation can be easily read by the programmer.
+
+.. todo
+  do I need the next paragraph??
+
+In the larger community of software development, it is somewhat of a truism that highly-dynamic languages are ideal for small teams and smaller programs, but that as code bases and teams become larger, the possibility of someone redefining a function on the fly becomes a double edged sword. (CITE, EXAMPLE).
+However, the typical composer-programmer is, I would argue, in the sweet spot for this kind of development. 
 
 
- 
+Macros and Domain Specific Languages
+-------------------------------------
+One of the hallmarks of Lisp is the Lisp Macro.
+We have previous discussed the ease with which the Lisp programmer can programmatically create lists of symbols that are then evaluated as syntactic Lisp expressions - code that makes code - a Lisp macro is a formalization of this process. 
+Macros look to the programmer much like a regular function call, but by virtue of being defined as a macro, they are first called in a special evaluation pass known as the macro-expansion pass.
+This runs the code in the body of the macro over the *symbolic arguments* passed in to it, returning a programmatically created list structure (the macro-expansion) that is then immediately evaluated. 
+Essentially, macros are code blocks that execute twice - first to build the code, then to evaluate it. (Technically they can be nested to repeat the first step.)
+
+Macros enable programmers to create Domain Specific Languages - languages within a language that are closer in syntax and sematics to the problem domain than to the host langauge. 
+This makes it possible for code that uses the macros (the "domain code") to be visually aligned with the problem domain, making them easier to read and faster to type. 
+For example, a macro for scheduling events in a score can look like the below:
+
+.. code: lisp
+  (score 
+    1:1       (fun-1 fun-2 fun-3)
+    +8        (fun-4 :dur 1b :repeat 4)
+    9:1:120   action-4
+   )
+
+The time argument, ``1:1:120``, ``+8``, and ``9:1:120`` are written as if they will passed in as symbol arguments, but the macro layer converts them into musically meaningful time representations, allowing the visual representation in code of the score to be more easily read by the composer.
+But to clarify, this is *not* a separate score language with limited functionality, as is found in, for example, Csound.
+This *is Scheme code* - it can include any Scheme functions and even be built by Scheme functions. 
+Thus the use of a language with Macro facilities enables the composer to work with different kinds of code - function defining code and score code - in one language without giving up the expressive power of high level language facilities.
+
+Max and Lisp syntax compability
+-------------------------------
+Finally, there is the fortunate coincidence of the Max message syntax being almost perfectly compatible with Lisp syntax.
+This happy accident (we can assume!) means that a user can create and run Scheme code in Max messages themselves, using Max message building functions to do so.
+While not something I was expecting when originally embarking on the design, this has a profound effect on the ease with which one can build Max patches that interact with Scheme for Max programs.
+
+A Max message consists of Max *atoms*, which may be integers, floating point numbers, and are separated by spaces. 
+It may also consist of several special characters: the dollar sign, the comma, and the semi-colon.
+When a message box sends a message to another message, a numeric dollar sign argument such as "$1" is used to interpolate the numbered argument from the received message, acting as a template.
+The semi-colon indicates the message is a special message sent to the Max engine itself.
+And the comma is used to indicate that the message is actually two message, with the two comma-separated halves being sent sequentially.
+
+Notably, the parenthesis, used in Lisp to delimit Lisp expressions, and the colon, used to indicate that a symbol should be a keyword (a special kind of symbol), have no special significance to Max.
+Conversely, the dollar sign has no significance in Lisp, and the semi-colon (used for comment characters) and the comma (used for back-quote escaping) are easily
+avoided.
+
+The result of this is that rather than require the programmer to create special handlers in their code to respond to Max messages, as one does in the JS object, we are able to simply evaluate in coming messages *as if they were Lisp code*.
+To simplify this, Scheme has one special trick - it will pretend an incoming expression is surrounded by parentheses if they are not there.
+It will also accept message with parentheses, including nested parentheses, processing these as Scheme code.
+In (FIGURE) we see several Max messages acting as Lisp code.
+
+This makes connecting Max input elements to a Scheme for Max program simple, and means that the containing patch can, if desired, provide a visual reminder of exactly what is going on in the Scheme program.
+
+Having built some complex programs myself in JavaScript in Max prior to building Scheme for Max, I am of the opinion that this is a significant advantage of the language choice.
+
+
+Why use s7 Scheme?
+==================
+When beginning the project, after determining that a Lisp-family language was appopriate, I evaluated a number of Scheme and Lisp implementations as candidates.
+Let us know look at why the s7 implementation in particular was chosen.
+
+Computer Music use
+------------------
+s7 was created and is maintained by Bill S., a professor emeritus from the Stanford music centre (CCRMA), and  the author of Common Lisp Music and the Snd editor. 
+It's principle uses are in Bill S's Snd editor, essentially an Emacs-like audio editing tool, and in Common Music 3, the algorithmic composition platform created by Henrik Taube.
+Because of this pedigree, the design drivers for s7 are compatible with Scheme for Max, with the author choosing that which makes sense for composer-programmers working on solo projects (discussed further below). 
+
+And perhaps even more importantly, there is a significant body of work from Common Music that can be used with very minimal adjustment in Scheme for Max. 
+Indeed, if I were to describe S4M in one sentence, it would be that it is a cross between Common Music and the Max JS object.
+
+Linguistic Features
+--------------------
+Not suprising, given Bill S's long involvement with Common Lisp music systems, s7 is, by Scheme standards, highly influenced by Common Lisp. 
+It includes Common Lisp style *keywords*, symbols beginning with a colon and that act as symbols that always evaluate to themselves.
+It supports Common Lisp style macros, rather than the syntax-case or syntax-rules macros in most modern Schemes, and to support using these safely (without inadvertent variable capture), it includes support for first-class environments (lexical environments can be used as values for variables), and includes the gensym function to create unique handles in the context of a macro definition.
+
+Interestingly, and fortunately for the purpose of adoption, these are features also shared with Clojure, a modern Lisp variant with wide use in business and web application circles. 
+
+We can assume these features were chosen by Bill as appropriate for his use case - the solo composer-programmer - and indeed in my personal experience have been highly productive for working on projects in S4M.
+
+Ease of embedding
+-----------------
+Of the Lisp languages, Scheme in particular has a further pragmattic advantage.
+Due to its minimal nature, Scheme is unusually simple to embed in another language, as a functional Scheme interpreter can be created in remarkably small amount of code. 
+This has led to numerous implementations of Scheme as minimal extension languages, such as Guile, Elk, Chibi, TinyScheme, and s7 (the implementation used for S4M). 
+
+(s7 is spelled lowercase and is named after a Yamaha motorcycle, for the curious! CITE BILL)
+s7 was orginally forked from TinyScheme, which in turn was based on SIOD - Scheme in one Day - a project by computer science professor George Carrette intended to make the smallest possible Scheme interpreter that could be embedded in a C or C++ program.
+
+s7 is available as two files, s7.h and s7.c that can simply be included in a source tree.
+The foreign function interface (FFI) is very straightforward and will be discussed further in the implementation chapter.
+
+And, importantly, s7 is fully thread-safe and re-entrant - meaning that there is no issue having multiple, isolated s7 interpreters running in the same application. 
+This cannot be said of all embeddable languages, or even of all Scheme implementations, and makes it appropriate for Max, where a patch may, between itself and its subpatches, have an unlimited number of s4m objects.
+
+License
+--------
+s7 uses the BSD license, a permissive free software licsense. 
+The BSD license imposes no redistribution restrictions they way the GPL family of licenses do, thus user-developers wishing to use it in a commercial project are free to do so with no obligations.
+This is a point in s7's favour as many Ableton Live device developers sell devices, and many Max developers sell standalone Max applications.
+
+

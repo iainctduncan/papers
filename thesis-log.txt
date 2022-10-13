@@ -1,7 +1,16 @@
 Log of thesis work
 
+2022-10-11 - 2100 words
+  - design - added 620 words
+  - features_usage.rst up to 1506 words  
+
+2022-10-11 - 1200 words
+  - design
+    - left off at 4242 words 
+
 2022-10-10 - 3032 words
-  - working on design.rst
+  - working on design.rst, 
+    - left off at 3032 words
 
 2022-10-09 - ~1000 words
 - worked on goals
