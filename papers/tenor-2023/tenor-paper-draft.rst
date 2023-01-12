@@ -320,6 +320,8 @@ Lisp Macros
 ------------------------
 
 A Lisp macro is a special type of callable form, with two key differences from a function.
+While s7 is a Scheme, the macro system it supports is the Common Lisp style def-macro variety,
+rather than a Scheme specific variety such as syntax-case or syntax-rules.
 
 First, when we use a macro, it looks like we are calling a function, but the rules of evaluation 
 for the arguments are different.  
