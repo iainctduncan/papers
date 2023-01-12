@@ -46,6 +46,8 @@ In modern versions of Csound, p-fields (as the parameter points are called) may 
 Score statements may also use some special characters in place of numbers, where these alludie to previous statements,
 such as the . and + symbol to repeat and increment respectively.
 
+.. code::
+
   ; three sequential notes of duration 1, at beat 0, 1, and 2
   i 1   0   1   .9
   i 1   +   .   .8
@@ -183,6 +185,8 @@ In the examples below, lines beginning with a ; are comments, and
 are ignored by the interpreter, while lines beginning with > are the
 printed return value from the intepreter in an interactive REPL (read-evaluate-print-loop) session. 
 
+.. code:: scheme
+
   ; call the + function, returning 6
   (+ 1 2 3)
   > 6
@@ -194,6 +198,8 @@ printed return value from the intepreter in an interactive REPL (read-evaluate-p
 
 Expressions may be nested, in which case they are evaluated from the innermost outwards,
 with inner expressions being substitued with their return values prior to outer evaluation.
+
+.. code:: scheme
 
   (* (+ 1 2) (+ 3 4)) 
   ; expands behind the scenes first to (* 3 7)
