@@ -72,8 +72,8 @@ In contrast with MIDI, we can have as many parameters for an event as we would l
 confident that all parameters will be used in the very first calcuation of audio, as opposed to potentially
 arriving to the instrument after the first sample of audio is rendered, as can be the case with MIDI.
 This because sending many paramaters to a MIDI instrument requires sending many sequential
-controller messages over a serial network. Additionally, we are given 32 or 64 bit accuracy
-in floating point numbers, compared to the MIDI 7 and 14 bit numbers.
+controller messages over a serial network.  Additionally, we are given 32 or 64 bit accuracy
+in floating point numbers, compared to the MIDI 7 and 14 bit numbers. (CITE)
 
 Tooling
 ^^^^^^^^^
@@ -81,6 +81,7 @@ We can use sophisticated text-oriented programming tools for editing, searching,
 storing, and analysing. Many text editors have small programming languages built
 in to them for generating text programmatically, and  we can run easily run external programs over text files, 
 allowing algorithmically assisted composition at the editing stage.
+(TODO example of CSound score processing tool CITE)
 
 Size
 ^^^^^^^^^
@@ -176,7 +177,7 @@ Before we delve into macros, we should review Scheme function syntax and evaluat
 (If you are familiar with Lisp or Scheme, you can probably skip this section.)
 
 Scheme code is composed of s-expressions, which are parenthetically enclosed series 
-of white-space delimited tokens, such as (a b c d).
+of white-space delimited tokens, such as **(a b c d)**.
 When the Scheme intepreter evaluates an s-expression, it interprets the first 
 token as a symbol representing a function, invoking it with the 
 rest of the tokens used as arguments to the function. 
@@ -213,7 +214,7 @@ Nested calls to the list function produce nested lists.
   (list (list 1 2) (list 3 4))
   > ((1 2) (3 4))
 
-Variables are defined by binding symbols to values with the define statement. 
+Variables are defined by binding symbols to values with the **define** statement. 
 Evaluating a variable returns the value to which it is bound. 
 (Note that in s7 Scheme, the define statement itself also returns the value bound.)
 
@@ -227,14 +228,14 @@ Evaluating a variable returns the value to which it is bound.
   my-var
   > 99
 
-Functions are defined with either the define or lambda statements (which are identical but for syntax). 
+Functions are defined with either the **define** or **lambda** statements (which are identical but for syntax). 
 Below are two examples of defining a function named "sum-list" that receives two arguments and 
 returns a list consisting of the two arguments and their sum.
 
 The lambda form returns an anonymous function. In the example below, we 
-create a function that takes two paramaters, a and b, and
+create a function that takes two paramaters, **a** and **b**, and
 then returns a list. The return value of the lambda (which is our function) is then
-bound to the symbol sum-list through the define call.
+bound to the symbol **sum-list** through the define call.
 
 .. code:: scheme
 
@@ -268,7 +269,7 @@ a printed form that looks exactly like an s-expression used in our program code.
 This is no accident, and is in fact the defining feature of the Lisp family of
 languages, of which s7 Scheme is one. (CITATION)
 If we construct a list programmatically, we can then execute it as if it is a 
-regular block of code by using the eval function.
+regular block of code by using the **eval** function.
 
 .. code:: scheme
 
@@ -284,7 +285,7 @@ Thus, we can build programs programmatically. There is no difference to the
 interpreter between a list we make with calls to the list function and one we make
 by typing code. 
 
-Finally, eval has a mirror-image form, quote. 
+Finally, **eval** has a mirror-image form, **quote**. 
 When we want to use a token in our program but have the intrepreter treat it as a symbol 
 (rather than evaluate the symbol and use the bound value)
 we can use the quote function, or its short-form, the single quotation mark.
@@ -311,7 +312,7 @@ we can use the quote function, or its short-form, the single quotation mark.
 
 Thus we can build Scheme programs dynamically by using quote to build lists,
 and then calling eval on these lists. When you say reference to Lisp as
-the "programmable programming language", this is what is meant.
+the "programmable programming language", this is what is meant. (CITE)
 
 That was a whirlwind tour, but now we are ready for macros! 
 
@@ -323,20 +324,20 @@ A Lisp macro is a special type of callable form, with two key differences from a
 First, when we use a macro, it looks like we are calling a function, but the rules of evaluation 
 for the arguments are different.  
 When a function is called, any arguments to the function are reduced as far as they can be
-prior to being used by the function body. If we pass in (+ 1 2), the code in the function
-only sees the value 3. 
+prior to being used by the function body. If we pass in **(+ 1 2)**, the code in the function
+only sees the value **3**. 
 In contrast, when a macro is called, the arguments to the macro are used by the body
-*as they are written*. If we pass (+ 1 2) to a macro, the macro receives and uses the
-s-expression (+ 1 2), not the reduced value, 3. In effect, the arguments
-are received by the body as if they were quoted.
+*as they are written*. If we pass **(+ 1 2)** to a macro, the macro receives and uses the
+s-expression **(+ 1 2)**, not the reduced value. In effect, the arguments
+are received by the body *as if they were quoted*. (CITE?)
 
 The second difference is that whatever the macro returns is then evaluated.
 The normal scenario being that the macro returns a list that we want to have treated
 as code. It builds a list programmatically as in our earlier examples, and the
-eval of that list (executing the code we have built programmatically) is automatic.
+evaluation of that list (executing the code we have built programmatically) is automatic.
 
 Put another way: arguments are passed in as symbolic expressions, and the return value
-is evaluated again. Our job is build and return a program (as a list), and the macro
+is evaluated again. Our job is to build and return a program (as a list), and the macro
 will run it when it returns. (This can involve recursively nested macros, but we can
 ignore that for the purposes of this discussion.)
 
@@ -388,11 +389,11 @@ Let us try the same call:
 
 Two things have happened here. First we see the output from 
 the post call worked, and showed us that the body of the macro is 
-working with the s-expression (+ 3 4). 
+working with the s-expression **(+ 3 4)**. 
 And then we see an error message. The error message is coming
 from the automatic evaluation of the list we are returning. 
-The list returned is (1 2 (+ 3 4)), and if try to evaluate that
-at the repl, first (+ 3 4) is reduced to 7, and then the interpeter
+The list returned is **(1 2 (+ 3 4))**, and if try to evaluate that
+at the repl, first **(+ 3 4)** is reduced to **7**, and then the interpeter
 complains that it doesn't know how to apply the function 1 to
 the arguments 2 and 7.
 
@@ -416,7 +417,7 @@ is indeed a function, all is fine. Let's try valid argument lists.
   s4m: args in list (+ 2 (+ 3 4))
   > 9
 
-To help the intrepid macro programmer, Lisps include a macroexpand facility.
+To help the intrepid macro programmer, Lisps include a **macroexpand** function.
 Enclosing a macro call in macroexpand will execute the macro, but skip the final
 automatic evaluation of the returned list.
 
@@ -427,7 +428,8 @@ automatic evaluation of the returned list.
   > (+ 2 (+ 3 4))
 
 And we can see that if we use macro expand with our problematic list, we get
-back our list, but we do not get an error message as we don't try to evaluate it.
+back our list, but we do not get an error message as the interpreter no
+longer tries to evaluate it at the end.
 
 .. code:: scheme
 
@@ -436,11 +438,11 @@ back our list, but we do not get an error message as we don't try to evaluate it
   > (1 2 (+ 3 4))
 
 There is another way we can avoid the error we see above, and that is to write
-our macro such that we do not evaluate the list we have built. We can do this
+our macro such that we do not evaluate our problematic list. We can do this
 by returning some other harmless list, and while this may seem counterproductive,
 it give us a way to write functions that receive s-expressions. Our macro becomes
 a callable that works on symbolic arguments, potentially produces side-effects 
-(such as our call to post), and returns a value that is harmless to evaluate.
+(such as our call to post), and returns a value that is harmless and ignored.
 
 .. code:: scheme
 
@@ -451,7 +453,7 @@ a callable that works on symbolic arguments, potentially produces side-effects
     ; now we return false, which evals as false without error
     #f )
 
-Calling it with any arguments is now safe, no error is produced.
+Calling it with any arguments is now safe; no error is produced.
 
 .. code:: scheme
 
@@ -464,14 +466,14 @@ Calling it with any arguments is now safe, no error is produced.
   > #f
 
 The reason macroexpand produces the exact same output is because evaluating false
-returns false, no matter how many times we do it. We say #false is a value
+returns false, no matter how many times we do it. We say false is a value
 that evaluates to itself. 
 
 An alternative for advanced programmers is to find a way to return a quoted
 list, so that the macro evaluation pass gives us the list we want (rather than a call to a function).
 This requires rather more involved Lisp programming, so it will not be explained
 here, but is included for the experienced or curious. (See a Lisp reference on 
-"backquoting" for an explanation)
+"backquoting" for an explanation.)
 
 .. code:: scheme
 
@@ -485,7 +487,7 @@ here, but is included for the experienced or curious. (See a Lisp reference on
  
 The important business for our discussion is that we can pass code-blocks in the form of parenthentical
 expressions or symbols into macros, which can then run programs that interpret these almost however we would like.
-The parenthical expression can be a list of arbitrary symbols that can be parsed, transformed,
+The parenthetical expression can be a list of arbitrary symbols that can be parsed, transformed,
 split, merged, and so forth, and this is done simply by code that is running in the interpreter and
 that can use any other code definitions currently valid in our intepreter environment. 
 Now we have everything we need to make score systems with macros. 
@@ -494,14 +496,18 @@ A Simple Macro Score
 ---------------------
 Given that we are now able to handle arbitrary s-expressions as we see fit, we can now
 make a macro that will be used similarly to a Csound score. If we are content with 
-having to enclose our lines in parentheses, these can be expressed concisely. 
+having to enclose our lines in parentheses, this can be expressed concisely. 
 The result of processing each score line will be a call to a schedule function,
 which will put a future call to an output function on to the Max scheduler, through the
-S4M delay-ms function. This is used to schedule a function at some point in the future,
+S4M **delay** function. This is used to schedule a function at some point in the future,
 expressed in milliseconds.
 
-Our desired interface with the score will look like the below, where score
-is the score macro, play-note is the output function, 500 is the milliseconds per beat.
+Our desired interface with the score will look like the below, where **score**
+is the score macro, **play-note** is the output function to which we want to delegate
+output, and **500** is the number of milliseconds per beat.
+Note that because this is a macro, we do not have to have defined **C2** and **D2**;
+the macro will receive those as quoted symbols. We can leave making sense of those
+to our output function (**play-note**).
 
 .. code:: scheme
 
@@ -513,19 +519,19 @@ is the score macro, play-note is the output function, 500 is the milliseconds pe
     ; etc
   )
 
-We will use a for-each loop in the score macro to iterate through all the score lines,
-passing them to a lambda function that in turn uses a schedule helper. Note that
+We will use a **for-each** loop in the score macro to iterate through all the score lines,
+passing them to a **lambda** function that in turn uses a **schedule** helper. Note that
 for-each returns nothing (it is called to cause side effects), so we do not need to 
 explicitly return false to avoid the errors previously encountered. Note also that
-the signature of the macro uses the dot notation to bundle all the s-expressions
-of score events into a list, exprs. Our macro expects to be receive a symbol name of
-an output function argument, output-fn-sym, which will be eval'd to get our actual
+the signature of the macro uses the dot notation to bundle an arbitrarily long group of s-expressions
+of score events into a list, **exprs**. Our macro expects to receive a symbolic name of
+an output function argument, **output-fn-sym**, which will be eval'd to get our actual
 output fun. This of course depends on the output function and the schedule function
-being defined so we will start with those. Our output function, play-note, could use any Max
-facility for playing audio, but for this example, it will simply print to the console.
-Our schedule function simply destructures the list of event parameters, using the
+being defined so we will start with those. Our output function, **play-note**, could use any Max
+facility for playing audio (through the Scheme for Max interface), but for this example, it will simply print to the console.
+Our schedule function simply destructurs the list of event parameters, using the
 first (the beat) to calculate the start time for the scheduled event, and making a new
-list with the remaining event params as the arguments to pass to the output function. 
+list with the remaining event parameters as the arguments to pass to the output function. 
  
 .. code:: scheme
 
@@ -578,7 +584,7 @@ Scheme, this is not much additional work.
           (if (not-null? (rest exprs))
             (out-loop cur-beat (rest exprs)))))))
 
-And now we can use the + symbol to increment beats.
+And now we can use the **+** symbol to increment beats:
 
 .. code:: scheme
 
@@ -591,9 +597,10 @@ And now we can use the + symbol to increment beats.
 
 Further extensions are likewise straightforward. We could, for example, decide
 we don't like enclosing each statement in parentheses, and come up with an alternate
-syntax. Provided we give some indication (other than a return) of a new line, this
-would simply require a new loop at the beginning to take all the tokens and first
-group then into the per-event lines. For example we could preface end all lines with a semi-colon.
+syntax. Provided we give some indication other than a carriage return of a new line, this
+would simply require a new loop at the beginning that ingests all the tokens of all the expressions
+and then explicitly groups them into the per-event lines. 
+For example we could preface end all lines with a semi-colon.
 
 .. code:: scheme
 
@@ -603,6 +610,23 @@ group then into the per-event lines. For example we could preface end all lines 
     3.0    .5 E2 .49 ;
   )
 
-TODO: some additional possibilities, limitations, conclusions
+TODO: 
+
+- some additional possibilities
+- limitations
+  - characters we can't sue
+  - mention we didn't discuss hygeine and capture
+- conclusions
+
+Citation possible
+
+- Touretzkey - GISC
+- Graham - On Lisp
+- ?? SICP on evaluation?
+- Csound book on scores
+- some csound score utility
+- s7 documentation on s7 approach to hygeine
+- perhaps something from Notes from the Metalevel or Simoni algorithmic composition
+
 
 
