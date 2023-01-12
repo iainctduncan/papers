@@ -1,0 +1,40 @@
+Tenor paper
+
+- about 600 words per page, we need 2500-3600 words
+  - at 2800 words right now
+
+Using lisp macros as scores with Scheme for Max & Scheme for Pd
+
+advantages
+- a textual score can take advantage of tools for working in plain text 
+- the score is a program, it is parsed and run, from top to bottom
+  - as such elements of how the score works can be redefined part way through processing of a score
+    by calling functions
+
+- as the elements of the score are translated to function calls
+
+- inversion of control - what the score means can be easily changed by the composer-programmer without 
+  changing the score parser 
+
+Points to make
+- in a text score systems, we have a score parser - that which takes in the incoming text and transforms
+it into something usable by other parts of the program.
+In a normal case this would be a data structure that is then consumed by other parts of the program.
+For example, in Csound, the orchestra score is parsed to become the orchestra data. 
+Some program (our score parser) is run and uses this text as input. 
+This program is typically complex beyond that which would be hackable by the user composer
+
+- main point of comparison can be csound I guess
+
+- the output of a macro based score could be either a data structure or file for further use
+  or execution of calls in real time, putting events on the scheduler.
+
+- how to explain macros
+  
+
+Nomenclature:
+- we will call the composer-programmer and the framework-programmer 
+
+
+
+
