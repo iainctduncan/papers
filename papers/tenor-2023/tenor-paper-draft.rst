@@ -612,6 +612,8 @@ For example we could preface end all lines with a semi-colon.
     3.0    .5 E2 .49 ;
   )
 
+Length: 4700 words
+
 TODO: 
 
 - some additional possibilities
