@@ -208,12 +208,16 @@ with inner expressions being substitued with their return values prior to outer 
   
 Nested calls to the list function produce nested lists.
 
+.. code:: scheme
+
   (list (list 1 2) (list 3 4))
   > ((1 2) (3 4))
 
 Variables are defined by binding symbols to values with the define statement. 
 Evaluating a variable returns the value to which it is bound. 
 (Note that in s7 Scheme, the define statement itself also returns the value bound.)
+
+.. code:: scheme
 
   ; define a variable named my-var.
   ; the define call also returns the value
@@ -232,6 +236,8 @@ create a function that takes two paramaters, a and b, and
 then returns a list. The return value of the lambda (which is our function) is then
 bound to the symbol sum-list through the define call.
 
+.. code:: scheme
+
   (define sum-list 
     (lambda (a b) 
       (list a b (+ a b))))
@@ -239,11 +245,15 @@ bound to the symbol sum-list through the define call.
 There is also a short hand version of the above in which the function name
 is the first value in the parameter list expression.
 
+.. code:: scheme
+
   (define (sum-list a b)
     (list a b (+ a b)))
   
 After making these definitions, we can call sum-list by evaluating an s-expression with the
 sum-list symbol in the first slot. 
+
+.. code:: scheme
 
   (sum-list 1 2)
   > (1 2 3)
@@ -259,6 +269,8 @@ This is no accident, and is in fact the defining feature of the Lisp family of
 languages, of which s7 Scheme is one. (CITATION)
 If we construct a list programmatically, we can then execute it as if it is a 
 regular block of code by using the eval function.
+
+.. code:: scheme
 
   ; define a list of our function and two arguments
   (define list-code (list sum-list 1 2))
@@ -276,6 +288,8 @@ Finally, eval has a mirror-image form, quote.
 When we want to use a token in our program but have the intrepreter treat it as a symbol 
 (rather than evaluate the symbol and use the bound value)
 we can use the quote function, or its short-form, the single quotation mark.
+
+.. code:: scheme
 
   ; bind the value 10 to the symbol my-var
   (define my-var 10)
@@ -337,6 +351,8 @@ Take the following definition of a function to return a list of its three parame
 (The post function prints arguments to the console. In S4M, printed output is
 prefaced by "s4m:")
 
+.. code:: scheme
+
   (define (to-list-f a b c)
     ; print and then return a list of a, b, and c 
     (post "args in list:" (list a b c))
@@ -346,11 +362,15 @@ When we call this in our REPL, we see both the output from the call to post, and
 If we pass in a nested expression as one of the arguments, 
 we see the value is reduced before it gets to post.
 
+.. code:: scheme
+
   (to-list-f 1 2 (+ 3 4))
   s4m: args in list (1 2 7)
   > (1 2 7)
 
 Now let us do the same thing, but as a macro, using the define-macro form.
+
+.. code:: scheme
 
   (define-macro (to-list-m a b c)
     ; print and then return a list of a, b, and c 
@@ -359,6 +379,8 @@ Now let us do the same thing, but as a macro, using the define-macro form.
 
 Let us try the same call:
   
+.. code:: scheme
+
   (to-list-m 1 2 (+ 3 4))
   s4m: args in list (1 2 (+ 3 4))
   s4m: Error
@@ -374,12 +396,16 @@ at the repl, first (+ 3 4) is reduced to 7, and then the interpeter
 complains that it doesn't know how to apply the function 1 to
 the arguments 2 and 7.
 
+.. code:: scheme
+
   (eval (list 1 2 (+ 3 4))
   s4m: Error
        attempt to apply an integer 1 to (2 7) in (list a b c)
 
 If instead we pass arguments that will make our macro build a list where the first element
 is indeed a function, all is fine. Let's try valid argument lists.   
+
+.. code:: scheme
 
   (to-list-m list 2 (+ 3 4))
   s4m: args in list (list 2 (+ 3 4))
@@ -394,12 +420,16 @@ To help the intrepid macro programmer, Lisps include a macroexpand facility.
 Enclosing a macro call in macroexpand will execute the macro, but skip the final
 automatic evaluation of the returned list.
 
+.. code:: scheme
+
   (macroexpand (to-list-m + 2 (+ 3 4)))
   s4m: args in list (+ 2 (+ 3 4))
   > (+ 2 (+ 3 4))
 
 And we can see that if we use macro expand with our problematic list, we get
 back our list, but we do not get an error message as we don't try to evaluate it.
+
+.. code:: scheme
 
   (macroexpand (to-list-m 1 2 (+ 3 4)))
   s4m: args in list (1 2 (+ 3 4))
@@ -412,6 +442,8 @@ it give us a way to write functions that receive s-expressions. Our macro become
 a callable that works on symbolic arguments, potentially produces side-effects 
 (such as our call to post), and returns a value that is harmless to evaluate.
 
+.. code:: scheme
+
   (define-macro (to-list-m2 a b c)
     ; print and then return a list of a, b, and c 
     (post "args in list:" (list a b c))
@@ -420,6 +452,8 @@ a callable that works on symbolic arguments, potentially produces side-effects
     #f )
 
 Calling it with any arguments is now safe, no error is produced.
+
+.. code:: scheme
 
   (to-list-m2 1 2 (+ 3 4))
   s4m: args in list: (1 2 (+ 3 4))
@@ -438,6 +472,8 @@ list, so that the macro evaluation pass gives us the list we want (rather than a
 This requires rather more involved Lisp programming, so it will not be explained
 here, but is included for the experienced or curious. (See a Lisp reference on 
 "backquoting" for an explanation)
+
+.. code:: scheme
 
   (define-macro (to-list-m3 a b c)
     (post "args in list:" (list a b c))
@@ -467,6 +503,8 @@ expressed in milliseconds.
 Our desired interface with the score will look like the below, where score
 is the score macro, play-note is the output function, 500 is the milliseconds per beat.
 
+.. code:: scheme
+
   ; put three sequential 1 beat notes on the scheduler
   (score play-note 500
     ; beat  arbitrary note data
@@ -489,6 +527,8 @@ Our schedule function simply destructures the list of event parameters, using th
 first (the beat) to calculate the start time for the scheduled event, and making a new
 list with the remaining event params as the arguments to pass to the output function. 
  
+.. code:: scheme
+
   (define (play-note . args)
     (post "play-note" args))
  
@@ -508,6 +548,8 @@ list with the remaining event params as the arguments to pass to the output func
 This is all we need to have a simple score player. Let's try it out.
 (You'll have to take my word that the bottom three lines are appearing 500 ms apart!)
   
+.. code:: scheme
+
   (score play-note 500
     (1.0    .5 C2 .99)
     (2.0    .5 D2 .74)
@@ -525,6 +567,8 @@ This requires us to keep track of the beat we are on with some more advanced
 looping, but I hope it is evident that, provided the programmer has learned
 Scheme, this is not much additional work.
 
+.. code:: scheme
+
   (define-macro (score-2 output-fn-sym ticks/beat . exprs) 
     (let ((output-fn (eval output-fn-sym)))
       (let out-loop ((beat 0) (exprs exprs))
@@ -535,6 +579,8 @@ Scheme, this is not much additional work.
             (out-loop cur-beat (rest exprs)))))))
 
 And now we can use the + symbol to increment beats.
+
+.. code:: scheme
 
   (score-2 play-note 480
     (1.0    .5 C2 .99)
@@ -549,12 +595,14 @@ syntax. Provided we give some indication (other than a return) of a new line, th
 would simply require a new loop at the beginning to take all the tokens and first
 group then into the per-event lines. For example we could preface end all lines with a semi-colon.
 
+.. code:: scheme
+
   (score play-note 500
     1.0    .5 C2 .99 ;
     2.0    .5 D2 .74 ;
     3.0    .5 E2 .49 ;
   )
 
-TODO: limitations, conclusions
+TODO: some additional possibilities, limitations, conclusions
 
 
