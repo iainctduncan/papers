@@ -35,7 +35,7 @@ automation of author instruments, effects, etc.).
 
 An example of a Csound score i-statment is the below:
 
-.. code:
+.. code::
 
   ;instrument  start  duration  pfields p4    p5    p6    etc ...  
   i 1          0      2                 .9    4.5   .33  
