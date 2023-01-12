@@ -615,10 +615,8 @@ For example we could preface end all lines with a semi-colon.
 TODO: 
 
 - some additional possibilities
-- limitations
-  - characters we can't sue
-  - mention we didn't discuss hygeine and capture
-- conclusions
+- limitations: characters we can't use, didn't discuss capture problem 
+- conclusion
 
 Citation possible
 
