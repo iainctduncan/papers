@@ -1,5 +1,7 @@
 Log of thesis work
 
+Currently at about 10K words
+
 2022-10-11 - 2100 words
   - design - added 620 words
   - features_usage.rst up to 1506 words  
@@ -13,7 +15,7 @@ Log of thesis work
     - left off at 3032 words
 
 2022-10-09 - ~1000 words
-- worked on goals
+- worked on goals 
 
 2022-10-08 - 1700 words
 - went over admin requirements

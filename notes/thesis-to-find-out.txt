@@ -3,3 +3,7 @@ Things I need to find out:
 - is there a way to load extra files in the JS object?
   - can one load files from the file system?
   - can one reload files from the file system?
+
+- Max JS docs say: 
+"Manage global variables for use among multiple js objects or between js objects and the Max patcher."
+- is there one interpreter??

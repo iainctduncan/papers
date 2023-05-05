@@ -2,23 +2,51 @@ Thesis outline
 
 Sections
 - introduction
-- motivation
-  - target user
-  - target context
-  - target use cases
-- justification
-  - why a text language in Max?
-  - why Scheme?
-  - why not use Common Music?
-  - why not use JS in Max?
-- background
-  - about Max
-  - about Scheme
+- project goals
+  Overview
+  1) Focus on programming musical events and event-oriented tools
+  2) Support multiple contexts: scored composition, realtime interaction, and live performance
+  3) Support advanced functional and object-oriented programming techniques
+  4) Be linguistically optimized for the target use cases
+  5) Be usable in conjunction with modern, commercial tools
+  6) Support composing music that is impractical on commercial tools
+  7) Enable iterative development during musical playback
 - related work
   - JS object in Max
   - Common Music
   - Nyquist
+- Design
+  Overview
+  Why a Max extension?
+  Why not just use JavaScript?
+  Why use a Lisp language?
+    Symbolic computation and list processing
+    Dynamic code loading and the REPL
+    Macros and Domain Specific Languages
+    Max and Lisp syntax compability
+  Why use s7 Scheme?
+    Computer Music use
+    Linguistic Features
+    Ease of embedding
+    License
+- background
+  - about Max
+  - about Scheme
 - features and usage
-- implementation
-- scheduling
-- 
+- implementation - 3000 words
+  - scheduling 
+- evaluation chapter 2000 words
+  - how goals are fulfilled 
+  - use cases as tests of goals being fulfilled
+- conclusions: 2000 words
+  - summary
+  - limitations
+  - future work
+
+
+Possible sections
+- case study - harmonic step sequencer 
+- use with Ableton Live
+- evaluation of how well it works
+- limitations and future work 
+

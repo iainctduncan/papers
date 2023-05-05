@@ -1,0 +1,54 @@
+Questions for call
+
+- currently at 10k words, have from previous call 15k words
+- discuss expectations from the M.Tech program description
+  "Students will also submit a detailed project report at the time of their presentation."
+- should we discuss the expectations with Kirk? 
+- problem is I could go for 100s of pages here
+
+- how much to do on related work, and how many works do I need?
+  - more than Common Music, JS object, and Nyquist? 
+  - should I discuss Bach?
+
+- when to complete - completing in summer term ok? (for phd application)
+
+- how to deal with the business of needing to explain a boat load about Max for the sections
+  to make sense? currently doing it as I go, would it be better to have ALL the background in one section?
+
+- how much detail to go into on implementation? The source code is now about 6000 lines
+  
+-   
+
+
+George call notes
+- Jordie's thesis is good example but way bigger than needs to be done for MTech
+
+- 20 to 30 references
+
+- related work: 3000 words
+  - cover 5 to 10 related works
+  - mini thing about programming
+  - brief coverage of a bunch: 1 paragraph (1 to 3 sentences)
+    - Bach, Overtone
+
+- cover related work first before design
+  - cover how related work does not fulfill the goals
+  - brief mention more related
+
+- appendix should be smaller than a chapter
+
+- implementation chapter: 2000 words
+  - code samples are fine
+  - zooming in approach, omit the diehards
+  - scheduling chapter could or could not be in there
+
+PhD application notes
+- look at ICMC, Sound and Music Computing Conference, NIME, Audio Mostley, CMMR
+- would be good to submit a paper by the time of phd of application
+  - to a CS conference especially 
+- applying with a piece would be a good
+- look for performance conference
+
+course is Mondays and Thursdays 4:30 
+- first class is monday 9th
+- synthesizer programming

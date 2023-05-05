@@ -1,3 +1,0 @@
-- Max JS docs say: 
-"Manage global variables for use among multiple js objects or between js objects and the Max patcher."
-- is there one interpreter??
