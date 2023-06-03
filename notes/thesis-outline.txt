@@ -1,5 +1,16 @@
 Thesis outline
 
+High level Outline
+- Intro 1k words
+- Background/Related Work - (2500 words, should be 3500-4000?)
+- Project Goals: at 1500 words (prob be 2k)
+- Design: at 4868 words
+- Features: at 1500 prob 2k
+- Implementation: prob 3k words, not done yet 
+- Evaluation: 2k words
+- Conclusion: 2k words
+
+
 Sections
 - introduction
 - project goals

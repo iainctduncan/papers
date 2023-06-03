@@ -1,0 +1,8 @@
+Log of thesis work
+
+Content to repurpose
+
+
+- there is good content on Max in the "Max Background.rtf" and in "Scripting Max" to put into the background and related work
+- should be prefaced by an overview of computer music programming languages
+
