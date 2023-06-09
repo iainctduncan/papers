@@ -17,7 +17,7 @@
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Project Goals" href="goals.html" />
+    <link rel="next" title="Introduction - TODO" href="introduction.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -40,7 +40,26 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="goals.html">Project Goals</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction - TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background - Computer Music Programming Languages (4300 words)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="background.html#what-is-computer-music-programming">What is Computer Music Programming?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background.html#requirements-for-a-computer-music-platform">Requirements for a Computer Music Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="background.html#support-for-musical-abstractions">Support for Musical Abstractions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#support-for-performer-interaction">Support for Performer Interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#support-for-complex-algorithms">Support for Complex Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="background.html#computer-music-platform-families">Computer Music Platform Families</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="background.html#domain-specific-textual-languages">Domain-specific Textual Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#visual-patching-environments">Visual Patching Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#general-purpose-languages">General Purpose Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#hybrids">Hybrids</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="goals.html">Project Goals and Motivation - 1500 words</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="goals.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="goals.html#focus-on-programming-musical-events-and-event-oriented-tools">1) Focus on programming musical events and event-oriented tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="goals.html#support-multiple-contexts-scored-composition-realtime-interaction-and-live-performance">2) Support multiple contexts: scored composition, realtime interaction, and live performance</a></li>
@@ -49,10 +68,10 @@
 <li class="toctree-l2"><a class="reference internal" href="goals.html#be-usable-in-conjunction-with-modern-commercial-tools">5) Be usable in conjunction with modern, commercial tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="goals.html#support-composing-music-that-is-impractical-on-commercial-tools">6) Support composing music that is impractical on commercial tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="goals.html#enable-iterative-development-during-musical-playback">7) Enable iterative development during musical playback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="goals.html#conclusion">Conclusion</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="design.html#overview">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">High-Level Design (4775 words)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="design.html#why-a-max-extension">Why a Max extension?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design.html#why-not-just-use-javascript">Why not just use JavaScript?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design.html#why-use-a-lisp-language">Why use a Lisp language?</a><ul>
@@ -62,8 +81,8 @@
 <li class="toctree-l3"><a class="reference internal" href="design.html#max-and-lisp-syntax-compability">Max and Lisp syntax compability</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="design.html#why-use-s7-scheme">Why use s7 Scheme?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="design.html#computer-music-use">Computer Music use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#of-the-possible-lisp-languages-why-use-s7-scheme">Of the possible Lisp languages, why use s7 Scheme?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#use-in-computer-music">Use in Computer Music</a></li>
 <li class="toctree-l3"><a class="reference internal" href="design.html#linguistic-features">Linguistic Features</a></li>
 <li class="toctree-l3"><a class="reference internal" href="design.html#ease-of-embedding">Ease of embedding</a></li>
 <li class="toctree-l3"><a class="reference internal" href="design.html#license">License</a></li>
@@ -71,18 +90,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="related_work.html">Related Work</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="related_work.html#the-max-javascript-object">The Max JavaScript object</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="related_work.html#overview">Overview</a></li>
-<li class="toctree-l3"><a class="reference internal" href="related_work.html#language">Language</a></li>
-<li class="toctree-l3"><a class="reference internal" href="related_work.html#thread-of-execution">Thread of Execution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="related_work.html#file-loading">File Loading</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="related_work.html#the-common-music-algorithimic-music-platform">The Common Music algorithimic music platform</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="features_usage.html">Features and Usage</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="features_usage.html">Features and Usage  (4760 words)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="features_usage.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="features_usage.html#object-initialization">Object Initialization</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="features_usage.html#bootstrap-files">Bootstrap files</a></li>
@@ -93,8 +101,23 @@
 <li class="toctree-l2"><a class="reference internal" href="features_usage.html#input">Input</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="features_usage.html#inlet-0-scheme-expressions">Inlet 0 Scheme Expressions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="features_usage.html#inlet-1">Inlet 1+</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#sending-messages">Sending Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#buffers-tables">Buffers &amp; Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#dictionaries">Dictionaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#s4m-arrays">S4M arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#the-s4m-grid-object">The s4m.grid object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#garbage-collector-functions">Garbage collector functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#scheduling-functions">Scheduling Functions</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling - MAYBE a rework of the ifcp paper??</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion - TODO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html#future-work">Future Work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html#conlusion">Conlusion</a></li>
 </ul>
 </li>
 </ul>
@@ -120,17 +143,20 @@
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="goals.html">Project Goals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="design.html">Design</a></li>
-<li class="toctree-l1"><a class="reference internal" href="related_work.html">Related Work</a></li>
-<li class="toctree-l1"><a class="reference internal" href="features_usage.html">Features and Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction - TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background - Computer Music Programming Languages (4300 words)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goals.html">Project Goals and Motivation - 1500 words</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">High-Level Design (4775 words)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features_usage.html">Features and Usage  (4760 words)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scheduling.html">Scheduling - MAYBE a rework of the ifcp paper??</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion - TODO</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="goals.html" title="next chapter">Project Goals</a></li>
+      <li>Next: <a href="introduction.html" title="next chapter">Introduction - TODO</a></li>
   </ul></li>
 </ul>
 </div>
