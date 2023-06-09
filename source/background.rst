@@ -1,21 +1,19 @@
-Background - Computer Music Programming - 3486 words
-=====================================================
+Background - Computer Music Programming Languages (4300 words)
+==============================================================
 
-..
-  - Families
-
+Status: 2023-06-02 edited, needs citations, needs proof read
 
 What is Computer Music Programming?
 -----------------------------------
 To frame the discussion of the the motivation and goals of the Scheme for Max project, I will 
-first briefly survey the computer music programming landscape, touching several families of 
+first briefly survey the computer music programming landscape, discussing several families of 
 language, their approaches to programming computer music, and the advantages and disadvantages of these
 for various kinds of user and projects. 
 
 To begin, I would like to clarify exactly what I mean by "computer music programming".
 I am using the term to refer to programming in which both the tools used and the composition itself
 are programmed on a computer. 
-I say this using the word "composition" is used in its broadest sense - the composition could
+I say this using the word "composition" in its broadest sense - the composition could
 be a linearly scored piece of set length and content, or an interactive program with which 
 a performer interacts but that contains prepared material of some kind. 
 This is distinct, for example, from commercial music tools (such as sequencers or digital
@@ -306,8 +304,6 @@ significant and convoluted programming.
 
 TODO: visual example of looping?
 
-.. good to here
-
 General Purpose Languages
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 Our third family of computer music programming languages is that of 
@@ -370,7 +366,7 @@ General purpose languages are thus attractive to composers wishing
 to create complex algorithmic music, or to those wishing to create sophisticated
 frameworks or tools of their own that they may reuse across many pieces. 
 With general purpose languages, the line between composer-programmer and tools-programmer
-is blurred - in fact, managing this division is one of the tricker problems 
+is blurred and managing this division is one of the tricker problems 
 with which the programmer must wrestle.
 These languages are, not surprisingly, popular amongst professional or serious
 programmers who want to make music, and much less so among musicians who simply want
@@ -380,7 +376,7 @@ General purpose languages can also provide rich facilities for
 performer interaction, but again, at the cost of giving the programmer much more
 to do. Numerous libraries exist for handing MIDI input, listening to
 messages over a network, and interfacing with custom hardware. 
-However, the amount of work and code required to get use these is dramatically
+However, the amount of work and code required to use these is dramatically
 higher than doing the same thing in a patching environment - an order of 
 magnitude, at least!
 However, *relatively speaking*, the additional work required decreases as the complexity
@@ -397,43 +393,47 @@ Hybrids
 
 Finally, we have what is arguably the most powerful approach to computer music programming:
 the hybrid. 
-While early versions of the tools for each of the previously examined families
+While early versions of the tools in each of the previously examined families
 were very much all-or-nothing scenarios, as programming tools and computers have improved,
-it has become practical to make computer music using more than one approach
+it has become practical to make computer music using more than one approach at a time,
 in an integrated system. 
-This has been explored in a wide variety of schemas.
-One can now run Csound from with a C++ or Python program, interacting with the Csound
-engine using its application programming interface (API). 
-One can run Csound or SuperCollider inside a visual patcher, using open-source
-extensions to Max and Pd that embed the DSL engine.
-One can run a general purpose languauge, to some degree, inside
-a music DSL, such as Python inside Csound (CITE Andrés Cabrera).
-And one can run a general purpose language inside a visual patcher, the most common 
+This has been explored in a wide variety of schemas, for example:
+one can now run Csound from with a C++ or Python program, interacting with the Csound
+engine using its application programming interface (API);
+one can run Csound or SuperCollider inside a visual patcher, using open-source
+extensions to Max and Pd that embed the DSL engine;
+one can run a general purpose languauge inside
+a music DSL, such as Python inside Csound (CITE Andrés Cabrera);
+and one can run a general purpose language inside a visual patcher, the most common 
 of these being the JavaScript engine available as part of Max.
-Note that this differs from *extending* the patcher with C or C++, as the JavaScript
-integration layer is much more practical for a composer-programmer.
+
+Note that these examples differ from the previously mentioned practice of 
+*extending* a patching language or DSL with C or C++.
+In these hybrid scenarios, the embedded general purpopse language is used
+by the *composer-programmer* to make piece specific code, 
+rather than creating reusable tools in the environments extension language.
 However, it is feasible to prototype algorithms in an embedded high-level language such as 
 JavaScript, porting them later to the extension language (C or C++) 
 once they have reached sufficient complexity and stability to warrant the work.
 
-The combination of these approaches provides the programmer with a great deal
-more in options. They can, for example, use visual patching to quickly
+In the hybrid scenario, the combination of the various platofrms 
+provides the programmer with a great deal more in options. 
+One could, for example, use visual patching to quickly
 make a performer interaction layer, have this layer interact with 
 a scored piece in the CSound engine, and simulatenously use JavaScript to
-drive complex algorithms that interact with the piece,
-providing, in essence, the best of all worlds.
+drive complex algorithms that interact with the piece.
 
 The cost of this approach is simply that it requires the programmer to learn
 more - a great deal more. Not only must they be familiar with each of the individual
-tools used in the hybrid, but they must also learn how these integrate with each other.
-And this requires not just learning the integration layer (e.g., the nuances of the csound~
+tools comprising the hybrid, but they must also learn how these integrate with each other.
+This requires not just learning the integration layer (e.g., the nuances of the csound~
 objects interaction with Max), but typically also understanding the host layer's
 operating model in greater depth than is required of the typical user.
 For example, synchronizing the Csound score scheduler and the Max global
 transport requires knowing each of these to a degree beyond that required of the 
 regular Csound or Max user.
 
-Nonetheless, the advantages of this approach are profound.
+Nonetheless, the advantages of the hybrid approach are profound.
 The hybrid programmer has the opportunity to prototype tools in the 
 environment that presents the least work, and to move them to a more 
 appropriate environment as they grow in complexity. 
@@ -443,18 +443,19 @@ Reuse of code is made more practical - experienced programmers
 moving some of their work to general purpose languages can take
 advantage of modern development tools such as version control systems
 (e.g., Git), integrated development environments, and
-editors designed around programming.
+editors designed around programming. And finally, the complexity 
+of algorithms one can use is essentially unlimited.
 
 Conclusion
 ^^^^^^^^^^^
 It is in this hybrid space that Scheme for Max sits.
-S4M provides a Max object that embeds the s7 Scheme interpreter,
-allowing one to use a high-level general purpose langauge
-within the visual patching environment.
+S4M provides a Max object that embeds an interpreter for
+the s7 Scheme language, a general purpose languate in the Lisp family.
 Given the myriad options existing already in the hybrid space,
 we might well ask why a new such tool is justified, and why 
 specifically it ought to use an uncommon language (Scheme being
-vastly less popular than JavaScript or Python).
+vastly less popular than JavaScript or Python), and why it should
+be embedded in Max rather than some other platform or langauge.
 To answer these questions, first we will look at my personal motivations,
 and secondly at why I chose Scheme and Max to fulfill them.
 
