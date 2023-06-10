@@ -1,5 +1,7 @@
-Features and Usage  (4760 words)
+Features and Usage  (6300 words)
 ====================================================================================================
+
+Status: needs editing, code needs testing, needs citations and example pictures
 
 In this chapter I will outline discuss some of the principal features of s4m from the perspective of a composer-programmer
 using s4m to create musical works. 
@@ -82,7 +84,8 @@ They can only be set as **@** arguments in the object box.
 
 
 Input
------
+--------------------------------------------------------------------------------
+
 
 Inlet 0 Scheme Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -165,7 +168,7 @@ a second for a list.
  
 
 Output
-^^^^^^
+--------------------------------------------------------------------------------
 The s4m object can output a standard Max message from any of its oulets using the **out** function.
 This is accomplished by passing the **out** function an outlet number and either a single value or a Scheme
 list of output values. 
@@ -190,7 +193,7 @@ Code to output various messages is shown below.
 
 
 Sending Messages
-^^^^^^^^^^^^^^^^
+--------------------------------------------------------------------------------
 In addition to sending messages by outputting through the s4m object's outlets and connecting the
 s4m outlets to destination objects, we can also send messages directly (without patch cables)
 to objects that have been given a Max **scripting name**. 
@@ -230,7 +233,7 @@ This facility allows one to orchestrate complex activity in a Max patch without
 having predetermined connection paths.
 
 Buffers & Tables
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------------------------------------------------
 Max contains two objects for storing arrays of numerical data: the **buffer** 
 and the **table**. Buffers are typically used to store floating-point sample
 data while tables are typically used to store integers. Both provide
@@ -278,7 +281,7 @@ looping constructs than are built in to Max.
 .. TODO: buffer example
 
 Dictionaries
-^^^^^^^^^^^^
+--------------------------------------------------------------------------------
 Another high-level data collection abstration provided by Max is the Max
 **dictionary**, a key-value store in which one can store a wide variety
 of Max data types as values, and use integers, floats, symbols, or strings 
@@ -351,8 +354,8 @@ calls to dict-ref and dict-set!.
   (hash-table->dict (hash-table :a 1 :b 2) 'my-max-dict-name)
 
 
-S4M arrays
-^^^^^^^^^^
+s4m-arrays
+--------------------------------------------------------------------------------
 While in Max one has access to arrays of hetergenous type through dictionaries,
 and arrays of integers and floats through buffers and tables, there is
 no direct interface to statically sized arrays of a single basic C type.
@@ -408,7 +411,7 @@ which will run more slowly on account of the thread-synchronization code
 that they run. 
 
 The s4m.grid object
-^^^^^^^^^^^^^^^^^^^^
+--------------------------------------------------------------------------------
 The missing piece for the scenario just discussed is a display element, 
 and for this purpose Scheme for Max provides the graphical display object, the **s4m.grid**. 
 The grid provides a simple visual grid on which we can draw values in each cell.
@@ -468,63 +471,247 @@ four 64 x 16 grids with minimal CPU impact.
 .. TODO screen cap of my grids
 
 
-Garbage collector functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Scheduling Functions (needs editing and code testing)
+--------------------------------------------------------------------------------
+
+Arguably the most important feature of Scheme for Max
+is its advanced scheduling and timing features, and their integration
+with the Max threading and transport subsystems. 
+On a surface level, they are quite straightforward: s4m provides
+functions that allow one to schedule execution of an arbitrary Scheme
+function at some point in the future, the simplest of this being the
+**delay** function.
+
+In the example below, an anonymous function is created and put on the scheduler
+to execute in 1000 milliseconds. The call to delay returns a
+handle that can be used to cancel the scheduled function if desired.
+
+.. code:: Scheme
+  
+  ;; create a lambda function that prints to the console,
+  ;; and schedule it for 1 second in the future, saving the handle
+  (define my-handle
+    (delay 1000 
+      (lambda () (post "Hello from the future!"))))
+  
+  ;; cancel its execution
+  (cancel-delay my-handle)
+
+The delay function has variants that allow one to schedule
+in ticks, based on the Max global transport, at 480 ticks per beat,
+and in quantized ticks where execution time is forced to align to a tick
+boundary regardless of at what time the call to delay was made.
+The tick delay functions will also only execute if the Max transport is
+playing, making it possible to synchronize scheduled functions accurately
+with other Max sequencing tools or with the Ableton Live built in sequencers.
+
+.. code:: Scheme
+  
+  ;; schedule my-function for 1 quarter note from now, if transport running
+  (delay-t 480 my-function)
+  
+  ;; schedule my-quantized-function for 1 quarter note from now, but forcing now be
+  ;; interpreted as on the nearest 16th note boundary from the time
+  ;; of the scheduling call
+  (delay-tq 480 120 my-quantized-function)
+  
+At an implementation level, these use the Max C SDK's **clock** functions, 
+which allow one to precisely schedule
+execution of a callback function. It is important to note that in 
+modern versions of Max, these functions are designed to preserve
+long-term temporal accuracy regardless of immediate jitter.
+Jitter, in this context, refers to the difference between the scheduled
+time and the actual execution time as one would see if analyzing recorded audio.
+
+For optimal real-time audio performance in Max, the recommended
+settings are to have "audio in interrupt" and "overdrive" enabled. (CITE Max docs) 
+When both of these are turned on, the Max engine alternately runs
+a DSP pass (calculating a signal vector of samples), and a scheduler
+thread pass. This means that real time of events stemming from 
+the scheduler thread execution can be off by up to a signal
+vector of samples, resulting in small timing discrepencies.
+However, what is important to note is that the clock functions
+in current versions of Max compensate for this in the long run such
+that this discrepency does not accumulate. 
+Tests I made during development confirmed that even after long
+playback times, clock driven functions did not accumulate jitter,
+and that if one sets the Max signal vector size to 1 sample, 
+the timing on the clock functions is sample accurate.
+
+The Scheme for Max functions use these clock facilities by putting
+a reference to the Scheme function passed to the delay functions
+into a special internal registry, keyed by their handles. 
+When the C clock callback runs, this is retrieved and the function
+is taken from the registry and executed.
+
+There is nonobvious capability granted by the combination of this facility 
+and the nature of Scheme's lexical scoping. This is that
+Scheme for Max uniquely makes it possible to easily specify a function
+to be run in the future, with that function using values that can
+be taken from the environment *at the time of scheduling*, 
+or *at the time of execution*. 
+This is not possible in regular Max patching, and while it is technically
+possible using JavaScript, it would be of limited use in JavaScript
+as the timing of said functions can potentially have unusable 
+levels of jitter due to the fact that the js object only executes
+in the low priority thread.
+
+This facilty makes algorithms and real-time interaction possible in
+interesting ways. One can, for example, create a patch in which
+dials or hardware change some musical value. This can be captured,
+so to speak, at scheduling time, such that when the function executes in the future,
+the value *where the dial was* is used. Alternatively, one can
+use a function that explicitly looks in the global environment 
+for settings at run time.
+Below is an example of a function that uses both of these facilities.
+The value read from **dial-1** will be used as it was at scheduling
+time, while the value from **dial-2** will be looked up in the future.
+
+.. TODO check and verify this code
+
+.. code:: Scheme
+  
+  ;; capture the value of g-dial-1 and use it in the function
+  ;; look up the value of g-dial-2 in the future
+  (delay-t 480 
+    (let ((dial-1-capture g-dial-1))
+      (lambda ()
+        (let ((dial-2-now (eval 'dial-2)))
+          (post "dial-1 was:" dial-1-capture)
+          (post "dial-2 is:" dial-2-now)))))
+
+In combination with s4m's capability of updating code interactively while
+programs run, this scheduling flexibility enables the programmer-performer
+to edit algorithms used in algorithmic music even once they are already
+scheduled. 
+
+Finally, these facilities also enable a workflow known as
+"self-scheduling" or "temporal recursion" (CITE lazzarini) in which
+a repeating function schedules the next pass of itself. 
+This facility enables the composer to create interesting evolving
+generative proccesses, as each pass of a function can change the data,
+or even the code, of the next pass of the function. One might think 
+at first glance that this would result in an accumulation of timing
+jitter, but the implementation of Max clocks does indeed make this possible
+while preserving sample-accuracty over long periods of time, something
+I have tested extensively.
+
+Below is an example of a function scheduling itself. The first iteration
+of this function would need to be manually created. The temporal recursion
+will stop when the variable **playing** is set to false.
+
+
+TODO: test this code
+
+.. code:: Scheme
+
+  ;; a variable to turn on and off playback
+  (define playing #f)
+
+  ;; a function that schedules itself to run on every quarter note
+  ;; and keeps track of how many times it has run
+  (define (my-process runs)
+    (post "run number:" runs)
+    (if playing
+      (delay-t 480 
+        ;; create an anonymous function that wraps the next call to my-process
+        (lambda ()(my-process (+ 1 runs))))))
+
+  ; a function to start the process
+  (define (start)
+    (set! playing #t)
+    (my-process 0))
+
+  ; a function to stop the scheduling chain
+  (define (stop)
+    (set! playing #f))
+
+The above can, of course, be combined with the previously mentioned
+lexical scoping capabilites, enabling implementations of complex,
+interactive, algorithmic process music in succint and flexible code.
+The Scheme for Max online documentation and example repositories contain
+examples of interactive algorithmic sequencers implemented in this way.
+      
+Garbage collector functions (needs editing)
+--------------------------------------------------------------------------------
 As a high-level, dynamically-typed language, Scheme includes a 
 **garbage collector** (a.k.a. a **gc**), a language subsystem that cleans up
-and frees unused memory.
+and frees unused memory that has previously been allocated by the program.
 Garbage collection spares the programmer the tedious work of manually allocating,
 tracking, and freeing the memory used by variables in the language.
 It is a standard feature of most modern high-level programming languages,
 such as Java, Python, Ruby, JavaScript. 
 The problem with garbage collection when one is doing soft real-time
-work (where "soft" means that missed deadlines are bad, but not catastrophic,
+work (where "soft" means that missed deadlines are undesirable, but not catastrophic,
 such as would be the case in avionics software), is that the gc
-must periodically do a pass in which it scans over the programs
+must periodically do a pass in which it scans over the program
 memory, looking for unused memory allocations and freeing them, and
-this can be a computationally expensive process with large programs or
-programs using large amounts of data.
-Further complicating things, it can be of indeterminate duration,
-as the work that the gc must do is heavily dependent on the algorithms
-and data structures used in the program over which it is running. 
+this can be a computationally expensive process when the program is large or
+uses large amounts of data.
+Further complicating things, garbage collection is of indeterminate duration,
+as the work that the gc must do is heavily dependent on the particular algorithms
+and data structures used in the program over which it is running
+(i.e., a program of some gven size and memory use may require more or less
+garbage collection depending on how precisely it is written).
 (CITE).
-For this reason, the use of garbage collected languages is not common
-in audio programming, where the program must be doing constant calculations
+
+For theses reasons, the use of garbage collected languages is not common
+in real-time audio programming, where the program must be doing constant calculations
 to produce streams of samples.
-Scheme for Max, however, is inteded to be used at the *note level*,
+Scheme for Max, however, is intended to be used at the *note level*,
 rather than the *audio level*, thus the time between blocks of computation
-is potentially much higher, giving us adequate time for the gc to do its work.
-Nonetheless, a sufficiently heavy Scheme for Max program can run into
-issues stemming from gc passes, thus Scheme for Max provides some
-facilities for controlling whether and when the gc runs.
+is potentially much higher (the temporal gap between notes), giving us 
+(potentially) adequate time for the gc to finish. 
+All modern DAWs allow a user to configure the output audio buffer size,
+corresponding to the number of samples the program pre-computes, and thus
+also corresponding to the latency of real-time operation.
+While the s7 garbage collector will cause issues if attempting to run
+Scheme for Max programs with a very low buffer and latency (e.g.,
+64 samples or less), on a modern computer and moderately sized program,
+the gc is able to run within the latency period of an output buffer of 128
+or more - sufficiently low for playable latency.
 
-TODO: gc functions, heap attribute, stats
+Nonetheless, a heavy Scheme for Max program can run out of time for
+the garbage collector, resulting in audio underruns and audible clicks.
+For these cases, Scheme for Max provides some additional facitilites
+for controlling whether and when the gc runs.
 
+The first of these, perhaps counterintuitively, allows one to control 
+when the gc runs on timer, allowing it to run *more* frequently
+than is the case if one does not force a gc run. This increases
+the overall work the gc does, but lowers how much work it must do
+on each pass, allowing each pass to complete more quickly.
 
+Sending the **gc-disable** message to the s4m object disables automatic
+running of the gc, allowing one to explicitly force a run by sending
+the **gc-run** message, which can be triggered off a timer such as a
+Max metronome. In my experience, setting this to somewhere between
+200 - 300 ms works well and provides better real-time performance
+than is posssible using the automatic gc.
 
+A second facility is to change the heap size of the Scheme for Max object.
+The lower the heap size, the faster the gc runs as it must run over less
+memory (CITE bill correspondence). The s4m object allows an initial
+**@heap** attribute to set the starting heap size. This works well so 
+long as one checks through testing whether the heap allocated will be big enough.
+If it is not, a *heap reallocation* will be required when s4m is out of memory,
+which is very likely to cause audio issues. 
+Users can use s7's built in gc reporting by turning on the **gc-stats** flag,
+which will result in output to the console on each gc pass, including the
+amount of memory it must run over. This can be used to ensure the initial
+heap size is adequate.
 
-
-Scheduling Functions
-^^^^^^^^^^^^^^^^^^^^^
-
-The final, and arguably most important, feature of Scheme for Max
-is its advanced scheduling and timing features, and their integration
-with the Max threading and transport subsystems. 
-On a surface level, the are quite straightforward: s4m provides
-several functions that allow one to schedule execution of a Scheme
-function in the future, specifying the delay time in either milliseconds
-or ticks relative the Max global transport (where 480 ticks comprise
-one quarter note).
-
-On an implementation level, these are the most complex components
-of the system, and are also the components that provide the most
-significant advantages over either plain Max or Max with JavaScript.
-These will thus be discussed in further detail in the next chapter.
-
-
-
-
-
+Finally, if the performance of piece is of a reasonable duration, the
+user may elect to disable the garbage collector all together.
+This is done again by sending the **gc-disable** message, but without
+using any forced runs following it. In this case, the heap will likely
+need to be quite large as the memory use of the program will grow as it
+runs, with no unused memory ever freed. In programming parlance, 
+this is referred to as a "memory leak", and is normally considered 
+a bug. However, given that the the size of audio sample libraries
+used in music production is now in the gigabytes (CITE), it is certainly
+not unreasonable for one to let a program grow in memory on the order
+of megabytes!
 
 
 
