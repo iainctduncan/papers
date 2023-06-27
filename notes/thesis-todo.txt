@@ -1,8 +1,4 @@
 
-- learn about and mention the jstrigger object
-- learn about and mention the jsui object
+Code examples and figures
 
-- Max Java Object?
-- Max jit.lua object?
-
- 
+- FFI example for conclusion

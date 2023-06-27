@@ -1,0 +1,167 @@
+Citation Notes
+
+possible sources:
+- taube paper on scheduling in common music, has gc and scheduler stuff
+
+- bach paper (introducing Bach)
+
+- Lyon, sample accurate triggering system
+  - cite in the further work on audio version and sample accurate onsets
+
+- Dannenburg - Languages for computer music
+  - cite in background
+
+- Puckett, Max at Seventeen for background
+
+- Zicarelli, HOw I learned to Love - for background
+
+- Lazarrini - Development of Computer Music Programming Systems
+  - for background
+
+- Rahn - Processing Musical Abstracion
+  - use to get citation on why Lisp is appropriate - good stuff on the second page
+
+- Dannenburg, nyquist paper
+
+- Wang, Ge - History of Programming and Music
+
+
+********************************************************************************
+Papers:
+* Dannenburg 2018 - Languages for computer music
+  - definition of dataflow on p4
+  - some good stuff on lanugages in genera;
+  - extending languages with C or C++, p6
+  - the max-like object model, p7
+  - idea of control rates (p7)
+  - music N history, p7
+  - concept of music N note abstractions p8
+
+* Wang 2008, A History of Programming and Music
+  - discusses Domain Specific Lanugages, p1
+  - lots of detail on Music N family, p6 
+  - good stuff on CMix as early example of language that uses a library
+  - good comment on Lisp too
+
+Lazzarini 2013, Development of Computer Music Programming Systems
+  - first extension with general purpose language example for Music 360, p100
+  - first use of control rate and audio rate computation in Music 11, p 100
+  - problem of control rate jitter of onset times, first appearing in Music 11
+    and still an issue in Pure Data, p 100
+  - "CLM provides ad- vanced support for manipulating note lists due to its use of the CL language." p 102
+  - p 102 "a significant difference between PD and the systems discussed in the previous sections is the absence of the concept of a score."
+  - p102 "This leads to different modes of interaction and of composition, which lean towards user interaction and improvisation."
+  - p102 mention of Extempore,
+  - p105 - csound embedded in Python
+  - p 016 instrument as a class that is instantiated in notes
+  - p106, multi-language design paradigm  
+  - p108, "Music programming systems have to be able to be flexible enough to allow for the emergence of 
+      this eco-system, either by participating in it, in a multi-application, multi- language environment, "
+  - p108 suitability of multi language systems for composition, especially algorithimic composition.
+  - p109, discusses how breaking into score versus implementation can be desirable or not
+  - p109, suitability of Csound score as an output format
+
+Dannenberg 1997, Nyquist Paper
+  - p2, p11 instance allocation in Music-N
+  - p2 non-interactivity of Music-N
+  - using lisp for scores, p5
+  - p5, ability to write functions that play scores
+  - p5, nyquist is a general purpose language
+  - p7 how lisp allows combinging note-lists and programs
+  - p9 lisp macros for transformations
+    ** good for usefulness of macros citation
+  - p9 logical stop times, importance of
+    ** good example of important temporal abstraction for music
+
+Vincenot, Lisp in Max
+  - p87 Patchwork, OpenMusic, PWGL and many others were built on top of Common Lisp, also Common Music, OpusModus
+  - p87 suitability of Lisp for music with regard to nested lists, hierarchal representations, recursion, and macros
+  - p88 Brad Garton's MaxLISPj object, running the Armed Bear Common Lips interpreter in the java virtual machine
+    - but had the limitation of not being able to output more that 2000 characters
+  - p89 Julien's own system for MoZlib, using a call to external CL interpreter through the shell object
+  - p89 problem of the delay/latency in this system
+  - p90 functions from PWGL that have could be in future work.
+  - p90 Lisp allowing use of functions originally only available for deferred time work
+  - p92 problem of the dependency on the shell object
+
+Lyon Sample Accurate Triggering system
+  - p1 problem of timing inaccuracy at event level: 
+    "In both systems temporal accuracy of control-level events can drift freely within the space of a signal vector."
+
+Puckette, 2002 - Max at Seventeen
+  - p33 original real time orientation of Max pre DSP
+  - use of Lisp in some of the Max early versions
+  - p35 no built in notion of musical scroe
+  - p35 "Max is oriented toward processes more than data"
+  - p34 Max messages and atoms, small talk selectors
+  - p36 "The Max design origi- nally looked at the problem of real-time computer music performance as essentially a control prob- lem, and the facility for patching audio signals from one box to another departs radically from the scheme."
+  - p36, difference between audio and control messages
+  - p36 "The Max design strives for simplicity and explic- itness throughout."
+  - p37 the max scheduler, logical time, Max as a "dataflow like" language
+  - p38 use of left inlet as main inlet
+  - p38 problem of granularity of control blocks
+  - p39 Max design decisions being made to make Max accessible to non-professional programmers
+  - p40 "Further, Max lacks any notion of linear ‘‘control flow’’ such as is fundamental in any real-world pro- gramming environment. "
+  - p40 "Rather than a programming environment, Max is fundamentally a system for scheduling real-time tasks and managing 
+      communication among them. Programming as such is better undertaken within the tasks than by building networks of 
+      existing tasks. This can be done by writing ‘‘externs’’ in C or C􏰁􏰁, or by importing entire interpreters (Forth or Scheme,
+      for example). The exact possibilities de- pend on the implementation."
+  - p40 Max deliberately avoiding design decisions that favour specific ways of making music
+
+Roads, Curtis - Composing Electronic Music 2015  
+  - p341 - use and definition of term composer programmer
+  - p344 - general purpose lanugages and lisp based languages
+
+- Rahn, John 1990 - Processing Musical Abstraction
+  p 180-181 - musical event programming is symbolic processing
+  p 181. - appropriateness of Lisp for manipulating control information
+  p 184 - "ease of writing an object system in lisp"
+
+- Lazzarini, 2016 (Csound: A sound and music computing system)
+  - p 157, score language
+
+- Aghostini and Ghizi
+
+- Puckette, miller 1991 - Combining Event and Signal Processing in the MAX Graphical Programming Environment
+  Source: Computer Music Journal , Autumn, 1991, Vol. 15, No. 3 (Autumn, 1991), pp. 68- 77, The MIT Press
+  **  - 68 - main purpose of real time is so musicain can control in performance
+  ** - p 68, pitch, timbre, tempo, articulation should be controllable physcially, sequentially, or algorithimically,
+    and inputs to the aglorithm should be controllable
+  - p69, any message that can be passed has a printable equivalent
+  - p70, Max is not a dataflow language as boxes contain local state, and independence of the order to the input
+    of an operation cannot be achieved
+  - p71 control messages cannot be sent during the DSP cycle, so there is a small delay
+  - p77 Max's initial scheduler used the the approach taken by Max Matthews in his RTSKED program.
+    (though later the approach to data handling is different, see Puckette 2002, p 37)
+
+
+- Dannenberg, 1997. Programming language design for music (from book Musical Signal Processing) 
+details: https://dare.uva.nl/search?identifier=1fdc28af-fd71-43bf-8beb-e4cd2689f379
+   - p272 discrete versus continous data, 
+   - p 282 advantages of events knowing their duration in advance and vice versa
+   - p283 requirement of the above for proper portamento
+   - p284 example of recursion being important in music with drum roll example
+     "Recursion is useful for expressing many structures"
+   - p 289 "(This is also one of the reasons why we believe in composition systems in the form of general 
+        programming languages with their capabilities of abstraction; there are so many styles of music 
+        composition that any pre-wired choice of the designer of a composition system is doomed to be wrong 
+        for some composer at some time.)"
+   - p 291 "Nyquist is based on Lisp, which has several advantages for music. First, Lisp is a very 
+      high-level language, with many built-in functions and data types. Second, Lisp is a good language for
+      symbol processing, which is a common task when manipulating musical information. Finally, Lisp 
+      provides an incremental, interpreted programming environment which is ideal for experimental 
+      and exploratory programming."
+
+- Bresson, 2009 
+  Visual Lisp/CLOS programming in OpenMusic Jean Bresson · Carlos Agon · Gérard Assayag
+  - p 82 Open Music being developed in Common Lisp on top of CLOS
+  - p90 "Supporting text programming complementarily to the visual aspects is an important issue for a visual programming language. Using text programming is indeed often a good solution to cope with the complexity of a program, because of the compactness of the textual represen- tation, or because sometimes things can just be more easily or more efficiently expressed with text than in a visual program. In real-size projects, for scalability issues or for general convenience, it is often necessary to have some components designed or reused under the form of textual functions and components."
+  - p90 way open music is actually a visual layer over a textual engine, in contrast to what S4M does
+
+ - Lazzarini, 2017 "Computer Music Instruments" 
+  - p25, discussion of DSLs versus GPPLs
+
+- Zicarelli, David, 2002 ("How I learned to love a program that does nothign)
+  
+- Cook, 2002, Real Sound Synthesis
+  - STK, 

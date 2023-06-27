@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Features and Usage (4760 words) &#8212; M.Tech Thesis  documentation</title>
+    <title>Features and Usage (6300 words) &#8212; M.Tech Thesis  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -17,7 +17,7 @@
     <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Conclusion - TODO" href="conclusion.html" />
+    <link rel="next" title="Conclusion - IN PROGRESS (2948 w)" href="conclusion.html" />
     <link rel="prev" title="High-Level Design (4775 words)" href="design.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -35,8 +35,9 @@
 
           <div class="body" role="main">
             
-  <section id="features-and-usage-4760-words">
-<h1>Features and Usage  (4760 words)<a class="headerlink" href="#features-and-usage-4760-words" title="Permalink to this heading">¶</a></h1>
+  <section id="features-and-usage-6300-words">
+<h1>Features and Usage  (6300 words)<a class="headerlink" href="#features-and-usage-6300-words" title="Permalink to this heading">¶</a></h1>
+<p>Status: needs editing, code needs testing, needs citations and example pictures</p>
 <p>In this chapter I will outline discuss some of the principal features of s4m from the perspective of a composer-programmer
 using s4m to create musical works.
 In the interest of space, I will not cover all of S4M’s functionality, however the interested
@@ -178,8 +179,9 @@ a second for a list.</p>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="output">
-<h3>Output<a class="headerlink" href="#output" title="Permalink to this heading">¶</a></h3>
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this heading">¶</a></h2>
 <p>The s4m object can output a standard Max message from any of its oulets using the <strong>out</strong> function.
 This is accomplished by passing the <strong>out</strong> function an outlet number and either a single value or a Scheme
 list of output values.
@@ -202,7 +204,7 @@ Code to output various messages is shown below.</p>
 </div>
 </section>
 <section id="sending-messages">
-<h3>Sending Messages<a class="headerlink" href="#sending-messages" title="Permalink to this heading">¶</a></h3>
+<h2>Sending Messages<a class="headerlink" href="#sending-messages" title="Permalink to this heading">¶</a></h2>
 <p>In addition to sending messages by outputting through the s4m object’s outlets and connecting the
 s4m outlets to destination objects, we can also send messages directly (without patch cables)
 to objects that have been given a Max <strong>scripting name</strong>.
@@ -237,7 +239,7 @@ sending list messages.</p>
 having predetermined connection paths.</p>
 </section>
 <section id="buffers-tables">
-<h3>Buffers &amp; Tables<a class="headerlink" href="#buffers-tables" title="Permalink to this heading">¶</a></h3>
+<h2>Buffers &amp; Tables<a class="headerlink" href="#buffers-tables" title="Permalink to this heading">¶</a></h2>
 <p>Max contains two objects for storing arrays of numerical data: the <strong>buffer</strong>
 and the <strong>table</strong>. Buffers are typically used to store floating-point sample
 data while tables are typically used to store integers. Both provide
@@ -278,7 +280,7 @@ Max functions, enabling iterative array manipulation with more convenient
 looping constructs than are built in to Max.</p>
 </section>
 <section id="dictionaries">
-<h3>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this heading">¶</a></h3>
+<h2>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this heading">¶</a></h2>
 <p>Another high-level data collection abstration provided by Max is the Max
 <strong>dictionary</strong>, a key-value store in which one can store a wide variety
 of Max data types as values, and use integers, floats, symbols, or strings
@@ -319,7 +321,7 @@ for dealing with nested dictionaries without having to nest
 calls to dict-ref and dict-set!.</p>
 </section>
 <section id="s4m-arrays">
-<h3>S4M arrays<a class="headerlink" href="#s4m-arrays" title="Permalink to this heading">¶</a></h3>
+<h2>s4m-arrays<a class="headerlink" href="#s4m-arrays" title="Permalink to this heading">¶</a></h2>
 <p>While in Max one has access to arrays of hetergenous type through dictionaries,
 and arrays of integers and floats through buffers and tables, there is
 no direct interface to statically sized arrays of a single basic C type.
@@ -370,7 +372,7 @@ which will run more slowly on account of the thread-synchronization code
 that they run.</p>
 </section>
 <section id="the-s4m-grid-object">
-<h3>The s4m.grid object<a class="headerlink" href="#the-s4m-grid-object" title="Permalink to this heading">¶</a></h3>
+<h2>The s4m.grid object<a class="headerlink" href="#the-s4m-grid-object" title="Permalink to this heading">¶</a></h2>
 <p>The missing piece for the scenario just discussed is a display element,
 and for this purpose Scheme for Max provides the graphical display object, the <strong>s4m.grid</strong>.
 The grid provides a simple visual grid on which we can draw values in each cell.
@@ -424,52 +426,231 @@ In my personal experiments, comparison with the Max built in jit.cellblock
 increases - from unusable with one 64 x 16 grid, to usable with
 four 64 x 16 grids with minimal CPU impact.</p>
 </section>
-<section id="garbage-collector-functions">
-<h3>Garbage collector functions<a class="headerlink" href="#garbage-collector-functions" title="Permalink to this heading">¶</a></h3>
+<section id="scheduling-functions-needs-editing-and-code-testing">
+<h2>Scheduling Functions (needs editing and code testing)<a class="headerlink" href="#scheduling-functions-needs-editing-and-code-testing" title="Permalink to this heading">¶</a></h2>
+<p>Arguably the most important feature of Scheme for Max
+is its advanced scheduling and timing features, and their integration
+with the Max threading and transport subsystems.
+On a surface level, they are quite straightforward: s4m provides
+functions that allow one to schedule execution of an arbitrary Scheme
+function at some point in the future, the simplest of this being the
+<strong>delay</strong> function.</p>
+<p>In the example below, an anonymous function is created and put on the scheduler
+to execute in 1000 milliseconds. The call to delay returns a
+handle that can be used to cancel the scheduled function if desired.</p>
+<div class="highlight-Scheme notranslate"><div class="highlight"><pre><span></span><span class="c1">;; create a lambda function that prints to the console,</span><span class="w"></span>
+<span class="c1">;; and schedule it for 1 second in the future, saving the handle</span><span class="w"></span>
+<span class="p">(</span><span class="k">define</span><span class="w"> </span><span class="nv">my-handle</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="k">delay</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="k">lambda</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nf">post</span><span class="w"> </span><span class="s">&quot;Hello from the future!&quot;</span><span class="p">))))</span><span class="w"></span>
+
+<span class="c1">;; cancel its execution</span><span class="w"></span>
+<span class="p">(</span><span class="nf">cancel-delay</span><span class="w"> </span><span class="nv">my-handle</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The delay function has variants that allow one to schedule
+in ticks, based on the Max global transport, at 480 ticks per beat,
+and in quantized ticks where execution time is forced to align to a tick
+boundary regardless of at what time the call to delay was made.
+The tick delay functions will also only execute if the Max transport is
+playing, making it possible to synchronize scheduled functions accurately
+with other Max sequencing tools or with the Ableton Live built in sequencers.</p>
+<div class="highlight-Scheme notranslate"><div class="highlight"><pre><span></span><span class="c1">;; schedule my-function for 1 quarter note from now, if transport running</span><span class="w"></span>
+<span class="p">(</span><span class="nf">delay-t</span><span class="w"> </span><span class="mi">480</span><span class="w"> </span><span class="nv">my-function</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">;; schedule my-quantized-function for 1 quarter note from now, but forcing now be</span><span class="w"></span>
+<span class="c1">;; interpreted as on the nearest 16th note boundary from the time</span><span class="w"></span>
+<span class="c1">;; of the scheduling call</span><span class="w"></span>
+<span class="p">(</span><span class="nf">delay-tq</span><span class="w"> </span><span class="mi">480</span><span class="w"> </span><span class="mi">120</span><span class="w"> </span><span class="nv">my-quantized-function</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>At an implementation level, these use the Max C SDK’s <strong>clock</strong> functions,
+which allow one to precisely schedule
+execution of a callback function. It is important to note that in
+modern versions of Max, these functions are designed to preserve
+long-term temporal accuracy regardless of immediate jitter.
+Jitter, in this context, refers to the difference between the scheduled
+time and the actual execution time as one would see if analyzing recorded audio.</p>
+<p>For optimal real-time audio performance in Max, the recommended
+settings are to have “audio in interrupt” and “overdrive” enabled. (CITE Max docs)
+When both of these are turned on, the Max engine alternately runs
+a DSP pass (calculating a signal vector of samples), and a scheduler
+thread pass. This means that real time of events stemming from
+the scheduler thread execution can be off by up to a signal
+vector of samples, resulting in small timing discrepencies.
+However, what is important to note is that the clock functions
+in current versions of Max compensate for this in the long run such
+that this discrepency does not accumulate.
+Tests I made during development confirmed that even after long
+playback times, clock driven functions did not accumulate jitter,
+and that if one sets the Max signal vector size to 1 sample,
+the timing on the clock functions is sample accurate.</p>
+<p>The Scheme for Max functions use these clock facilities by putting
+a reference to the Scheme function passed to the delay functions
+into a special internal registry, keyed by their handles.
+When the C clock callback runs, this is retrieved and the function
+is taken from the registry and executed.</p>
+<p>There is nonobvious capability granted by the combination of this facility
+and the nature of Scheme’s lexical scoping. This is that
+Scheme for Max uniquely makes it possible to easily specify a function
+to be run in the future, with that function using values that can
+be taken from the environment <em>at the time of scheduling</em>,
+or <em>at the time of execution</em>.
+This is not possible in regular Max patching, and while it is technically
+possible using JavaScript, it would be of limited use in JavaScript
+as the timing of said functions can potentially have unusable
+levels of jitter due to the fact that the js object only executes
+in the low priority thread.</p>
+<p>This facilty makes algorithms and real-time interaction possible in
+interesting ways. One can, for example, create a patch in which
+dials or hardware change some musical value. This can be captured,
+so to speak, at scheduling time, such that when the function executes in the future,
+the value <em>where the dial was</em> is used. Alternatively, one can
+use a function that explicitly looks in the global environment
+for settings at run time.
+Below is an example of a function that uses both of these facilities.
+The value read from <strong>dial-1</strong> will be used as it was at scheduling
+time, while the value from <strong>dial-2</strong> will be looked up in the future.</p>
+<div class="highlight-Scheme notranslate"><div class="highlight"><pre><span></span><span class="c1">;; capture the value of g-dial-1 and use it in the function</span><span class="w"></span>
+<span class="c1">;; look up the value of g-dial-2 in the future</span><span class="w"></span>
+<span class="p">(</span><span class="nf">delay-t</span><span class="w"> </span><span class="mi">480</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">((</span><span class="nf">dial-1-capture</span><span class="w"> </span><span class="nv">g-dial-1</span><span class="p">))</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="k">lambda</span><span class="w"> </span><span class="p">()</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="k">let</span><span class="w"> </span><span class="p">((</span><span class="nf">dial-2-now</span><span class="w"> </span><span class="p">(</span><span class="nb">eval</span><span class="w"> </span><span class="ss">&#39;dial-2</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="nf">post</span><span class="w"> </span><span class="s">&quot;dial-1 was:&quot;</span><span class="w"> </span><span class="nv">dial-1-capture</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">(</span><span class="nf">post</span><span class="w"> </span><span class="s">&quot;dial-2 is:&quot;</span><span class="w"> </span><span class="nv">dial-2-now</span><span class="p">)))))</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In combination with s4m’s capability of updating code interactively while
+programs run, this scheduling flexibility enables the programmer-performer
+to edit algorithms used in algorithmic music even once they are already
+scheduled.</p>
+<p>Finally, these facilities also enable a workflow known as
+“self-scheduling” or “temporal recursion” (CITE lazzarini) in which
+a repeating function schedules the next pass of itself.
+This facility enables the composer to create interesting evolving
+generative proccesses, as each pass of a function can change the data,
+or even the code, of the next pass of the function. One might think
+at first glance that this would result in an accumulation of timing
+jitter, but the implementation of Max clocks does indeed make this possible
+while preserving sample-accuracty over long periods of time, something
+I have tested extensively.</p>
+<p>Below is an example of a function scheduling itself. The first iteration
+of this function would need to be manually created. The temporal recursion
+will stop when the variable <strong>playing</strong> is set to false.</p>
+<p>TODO: test this code</p>
+<div class="highlight-Scheme notranslate"><div class="highlight"><pre><span></span><span class="c1">;; a variable to turn on and off playback</span><span class="w"></span>
+<span class="p">(</span><span class="k">define</span><span class="w"> </span><span class="nv">playing</span><span class="w"> </span><span class="no">#f</span><span class="p">)</span><span class="w"></span>
+
+<span class="c1">;; a function that schedules itself to run on every quarter note</span><span class="w"></span>
+<span class="c1">;; and keeps track of how many times it has run</span><span class="w"></span>
+<span class="p">(</span><span class="k">define</span><span class="w"> </span><span class="p">(</span><span class="nf">my-process</span><span class="w"> </span><span class="nv">runs</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="nf">post</span><span class="w"> </span><span class="s">&quot;run number:&quot;</span><span class="w"> </span><span class="nv">runs</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="k">if</span><span class="w"> </span><span class="nv">playing</span><span class="w"></span>
+<span class="w">    </span><span class="p">(</span><span class="nf">delay-t</span><span class="w"> </span><span class="mi">480</span><span class="w"></span>
+<span class="w">      </span><span class="c1">;; create an anonymous function that wraps the next call to my-process</span><span class="w"></span>
+<span class="w">      </span><span class="p">(</span><span class="k">lambda</span><span class="w"> </span><span class="p">()(</span><span class="nf">my-process</span><span class="w"> </span><span class="p">(</span><span class="nb">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nv">runs</span><span class="p">))))))</span><span class="w"></span>
+
+<span class="c1">; a function to start the process</span><span class="w"></span>
+<span class="p">(</span><span class="k">define</span><span class="w"> </span><span class="p">(</span><span class="nf">start</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="k">set!</span><span class="w"> </span><span class="nv">playing</span><span class="w"> </span><span class="no">#t</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="nf">my-process</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span><span class="w"></span>
+
+<span class="c1">; a function to stop the scheduling chain</span><span class="w"></span>
+<span class="p">(</span><span class="k">define</span><span class="w"> </span><span class="p">(</span><span class="nf">stop</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="k">set!</span><span class="w"> </span><span class="nv">playing</span><span class="w"> </span><span class="no">#f</span><span class="p">))</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The above can, of course, be combined with the previously mentioned
+lexical scoping capabilites, enabling implementations of complex,
+interactive, algorithmic process music in succint and flexible code.
+The Scheme for Max online documentation and example repositories contain
+examples of interactive algorithmic sequencers implemented in this way.</p>
+</section>
+<section id="garbage-collector-functions-needs-editing">
+<h2>Garbage collector functions (needs editing)<a class="headerlink" href="#garbage-collector-functions-needs-editing" title="Permalink to this heading">¶</a></h2>
 <p>As a high-level, dynamically-typed language, Scheme includes a
 <strong>garbage collector</strong> (a.k.a. a <strong>gc</strong>), a language subsystem that cleans up
-and frees unused memory.
+and frees unused memory that has previously been allocated by the program.
 Garbage collection spares the programmer the tedious work of manually allocating,
 tracking, and freeing the memory used by variables in the language.
 It is a standard feature of most modern high-level programming languages,
 such as Java, Python, Ruby, JavaScript.
 The problem with garbage collection when one is doing soft real-time
-work (where “soft” means that missed deadlines are bad, but not catastrophic,
+work (where “soft” means that missed deadlines are undesirable, but not catastrophic,
 such as would be the case in avionics software), is that the gc
-must periodically do a pass in which it scans over the programs
+must periodically do a pass in which it scans over the program
 memory, looking for unused memory allocations and freeing them, and
-this can be a computationally expensive process with large programs or
-programs using large amounts of data.
-Further complicating things, it can be of indeterminate duration,
-as the work that the gc must do is heavily dependent on the algorithms
-and data structures used in the program over which it is running.
-(CITE).
-For this reason, the use of garbage collected languages is not common
-in audio programming, where the program must be doing constant calculations
+this can be a computationally expensive process when the program is large or
+uses large amounts of data.
+Further complicating things, garbage collection is of indeterminate duration,
+as the work that the gc must do is heavily dependent on the particular algorithms
+and data structures used in the program over which it is running
+(i.e., a program of some gven size and memory use may require more or less
+garbage collection depending on how precisely it is written).
+(CITE).</p>
+<p>For theses reasons, the use of garbage collected languages is not common
+in real-time audio programming, where the program must be doing constant calculations
 to produce streams of samples.
-Scheme for Max, however, is inteded to be used at the <em>note level</em>,
+Scheme for Max, however, is intended to be used at the <em>note level</em>,
 rather than the <em>audio level</em>, thus the time between blocks of computation
-is potentially much higher, giving us adequate time for the gc to do its work.
-Nonetheless, a sufficiently heavy Scheme for Max program can run into
-issues stemming from gc passes, thus Scheme for Max provides some
-facilities for controlling whether and when the gc runs.</p>
-<p>TODO: gc functions, heap attribute, stats</p>
+is potentially much higher (the temporal gap between notes), giving us
+(potentially) adequate time for the gc to finish.
+All modern DAWs allow a user to configure the output audio buffer size,
+corresponding to the number of samples the program pre-computes, and thus
+also corresponding to the latency of real-time operation.
+While the s7 garbage collector will cause issues if attempting to run
+Scheme for Max programs with a very low buffer and latency (e.g.,
+64 samples or less), on a modern computer and moderately sized program,
+the gc is able to run within the latency period of an output buffer of 128
+or more - sufficiently low for playable latency.</p>
+<p>Nonetheless, a heavy Scheme for Max program can run out of time for
+the garbage collector, resulting in audio underruns and audible clicks.
+For these cases, Scheme for Max provides some additional facitilites
+for controlling whether and when the gc runs.</p>
+<p>The first of these, perhaps counterintuitively, allows one to control
+when the gc runs on timer, allowing it to run <em>more</em> frequently
+than is the case if one does not force a gc run. This increases
+the overall work the gc does, but lowers how much work it must do
+on each pass, allowing each pass to complete more quickly.</p>
+<p>Sending the <strong>gc-disable</strong> message to the s4m object disables automatic
+running of the gc, allowing one to explicitly force a run by sending
+the <strong>gc-run</strong> message, which can be triggered off a timer such as a
+Max metronome. In my experience, setting this to somewhere between
+200 - 300 ms works well and provides better real-time performance
+than is posssible using the automatic gc.</p>
+<p>A second facility is to change the heap size of the Scheme for Max object.
+The lower the heap size, the faster the gc runs as it must run over less
+memory (CITE bill correspondence). The s4m object allows an initial
+<strong>&#64;heap</strong> attribute to set the starting heap size. This works well so
+long as one checks through testing whether the heap allocated will be big enough.
+If it is not, a <em>heap reallocation</em> will be required when s4m is out of memory,
+which is very likely to cause audio issues.
+Users can use s7’s built in gc reporting by turning on the <strong>gc-stats</strong> flag,
+which will result in output to the console on each gc pass, including the
+amount of memory it must run over. This can be used to ensure the initial
+heap size is adequate.</p>
+<p>Finally, if the performance of piece is of a reasonable duration, the
+user may elect to disable the garbage collector all together.
+This is done again by sending the <strong>gc-disable</strong> message, but without
+using any forced runs following it. In this case, the heap will likely
+need to be quite large as the memory use of the program will grow as it
+runs, with no unused memory ever freed. In programming parlance,
+this is referred to as a “memory leak”, and is normally considered
+a bug. However, given that the the size of audio sample libraries
+used in music production is now in the gigabytes (CITE), it is certainly
+not unreasonable for one to let a program grow in memory on the order
+of megabytes!</p>
 </section>
-<section id="scheduling-functions">
-<h3>Scheduling Functions<a class="headerlink" href="#scheduling-functions" title="Permalink to this heading">¶</a></h3>
-<p>The final, and arguably most important, feature of Scheme for Max
-is its advanced scheduling and timing features, and their integration
-with the Max threading and transport subsystems.
-On a surface level, the are quite straightforward: s4m provides
-several functions that allow one to schedule execution of a Scheme
-function in the future, specifying the delay time in either milliseconds
-or ticks relative the Max global transport (where 480 ticks comprise
-one quarter note).</p>
-<p>On an implementation level, these are the most complex components
-of the system, and are also the components that provide the most
-significant advantages over either plain Max or Max with JavaScript.
-These will thus be discussed in further detail in the next chapter.</p>
-</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">¶</a></h2>
+<p>This covers the main features and capabilities of Scheme for Max
+as of version 1.0.
+Additional functions and variations on those covered here are
+covered in both the official online documentation and in the Max help file.
+Additionally, various tutorials with examples using the functions
+covered here are available, and are linked from the main GitHub project
+page.</p>
 </section>
 </section>
 
@@ -496,7 +677,7 @@ These will thus be discussed in further detail in the next chapter.</p>
 <li class="toctree-l1"><a class="reference internal" href="background.html">Background - Computer Music Programming Languages (4300 words)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="goals.html">Project Goals and Motivation - 1500 words</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">High-Level Design (4775 words)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Features and Usage  (4760 words)</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Features and Usage  (6300 words)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#object-initialization">Object Initialization</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#bootstrap-files">Bootstrap files</a></li>
@@ -507,19 +688,20 @@ These will thus be discussed in further detail in the next chapter.</p>
 <li class="toctree-l2"><a class="reference internal" href="#input">Input</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#inlet-0-scheme-expressions">Inlet 0 Scheme Expressions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inlet-1">Inlet 1+</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#output">Output</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sending-messages">Sending Messages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#buffers-tables">Buffers &amp; Tables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dictionaries">Dictionaries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#s4m-arrays">S4M arrays</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-s4m-grid-object">The s4m.grid object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#garbage-collector-functions">Garbage collector functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scheduling-functions">Scheduling Functions</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-messages">Sending Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#buffers-tables">Buffers &amp; Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dictionaries">Dictionaries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#s4m-arrays">s4m-arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-s4m-grid-object">The s4m.grid object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheduling-functions-needs-editing-and-code-testing">Scheduling Functions (needs editing and code testing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#garbage-collector-functions-needs-editing">Garbage collector functions (needs editing)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion - TODO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion - IN PROGRESS (2948 w)</a></li>
 </ul>
 
 <div class="relations">
@@ -527,7 +709,7 @@ These will thus be discussed in further detail in the next chapter.</p>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="design.html" title="previous chapter">High-Level Design (4775 words)</a></li>
-      <li>Next: <a href="conclusion.html" title="next chapter">Conclusion - TODO</a></li>
+      <li>Next: <a href="conclusion.html" title="next chapter">Conclusion - IN PROGRESS (2948 w)</a></li>
   </ul></li>
 </ul>
 </div>

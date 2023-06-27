@@ -1,0 +1,6 @@
+Exploring spectralism 
+- real-time gc
+- integration with Max
+- audio version
+- possibly embedding csound in one object
+

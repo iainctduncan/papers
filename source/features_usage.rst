@@ -713,7 +713,15 @@ used in music production is now in the gigabytes (CITE), it is certainly
 not unreasonable for one to let a program grow in memory on the order
 of megabytes!
 
-
+Summary
+--------
+This covers the main features and capabilities of Scheme for Max
+as of version 1.0. 
+Additional functions and variations on those covered here are
+covered in both the official online documentation and in the Max help file.  
+Additionally, various tutorials with examples using the functions
+covered here are available, and are linked from the main GitHub project
+page.
 
 
 
