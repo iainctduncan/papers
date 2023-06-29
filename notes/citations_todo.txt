@@ -23,3 +23,18 @@ CITATION TODO LIST
 - cite notes from metalevel somwehere
 
 - find citation, (Taube, Dannenberg, on GPPL being suited to complex algorithms)
+
+- maybe citation on tradeoffs in programming languages, line 76 of goals
+
+- interactive development with lisp 132, goals.
+ 
+
+********************************************************************************
+Design chapter
+- popularity of Max msp
+- number of Max objects
+- number of users for Ableton Live
+
+- citation on linguistic features of javascript
+
+- big citation for the list CM tools, line 277 of design.rst

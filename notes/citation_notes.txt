@@ -68,6 +68,7 @@ Dannenberg 1997, Nyquist Paper
   - p5, ability to write functions that play scores
   - p5, nyquist is a general purpose language
   - p7 how lisp allows combinging note-lists and programs
+      
   - p9 lisp macros for transformations
     ** good for usefulness of macros citation
   - p9 logical stop times, importance of
@@ -158,10 +159,27 @@ details: https://dare.uva.nl/search?identifier=1fdc28af-fd71-43bf-8beb-e4cd2689f
   - p90 "Supporting text programming complementarily to the visual aspects is an important issue for a visual programming language. Using text programming is indeed often a good solution to cope with the complexity of a program, because of the compactness of the textual represen- tation, or because sometimes things can just be more easily or more efficiently expressed with text than in a visual program. In real-size projects, for scalability issues or for general convenience, it is often necessary to have some components designed or reused under the form of textual functions and components."
   - p90 way open music is actually a visual layer over a textual engine, in contrast to what S4M does
 
- - Lazzarini, 2017 "Computer Music Instruments" 
+- Lazzarini, 2017 "Computer Music Instruments" 
   - p25, discussion of DSLs versus GPPLs
 
 - Zicarelli, David, 2002 ("How I learned to love a program that does nothign)
   
 - Cook, 2002, Real Sound Synthesis
-  - STK, 
+  - STK,
+
+Ways Ahead : Proceedings of the First International Csound Conference, 2013
+- Boulanger, Introducing Csound for Live
+- Gogins, Michael: The Csound API: Interview with Michael Gogins
+
+Christopher Ariza. Sonifying Sieves: Synthesis and Signal Processing Applications of the Xenakis Sieve 
+with Python and Csound. International Computer Music Conference Proceedings. Vol. 2009. Ann Arbor, MI: 
+Michigan Publishing, University of Michigan Library, 2009.
+- using the Python opcodes inside Csound
+
+Adrian Freed, John MacCallum, and Andrew Schmeder. Dynamic, Instance-Based, Object-Oriented Programming in Max/MSP Using Open Sound Control Message Delegation. International Computer Music Conference Proceedings. Vol. 2011. Ann Arbor, MI: Michigan Publishing, University of Michigan Library, 2011.
+
+Heinrich Taube. Common Music 3. International Computer Music Conference Proceedings. Vol. 2009. Ann Arbor, MI: Michigan Publishing, University of Michigan Library, 2009.
+
+
+Roberts, Charlie, and Graham Wakefield. “Tensions and Techniques in Live Coding Performance.” In The Oxford Handbook of Algorithmic Music. Oxford University Press, 2018.
+

@@ -527,7 +527,7 @@ advantage of modern development tools such as version control systems,
 integrated development environments, and
 editors designed around programming. And finally, the complexity 
 of algorithms one can use is essentially unlimited.
-.. TODO cite Dannenberg on GPPLs for complex algorithms
+.. TODO can we find a citation for this??
 
 Conclusion
 ^^^^^^^^^^^

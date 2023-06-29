@@ -4,17 +4,18 @@ High-Level Design (4775 words)
 Status edited, needs conclusion and citations
 - prob needs shortening, get George and Andy's advice
 
-As previously mentioned, to achieve the goals of the project, I have created an extension 
+To achieve the goals of the project, I have created an extension 
 to the Max audio-visual programming language called Scheme for Max (S4M). 
 Scheme for Max provides a Max object that embeds the s7 Scheme intepreter, 
 enabling users to run s7 Scheme programs within the Max environment,
 along with a rich library of functions for interacting with the Max environment.
 
-User programs are able to interact with other Max objects and the larger Max environment in a variety of ways: 
+Scheme programs are able to interact with other Max objects and the larger Max environment in a variety of ways: 
 they may receive Max messages which get interpreted as Scheme calls;
 they can output Scheme data that become Max messages to other objects;
-they can read from and write to globally accessible data such as Max dictionaries, tables, and buffers;
-and they can interact with the Max scheduler, running Scheme functions at specific times and synchronizing with Max's own transport mechanism. 
+they can read from and write to globally Max data such as dictionaries, tables, and buffers;
+and they can interact with the Max scheduler, allowing one to run Scheme functions at specific times 
+in synchronization with Max's own transport mechanisms. 
 
 Scheme for Max is released as open-source software under the BSD license, and the fourth release
 (v 0.4) is freely available as a download or source code from GitHub.
@@ -22,78 +23,91 @@ The project is extensively documented, with a comprehensive Max help patch,
 online documentation, a "Learn Scheme for Max" e-book, and a library of YouTube tutorial videos.
 
 In the remainder of this section I will discuss the various high-level design decisions in detail, 
-including why they were taken and how they have worked well to achieve the goals of the project.
+including why they were taken and how they have achieved the stated goals of the project.
 
 Why a Max extension?
 ----------------------------------------------------------------------------------------------------
-Given the advantages previously stated of the hybrid approach to computer music, 
-the first design question might be: why was Max chosen as the host layer? 
+Scheme for Max is a tool to allow multi-language workflows. This begs 
+the first design question of: "Why choose Max specifically as the host platform?". 
 
 One driver for choosing Max is the success of Max itself.
-Max is one of the most popular platforms world-wide for making computer music, with
-(TODO NUMBER OF USERS, CITE)
-and thousands of Max objects available from both Cycling 74 and the broader Max community (CITE).
-This extensive community and breadth of objects enables a very wide variety of ways of working 
-with both music (in the abstract sense) and audio.
-This includes support for interacting with external hardware and hostin commercial software synthesizers and effect plugins.
+Having been first established in the 1980's, Max is now one of the most popular platforms world-wide 
+for making computer music, with thousands of Max objects available between those provided by Cycling 74 and 
+the broader Max community (www.maxobjects.com)
+.. citation FIX
+This extensive community and breadth of objects enables a wide variety of ways of working 
+with both music, audio, and even video.
+This includes support for interacting with external hardware through various synchronization and
+message protocols and hosting commercial software synthesizers and effect plugins in Max itself through
+the vst~ object.
 
-While Max is developed by the software compay Cycling 74, Cycling 74 itself has been 
-owned since mid-2017 by another software company, Ableton, the makers of the tremendously 
-successful commercial audio workstation and sequencing platform, Ableton Live. (NUMBER USERS)
-In addition to being a popular and powerful platform on its own, Max is also available as "Max for Live",
-an embedded runtime within the Ableton Live commercial digital audio workstation and sequencing platform.
-When run in this context, Max patches are able to interact with Ableton Live, processing both audio 
-and MIDI data, but also interacting with the host programming through an application programming interface (API),
-the Live API. The Live API provides Max patches the ability to control the Ableton program, read and write to 
+In addition to being a popular and powerful platform on its own, Max has been available since 2009 as "Max for Live",
+an embedded runtime within the tremendously successful commercial audio workstation and sequencing platform, Ableton Live
+(www.ableton.com, 2009).
+This partnership has in fact been so successful as an addition to Live that it led to Ableton aquiring Cycling 74 in 2017
+(www.ableton.com, 2017).
+When run in Live, Max patches are able to interact with Ableton Live, processing both audio 
+and MIDI data, but also interacting with the host through an application programming interface, the Live API. 
+The Live API provides Max patches the ability to control and query Live, read and write to 
 Live's own sequences and audio clips, interact with the mixer and effects, and interact with the global transport.
-Max for Live is included in the top-tier Ableton offering ("Live Suite") as well as an add-on to Live. 
-Between the standalone Max version and Max for Live, Max has become the most widely deployed computer music 
-programming platform worldwide (TODO NUMBERS CITE).
+Max for Live is included automatically in the top-tier Ableton offering ("Live Suite") as well as an add-on to Live. 
+While exact numbers are not published by Ableton, it seems highly likely that, between the standalone Max version and Max for Live,
+Max has become the most widely deployed advanced computer music programming platform worldwide.
 
-Max supports two kinds of data passed between objects: audio and event, corresponding to different threads of execution.
+In addition to the popularity of the platform and its integrations with a full-featured commercial sequencing tool, 
+there are implementation related attractions to Max as well.
+Max supports two kinds of data passed between objects, audio samples and event messages, which in turn run in several
+different threads of execution.
 In Max, there are actually two threads handling event messages, the "main thread" and the "scheduler thread".
 The first is also referred to as the UI thread, or low-priority thread, and the second as the high-priority thread.
 MIDI data, events from timers and metronomes, and events from audio signals that have been turned into event messages 
 (with various translation objects) all use the high-priority scheduler thread. 
 Events from the user interacting with the GUI are run in the low priority thread, which is also used for redrawing any UI widgets.
-A Max external can run in any or all of these contexts, and objects exists to pass events from one to the other.
+A Max external can run in any or all of these contexts, and objects exists to pass events from one to the other
+(cycling74.github.io, 2019)
+.. citation (cycling74.github.io, 2019) FIX
+
 Scheme for Max operates only in the two event oriented threads, receiving and producing only Max messages - 
-it does not render blocks of samples as part of the DSP graph.
-It can optionally run in either the low or high priority thread, but a given instantiation of the s4m object
+it does not render blocks of samples in the audio thread..
+It can optionally be run in either the low or high priority thread, but a given instantiation of the s4m object
 is limited to one of these (chosen at instantiation time).
 The threading designs of Max and Scheme for Max make it possible for us to run Scheme for Max code only occasionally 
-(i.e, on receipt of a message rather than on every block of samples), and also to ensure that it runs at a high priorty
+(i.e, on receipt of a message rather than on every block of samples), and also to ensure that it runs at a high priority
 and is not interrupted by low priority activity.
 
 Thus, the choice of creating the project as an extension for Max supports several of the stated goals.
-
-First, there is a clear distinction between event time and audio time, supporting the goal of focusing on the musical event (e.g. "note") time-scale,
-and there is a way for us to run in event time but with high temporal accuracy.
+First, there is a clear distinction between event time and audio time, supporting the goal of focusing on 
+the musical event (e.g. "note") abstraction level,
+and there is a way for us to run events with high temporal accuracy.
 By running only at the event time scale, we are afforded the option to use a high-level, garbage-collected language - 
-whereas runing a garbage-collected language in the DSP loop would seriously limit the amount of computation possible in real time.
+whereas runing a garbage-collected language in the audio rendering loop would seriously limit the amount of 
+computation possible in real time and likely require us to run with a high degree of latency.
 
 Second, using Max supports the goal of being able to use the tool in conjunction with modern commercial music tools.
-Max runs inside Ableton Live, and Max can host commercial VST plugins. 
+Max runs very well inside Ableton Live, and Max can host commercial VST plugins. 
 When run in Ableton Live, Max uses Live's own transport, and when run as a VST host, Max's transport is visible to the VST plugins.
-It is thus practical to create music that mixes algorithmic content generated in Scheme with
-content sequenced, rendered, or recorded with commercial tools.
+It is thus possible to create music that mixes algorithmic content generated in Scheme with
+content that is sequenced, rendered, or recorded with commercial tools.
 
 Third, using Max supports the goal of being usable for real-time interaction and live performance. 
-The Max clocking facilities are highly accurate, with jitter being typically in the 0.5-1ms range if using a typical signal vector size of 32 or 64 samples. 
+The Max clocking facilities are highly accurate, with jitter being typically in the 0.5-1ms range when 
+using a typical signal vector size of 32 or 64 samples (Lyon, 2006, 67).
+.. citation (Lyon, 2006)
 (Signal vector size is user configurable in standalone Max, and is locked to 64 samples in Ableton Live.)
-Timing is also self-correcting, in that this degree of inaccuracy does not accumulate over time.
+Max timers are also implemented such that this degree of jitter does not accumulate over time, something
+I have verified in extensives tests during development.
 
-Taken together, these three points makes Max an attractive host platform for the project. 
-One is able to create music that is implemented in some mix of Scheme, standard Max programming, and in sequencing from Ableton Live.
-We can use modern commercial audio sources, taking advantage of the dramatic advances in software synthesis in recent years.
+Taken together, these three points makes Max a very attractive host platform for the project. 
+We can create music that is implemented in various mixes of Scheme, standard Max programming, and sequencing from Ableton Live.
+We can use modern commercial effect and synthesis plugins, taking advantage of the dramatic advances in software synthesis in recent years.
 And timing is reliable and accurate enough that we can use the tool on stage, or in the studio for commercial production of 
 music where high timing accuracy is desired (e.g. electronic dance music).
 We can even, through Ableton Live, use the tool during the mixing and mastering processes, as all of this can be done in Live, 
 with Scheme for Max used to orchestrate and automate Live devices and VST plugins.
 
-Now, given the decision to build a Max extension, the advantages just discussed could be applied to any general purpose programming 
+However, the advantages just discussed could be applied to any general purpose programming 
 language hosted in a Max external.
-Which begs the question, why use a Lisp language rather than something more common such as Python, Ruby, JavaScript, or Lua? 
+Which begs the second question: "Why use a Lisp dialect rather than something a more popular interpreted language as Python, Ruby, JavaScript, or Lua?"
 Or more pointedly, why bother at all, when Max provides already an object that embeds an interpreter for JavaScript in the form of
 the js object?
 
@@ -102,25 +116,34 @@ Why not just use JavaScript?
 I will discuss in some depth the linguistic reasons for choosing a Lisp language, but first I will outline the 
 reasons I could not simply use the built-in js object to satisfy the project goals. 
 
-At first glance, the js objects seems like a pretty good solution. 
-It runs in Max, it can send and receive Max messages, tt has access to Max externals, 
-it has a scheduler facility (the Task objects), and it's a high-level language with some modern features 
-such as dictionaries, lexical scoping, and closures. 
+At first glance, the js objects seems like a comprehensive solution. 
+It runs in Max, it can send and receive Max messages, it has access to Max global data structures such as tables and buffers, 
+it has a scheduler facility in the Task object (Taylor, 2020).
+.. citation (Taylor, 2020) FIX
+Linguistically, it's a high-level language with various modern features such as automatic memory management, 
+objects, lexical scoping, and functional programming techiques such as closures, and is now one of the most popular
+languages in the world (Sun, 2017).
+.. citation (Sun, 2017) CHECK
 
-Unfortunately, the js object has a serious implementation issue - it *only* executes in the lower-priority main thread.
-It is not clear why this is so, and indeed in previous versions (TODO version?) of Max it was possible to run in both threads. 
-However, this has been the case since at least Max 7 (TODO date).
-Any messages sent to the js object from the scheduler thread are implicity queued to the main thread and handled on its next pass.
+Unfortunately, the js object in Max has a serious implementation issue - current versions of Max it *only* executes in the 
+lower-priority main thread.  Any messages sent to the js object from the scheduler thread are implicity queued to the 
+main thread and handled on its next pass (docs.cycling74.com).
+.. citation (docs.cycling74.com) FIX
 The result of this is that timing of events handled in the js object is not reliable - 
 depending on other activity, execution of messages can be delayed, with this delay large enough to be audibly noticeable as errors.
+This was simple for me to verify, as any heavy redrawing of the graphic layer (such as by resizing the window) will
+introduce significant delays to tasks scheduled through the Max JavaScript Task object.
 
-In addition, the js object provides us with no way to interact directly with the garbage collector (GC). 
-As a result, we have no control over when or for how long the GC may run, potentially also creating audibly late events when it does.
+In addition, the js object provides us with no straightforward way to interact directly with the its garbage collector (GC). 
+As a result, we have no control over when the GC may run, potentially also creating audibly late events if a GC
+pass runs and has significant memory to clean up.
 
-In fact, I did indeed begin my work combining textual programming with commercial environments by attempting to use JavaScript in Max,
-and overcoming the timing limitations of the js object was one of the main initial motivations for the Scheme for Max project.
+In fact, I began my work combining textual programming with the Max environment by attempting to use the js object 
+to build large-scale sequencing projects, and
+overcoming the timing limitations of the js object was one of the main initial motivations for the Scheme for Max project.
 Fortunately, there is nothing in the Max SDK (the C and C++ software development kit used for buidling Max extensions) that requires
-one to use any particular thread, thus any high-level language with an interpreter implemented in C or C++ could be used. 
+one to use any particular thread, thus any high-level language with an interpreter implemented in C or C++ can be used in the scheduler
+thread safely so long as messages coming from other threads are appropriately queued.
 
 Why use a Lisp language?
 ----------------------------------------------------------------------------------------------------
@@ -129,39 +152,48 @@ which choose a Lisp language?
 For the purposes of this dicussion I will use "Lisp" when referring to traits shared across the Lisp family of languages 
 (including Scheme, Common Lisp, and Clojure, Racket), and Scheme when referring to the particular choice used in Scheme for Max.
 
-In the initial research stage of this project (dating back to 2019) I examined options from numerous high-level languages, 
-and reviewed the use of many possible languages in music.
-Non-Lisp candidates included Python, Lua, Ruby, Erlang, Haskell, OCaml, and JavaScript (i.e. in a new implementation), 
+In the initial research stage of this project (dating back to 2019) I examined various possible high-level languages, 
+and reviewed the use of many various general purpose languages in music.
+Non-Lisp candidates I evaluated included Python, Lua, Ruby, Erlang, Haskell, OCaml, and JavaScript (i.e. in a new implementation), 
 all of which have been used for music projects of different types.
 
 We will examine various advantage for the user of working in Lisp. 
 These include suitability for representing music; suitability to the typical scenarios and needs of the composer-programmer;
 and suitability for implementing the project in Max specifically.
 
-Compared to the other candidate languages mentioned, Lisps are unusual in several ways that make them almost uniquely suited to representing music.
-(To be clear, some of these traits are shared by some of the other candidates, but none of the other candidates share all of these traits with Lisps.)
+Compared to the other candidate languages mentioned, Lisps are unusual in several ways that make them almost uniquely 
+suited to representing music.
+(To be clear, some of these traits are shared by some of the other candidates, but I would argue that none of the 
+other candidates share all of these traits with Lisps.)
+
+.. citations done to here
+
 
 Symbolic computation and list processing 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Lisp is unusual in its first-class support for programming with *symbols*,
-where a symbol means the textual token used in the program itself to refer to a function or variable,
-and in its extremely minimal syntax: everything in the language being represented by a list of tokens
-surrounded by parentheses. 
+
+Lisp is unusual in its first-class support for programming with *symbols* and in its simple, minimal, and consistent syntax (Taube, 2004, 8)
+.. citation (Taube, 2004, 8)
+
+Programming with symbols, also known as "symbolic computation" or "symbolic processing", means
+that programs can work directly with not only program *data* but with the *textual tokens* comprising the program itself.
 For example, as with any high-level language, we may have a variable named "foo", at which we have stored the value 99,
-and this allows us to refer to the contents bound to that variable (99) by the name "foo". 
+allowing us to refer to the contents bound to that variable (99) by the name "foo". 
 When the interpreter encounters the textual token "foo", perhaps in an expression such as "1 + foo", 
-it will automatically *evaluate* this token, replacing it with 99. 
-But in Lisp, we may also work with the textual token itself, referred to as *the symbol foo*,
+it will automatically *evaluate* this token, replacing it in an internally expanded form with the number 99. 
+But in Lisp, we may also work with the textual token itself, referred to *the symbol foo*
 just as easily as we work with any other primitive type. We can pass it around, put it in lists,
 concatenate it to other symbols, and so on.
-When we want to refer to the symbol used by a variable (the text to which the value is bound),
+When we want to refer to the symbol part of a variable (the text to which the value is bound),
 we use a facility of the language called *quoting*, meaning we are telling the interpreter 
-to skip evaluating the symbol as a variable (thus expanding to 99) but rather give us the textual token.
+to skip evaluating the symbol as a variable (thus expanding to 99) and instead give us the textual token.
 We can quote by using the **quote** function, or by prepending a symbol with a single quote: **'foo**.
+This symbolic processing capability is particularly appropriate for music, as we shall see shortly.
 
-In addition to this, Lisp syntax is *entirely* composed of s-expressions, whcih are parenthetical 
+In addition to this, Lisp syntax is *entirely* composed of s-expressions, which are parenthetical 
 expressions containing lists of symbols and primitives.
-For example, all of the below return lists of symbols: 
+For example, below are several ways to return a list of symbols. We can see that all 
+use one or more parenthetical expression as the basic unit of syntax. 
 
 .. code: lisp
   ; 3 ways of creating a list containing the symbols foo and bar and the primitive 1
@@ -170,17 +202,20 @@ For example, all of the below return lists of symbols:
   (quote (foo bar baz))
 
 Note that the list returned by the above, ``(foo bar baz)`` looks idential to a Lisp function call,
-calling the function **foo** with the arguments **bar** and **baz**. 
-And indeed, if we were to take the list returned, and pass it the Lisp function **eval**,
-that is exactly what would happen - we would call a foo function with arguments bar and baz,
-getting an error if any of those were undefined. 
+specifically it looks like code we would use to call the function **foo** with the arguments **bar** and **baz**. 
+And indeed, if we were to take the lists returned in our example  and pass this returned *symbolic* structure 
+to the Lisp **eval** function,
+that is exactly what would happen - we would call whatever function is bound to the symbol **foo**, passing
+it the arguments with arguments bar and baz, producing an error if any of those were undefined. 
 
 Below is an example of doing this at a Scheme interpreter: 
-.. code: lisp
+
+.. code: scheme
+
   ; create a list and save it to the variable my-program
   (define my-program (list 'print 99))
   > my-program
-  ; now run it
+  ; now run it, which will print 99
   (eval my-program)
   > 99
   ; or all in one step
@@ -191,16 +226,17 @@ In the example above, we used quoting to create
 a list consisting of the symbol **'print** and the number 99, and then
 we use **eval** to *run this list as a program*.
 The impact of this is profound:
-Lisps allow us to easily make programs that build lists of symbols and primitives, 
+Lisps allow us to easily and elegantly make programs that build lists of symbols and primitives, 
 *and these lists we have built can themselves can be executed as programs*.
 
 Now to be clear, we can also build a program with a program in other high-level languages, including Python, Ruby, Lua, and JavaScript.
 However, in none of these languages is programming *on* the symbolic tokens of the language directly supported the way it is in Lisp.
-The result is that in these other language this kind of dynamic programming (also known as "meta-programming") is cumbersome, and 
-is commonly regarded as something to be used sparingly, if at all.
+The result is that in these other language this kind of dynamic programming (also known as "meta-programming") is very involved and 
+typically seen as something to be used only sparingly by expert programmers building reusable tools.
 In Lisp, on the other hand, manipulating lists of symbols, and later evaluating them as functions, is the very stuff of which the langauge is made.
 
 Now, why does this matter for a programming language for music?
+
 As in Lisp code, in music we use lists of symbols to represent functions, relationships, and events.
 For example, let us say I write a chord progression, such as **I vi ii V7**.
 We have a *list* of four items, each denoted by a symbol: **I**, **vi**, etc.
@@ -212,19 +248,20 @@ particular algorithm (the intervals within the chord along with the scale-step f
 In a Lisp language, this can be represented in code that is visually compatible (almost identical even) to what we would use in musical analysis. 
 ``(chords->notes 'C '(I vi ii V7))`` is a legitimate line of Lisp syntax that could be implemented to be a function that renders a chord progression into 
 a list of notes, given a tonic of C.
-It could even return something that looks very familiar to a musician, and *on which more of the program can work*. 
+It could even return something symbolic that looks very familiar to a musician, and *on which more of the program can work*. 
 A potential return value could be represented by the interactive Lisp interpreter as a nested list containing sublists of symbols:
 ``'( (C E G) (A C E) (D F A) (G B D F))``
 
-Further, because this form of symbolic computation is so central to the language (one of the classic texts is even subtitled 
-"A Gentle Introduction to Symbolic Computation"), Lisps include numerous functions for manipulating and transforming lists. 
+Further, because this form of symbolic computation is so central to the language - one of the classic texts is even subtitled 
+"A Gentle Introduction to Symbolic Computation" - Lisps include numerous functions for manipulating and transforming lists (Touretzky, 1984). 
 For example, we might transpose a list by applying a transposition function, which itself might be built by a function-building function
 called **make-transposer**, and we might apply this function to a list of symbols. 
-This sounds complicated, and indeed, expressing this in most languages is not easy, but in Scheme this is both readable and succint:
+This sounds complicated, and indeed, expressing this in most languages is cumbersome, but in Scheme this is both readable and succint:
 
 .. code: scheme
-  ; apply a transposition function that transposes up by 2 all elements in our chord progression
+  ; apply a transposition function that transposes all elements in our chord progression by 2 steps
   ; the map function maps a function over a list, returning a new list
+  ; (make-transposer 2) creates a function that transposes by 2 specifically
   (map (make-transposer 2) 
     '( (C E G) (A C E) (D F A) (G B D F)))
 
@@ -236,55 +273,57 @@ This demonstrates thats Lisps are particularly well suited to expressing musical
 computer code, and a result of this suitability, there is a rich history of Lisp use in musical programming.
 Examples of Lisp-based musical programming environments, both historical and current, include Common Music,
 Nyquist, Common Lisp Music, MIDI-Lisp, PatchWork, OpenMusic, Extempore, Slippery Chicken, the Bach Project, MozLib, 
-and cl-collider.
+and cl-collider. 
+.. TODO multi part citation for this
 
-Thus the choice of Scheme as the language for the project has several important ramifications:
+Thus the choice of Scheme as the language for the project has several important advantages:
 
-.. TODO expand this list make better?
-
-* Users have access to a rich historical body of prior work, with code that can be ported to Scheme for Max relatively easily 
 * Code representing musical data can be more succint, lowering the sheer amount of code the composer must contend with while working
 * Code working with musical constructs can look remarkably similar to the notation that composers are used to, making the code
   more readable, and thus more appropriate for use within a piece of music that may be composed of both data and code
+* Programmers have access to a rich historical body of prior work, with code that can be ported to Scheme for Max relatively easily 
 
 
 Dynamic code loading and the REPL 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Previously mentioned as REPL-driven development, Lisp programmers commonly work in an ongoing process 
-of evaluating new code in the interpreter and examining the interpreter's output, *while the program runs* . 
+Previously mentioned as interactive development, or REPL-driven development, Lisp programmers commonly work in an ongoing process 
+of evaluating new code in the interpreter and examining the interpreter's output, *while the program runs*. 
 At any point, the programmer can send new expressions to the Lisp interpreter, which evaluates the expressions, updates
-the state of the Lisp environment, and then prints the return value of evaluating the expressions. 
-The programmer can even use Lisp code itself to interactively inspect the current environment, 
-or even to build new functions and expressions to evaluate.
+the state of the Lisp environment, and then prints the return value of evaluating the expressions.
+These can define new functions, redefine functions already in use, change state data, or 
+interactively inspect or alter the current environment. While this iteractively style of development is possible
+to some degrees in other high level languages (such as Python and Ruby), it has been available to a deeper degree in Lisp going
+back as far as the the 1970's! (Sandewell, 1978, 35-39)
+.. citation (Sandewell, 1978)
 
-For example, the composer-programmer can separate code into files that contain score data and files 
+For example, the composer-programmer might separate work into files that contain score data and files 
 that contain functions for altering or creating music, where the functions might be musical transformations of 
 algorithms for generating new content given base score data.
-The files of functions can be incrementally adjusted and reloaded with new definitions without needing 
+The files of functions can be incrementally adjusted and reloaded, thus updating algorithm definitions, without needing 
 to restart the piece or reset the score data.
 
-In addition to updating specific files as the program runs, the programmer can also trigger
+In Scheme for Max, the programmer can also trigger
 interpreter calls from text interface objects in Max, or even from an external text editor 
-by sending blocks of code over the local network as into Max. 
+by sending blocks of code over the local network into Max. 
 Max has a console window to show messages from the Max engine, and this is used by Scheme for Max
 for the Print stage of the REPL loop so that the results of dynamic evaluation can be easily read by the programmer.
 
 I have personally found this capability to be enormously productive while working on 
-algorithmically generated or enhanced compositions - the ability to tinker with the algorithms
+algorithmically generated or augmented compositions - the ability to tinker with the algorithms
 without necessarily restarting a piece is a signficant time saver, and being able to interactively
 inspect data in the Max console while doing so is similarly helpful.
 
 Macros and Domain Specific Languages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-One of the hallmarks of Lisp is the Lisp Macro.
+One of the hallmarks of Lisp is the Lisp macro.
 We have previous discussed the ease with which the Lisp programmer can programmatically create lists of 
 symbols that are then evaluated as syntactic Lisp expressions - the Lisp macro is a linguistic formalization of this process. 
 Macros look to the programmer much like a regular function call, but by virtue of being defined as a macro, 
 they are first called in a special evaluation pass known as the macro-expansion pass.
 This runs the code in the body of the macro over the *symbolic arguments* passed in to it, returning a
 programmatically created list structure (the macro-expansion) that is then evaluated. 
-Essentially, macros are code blocks that execute twice - first to build the code, then to evaluate it. 
-(Technically they can be nested to repeat the expansion step an arbitrary number of times.)
+Essentially, macros are code blocks that execute twice - first to build the code, then to evaluate it - though 
+technically they can be nested to repeat the expansion step an arbitrary number of times (Touretsky, 1984, 405-417). 
 
 Macros enable programmers to create their *own* domain specific languages - 
 miniature languages within a language that are closer in syntax and sematics to the problem domain than to the host langauge. 
@@ -301,18 +340,24 @@ For example, a macro I use for scheduling events in a score looks like the below
 
 The time argument, ``1:1:120``, ``+8``, and ``9:1:120`` are converted by the macro layer into musically meaningful time 
 representations, allowing the visual representation of the score code to be more easily read by the composer.
-But to clarify, this is *not* a separate score language with limited functionality, as is found in, for example, Csound.
+
+But to clarify, this is *not* a separate score language with limited functionality, as is found in Csound.
 This *is Scheme code* - it can include *any* Scheme functions and even be built by Scheme functions. 
 Thus the use of a language with macro facilities enables the composer to work with different kinds of code 
 - function defining code and score code - in one language without giving up the expressive power of high level language 
-facilities.
+facilities. This use of a general programming language that can function additionally *as a readable score language*
+provides tremendous flexibility to the programmer, breaking the dichotomy between score data and running program that
+introduces constraints to the composer-programmer (Dannenberg, 1997, 5-9).
+.. citation (Dannenberg, 1997)
+
+.. LEFT OFF
 
 Max and Lisp syntax compability
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Finally, there is the fortunate coincidence of the Max message syntax being almost perfectly compatible with Lisp syntax.
-This happy accident (we can assume!) means that a user can create and run Scheme code in Max messages themselves, and
+This happy accident (we can assume!) means that a composer-programmer can create and run Scheme code *in Max messages*, and
 use Max message-building functions to do so.
-While this compatibility was not something I was expecting when originally embarking on the design, 
+While this compatibility was not something I was expecting when originally embarking on the design of Scheme for Max, 
 it has had a profound effect on the ease with which one can build Max patches that interact with Scheme for Max programs.
 
 A Max message consists of Max *atoms*, which are space-separated tokens that may be integers, floating point numbers, or alpha-numeric symbols.

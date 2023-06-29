@@ -1,4 +1,5 @@
 Questions for George
 - how to cite an entire book? (ie no page number make sense)
 - is quoting directly good or frowned on?
-
+- how to cite an app? ie
+  ie I looked in Grace the app to determine that it has no sync features
