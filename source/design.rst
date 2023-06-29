@@ -393,27 +393,33 @@ Of the possible Lisp languages, why use s7 Scheme?
 When beginning the project, after determining that a Lisp-family language was appopriate, I evaluated a number of 
 Scheme and Lisp implementations as candidates.
 I will discuss now why the s7 implementation in particular was chosen.
-(Note for the curious: s7 is intended to be spelled lowercase and is named after a Yamaha motorcycle! CITE BILL)
+(Note for the curious: the author has informed me that s7 is intended to be spelled lowercase 
+as it is named after a Yamaha motorcycle!)
 
 Use in Computer Music 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 s7 was created by, and is maintained by, Bill Schottstaedt, a professor emeritus of the Stanford music centre (CCRMA), 
 and the author of Common Lisp Music and the Snd editor. 
 s7 is used in in Snd editor (essentially an Emacs-like audio editing tool), and in Common Music 3, an algorithmic composition 
-platform created by Henrik Taube.
+platform created by Henrik Taube. (Schottstaedt,)
+.. citation, s7 website
 This has meant that there is a significant body of code from Common Music that can be used with very minimal adjustment in Scheme for Max. 
 Indeed, if I were to describe S4M in one sentence, it would be that it is a cross between Common Music and the Max js object.
 
 Linguistic Features
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Not suprising, given the author's involvement with Common Lisp music systems, s7 is, by Scheme standards, highly influenced by Common Lisp. 
-It includes Common Lisp style *keywords*, which are symbols that begin with and always evaluate to themselves.
-s7 also uses Common-Lisp-style macros (a.k.a defmacro macros), rather than the syntax-case or syntax-rules macros in most modern Schemes.
+Not suprising, given the author's involvement with Common Lisp (CL) music systems, s7 is, by Scheme standards, 
+highly influenced by Common Lisp. 
+It includes Common Lisp *keywords*, which are symbols that begin with and always evaluate to themselves.
+s7 also uses Common Lisp style macros (a.k.a. "defmacro" macros), rather than the syntax-case or syntax-rules macros in most modern Schemes.
 To support CL macros safely (without inadvertent variable capture), s7 includes support for first-class environments 
-(lexical environments that can be used as values for variables), and the gensym function, which is used to create unique 
-guaranteed-unique symbols in the context of a macroexpansion.
-(Interestingly, and fortunately for the purpose of adoption, these are features also shared with Clojure, a modern Lisp variant 
-with wide use in business and web application circles.)
+(lexical environments that can be used as values for variables), and the "gensym" function, which is used to create unique 
+guaranteed-unique symbols for use in a macroexpansion.
+.. citatation FIX TODO s7 site
+Interestingly, and perhaps fortunately for the purpose of adoption, these are features also shared with Clojure, 
+a modern Lisp variant with much in common with Scheme, and with wide use in business and web application circles. 
+(Miller, 2018)
+.. citation (Miller, 2018) Programming Clojure
 
 We can assume these features were chosen by Bill as appropriate for his use case - the solo composer-programmer - 
 and indeed in my personal experience they have been helpful for working on projects in S4M.
@@ -423,30 +429,30 @@ as symbols when the message is evaluated by the s4m interpreter, and these are e
 Ease of embedding
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Of the Lisp dialects, Scheme in particular has a further pragmatic advantage:
-due to its minimal nature, Scheme is remarkably simple to embed in another language.
-A functional Scheme interpreter can be created in a very small amount of code (TODO cite some).
-This has led to numerous implementations of Scheme as minimal extension languages, including 
-Guile, Elk, Chibi, TinyScheme, and of course s7. 
+due to its minimal nature, Scheme is eminently appropriate for embedding in another language,
+and there exists a wide variety of embeddable Scheme intepreters.
+A functional Scheme interpreter can be created in a very small amount of code -
+there even exists an interpreter named SIOD, for "Scheme In One Defun" but also "Scheme in One Day".
+SIOD was a project by computer science professor George Carrette, started in 1988, intended to make 
+the smallest possible Scheme interpreter that could be embedded in a C or C++ program. (Carrette, 2007)
+.. citation (Carrette) FIX
 
-s7 was orginally forked from TinyScheme (CITE), which in turn was based on SIOD - Scheme in one Day - a project by computer science 
-professor George Carrette (CITE), intended to make the smallest possible Scheme interpreter that could be embedded in a C or C++ program.
-
+The s7 project in particular is a Scheme distribution intended expressly for embedding in C host programs, and
+designed to make that use case as simple as possible.
 The core s7 interpreter is distributed as only two files, s7.h and s7.c, that can simply be included in a source tree.
-The foreign function interface (FFI) is very straightforward and will be discussed further in the implementation chapter.
+The foreign function interface (FFI) is very straightforward making adding Scheme functions to S4M simple.
+And, importantly, s7 is fully thread-safe and re-entrant - meaning that there is no issue having multiple, isolated s7 interpreters 
+running in the same application, a situation common in a Max patch where many s4m object may coexist. 
+.. citation (s7 website) FIX
 
-And, importantly, s7 is fully thread-safe and re-entrant - meaning that there is no issue having multiple, isolated s7 interpreters running in the same application. 
-This cannot be said of all embeddable languages, or even of all Scheme implementations, and makes it especially appropriate for Max,
-where a patch may potentially, between itself and its subpatches, have a very high number of s4m objects.
 
 License
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Finally, s7 uses the BSD license, a permissive free software licsense. 
+Finally, s7 uses the BSD license, a permissive free software license. 
 The BSD license imposes no redistribution restrictions the way the GPL family of licenses do, thus user-developers wishing to 
 use it in a commercial project are free to do so with no obligations.
+.. TODO citation (s7.html) FIX
 This is a point in s7's favour as many Ableton Live device developers sell devices, and many Max developers sell standalone Max
 applications.
 
-TODO: 
-Conclusion
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

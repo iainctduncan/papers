@@ -7,6 +7,7 @@ Bibilography
 ableton.com, 2017, https://www.ableton.com/en/blog/ableton-cycling-74-new-partnership/
 ableton.com, 2009, https://www.ableton.com/en/press/press-archive/press-archive-mfl-release/
 Boulanger, 2013, Introducing Csound for Live, from Ways Ahead
+Carrette, George, SIOD: Scheme in One Defun, http://people.delphiforums.com/gjc//siod.html
 Cipriani, 2019, Electronic Music and Sound Design
 Cook, 2002, Real Sound Synthesis
 Cycling74 article "JavaScript in Max"
@@ -27,6 +28,7 @@ Maldanado, 2010 Working WIth Audio Streams (in Audio Programming Book)
 Manning 2013, Electronic and Computer Music
 Max SDK
 Maxobjects.com website
+Miller, Alex, Stuart Halloway, Aaron Bedra, and Jacquelyn Carter. Programming Clojure. Edited by Jacquelyn Carter. Third edition. Place of publication not identified: Pragmatic Programmers, 2018.
 Puckette, 1991 - Combining Event and Signal Processing in the MAX Graphical Programming Environment
 Puckette, 2002 - Max at Seventeen
 Roads, Curtis - Composing Electronic Music 2015 
@@ -34,6 +36,7 @@ Roberts, Charlie, and Graham Wakefield. “Tensions and Techniques in Live Codin
 Ruby on Rails website TODO
 Sandewall, Erik. “Programming in an Interactive Environment: The 'Lisp' Experience.” ACM computing surveys 10, no. 1 (1978): 35–71.
 Schottstaedt, Snd website
+Schottstaedt, s7 website 
 Sun, Kwangwon, and Sukyoung Ryu. “Analysis of JavaScript Programs: Challenges and Research Trends.” ACM computing surveys 50, no. 4 (2017): 1–34.
 Taylor, Gregory, JavaScript: A Brief Resource Guide for Max Users, https://cycling74.com/articles/javascript-a-resource-guide-for-max-users
 Taube, 2004 Notes from the Metalevel

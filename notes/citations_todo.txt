@@ -31,10 +31,9 @@ CITATION TODO LIST
 
 ********************************************************************************
 Design chapter
-- popularity of Max msp
-- number of Max objects
-- number of users for Ableton Live
-
-- citation on linguistic features of javascript
 
 - big citation for the list CM tools, line 277 of design.rst
+- s7 site on s7 features
+- ?clojure source on the sharing with Clojure?
+- ease of embedding citation
+- BSD citation

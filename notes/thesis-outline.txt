@@ -12,9 +12,10 @@ High level Outline
 
 - Features: 6300 words
   - needs citation and figures/examples/tests
+  - prob doesn't need citations though
 
 - Conclusion, Evaluation and future work: 4k words
-
+  
 
 Current total words: 15k words
 - todo: count my citations
