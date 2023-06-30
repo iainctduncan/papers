@@ -350,8 +350,6 @@ provides tremendous flexibility to the programmer, breaking the dichotomy betwee
 introduces constraints to the composer-programmer (Dannenberg, 1997, 5-9).
 .. citation (Dannenberg, 1997)
 
-.. LEFT OFF
-
 Max and Lisp syntax compability
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Finally, there is the fortunate coincidence of the Max message syntax being almost perfectly compatible with Lisp syntax.
