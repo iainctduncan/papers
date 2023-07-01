@@ -33,7 +33,12 @@ CITATION TODO LIST
 Design chapter
 
 - big citation for the list CM tools, line 277 of design.rst
-- s7 site on s7 features
-- ?clojure source on the sharing with Clojure?
-- ease of embedding citation
-- BSD citation
+
+********************************************************************************
+Features chapter
+.. cite Max scheduler docs for recommended settings
+
+
+********************************************************************************
+Conclusion
+Live API citation

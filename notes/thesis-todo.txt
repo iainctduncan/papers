@@ -1,4 +1,10 @@
+Write
+- intro
+- conclusion
 
-Code examples and figures
+Figures
 
-- FFI example for conclusion
+Bibliography
+
+Format citations
+

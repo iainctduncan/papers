@@ -9,14 +9,18 @@ Bibilography
 
 ableton.com, 2017, https://www.ableton.com/en/blog/ableton-cycling-74-new-partnership/
 ableton.com, 2009, https://www.ableton.com/en/press/press-archive/press-archive-mfl-release/
+Agostini, Andrea, and Daniele Ghisi. “A Max Library for Musical Notation and Computer-Aided Composition.” Computer music journal 39, no. 2 (2015): 11–27.
 Boulanger, 2013, Introducing Csound for Live, from Ways Ahead
 Carrette, George, SIOD: Scheme in One Defun, http://people.delphiforums.com/gjc//siod.html
-Cipriani, 2019, Electronic Music and Sound Design
+Cipriani, 2019, Electronic Music and Sound Design V1.
+Cipriani, 2020, Electronic Music and Sound Design V2.
 Cook, 2002, Real Sound Synthesis
 Cycling74 article "JavaScript in Max"
 cycling74.github.io, http://cycling74.github.io/min-devkit/guide/threading
 Dannenburg 2018 - Languages for computer music
 https://docs.cycling74.com/max8/vignettes/jsthreading "JavaScript and Threading" Max v8.5.5 Documentation
+https://docs.cycling74.com/max8/vignettes/scheduler_settings "Scheduler Settings"
+Deutsch, L. Peter and Daniel G. Bobrow. 1976. An efficient, incremental, automatic garbage collector. Commun. ACM 19, 9 (Sept. 1976), 522–526. https://doi.org/10.1145/360336.360345
 Django website TODO
 Farnell, 2010, Designing Sound
 ffitch, 2011, Understanding and Opcode in Csound, Audio Programming Book
@@ -40,6 +44,7 @@ Ruby on Rails website TODO
 Sandewall, Erik. “Programming in an Interactive Environment: The 'Lisp' Experience.” ACM computing surveys 10, no. 1 (1978): 35–71.
 Schottstaedt, Snd website
 Schottstaedt, s7 website 
+Smaragdis, Paris. "Optimizing Your Csound Instruments" in The Csound Book, 2000
 Sun, Kwangwon, and Sukyoung Ryu. “Analysis of JavaScript Programs: Challenges and Research Trends.” ACM computing surveys 50, no. 4 (2017): 1–34.
 Taylor, Gregory, JavaScript: A Brief Resource Guide for Max Users, https://cycling74.com/articles/javascript-a-resource-guide-for-max-users
 Taube, 2004 Notes from the Metalevel
