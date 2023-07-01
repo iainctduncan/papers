@@ -190,7 +190,7 @@ it the arguments bar and baz.
 Below is an example of doing just this at a Scheme interpreter. (The lines prefaced by **>** are the text
 responses from the interpreter that would be printed to a console in an interactive session.)
 
-.. code: scheme
+.. code:: scheme
 
   ; create a list and save it to the variable my-program
   (define my-program (list 'print 99))
@@ -239,7 +239,8 @@ For example, we might transpose a list by applying a transposition function, whi
 called **make-transposer**, and we might apply this function to a list of symbols. 
 This sounds complicated, and indeed, expressing this in most languages is cumbersome, but in Scheme this is both readable and succint:
 
-.. code: scheme
+.. code:: scheme
+
   ; apply a transposition function that transposes all elements in our chord progression by 2 steps
   ; the map function maps a function over a list, returning a new list
   ; (make-transposer 2) creates a function that transposes by 2 specifically

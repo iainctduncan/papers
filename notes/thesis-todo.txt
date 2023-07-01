@@ -1,7 +1,6 @@
 Copy edit:
-- DONE: intro, background, goals, design, features,
-- TODO: conclusion:
-
+- DONE: intro, background, goals, design, features, conclusion
+- still need to spell check
 
 Write
 - conclusion

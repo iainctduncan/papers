@@ -361,6 +361,7 @@ for dealing with nested dictionaries without having to nest
 calls to dict-ref and dict-set!, as shown below.
 
 .. code:: Scheme
+
   ;; get a value from max dict named "test-dict", at key "a"
   (dict-ref 'test-dict 'a)
 
@@ -571,7 +572,7 @@ This means that real time of events stemming from
 the scheduler thread execution can be off by up to a signal
 vector of samples, resulting in small timing discrepencies.
 At a signal-vector size of 64 samples (the default for Ableton Live) and
-a sample rate of 44100 samples per second, this is 1.4 milliseconds,
+a sample rate of 44100 samples per second, this is 1.5 milliseconds,
 and is thus a musically acceptable discrepency. 
 Note though that the clock functions
 in current versions of Max compensate for this in the long run such

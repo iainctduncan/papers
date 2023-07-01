@@ -1,24 +1,19 @@
 Thesis outline
 
 High level Outline
-- Intro - 900
+- Intro - 888
 
 - Background - 5100 
 
 - Project Goals - 1600 
 
-- Design - 5156 
-  - needs conclusion
+- Design - 5042 
 
-- Features: 6300 words
-  - needs citation and figures/examples/tests
-  - prob doesn't need citations though
+- Features: 6822 
 
-- Conclusion, Evaluation and future work: 4k words
+- Conclusion, 3447
   
-
-Current total words: 15k words
-- todo: count my citations
+Current total words: 23k words
 
 
 Sections

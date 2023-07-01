@@ -5,11 +5,10 @@
 
 Masters in Music Tech Thesis
 =========================================
-Iain C.T. Duncan
+Iain C.T. Duncan, University of Victoria
 
 .. toctree::
-    :maxdepth: 4
-    :caption: Contents:
+    :maxdepth: 3
  
     introduction.rst
     background.rst
@@ -17,6 +16,7 @@ Iain C.T. Duncan
     design.rst
     features_usage.rst 
     conclusion.rst
+    bibliography.rst
 
 .. * :ref:`genindex`
 .. * :ref:`search`
