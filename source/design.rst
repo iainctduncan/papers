@@ -355,14 +355,7 @@ Conversely, the dollar sign has no significance in Lisp, and the semi-colon (use
 The result of this is that rather than require the programmer to create special handlers in their code to respond to Max messages, 
 as one must do when using the js object, the s4m object is able to simply evaluate incoming messages *as if they were Scheme code*,
 saving the programmer the need to write callback functions for every type of incoming message.
-To simplify this, s4m also has a special convenience feature: it will act as if an incoming expression is surrounded by parentheses if they are not there.
-It will also accept message with parentheses, including nested parentheses, processing these as Scheme code.
-In figure X we see several Max messages acting as Lisp code.
-
-.. TODO insert figure of message processing
-
-This makes connecting Max user input objects to a Scheme for Max program simple, and means that the containing patch can, 
-if desired, provide a visual reminder of exactly what is going on in the Scheme program.
+This facility is covered in more detail in the Features and Usage chapter, with an accompanying figure.
 
 Having built some complex programs myself in JavaScript in Max prior to building Scheme for Max, 
 I have found this to be a significant advantage of Scheme for Max over the js object. 

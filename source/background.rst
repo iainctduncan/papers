@@ -297,9 +297,11 @@ matters (Puckette, 1991, 70).
 .. citation (Puckette, 1991)
 
 As with many textual DSL's, it is possible for the advanced programmer to extend both Max 
-and Pure Data by writing "externals" in the C and C++ languages. 
-This has led to a large body of ready made objects
-being available for Max and Pure Data, both included
+and Pure Data by writing "externals" in the C and C++ languages. In Max, this facility
+is called the Max Software Development Kit (SDK) (Lyon,)
+.. citation (Lyon) FIX
+The popularity and extensibility of Max and Pure Data has led to thousands
+of patcher objects being available for Max and Pure Data, both included
 in the platforms and as freely-available extensions. These include objects
 for handling MIDI and other gestural input, timers, graphical displays,
 facilities for importing and playing audio files, mathematical
