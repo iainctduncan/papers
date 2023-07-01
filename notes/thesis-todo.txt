@@ -1,10 +1,25 @@
+Copy edit:
+- DONE: intro, background, goals, design, features,
+- TODO: conclusion:
+
+
 Write
-- intro
 - conclusion
 
 Figures
+- csound example
+- max patch
+- max message expansion
+  features 123
+- s4m grid 
 
 Bibliography
 
-Format citations
+Fix inline citations
+
+
+Missing Citations missing
+- dannenberg on advantage of GPPLs
+- citation on the many lisps, background 258
+
 

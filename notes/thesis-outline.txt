@@ -1,13 +1,13 @@
 Thesis outline
 
 High level Outline
-- Intro 1k words TODO
+- Intro - 900
 
-- Background - 4300
+- Background - 5100 
 
-- Project Goals: at 1500 words 
+- Project Goals - 1600 
 
-- Design: at 4868 words - edited
+- Design - 5156 
   - needs conclusion
 
 - Features: 6300 words
