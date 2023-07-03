@@ -118,7 +118,13 @@ will receive the message **set! my-var 99** and will treat this as **(set! my-va
 This capability significantly reduces the amount of code the user must write to make interactive patches when compared to the Max js object, 
 as the js object requires explicit handler methods to be made for any input (Cycling 74 n.d.).
 
-.. TODO FIGURE
+.. FIGURE 2 max message to scheme
+
+.. figure:: figure_2_setting_variables_max_patch.png
+   :class: with-border
+
+   Figure 2: Setting Scheme variables using Max message interpolation.
+
 
 A result of this input facility is that when one uses a symbol in a Max message sent to inlet 0, the interpreter will take symbol
 to be a variable name in the running Scheme programs top-level environment. 
@@ -504,7 +510,12 @@ In my personal experiments, comparison with the Max built in jit.cellblock
 increases - from unusable with one 64 x 16 grid, to usable with 
 four 64 x 16 grids with minimal CPU impact.
 
-.. TODO figure of the s4m-grid
+.. figure of the s4m-grid
+
+.. figure:: figure_3_s4m_grid.png
+   :class: with-border
+
+   Figure 3: The s4m.grid display object.
 
 
 Scheduling Functions 

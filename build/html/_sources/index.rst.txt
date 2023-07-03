@@ -8,7 +8,7 @@ Masters in Music Tech Thesis
 Iain C.T. Duncan, University of Victoria
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 2
  
     introduction.rst
     background.rst

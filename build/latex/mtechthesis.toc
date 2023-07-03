@@ -1,0 +1,73 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Background \sphinxhyphen {} Computer Music Programming Languages}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}What is Computer Music Programming?}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Requirements for a Computer Music Platform}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Support for Musical Abstractions}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Support for Performer Interaction}{6}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Support for Complex Algorithms}{7}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Computer Music Platform Families}{7}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Domain\sphinxhyphen {}specific Textual Languages}{7}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Visual Patching Environments}{9}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}General Purpose Programming Languages}{10}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Multi\sphinxhyphen {}Language Platforms}{11}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Conclusion}{12}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Project Motivation and Goals}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Overview}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}1) Focus on programming musical events and event\sphinxhyphen {}oriented tools}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}2) Support multiple contexts, including linear composition, realtime interaction, and live performance}{14}{section.3.3}%
+\contentsline {section}{\numberline {3.4}3) Support advanced functional and object\sphinxhyphen {}oriented programming techniques}{14}{section.3.4}%
+\contentsline {section}{\numberline {3.5}4) Be linguistically optimized for the target use cases}{14}{section.3.5}%
+\contentsline {section}{\numberline {3.6}5) Be usable in conjunction with modern, commercial tools}{15}{section.3.6}%
+\contentsline {section}{\numberline {3.7}6) Support composing music that is impractical on commercial tools}{15}{section.3.7}%
+\contentsline {section}{\numberline {3.8}7) Enable iterative development during musical playback}{15}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Conclusion}{16}{section.3.9}%
+\contentsline {chapter}{\numberline {4}High\sphinxhyphen {}Level Design}{17}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Why a Max extension?}{17}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Why not just use JavaScript?}{18}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Why use a Lisp language?}{19}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Symbolic computation and list processing}{19}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Dynamic code loading and the REPL}{21}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Macros and Domain Specific Languages}{22}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Max and Lisp syntax compability}{22}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Of the possible Lisp languages, why use s7 Scheme?}{23}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Use in Computer Music}{23}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Linguistic Features}{23}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Ease of embedding}{23}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}License}{24}{subsection.4.4.4}%
+\contentsline {chapter}{\numberline {5}Features and Usage}{25}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Installation}{25}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Object Initialization}{25}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Bootstrap files}{25}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Source Files}{26}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Inlets and Outlets}{26}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Input}{26}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Inlet 0 Scheme Expressions}{26}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Inlet 1+}{27}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Output}{28}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Sending Messages}{28}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Buffers \& Tables}{29}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Dictionaries}{30}{section.5.7}%
+\contentsline {section}{\numberline {5.8}S4M Arrays}{31}{section.5.8}%
+\contentsline {section}{\numberline {5.9}The s4m.grid object}{32}{section.5.9}%
+\contentsline {section}{\numberline {5.10}Scheduling Functions}{32}{section.5.10}%
+\contentsline {section}{\numberline {5.11}Garbage collector functions}{35}{section.5.11}%
+\contentsline {section}{\numberline {5.12}Summary}{36}{section.5.12}%
+\contentsline {chapter}{\numberline {6}Conclusion}{37}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Evaluation}{37}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}1) Focus on programming musical events and event\sphinxhyphen {}oriented tools}{37}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}2) Support multiple contexts, including linear composition, real\sphinxhyphen {}time interaction, and live performance}{37}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}3) Support advanced functional and object\sphinxhyphen {}oriented programming techniques}{38}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}4) Be linguistically optimized for the target use cases}{38}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}5) Be usable in conjunction with modern, commercial tools}{38}{subsection.6.1.5}%
+\contentsline {subsection}{\numberline {6.1.6}6) Support composing music that is impractical on commercial tools}{39}{subsection.6.1.6}%
+\contentsline {subsection}{\numberline {6.1.7}7) Enable iterative development during musical playback}{39}{subsection.6.1.7}%
+\contentsline {subsection}{\numberline {6.1.8}Evaluation Summary}{40}{subsection.6.1.8}%
+\contentsline {section}{\numberline {6.2}Limitations and Future Work}{40}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Limited Integrations}{40}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Real\sphinxhyphen {}time Scheduling}{40}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Garbage Collection}{41}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Thread Limitations}{41}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Difficulty of Extension}{42}{subsection.6.2.5}%
+\contentsline {section}{\numberline {6.3}Conclusion}{42}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Bibilography}{43}{chapter.7}%

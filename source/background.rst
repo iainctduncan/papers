@@ -188,10 +188,38 @@ of musical events notated in Csound's own data format. (These files
 may be merged into one containing "csd" file, but the distinction still holds.)
 These are used together to render a scored piece to audio, 
 either as an offline operation or as a realtime operation.
-In figure 1, a sample of Csound code is shown, with an instrument playing a
-short melody driven by the score.
+A sample of Csound code is shown below, with an instrument playing a
+short scale driven by the score.
 
-.. FIGURE 1 TODO Csound instrument and score
+.. code:: csound
+
+  <CsoundSynthesizer>
+  <CsInstruments>
+  
+  instr 1	
+    ; take pitch as midi note from param 4 
+    kfrq  mtof  p4
+    ; saw wave
+    asig  vco2  0.8, kfrq, 0
+    ; an ADSR envelope
+    aenv  0.01, 0.3, 0.7, 0.2
+    ; apply env and output in stereo
+    outs  asig * aenv, asig * aenv
+  endin
+  
+  </CsInstruments>
+  <CsScore>
+
+  ;  time   dur  midi-note-num
+  i1 0      1    60
+  i1 1      1    62
+  i1 2      1    64
+  i1 3      1    65
+  i1 4      1    67
+  
+  </CsScore>
+  </CsoundSynthesizer>
+
 
 With their built-in musical abstractions, DSL's are attractive to the composer-programmer, 
 but on the other hand, the tools-programmer is significantly more constrained than when
@@ -287,7 +315,12 @@ A patch runs as long as it is open, and will continue to do computations in resp
 incoming events such as MIDI messages, timers firing, or blocks of samples
 coming from operating systems audio subsystem (CTN: Farnell 2010, 149).
 
-.. FIGURE 2 max patch figure
+.. FIGURE 1 max patch figure
+
+.. figure:: figure_1_interactive_max_patch.png
+   :class: with-border
+
+   Figure 1: A Max patch with a keyboard and dial user interaction objects. 
 
 In contrast to textual DSLs such as CSound, patching environments have comparatively
 little built in support for musically meaningful abstractions.

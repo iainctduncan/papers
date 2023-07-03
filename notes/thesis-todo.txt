@@ -1,24 +1,17 @@
-Copy edit:
-- DONE: intro, background, goals, design, features, conclusion
-- still need to spell check
-
-Write
-- conclusion
-
 Figures
-- csound example
-- max patch
+- csound example: background 194
+- a sample max patch: background 290
 - max message expansion
   features 123
-- s4m grid 
+- s4m grid features 507
+
 
 Bibliography
+- done, check it
 
-Fix inline citations
-
-
-Missing Citations missing
-- dannenberg on advantage of GPPLs
-- citation on the many lisps, background 258
-
-
+Misc
+- spell check
+- check code for errors
+- hanging indent in bib
+- title pages and shit
+- latex formatting (page numbers and so on) 
