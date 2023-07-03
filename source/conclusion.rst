@@ -112,8 +112,7 @@ been particularly successful. The Live API provides a way for Max patches to pro
 most elements of the host in real-time, including mixer settings, device settings, the system transport,
 sequencer data, and much more. It uses an object model, the Live Object Model (or LOM), that
 is based on hierarchal lists of symbols. Users construct lists of numbers and symbols, and send
-these to special Max objects to query and control elements of the API (Cipriani, 2020, 676-680).
-.. citation (Cipriani, 2020)
+these to special Max objects to query and control elements of the API (CTN: Cipriani 2020, 676-680).
 Given that the fundamental model is of lists of symbols, it thus lends itself well to implementation in Lisp.
 I have created a low-level interface object for working with the Live API, **live-api**, and an accompanying
 Max subpatch (provided with S4M), which together provide the functions
@@ -221,8 +220,7 @@ a wide variety of objects for working with these lists, including sophisticated 
 elements such as staff notation displays and piano rolls.
 Bach uses lllls in a similar fashion to how Max uses dictionaires 
 and S4M uses s4m-arrays: the data is stored in a global Bach-controlled registry,
-and objects can pass references to these between them (Agostini, 2015, 11-27).
-.. citation (Agostini, 2015)
+and objects can pass references to these between them (CTN: Agostini 2015, 11-27).
 However, while being inspired by Lisp data structures and Lisp-based platforms,
 Bach is notably missing an interactive Lisp interpreter itself.
 Were Scheme for Max also able to work with Bach lllls, the capabilities of both Bach
@@ -280,8 +278,7 @@ Were it possible to run an instance in the audio thread, S4M could be
 used to produce audio signals at single sample temporal accuracy.
 The previously discussed jitter of event onsets in Max is only an issue
 for Max *event messages*. Generating timing data as part of an audio stream
-is not affected. (Lyon, 2012, 121-179)
-.. citation (Lyon, 2012)
+is not affected. (CTN: Lyon 2012, 121-179)
 This could be useful for those wishing to sequence synthesizers controlled
 by control voltages, as this is done in modern audio workstations by outputing
 control voltage signals as audio streams. 
@@ -292,8 +289,7 @@ sample rate as regular audio to be useful. For example, in the Csound language,
 it is common to use *k-rate* signals, generated at a divisor of the sample
 rate, to control many attributes of synthesis. These can be generated
 at lower resolution, and one can use interpolation when a smoother output
-signal is needed (Smaragdis, 2000, 126-128).
-.. citation (Smaragdis, 2000)
+signal is needed (CTN: Smaragdis 2000, 126-128).
 It is thus possible that creating
 control rate signals for purposes such as control-volt gates (controlling note onsets),
 envelopes, and low frequency oscillators could all be practical in Scheme.

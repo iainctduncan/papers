@@ -1,4 +1,4 @@
-Project Motivation and Goals and Motivation 
+Project Motivation and Goals 
 ============================================
 
 Overview
@@ -9,17 +9,17 @@ The project requirements were born from my experiences, both positive and negati
 of tools, both commercial and non-commercial.
 Broadly, the requirements I set myself for the project are that it should:
 
-#. Focus on programming musical events and event-oriented tools
-#. Support multiple contexts, including linear composition, real-time interaction, and live performance
-#. Support advanced functional and object-oriented programming techniques
-#. Be linguistically optimized for the target use cases
-#. Be usable in conjunction with modern, commercial tools 
-#. Support composing music that is impractical on commercial tools
-#. Enable iterative development during musical playback
+* Focus on programming musical events and event-oriented tools
+* Support multiple contexts, including linear composition, real-time interaction, and live performance
+* Support advanced functional and object-oriented programming techniques
+* Be linguistically optimized for the target use cases
+* Be usable in conjunction with modern, commercial tools 
+* Support composing music that is impractical on commercial tools
+* Enable iterative development during musical playback
 
 These goals will act as our reference when discussing the sucess of design and implementation decisions.
 
-1) Focus on programming musical events and event-oriented tools
+Focus on programming musical events and event-oriented tools
 -----------------------------------------------------------------
 While numerous options for programming computer music exist, most domain specific computer music languages are 
 designed principally around rendering audio, essentially acting as higher level langauges for digital signal processing (DSP).
@@ -37,7 +37,7 @@ I believe that reducing the scope in this way enables an approach that is more p
 for the specific act of *composing*, in that the features of high-level languages afforded by this decision
 are, in my opinion, tremendously helpful when working programmatically with musical abstractions.
 
-2) Support multiple contexts, including linear composition, realtime interaction, and live performance
+Support multiple contexts, including linear composition, realtime interaction, and live performance
 -------------------------------------------------------------------------------------------------------
 As previously discussed, on modern computers it is now possible to run complex computer music processes in realtime, 
 where acceptable realtime performance means there are not any audible audio issues from missed rendering deadlines, and the system can run with a 
@@ -55,7 +55,7 @@ algorithmic processes and/or sequencers.
 And finally, it should be usable on stage, for example to create performances in which a human being plays
 physical instruments or manipulates devices that interact with the program.
 
-3) Support advanced functional and object-oriented programming techniques
+Support advanced functional and object-oriented programming techniques
 -------------------------------------------------------------------------
 The project should support advanced high-level programming idioms, many of which are now in the broader 
 programming mainstream, having been adopted into mainstream languages such as JavaScript, Java, Python, and Ruby.
@@ -66,7 +66,7 @@ their intent more succinctly, with the code better representative of musical abs
 also make the tool more attractive to advanced programmers who might otherwise
 feel they need to use a general purpose programming language.
 
-4) Be linguistically optimized for the target use cases
+Be linguistically optimized for the target use cases
 --------------------------------------------------------------------------------------------------------
 Support for higher level functional and object-oriented programming idioms can be done in a variety of 
 general programming languages, with the differences between these languages having ramifications on the development process. 
@@ -82,15 +82,14 @@ favouring whatever is most efficient for the process of composing and interactin
 and favouring the linguistic tradeoffs appropriate for the solo developer who is likely to be able to
 hold the entire program in one brain.
 
-5) Be usable in conjunction with modern, commercial tools 
+Be usable in conjunction with modern, commercial tools 
 ----------------------------------------------------------------------------------------------------
 A problem with many of the existing computer music DSLs is that they were designed with the
 expectation that the user would be using only (or principally) the lanugage in question - that in effect,
 the DSL would always get to "be the boss".
 For example, Common Music enables composing in a high-level language (Scheme), but to be used in real-time,
 this Scheme code must be run from the Grace host application, where it uses the Grace scheduler for 
-controlling event times (Taube, 2009, 451).
-.. citation (Taube, 2009)
+controlling event times (CTN: Taube 2009, 451).
 Thus combining music coming from Common Music with musical elements coming from a commercial sequencing program such as 
 Ableton Live is not terribly practical if one wants tight synchronization and the "clock-boss" to be Ableton Live.
 As commercial music software becomes more and more sophisticated, especially in the areas of sound design 
@@ -102,7 +101,7 @@ as Ableton Live and modern VST plugins.
 The user of the project should not be faced with a binary choice between using the power of the project or
 having the convenience and audio quality of modern commercial tools available to them.
 
-6) Support composing music that is impractical on commercial tools
+Support composing music that is impractical on commercial tools
 ----------------------------------------------------------------------------------------------------
 While being able to work with commercial tools is a goal, this cannot be at the expense of supporting 
 compositions that are impractical to render purely on commercial platforms.
@@ -116,7 +115,7 @@ and so on. While certainly one can find ways around these assumptions in commerc
 involved can be laborious and discouraging.
 However, these assumptions do not need to be made for a tool using a high-level textual language.
 
-7) Enable iterative development during musical playback
+Enable iterative development during musical playback
 ----------------------------------------------------------------------------------------------------
 Finally, a goal of the project is to ensure that all of the goals listed so far can be achieved in a way that 
 allows *interactive development* during audio playback. 
@@ -126,15 +125,13 @@ This workflow is productive compositionally, and provides the ability to use the
 Languages in the Lisp family (and some others) allow this kind of workflow during software development, 
 an idiom know as interactive programming, or REPL-driven development (REPL being a reference to the Read Evaluate Print Loop).
 In this style of development, code is incrementally updated while the program is running, allowing an exploratory style of development 
-that is ideal during early prototyping and during the composition process (Taube, 2004, 8).
-.. citation (Taube, 2004)
+that is ideal during early prototyping and during the composition process (CTN: Taube 2004, 8).
 For the domain of algorithmic music, interactive development provides the same kind of immediacy one
 gets with sequencers that allow updating data during playback. 
 Indeed, there exists an entire musical community dedicated to this kind of music programming, 
 known as "live coding", in which the performer takes the stage with minimal advanced material prepared
 and composes in the programming language in view of the audience, often with the code projected on screen
-(Roberts, 2018, 293-294).
-.. citation (Roberts, 2018)
+(CTN: Roberts and Wakefield 2018, 293-294).
 While *performing* live coding is not a personal goal of mine, the ability to live code while *composing* is.
 The project should support this style of working.
 

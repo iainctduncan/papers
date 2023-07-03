@@ -16,17 +16,16 @@ be a linearly scored piece of set length and content, or an interactive program 
 a performer interacts, but that contains prepared material of some kind. 
 This is distinct, for example, from commercial music tools (such as sequencers or digital
 audio workstations) in which a computer program is run as the host environment, but the compositional
-work itself is stored as simply data within that program (for example in a binary format or
+work itself is stored as static data within that program (for example in a binary format or
 in MIDI files), and would not normally be considered a computer *program* itself.
 
 Using this definition of computer music programming, we can draw a further distinction
 between two kinds of programming and programmer:
-we have programming that is specific to a composer, or one or more artistic pieces of work;
+we have programming that is specific to a composer or an artistic work;
 and we have programming of tools and frameworks that will be potentially be used by many 
 people and in potentially many contexts.
 For the purpose of this discussion, I will refer to the people doing these as the "composer-programmer"
-- a term also used by Curtis Roads in "Composing Electronic Music" (Roads, 2015, 341) -
-.. citation (Roads, 2015)
+- a term also used by Curtis Roads in "Composing Electronic Music" (CTN: Roads 2015, 341) -
 and the "tools programmer" (my own terminology). 
 Of course, these frequently are the same person at different times.
 This distinction is important, as the goals of these two programmers, and thus the
@@ -37,11 +36,10 @@ developing software for use by a larger community and may prefer design decision
 that favour long-term code reuse and team development at the expense of immediate convenience.
 As we will see, the various computer music languages, platforms, and approaches 
 favour one of these hypothetical programmers to a greater or lesser degree.
-
 Beyond these distinctions, I use the term "computer music programming" as broadly
 as possible - I include as computer music programming platforms both graphic platforms with
-which a beginner can be immediately productive as well as tools for advanced programming 
-languages that are only accessible to experienced computer programmers.
+which a beginner can be immediately productive as well as general purpose programming 
+languages that are the domain of experienced computer programmers.
 
 Requirements for a Computer Music Platform
 -------------------------------------------
@@ -52,8 +50,7 @@ While the list of possible requirements is potentially long, I will group
 them into three high level requirements that are personally important to me as
 a composer and performer. Note that not all of these are necessarily fulfilled well, or at all,
 by each of the possible platforms a composer might use - some offer
-only partial support for a requirement, or perhaps even none at all (Lazzarini, 2013, 1).
-.. citation (Lazzarini, 2013) 
+only partial support for a requirement, or perhaps even none at all (CTN: Lazzarini 2013, 97).
 
 Support for Musical Abstractions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -67,8 +64,7 @@ Probably the most important of these abstractions are those concerning musical t
 - a good computer music language must have an implementation of *logical time*,
 allowing the programmer to schedule events accurately in a way that makes sense
 to the user but that also works for rendering or playing in real-time to a degree of accuracy
-appropriate for music (Dannenberg, 2018, 3).
-.. citation (Dannenberg, 2018)
+appropriate for music (CTN: Dannenberg 2018, 3).
 
 However, it should be noted that the importance of these abstractions being readily provided
 by a language varies widely amongst composer-programmers:
@@ -76,15 +72,12 @@ while some composers will be relieved not to have to decide how to implement
 the concept of beats and tempi themselves, others may be expressly looking for platforms
 that do not come with any assumptions of how one might think about musical abstractions.
 Computer music programming languages thus also vary widely in their areas
-of focus and the problems they attempt to solve for the programmer (Dannenberg, 2018, 4).
-.. citation (Dannenburg, 2018)
+of focus and the problems they attempt to solve for the programmer (CTN: Dannenberg 2018, 4).
 For example, the Csound language comes with a built-in abstraction of a score system,
-that in turn depends on abstractions representing beats and tempi (Lazzarini, 2016, 157).
-.. citation (Lazzarini, 2016)
+that in turn depends on abstractions representing beats and tempi (CTN: Lazzarini 2016, 157).
 In contrast, the Max platform takes the design approach of giving the user
 an almost blank canvas, deliberately avoiding any assumptions that the user
-will make music of any particular style or in any particular way (Puckette, 2002, 34).
-.. citation (Puckette, 2002)
+will make music of any particular style or in any particular way (CTN: Puckette 2002, 34).
 
 For my own purposes, I would ideally like to have the ability to score conventional music without
 necessarily being required to implement all the dependencies of a score system myself,
@@ -107,15 +100,13 @@ an acoustic instrument.
 Again, the importance of this varies with the composer and the platform.
 In fact, this was not even possible with early computer music languages such
 as the MUSIC-N family, with which the process of rendering audio from a score file 
-took far longer than the duration of a piece (Wang, 2008, 6).
-.. citation (Wang, 2008) needs page checked  FIX
+took far longer than the duration of a piece (CTN: Wang 2017, 60-63).
 
 However, since the advent of realtime-capable systems, this has become a
 standard feature in computer music platforms.
 In fact, in contrast to the Music-N languages, the Max platform was designed
 to support performance-time interactivity first, with the ability to render audio only added later
-as computers became capable of doing both (Puckette, 2002, 33).
-.. citation (Puckette, 2002)
+as computers became capable of doing both (CTN: Puckette 2002, 33).
 As someone who comes principally from a jazz and contemporary improvised music
 background, being able to create complex systems that support realtime input is a high priority to me.
 
@@ -134,8 +125,7 @@ However, it is also important to me that a performer be able to interact with th
 That, to quote Miller Puckette on his original design goals for Max, 
 basic musical material should be "controllable physcially, sequentially, or algorithmically;
 if they are to be controlled algorithmically, the inputs to the algorithm should 
-themselves be controllable in any way" (Puckette, 1991, 68).
-.. citation (Puckette, 1991)
+themselves be controllable in any way" (CTN: Puckette 1991, 68).
 
 While one could certainly come up with further requirements, these three provide the basis
 on which I will discuss the main families of computer music programming tools, and
@@ -149,29 +139,27 @@ environments into three general categories: domain-specific textual languages, v
 environments, and general purpose programming languages that are run with music-specific libraries
 or within musical frameworks. 
 
-I will briefly discuss each of these, listing examples, but focusing on a representative tool from each family.
+I will briefly discuss each of these, listing various examples, but focusing on a representative tool from each family.
 I will provide my observations and experiences of the advantages and disadvantages of each, 
 drawing both on the literature and on my personal experiences with tools from each category 
 over the last 25 years.
 
-Domain-specific Textual Languages
+Domain-Specific Textual Languages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-A domain-specific language (DSL) for music is a textual programming language designed
-expressly around making music with a computer (Wang 2008, 1).
-.. citation (Wang, 2008, check page - replace with better DSL def citation if I find one FIX  (maybe swap to Lazzarini?)
+A domain-specific language (DSL) for music is a textual programming language intended
+expressly for making music with a computer (CTN: Wang 2017, 58).
 
-Interestingly, the first example of programming computer music (that one might reasonably
+The first historical example of programming computer music (that one might reasonably
 consider as more than an audio experiment) used a music DSL, namely Max Matthew's MUSIC I
 language, created in 1957. 
 MUSIC I (originally refered to as simply MUSIC) was a domain specific language written in assembly 
 language for the IBM 704 mainframe at Bell Labs.
-It was able to translate a high-level text language with musical abstractions to assembly code,
+It was able to translate a high-level textual language with musical abstractions to assembly code,
 and could (through various intermediary steps) output digital audio. 
 MUSIC I was followed by various refinements by Matthews (Music II through V),
 and by similar languages by others. 
 Its lineage continues to this day in the Csound language, still under active development and widely used,
-and one with which I have extensive experience (Manning, 2013, 187-189).
-.. citation (Manning, 2013)
+and one with which I have extensive experience. (CTN: Manning 2013, 187-189).
 
 While the source code of Csound piece, for example, is clearly a computer programs 
 (and would be recognizable as such to one familiar with programming)
@@ -181,13 +169,11 @@ of creating a composition, and has a particular way in which it is run to make t
 Historically, running such a program meant rendering a piece to an audio file, but
 with modern computers (and versions of Csound) the rendering can be done in realtime.
 While originally these programs were not something with which a performer could interact while the music rendered,
-facilties now exist in Csound for performers to interact with the programs while they play (Lazzarini, 2016).
-.. citation (Lazzarini, 2013)
+facilties now exist in Csound for performers to interact with the programs while they play (CTN: Lazzarini 2016, 171-179).
 
 In addition to Csound, some other actively developed examples from this general family of language
 include SuperCollider, ChucK, and Faust, each of which has a particular focus or approach to the problems
-of computer music (Wang, 2008).
-.. citation FIX
+of computer music (CTN: Wang 2017, 69-72; Lazzarini 2017, 41-42).
 
 A notable advantage of a using a music DSL is that many of the hard
 decisions that face the programmer have been made already.
@@ -195,50 +181,45 @@ The composer-programmer is not starting with a blank slate:
 the language provides built-in abstractions ranging from
 macro-structural concepts such as scores and sections to individual notes and beats.
 Music DSLs thus significantly simplify the task of programming music and reduce
-how much the composer-programmer must learn and program to begin making music (Lazzarini, 2017, 26).
-.. citation (Lazzarini, 2017)
+how much the composer-programmer must learn and program to begin making music (CTN: Lazzarini 2017, 26).
 In Csound, for example, a program consists of an "orchestra" file, containing
 programmatic instrument definitions, and a "score" file, containing a score
-of musical events notated in Csound's own data format.
+of musical events notated in Csound's own data format. (These files
+may be merged into one containing "csd" file, but the distinction still holds.)
 These are used together to render a scored piece to audio, 
 either as an offline operation or as a realtime operation.
-
-In the simple example in figure 1, we have a instrument playing a
+In figure 1, a sample of Csound code is shown, with an instrument playing a
 short melody driven by the score.
 
-.. FIGURE TODO insert Csound code example
+.. FIGURE 1 TODO Csound instrument and score
 
-
-With these built-in musical constructs, DSL's are attractive to the composer-programmer, 
+With their built-in musical abstractions, DSL's are attractive to the composer-programmer, 
 but on the other hand, the tools-programmer is significantly more constrained than when
 working in a general purpose programming language.
 This can be frustrating for experienced programmers coming from general purpose languages,
 who may wonder where their function calls and looping constructs went and how they can
-express algorithms they already know in the abstractions provided by the language.
+express the algorithms with which they are familiar in the unusual abstractions provided by the language.
 For example, in Csound one can program a form of recursion, but one of the techniques
-for doing so involves creating instruments that play notes that in turn schedule notes (Lazzarini, 2016, 116).
-.. citation (Lazzarini, 2016)
+for doing so involves creating instruments that play notes that in turn schedule notes (CTN: Lazzarini 2016, 116).
 The use of the note as the fundamental
 unit of computation (where a "note" is an instance of an instrument definition activated at
 some time, for some duration) requires the tools-programmer to not only 
 understand the concept of recursion, but to also understand how to translate it
-into an unusual syntax. 
+into this unusual syntax. 
 
 That said, music DSLs generally provide ways of *extending* the language with 
 a general purpose language, allowing the tools-programmer to add new abstractions to the DSL itself.
-In Csound, for example, a tools-programmer may create a new opcode (essentially the equivalent
+In Csound, for example, a tools-programmer may create a new *opcode* (essentially the equivalent
 of a Csound class or function) using the C language,
 compiling it such that it can be used in the same way as any built in opcode that comes with Csound
-(Fitch, 2011, 581).
-.. citation (Fitch, 2011)
+(CTN: ffitch 2011b, 581).
 
 It should also be noted that the ease with which composer-programmers can work 
 with DSLs has led to broad popularity in the music community, and this
 in turn has led to many programmers creating publically available extensions, thus providing
 a rich library of freely-available tools for the programmer to use.
 Csound, for example, is still actively used and developed today, which is
-remarkable for a language first developed in 1986, and now has thousands of objects available (Manning, 2013, 189).
-.. citation (Manning, 2013)
+remarkable for a language first developed in 1986, and now has thousands of objects available (CTN Manning 2013, 189).
 If an extension is popular and useful enough, it may even find its way into the
 main language or into official repositories of extensions.
 
@@ -247,12 +228,10 @@ Certainly, we are given many high-level and convenient musically-meaningful abst
 Creating linear pieces according to a set score is straightforward.
 Performer interaction is also possible in modern versions, though programming 
 an interactive system is somewhat cumbersome in that tasks that would require simple programming
-in a general purpose language 
-must be done in an unusual manner to fit in the note-centered paradigm of Csound.
+in a general purpose language must be done in an unusual manner to fit in the note-centered paradigm of Csound.
 For example,  making a component to receive, parse, and translate MIDI input according
 to some arbitrary rules requires making an "instrument" and having the
-score turn on "always-on" notes (Lazzarini, 2106, 175).
-.. citation (Lazzarini, 2016)
+score turn on "always-on" notes (CTN: Lazzarini 2016, 175).
 Clearly we are bending the built in abstractions to other purposes, 
 at the expense of easily comprehensible code.
 
@@ -279,42 +258,36 @@ In a typical use case, the Max program would output messages (which could be MID
 necessarily), and these would be rendered to audio with some other tools, such
 as standard MIDI-capable synthesizers or other audio rendering systems. 
 Later versions of Pure Data and Max added support for generating audio directly,
-as computers became fast enough to generate audio in real-time (Puckette, 2002, 34).
-.. citation (Puckette, 2002)
+as computers became fast enough to generate audio in real-time (CTN: Puckette, 2002, 34).
 
-In Max and Pure Data,
-the composer-programmer places visual representations of objects on a graphic canvas, 
+In Max and Pure Data, the composer-programmer places visual representations of objects on a graphic canvas, 
 connecting them with virtual "patch cables". When the program (called a "patch") runs,
 each object in this graph receives messages from other connected objects, processes the 
 message or block of samples, and optionally outputs messages or audio in response.
 A complete patch thus acts as a program where messages flow  
 through a graph of objects, similar to data flowing through a spreadsheet application.
-The term "dataflow" has been used to describe this type of program (Farnell, 2010, 149)
-.. citation (Farnell, 2010, 149)
+The term "dataflow" has been used to describe this type of program (CTN: Farnell 2010, 149)
 though it should be noted that Miller Puckette himself asserts that it is not
 truly "dataflow" as the objects may retain state, and ordering of operations within the graph
-matters (Puckette, 1991, 70).
-.. citation (Puckette, 1991)
+matters (CTN: Puckette 1991, 70).
 
 As with many textual DSL's, it is possible for the advanced programmer to extend both Max 
 and Pure Data by writing "externals" in the C and C++ languages. In Max, this facility
-is called the Max Software Development Kit (SDK) (Lyon,)
-.. citation (Lyon) FIX
+is called the Max Software Development Kit, or SDK (CTN: Lyon 2012, 3).
 The popularity and extensibility of Max and Pure Data has led to thousands
 of patcher objects being available for Max and Pure Data, both included
 in the platforms and as freely-available extensions. These include objects
 for handling MIDI and other gestural input, timers, graphical displays,
 facilities for importing and playing audio files, mathematical
-and digital signal processing operators, and much more (Cipriani, 2019, XI).
-.. citation (Cipriani, 2019)
+and digital signal processing operators, and much more (CTN: Cipriani, 2019, XI).
 
 This visual patching paradigm differs significantly from that of Csound and similar DSLs. 
 The program created by a user is best described as an interactive environment, rather than a piece.
 A patch runs as long as it is open, and will continue to do computations in response to 
 incoming events such as MIDI messages, timers firing, or blocks of samples
-coming from operating systems audio subsystem (Farnell, 2010, 149).
+coming from operating systems audio subsystem (CTN: Farnell 2010, 149).
 
-.. FIGURE TODO max patch figure
+.. FIGURE 2 max patch figure
 
 In contrast to textual DSLs such as CSound, patching environments have comparatively
 little built in support for musically meaningful abstractions.
@@ -331,8 +304,7 @@ There is nothing intrinsically musical about the patcher environments -
 the environments are much more open ended in this way than the musical DSLs.
 As Max developer David Zicarelli put it in his paper on the 17th anniversary of Max,
 it is, compared to most programs, "a program which does nothing", presenting the user 
-with a completely blank canvas (Zicarelli, 2002, 44).
-.. citation (Zicarelli, 2002)
+with a completely blank canvas (CTN: Zicarelli 2002, 44).
 
 Returning to our requirements, the fundamental strength of patching environments
 is the ease with which one can create programs mean for performer interaction.
@@ -356,8 +328,7 @@ can only make new messages that they will pass on to downstream objects, resulti
 function calls until the chain ends.
 Describing this in programming terminology: the flow of messages creates a call chain 
 of void functions, with the stack eventually terminating when there are no more functions
-to be called (Cycling 74, 2023).
-.. citation (Cycling 74)  FIX  how to do this?
+to be called.
 
 While easy to grasp for new programmers, 
 this style of programming makes many standard programming practices difficult to implement,
@@ -369,7 +340,7 @@ significant and non-obvious programming.
 General Purpose Programming Languages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Our third family of computer music programming languages is that of 
-general purpose programming languages (GPPLs), such as C++, Python, JavaScript, Lisp, and so on. 
+general purpose programming languages (GPPLs), such as C++, Python, JavaScript, Lisp, and the like. 
 The use of GPPLs for music can be divided broadly
 into two approaches, corresponding to the mainstream software development
 approaches of developing with libraries versus developing with 
@@ -380,12 +351,9 @@ much as they would for any software development, and uses third-party
 musically-oriented libraries to accomplish musical tasks.
 In this case, the structure and operation of the program is entirely up to the programmer.
 For example, a programmer might use C++ to create an application, creating sounds
-with a library such as the Synthesis Tool Kit (Cook, 2002, 236-237),
-.. citation (Cook, 2002). 
-handling MIDI input and output with PortMidi (Lazzarini, 2010, 784-795),
-.. citation (Lazzarini, 2010)
-and outputing audio with the PortAudio library (Maldanado, 2010, 364-375).
-.. citation (Maldanado, 2010).
+with a library such as the Synthesis Tool Kit (CTN: Cook 2002, 236-237),
+handling MIDI input and output with PortMidi (CTN: Lazzarini 2011, 784-795),
+and outputing audio with the PortAudio library (CTN: Maldanado, 2011, 364-375).
 While the use of these libraries significantly reduces the work needed by the programmer,
 fundamentally they are simply making a C++ application of their own design.
 
@@ -399,13 +367,11 @@ code provided by the programmer - the programmer "fills in the blanks", so to sp
 Non-musical examples of this are the Ruby-on-Rails and Django frameworks for web development,
 in which the programmer need provide only a relatively small amount of Ruby or Python
 code to create a fully functional web application.
-.. citation RoR and Django sites FIX.
 A musical example of this is the Common Music platform, in which
 the composer-programmer can work in either the Scheme or Common Lisp programming language,
 but the program is executed by the Grace host application, which 
 provides an interpreter for the hosted language, along 
-with facilities for scheduling, transport controls, outputting MIDI, and so on (Taube, 2009, 451-454).
-.. citation (Taube, 2009) 
+with facilities for scheduling, transport controls, outputting MIDI, and so on (CTN: Taube 2009, 451-454).
 The framework-driven approach thus significantly decreases the number
 of decisions the programmer must make and the amount of code that
 must be created, while still preserving the flexibility one gaines from
@@ -422,8 +388,7 @@ Implementing complex algorithms is no more difficult than it is in any
 programming language. Looping, recursion, nested function calls, and complex
 design patterns are all practical, and the programmer has a wealth of resources
 available to help them, drawing from the (vastly) larger documentation
-available for general purpose languages. (CITE dannenburg here on GPPL
-.. citation TODO citation needed
+available for general purpose languages. 
 
 Of course, this comes at the cost of giving of the programmer both a great deal more 
 to learn and a lot more work to do to get making music. 
@@ -454,49 +419,41 @@ savings of using a patching language may be offset by the power of the
 (C++) development tools with which the programmer is familiar.
 
 
-
 Multi-Language Platforms 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 Finally, we have what is, in my personal opinion, the most powerful approach to computer music programming:
 the multi-language, or hybrid, platform. 
-As programming tools and computers have improved,
-it has become more and more practical to make computer music using more than one platform at a time
-in an integrated system.  
+As programming tools and computers have improved, it has become more and more practical to make computer
+music using more than one platform at a time in an integrated system.  
 
 This multi-language approach has been explored in a wide variety of schemas. 
 The simplest is that of taking the output from one program
 and sending it as input to another. With the Csound platform, this
 is straightforward: instrument input, whether real-time or rendered, 
 comes from textual score statements, and these can be created by programs
-made in other languages that either write to files or pipe to the Csound engine (ffitch, 2011, 655).
-.. citation (ffitch, 2011)
+made in other languages that either write to files or pipe to the Csound engine (ffitch 2011a, 655).
 In many modern platforms tighter integrations are now possible
 through application programming interfaces (APIs) that let languages directly call
 functions in other languages, as they run. 
 One can, for example, run Csound from within a C++ or Python program, interacting 
-directly with the Csound engine using the Csound API (Gogins, 2013, 43-46).
-.. citation (Gogins, 2013)
+directly with the Csound engine using the Csound API (CTN: Gogins, 2013, 43-46).
 One can also run a DSL such as Csound inside a visual patcher, using open-source
-extensions to Max and Pd that embed the Csound engine in a Max or Pure Data object (Boulanger, 2013, 189).
-.. citation (Boulanger, 2013)
+extensions to Max and Pd that embed the Csound engine in a Max or Pure Data object (CTN: Boulanger 2013, 189).
 And one can even run a general purpose languauge *inside* a DSL or visual platform,
-such as Python inside Csound (Ariza, 2009, 367),
-.. citation (Ariza, 2009)
-or JavaScript inside Max (Cycling74 FIX). 
-.. citation FIX (Cycling74 docs) FIX
+such as Python inside Csound (CTN: Ariza 2009, 367).
+or JavaScript inside Max (CTN: Lyon, 13). 
 
 Note that a multi-language platform differs from the previously discussed practice of 
 *extending* a patching language or DSL with a GPPL such as C or C++.
 In the multi-language hybrid scenario, the embedded GPPL is used
 by the *composer-programmer* to make potentially piece-specific code, 
-rather than solely by a tools-programmer creating reusable tools in the environment's extension language.
+rather than solely by a tools-programmer who is creating reusable tools in the environment's extension language.
 (It should be mentioned, however, that it is feasible to prototype algorithms in an embedded high-level language such as 
 JavaScript and port them later to a DSL's extension language,
 should they reach sufficient complexity and stability to warrant the low-level work.)
 
 In the hybrid scenario, the combination of the various platforms 
-provides the programmer with a tremendous amount of flexibility (Lazzarini, 2013, 108).
-.. citation (Lazzarini, 2013)
+provides the programmer with a tremendous amount of flexibility (CTN: Lazzarini 2013, 108).
 One can, for example, use visual patching to quickly
 create a performer-interaction layer, have this layer interact with 
 a scored piece in the CSound engine, and simultaneously use an embedded GPPL to
@@ -529,8 +486,8 @@ Conclusion
 ----------
 It is in this multi-language, hybrid space that Scheme for Max sits.
 S4M provides a Max object that embeds an interpreter for
-the s7 Scheme language, a general purpose language in the Lisp family (Schottstaed)
-.. citation (Schottstaedt) FIX website citation
+the s7 Scheme language, a general purpose language in the Lisp family 
+(CTN: Schottstaed n.d.).
 With S4M, one gets a general purpose language in a visual patcher, and
 with objects such as the csound~ object, can interact closely with
 a textual DSL as well.

@@ -116,8 +116,7 @@ of the s4m object.
 Typing the number 99 into the number box will now result in Scheme calls to set the my-var variable to 99, as the s4m object
 will receive the message **set! my-var 99** and will treat this as **(set! my-var 99)**, evaluating accordingly.
 This capability significantly reduces the amount of code the user must write to make interactive patches when compared to the Max js object, 
-as the js object requires explicit handler methods to be made for any input.
-.. citation cycling site FIX
+as the js object requires explicit handler methods to be made for any input (Cycling 74 n.d.).
 
 .. TODO FIGURE
 
@@ -565,8 +564,7 @@ For optimal real-time audio performance in Max, the recommended
 settings are to have "audio in interrupt" and "overdrive" enabled. 
 When both of these are turned on, the Max engine alternately runs
 a DSP pass (calculating a signal vector of samples), and a scheduler
-thread pass. (docs.cycling74.scom) 
-.. citation cycling site, FIX ME
+thread pass (CTN: Cycling 74 n.d.). 
 
 This means that real time of events stemming from 
 the scheduler thread execution can be off by up to a signal
@@ -631,8 +629,7 @@ they have already been scheduled.
 
 Finally, these facilities enable a workflow known as
 "self-scheduling" or "temporal recursion", 
-in which a repeating function schedules the next pass of itself (Lazzarini, 2016, 115-116). 
-.. citation (Lazzarini, 2016)
+in which a repeating function schedules the next pass of itself (CTN: Lazzarini 2016, 115-116). 
 This enables the composer to create evolving
 processes, as each pass of a function can change the data,
 (or even the code!) of the next pass of the function. One might think 
@@ -698,9 +695,8 @@ uses large amounts of data.
 Further complicating things, garbage collection is of indeterminate duration,
 as the work that the gc must do is heavily dependent on the particular algorithms
 and data structures used in the program over which it is running
-(i.e., a program of some given size and memory use may require more or less
-garbage collection processing, depending on how precisely it is written). (Deutsch, 1976, 522-523)
-.. citation (Deutsch) FIX BIB (was ACM)
+That is to say, a program of some given size and memory use may require more or less
+garbage collection processing, depending on how precisely it is written. (CTN: Deutsch and Bobrow 1976, 522-523)
 
 For theses reasons, the use of garbage- collected languages is not common
 in real-time audio programming, where the program must be doing constant calculations
