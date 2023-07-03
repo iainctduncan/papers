@@ -14,9 +14,9 @@ Boulanger, Richard. 2013. "Introducing Csound for Live." In *Ways Ahead Proceedi
 
 Carrette, George. 2007. "SIOD: Scheme in One Defun." Last modified April 5, 2007. http://people.delphiforums.com/gjc//siod.html
 
-Cipriani, Alessandro, and Maurizio Giri. 2019. *Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 1*. Rome: ConTempoNet.
+Cipriani, Alessandro, and Maurizio Giri. 2019. *Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 1*. Rome: ConTempoNet.
 
-Cipriani, Alessandro, and Maurizio Giri. 2020. *Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 2*. Rome: ConTempoNet.
+Cipriani, Alessandro, and Maurizio Giri. 2020. *Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 2*. Rome: ConTempoNet.
 
 CLiki. n.d. "Music." The Common Lisp Wiki. Last accessed July 2, 2023. https://www.cliki.net/music
 
@@ -72,7 +72,7 @@ Puckette, Miller. 1991. “Combining Event and Signal Processing in the MAX Grap
 
 Puckette, Miller. 2002. “Max at Seventeen.” *Computer music journal* 26, no. 4 (2002): 31–43.
 
-Roads, Curtis. 2015. *Composing Electronic Music : a New Aesthetic.* Oxford: Oxford University Press.
+Roads, Curtis. 2015. *Composing Electronic Music : a New Aesthetic.* Oxford: Oxford University Press.
 
 Roberts, Charlie, and Graham Wakefield. 2018. “Tensions and Techniques in Live Coding Performance.” In *The Oxford Handbook of Algorithmic Music.*, edited by Alex McLean, 293. Oxford: Oxford University Press.
 

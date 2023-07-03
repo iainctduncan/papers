@@ -55,7 +55,7 @@
 
 
 \usepackage{sphinxmessages}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 
 
 
@@ -99,54 +99,54 @@ at the advent of the compact disc are trivial on a commodity laptop today and po
 with even free software.
 
 \sphinxAtStartPar
-A side effect of the rapid progress in realtime audio computation is that may techniques
+A side effect of the rapid progress in realtime audio computation is that many techniques
 used principally in the context of \sphinxstyleemphasis{non\sphinxhyphen{}realtime} computer music have largely fallen out of the public light.
-However, in the last decade or so computers have reached speeds such that some of the
-tools and approaches previously associated only with offline rendering have become
+However, in the last decade computers have reached speeds such that some of the
+tools and approaches previously associated only with non\sphinxhyphen{}realtime rendering have become
 feasible even in a realtime scenario.
 One of these, the one with which I am involved, is the programming of computer music in the
 Lisp family of languages.
-Lisp has a rich history in computer music, going back to the very early days of the field.
 With its support for symbolic processing, recursion, and iteractive development,
-Lisp has always been an elegant and productive way to represent and build music.
+Lisp has always been an elegant and productive way to represent and build music (CTN: Dannenberg 1997, 291).
 However, the accepted wisdom has been that one does not try to do anything
-realtime heavy, where heavy means the computer is generating significant amounts of digital audio,
+where the same computer is generating significant amounts of digital audio in real time
 while running a Lisp or similar high\sphinxhyphen{}level, garbage\sphinxhyphen{}collected language.
 This is now not just possible, but practical even at latencies usable by serious instrumentalists
 (i.e., sub 20 ms), allowing it be used on stage as well as in the studio.
 
 \sphinxAtStartPar
-As a result, I believe we are seeing a renaissance of the use of dynamic programming languages in music.
-JavaScript is used as an extension language in Max.
-Python, Ruby, and Clojure are all used for algorithmic composition.
-Even Haskell is used in live\sphinxhyphen{}coding performances. And a new generation of computer
+I believe we are, as a result, at the cusp of a renaissance of the use of high\sphinxhyphen{}level programming languages in music.
+JavaScript is used as an extension language in Max,
+Python and Ruby are used for algorithmic composition,
+and even Haskell is used in live\sphinxhyphen{}coding performances
+(CITE:Lyon 2012, 13\sphinxhyphen{}16; Mclean and Dean 2018, 650\sphinxhyphen{}651, 597, 258).
+And a new generation of computer
 musicians is discovering the elegance, the productivity, and the joy of doing this work
 with Lisp, a language that I and many others will argue is uniquely suited to expressing musical
 abstractions in code.
 
 \sphinxAtStartPar
 The Scheme for Max project is, among other things, an attempt to make music programming in a Lisp
-\sphinxhyphen{} specifically Scheme Lisp \sphinxhyphen{} accessible and practical to the “regular” computer musician working in a “regular” studio.
+\sphinxhyphen{} specifically the Scheme dialect of Lisp \sphinxhyphen{} accessible and practical to the “regular” computer musician working in a “regular” studio.
 Scheme for Max (S4M) provides an extension to the Max audio/visual programming platform
-that embeds a Scheme interpreter, allowing the user to create fully function Scheme programs that
+that embeds a Scheme interpreter, allowing the user to create fully functional Scheme programs that
 interact with the rest of the Max environment, and which do so with high temporal accuracy.
 S4M can be used to embed single\sphinxhyphen{}line programs directly in visual Max patches, or to build
 programs of thousands of lines that do everything from sequencing MIDI
 to controlling analog hardware and editing audio.
-And it can be used for everything from complex contemporary scored music, to interactive
+And it can be used for music of all sorts, from complex contemporary scored music, to interactive
 live improvisation, to generative and stochastic algorithmic composition.
 
 \sphinxAtStartPar
 While I am far from the only one working on new ways to use Lisp in computer music (even in a realtime context),
 I believe Scheme for Max achieves something unique.
 By creating an enviroment thats runs seamlessly and flexibly inside the tremendously successful
-Max platform (and thus also inside the even more tremendously successful Ableton Live digital audio workstation
-which is able to host Max),
-Scheme can comfortably be used in close tandem with both popular,
+Max platform (and thus also inside the even more tremendously successful Ableton Live digital audio workstation),
+Scheme can be productively used in close tandem with both popular,
 commercial music tools and the vast library of specialized, academic, and research tools available for Max.
 And by the happy coincidence of Scheme’s syntax compability with Max message syntax, it can be even be used
 in baby\sphinxhyphen{}steps \sphinxhyphen{} new programmers can add the power of Scheme to their Max patches with
-only a few lines of code, and that without even reaching for a text editor.
+only a few lines of code without even reaching for a text editor.
 I believe Scheme’s consistent, minimal syntax and interactive development style provide an ideal
 introduction to textual programming for the curious Max user.
 With Scheme for Max, one is not forced to choose between the power and flexibility of Lisp and the
@@ -154,13 +154,14 @@ convenience and accessibility of commercial music software.
 
 \sphinxAtStartPar
 This thesis introduces the Scheme for Max project. I begin by discussing the landscape into which it fits
-and its precendents and inspirations. I cover the motivations for the project and the goals by which
-I judge its success. I then examine its design and capabilities, and finally, I evaluate
-how well I feel it has succeeded and discuss my future plans for it.
+and its precendents and inspirations. I cover the motivations and goals for the project, discussing
+my own musical and technical desires.
+I examine its design and capabilities. And finally, I conclude by evaluating
+how well it has succeeded, discussing its limitations, and outlining my future plans for the project.
 
 \sphinxAtStartPar
 For reasons of space, I have not covered every feature of the project, nor have I delved into the
-low\sphinxhyphen{}level implementation details and C code. I have limited myself to discussion appropriate
+low\sphinxhyphen{}level implementation details and the underlying C code. I have limited myself to discussion appropriate
 to an interested computer musician, rather than a professional programmer or computer scientist.
 That said, the project is open\sphinxhyphen{}source and freely available, so the
 the interested reader is encouraged to consult the GitHub project page for further details if desired,
@@ -193,17 +194,17 @@ be a linearly scored piece of set length and content, or an interactive program 
 a performer interacts, but that contains prepared material of some kind.
 This is distinct, for example, from commercial music tools (such as sequencers or digital
 audio workstations) in which a computer program is run as the host environment, but the compositional
-work itself is stored as simply data within that program (for example in a binary format or
+work itself is stored as static data within that program (for example in a binary format or
 in MIDI files), and would not normally be considered a computer \sphinxstyleemphasis{program} itself.
 
 \sphinxAtStartPar
 Using this definition of computer music programming, we can draw a further distinction
 between two kinds of programming and programmer:
-we have programming that is specific to a composer, or one or more artistic pieces of work;
+we have programming that is specific to a composer or an artistic work;
 and we have programming of tools and frameworks that will be potentially be used by many
 people and in potentially many contexts.
 For the purpose of this discussion, I will refer to the people doing these as the “composer\sphinxhyphen{}programmer”
-\sphinxhyphen{} a term also used by Curtis Roads in “Composing Electronic Music” (Roads, 2015, 341) \sphinxhyphen{}
+\sphinxhyphen{} a term also used by Curtis Roads in “Composing Electronic Music” (CTN: Roads 2015, 341) \sphinxhyphen{}
 and the “tools programmer” (my own terminology).
 Of course, these frequently are the same person at different times.
 This distinction is important, as the goals of these two programmers, and thus the
@@ -214,12 +215,10 @@ developing software for use by a larger community and may prefer design decision
 that favour long\sphinxhyphen{}term code reuse and team development at the expense of immediate convenience.
 As we will see, the various computer music languages, platforms, and approaches
 favour one of these hypothetical programmers to a greater or lesser degree.
-
-\sphinxAtStartPar
 Beyond these distinctions, I use the term “computer music programming” as broadly
 as possible \sphinxhyphen{} I include as computer music programming platforms both graphic platforms with
-which a beginner can be immediately productive as well as tools for advanced programming
-languages that are only accessible to experienced computer programmers.
+which a beginner can be immediately productive as well as general purpose programming
+languages that are the domain of experienced computer programmers.
 
 
 \section{Requirements for a Computer Music Platform}
@@ -232,7 +231,7 @@ While the list of possible requirements is potentially long, I will group
 them into three high level requirements that are personally important to me as
 a composer and performer. Note that not all of these are necessarily fulfilled well, or at all,
 by each of the possible platforms a composer might use \sphinxhyphen{} some offer
-only partial support for a requirement, or perhaps even none at all (Lazzarini, 2013, 1).
+only partial support for a requirement, or perhaps even none at all (CTN: Lazzarini 2013, 97).
 
 
 \subsection{Support for Musical Abstractions}
@@ -248,7 +247,7 @@ Probably the most important of these abstractions are those concerning musical t
 \sphinxhyphen{} a good computer music language must have an implementation of \sphinxstyleemphasis{logical time},
 allowing the programmer to schedule events accurately in a way that makes sense
 to the user but that also works for rendering or playing in real\sphinxhyphen{}time to a degree of accuracy
-appropriate for music (Dannenberg, 2018, 3).
+appropriate for music (CTN: Dannenberg 2018, 3).
 
 \sphinxAtStartPar
 However, it should be noted that the importance of these abstractions being readily provided
@@ -257,15 +256,12 @@ while some composers will be relieved not to have to decide how to implement
 the concept of beats and tempi themselves, others may be expressly looking for platforms
 that do not come with any assumptions of how one might think about musical abstractions.
 Computer music programming languages thus also vary widely in their areas
-of focus and the problems they attempt to solve for the programmer (Dannenberg, 2018, 4).
-.. citation (Dannenburg, 2018)
+of focus and the problems they attempt to solve for the programmer (CTN: Dannenberg 2018, 4).
 For example, the Csound language comes with a built\sphinxhyphen{}in abstraction of a score system,
-that in turn depends on abstractions representing beats and tempi (Lazzarini, 2016, 157).
-.. citation (Lazzarini, 2016)
+that in turn depends on abstractions representing beats and tempi (CTN: Lazzarini 2016, 157).
 In contrast, the Max platform takes the design approach of giving the user
 an almost blank canvas, deliberately avoiding any assumptions that the user
-will make music of any particular style or in any particular way (Puckette, 2002, 34).
-.. citation (Puckette, 2002)
+will make music of any particular style or in any particular way (CTN: Puckette 2002, 34).
 
 \sphinxAtStartPar
 For my own purposes, I would ideally like to have the ability to score conventional music without
@@ -292,16 +288,14 @@ an acoustic instrument.
 Again, the importance of this varies with the composer and the platform.
 In fact, this was not even possible with early computer music languages such
 as the MUSIC\sphinxhyphen{}N family, with which the process of rendering audio from a score file
-took far longer than the duration of a piece (Wang, 2008, 6).
-.. citation (Wang, 2008) needs page checked  FIX
+took far longer than the duration of a piece (CTN: Wang 2017, 60\sphinxhyphen{}63).
 
 \sphinxAtStartPar
 However, since the advent of realtime\sphinxhyphen{}capable systems, this has become a
 standard feature in computer music platforms.
 In fact, in contrast to the Music\sphinxhyphen{}N languages, the Max platform was designed
 to support performance\sphinxhyphen{}time interactivity first, with the ability to render audio only added later
-as computers became capable of doing both (Puckette, 2002, 33).
-.. citation (Puckette, 2002)
+as computers became capable of doing both (CTN: Puckette 2002, 33).
 As someone who comes principally from a jazz and contemporary improvised music
 background, being able to create complex systems that support realtime input is a high priority to me.
 
@@ -321,8 +315,7 @@ However, it is also important to me that a performer be able to interact with th
 That, to quote Miller Puckette on his original design goals for Max,
 basic musical material should be “controllable physcially, sequentially, or algorithmically;
 if they are to be controlled algorithmically, the inputs to the algorithm should
-themselves be controllable in any way” (Puckette, 1991, 68).
-.. citation (Puckette, 1991)
+themselves be controllable in any way” (CTN: Puckette 1991, 68).
 
 \sphinxAtStartPar
 While one could certainly come up with further requirements, these three provide the basis
@@ -340,32 +333,30 @@ environments, and general purpose programming languages that are run with music\
 or within musical frameworks.
 
 \sphinxAtStartPar
-I will briefly discuss each of these, listing examples, but focusing on a representative tool from each family.
+I will briefly discuss each of these, listing various examples, but focusing on a representative tool from each family.
 I will provide my observations and experiences of the advantages and disadvantages of each,
 drawing both on the literature and on my personal experiences with tools from each category
 over the last 25 years.
 
 
-\subsection{Domain\sphinxhyphen{}specific Textual Languages}
+\subsection{Domain\sphinxhyphen{}Specific Textual Languages}
 \label{\detokenize{background:domain-specific-textual-languages}}
 \sphinxAtStartPar
-A domain\sphinxhyphen{}specific language (DSL) for music is a textual programming language designed
-expressly around making music with a computer (Wang 2008, 1).
-.. citation (Wang, 2008, check page \sphinxhyphen{} replace with better DSL def citation if I find one FIX  (maybe swap to Lazzarini?)
+A domain\sphinxhyphen{}specific language (DSL) for music is a textual programming language intended
+expressly for making music with a computer (CTN: Wang 2017, 58).
 
 \sphinxAtStartPar
-Interestingly, the first example of programming computer music (that one might reasonably
+The first historical example of programming computer music (that one might reasonably
 consider as more than an audio experiment) used a music DSL, namely Max Matthew’s MUSIC I
 language, created in 1957.
 MUSIC I (originally refered to as simply MUSIC) was a domain specific language written in assembly
 language for the IBM 704 mainframe at Bell Labs.
-It was able to translate a high\sphinxhyphen{}level text language with musical abstractions to assembly code,
+It was able to translate a high\sphinxhyphen{}level textual language with musical abstractions to assembly code,
 and could (through various intermediary steps) output digital audio.
 MUSIC I was followed by various refinements by Matthews (Music II through V),
 and by similar languages by others.
 Its lineage continues to this day in the Csound language, still under active development and widely used,
-and one with which I have extensive experience (Manning, 2013, 187\sphinxhyphen{}189).
-.. citation (Manning, 2013)
+and one with which I have extensive experience. (CTN: Manning 2013, 187\sphinxhyphen{}189).
 
 \sphinxAtStartPar
 While the source code of Csound piece, for example, is clearly a computer programs
@@ -376,14 +367,12 @@ of creating a composition, and has a particular way in which it is run to make t
 Historically, running such a program meant rendering a piece to an audio file, but
 with modern computers (and versions of Csound) the rendering can be done in realtime.
 While originally these programs were not something with which a performer could interact while the music rendered,
-facilties now exist in Csound for performers to interact with the programs while they play (Lazzarini, 2016).
-.. citation (Lazzarini, 2013)
+facilties now exist in Csound for performers to interact with the programs while they play (CTN: Lazzarini 2016, 171\sphinxhyphen{}179).
 
 \sphinxAtStartPar
 In addition to Csound, some other actively developed examples from this general family of language
 include SuperCollider, ChucK, and Faust, each of which has a particular focus or approach to the problems
-of computer music (Wang, 2008).
-.. citation FIX
+of computer music (CTN: Wang 2017, 69\sphinxhyphen{}72; Lazzarini 2017, 41\sphinxhyphen{}42).
 
 \sphinxAtStartPar
 A notable advantage of a using a music DSL is that many of the hard
@@ -392,42 +381,67 @@ The composer\sphinxhyphen{}programmer is not starting with a blank slate:
 the language provides built\sphinxhyphen{}in abstractions ranging from
 macro\sphinxhyphen{}structural concepts such as scores and sections to individual notes and beats.
 Music DSLs thus significantly simplify the task of programming music and reduce
-how much the composer\sphinxhyphen{}programmer must learn and program to begin making music (Lazzarini, 2017, 26).
-.. citation (Lazzarini, 2017)
+how much the composer\sphinxhyphen{}programmer must learn and program to begin making music (CTN: Lazzarini 2017, 26).
 In Csound, for example, a program consists of an “orchestra” file, containing
 programmatic instrument definitions, and a “score” file, containing a score
-of musical events notated in Csound’s own data format.
+of musical events notated in Csound’s own data format. (These files
+may be merged into one containing “csd” file, but the distinction still holds.)
 These are used together to render a scored piece to audio,
 either as an offline operation or as a realtime operation.
+A sample of Csound code is shown below, with an instrument playing a
+short scale driven by the score.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZlt{}}\PYG{n}{CsoundSynthesizer}\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZlt{}}\PYG{n}{CsInstruments}\PYG{o}{\PYGZgt{}}
+
+\PYG{k+kd}{instr}\PYG{+w}{ }\PYG{n+nf}{1}
+\PYG{+w}{  }\PYG{c+c1}{; take pitch as midi note from param 4}
+\PYG{+w}{  }\PYG{k+kt}{k}\PYG{n}{frq}\PYG{+w}{  }\PYG{n+nb}{mtof}\PYG{+w}{  }\PYG{n+nv+vi}{p4}
+\PYG{+w}{  }\PYG{c+c1}{; saw wave}
+\PYG{+w}{  }\PYG{k+kt}{a}\PYG{n}{sig}\PYG{+w}{  }\PYG{n+nb}{vco2}\PYG{+w}{  }\PYG{l+m+mf}{0.8}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{k}\PYG{n}{frq}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{+w}{  }\PYG{c+c1}{; an ADSR envelope}
+\PYG{+w}{  }\PYG{k+kt}{a}\PYG{n}{env}\PYG{+w}{  }\PYG{l+m+mf}{0.01}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.3}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.7}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mf}{0.2}
+\PYG{+w}{  }\PYG{c+c1}{; apply env and output in stereo}
+\PYG{+w}{  }\PYG{n+nb}{outs}\PYG{+w}{  }\PYG{k+kt}{a}\PYG{n}{sig}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{k+kt}{a}\PYG{n}{env}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kt}{a}\PYG{n}{sig}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{k+kt}{a}\PYG{n}{env}
+\PYG{k+kd}{endin}
+
+\PYG{o}{\PYGZlt{}}\PYG{o}{/}\PYG{n}{CsInstruments}\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZlt{}}\PYG{n}{CsScore}\PYG{o}{\PYGZgt{}}
+
+\PYG{c+c1}{;  time   dur  midi\PYGZhy{}note\PYGZhy{}num}
+\PYG{k+kt}{i}\PYG{n}{1}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{+w}{      }\PYG{l+m+mi}{1}\PYG{+w}{    }\PYG{l+m+mi}{60}
+\PYG{k+kt}{i}\PYG{n}{1}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{+w}{      }\PYG{l+m+mi}{1}\PYG{+w}{    }\PYG{l+m+mi}{62}
+\PYG{k+kt}{i}\PYG{n}{1}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{+w}{      }\PYG{l+m+mi}{1}\PYG{+w}{    }\PYG{l+m+mi}{64}
+\PYG{k+kt}{i}\PYG{n}{1}\PYG{+w}{ }\PYG{l+m+mi}{3}\PYG{+w}{      }\PYG{l+m+mi}{1}\PYG{+w}{    }\PYG{l+m+mi}{65}
+\PYG{k+kt}{i}\PYG{n}{1}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{+w}{      }\PYG{l+m+mi}{1}\PYG{+w}{    }\PYG{l+m+mi}{67}
+
+\PYG{o}{\PYGZlt{}}\PYG{o}{/}\PYG{n}{CsScore}\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZlt{}}\PYG{o}{/}\PYG{n}{CsoundSynthesizer}\PYG{o}{\PYGZgt{}}
+\end{sphinxVerbatim}
 
 \sphinxAtStartPar
-In the simple example in figure 1, we have a instrument playing a
-short melody driven by the score.
-
-\sphinxAtStartPar
-With these built\sphinxhyphen{}in musical constructs, DSL’s are attractive to the composer\sphinxhyphen{}programmer,
+With their built\sphinxhyphen{}in musical abstractions, DSL’s are attractive to the composer\sphinxhyphen{}programmer,
 but on the other hand, the tools\sphinxhyphen{}programmer is significantly more constrained than when
 working in a general purpose programming language.
 This can be frustrating for experienced programmers coming from general purpose languages,
 who may wonder where their function calls and looping constructs went and how they can
-express algorithms they already know in the abstractions provided by the language.
+express the algorithms with which they are familiar in the unusual abstractions provided by the language.
 For example, in Csound one can program a form of recursion, but one of the techniques
-for doing so involves creating instruments that play notes that in turn schedule notes (Lazzarini, 2016, 116).
-.. citation (Lazzarini, 2016)
+for doing so involves creating instruments that play notes that in turn schedule notes (CTN: Lazzarini 2016, 116).
 The use of the note as the fundamental
 unit of computation (where a “note” is an instance of an instrument definition activated at
 some time, for some duration) requires the tools\sphinxhyphen{}programmer to not only
 understand the concept of recursion, but to also understand how to translate it
-into an unusual syntax.
+into this unusual syntax.
 
 \sphinxAtStartPar
 That said, music DSLs generally provide ways of \sphinxstyleemphasis{extending} the language with
 a general purpose language, allowing the tools\sphinxhyphen{}programmer to add new abstractions to the DSL itself.
-In Csound, for example, a tools\sphinxhyphen{}programmer may create a new opcode (essentially the equivalent
+In Csound, for example, a tools\sphinxhyphen{}programmer may create a new \sphinxstyleemphasis{opcode} (essentially the equivalent
 of a Csound class or function) using the C language,
 compiling it such that it can be used in the same way as any built in opcode that comes with Csound
-(Fitch, 2011, 581).
-.. citation (Fitch, 2011)
+(CTN: ffitch 2011b, 581).
 
 \sphinxAtStartPar
 It should also be noted that the ease with which composer\sphinxhyphen{}programmers can work
@@ -435,8 +449,7 @@ with DSLs has led to broad popularity in the music community, and this
 in turn has led to many programmers creating publically available extensions, thus providing
 a rich library of freely\sphinxhyphen{}available tools for the programmer to use.
 Csound, for example, is still actively used and developed today, which is
-remarkable for a language first developed in 1986, and now has thousands of objects available (Manning, 2013, 189).
-.. citation (Manning, 2013)
+remarkable for a language first developed in 1986, and now has thousands of objects available (CTN Manning 2013, 189).
 If an extension is popular and useful enough, it may even find its way into the
 main language or into official repositories of extensions.
 
@@ -446,12 +459,10 @@ Certainly, we are given many high\sphinxhyphen{}level and convenient musically\s
 Creating linear pieces according to a set score is straightforward.
 Performer interaction is also possible in modern versions, though programming
 an interactive system is somewhat cumbersome in that tasks that would require simple programming
-in a general purpose language
-must be done in an unusual manner to fit in the note\sphinxhyphen{}centered paradigm of Csound.
+in a general purpose language must be done in an unusual manner to fit in the note\sphinxhyphen{}centered paradigm of Csound.
 For example,  making a component to receive, parse, and translate MIDI input according
 to some arbitrary rules requires making an “instrument” and having the
-score turn on “always\sphinxhyphen{}on” notes (Lazzarini, 2106, 175).
-.. citation (Lazzarini, 2016)
+score turn on “always\sphinxhyphen{}on” notes (CTN: Lazzarini 2016, 175).
 Clearly we are bending the built in abstractions to other purposes,
 at the expense of easily comprehensible code.
 
@@ -482,43 +493,44 @@ In a typical use case, the Max program would output messages (which could be MID
 necessarily), and these would be rendered to audio with some other tools, such
 as standard MIDI\sphinxhyphen{}capable synthesizers or other audio rendering systems.
 Later versions of Pure Data and Max added support for generating audio directly,
-as computers became fast enough to generate audio in real\sphinxhyphen{}time (Puckette, 2002, 34).
-.. citation (Puckette, 2002)
+as computers became fast enough to generate audio in real\sphinxhyphen{}time (CTN: Puckette, 2002, 34).
 
 \sphinxAtStartPar
-In Max and Pure Data,
-the composer\sphinxhyphen{}programmer places visual representations of objects on a graphic canvas,
+In Max and Pure Data, the composer\sphinxhyphen{}programmer places visual representations of objects on a graphic canvas,
 connecting them with virtual “patch cables”. When the program (called a “patch”) runs,
 each object in this graph receives messages from other connected objects, processes the
 message or block of samples, and optionally outputs messages or audio in response.
 A complete patch thus acts as a program where messages flow
 through a graph of objects, similar to data flowing through a spreadsheet application.
-The term “dataflow” has been used to describe this type of program (Farnell, 2010, 149)
-.. citation (Farnell, 2010, 149)
+The term “dataflow” has been used to describe this type of program (CTN: Farnell 2010, 149)
 though it should be noted that Miller Puckette himself asserts that it is not
 truly “dataflow” as the objects may retain state, and ordering of operations within the graph
-matters (Puckette, 1991, 70).
-.. citation (Puckette, 1991)
+matters (CTN: Puckette 1991, 70).
 
 \sphinxAtStartPar
 As with many textual DSL’s, it is possible for the advanced programmer to extend both Max
 and Pure Data by writing “externals” in the C and C++ languages. In Max, this facility
-is called the Max Software Development Kit (SDK) (Lyon,)
-.. citation (Lyon) FIX
+is called the Max Software Development Kit, or SDK (CTN: Lyon 2012, 3).
 The popularity and extensibility of Max and Pure Data has led to thousands
 of patcher objects being available for Max and Pure Data, both included
 in the platforms and as freely\sphinxhyphen{}available extensions. These include objects
 for handling MIDI and other gestural input, timers, graphical displays,
 facilities for importing and playing audio files, mathematical
-and digital signal processing operators, and much more (Cipriani, 2019, XI).
-.. citation (Cipriani, 2019)
+and digital signal processing operators, and much more (CTN: Cipriani, 2019, XI).
 
 \sphinxAtStartPar
 This visual patching paradigm differs significantly from that of Csound and similar DSLs.
 The program created by a user is best described as an interactive environment, rather than a piece.
 A patch runs as long as it is open, and will continue to do computations in response to
 incoming events such as MIDI messages, timers firing, or blocks of samples
-coming from operating systems audio subsystem (Farnell, 2010, 149).
+coming from operating systems audio subsystem (CTN: Farnell 2010, 149).
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{figure_1_interactive_max_patch}.png}
+\caption{Figure 1: A Max patch with a keyboard and dial user interaction objects.}\label{\detokenize{background:id1}}\end{figure}
 
 \sphinxAtStartPar
 In contrast to textual DSLs such as CSound, patching environments have comparatively
@@ -536,8 +548,7 @@ There is nothing intrinsically musical about the patcher environments \sphinxhyp
 the environments are much more open ended in this way than the musical DSLs.
 As Max developer David Zicarelli put it in his paper on the 17th anniversary of Max,
 it is, compared to most programs, “a program which does nothing”, presenting the user
-with a completely blank canvas (Zicarelli, 2002, 44).
-.. citation (Zicarelli, 2002)
+with a completely blank canvas (CTN: Zicarelli 2002, 44).
 
 \sphinxAtStartPar
 Returning to our requirements, the fundamental strength of patching environments
@@ -564,8 +575,7 @@ can only make new messages that they will pass on to downstream objects, resulti
 function calls until the chain ends.
 Describing this in programming terminology: the flow of messages creates a call chain
 of void functions, with the stack eventually terminating when there are no more functions
-to be called (Cycling 74, 2023).
-.. citation (Cycling 74)  FIX  how to do this?
+to be called.
 
 \sphinxAtStartPar
 While easy to grasp for new programmers,
@@ -580,7 +590,7 @@ significant and non\sphinxhyphen{}obvious programming.
 \label{\detokenize{background:general-purpose-programming-languages}}
 \sphinxAtStartPar
 Our third family of computer music programming languages is that of
-general purpose programming languages (GPPLs), such as C++, Python, JavaScript, Lisp, and so on.
+general purpose programming languages (GPPLs), such as C++, Python, JavaScript, Lisp, and the like.
 The use of GPPLs for music can be divided broadly
 into two approaches, corresponding to the mainstream software development
 approaches of developing with libraries versus developing with
@@ -592,12 +602,9 @@ much as they would for any software development, and uses third\sphinxhyphen{}pa
 musically\sphinxhyphen{}oriented libraries to accomplish musical tasks.
 In this case, the structure and operation of the program is entirely up to the programmer.
 For example, a programmer might use C++ to create an application, creating sounds
-with a library such as the Synthesis Tool Kit (Cook, 2002, 236\sphinxhyphen{}237),
-.. citation (Cook, 2002).
-handling MIDI input and output with PortMidi (Lazzarini, 2010, 784\sphinxhyphen{}795),
-.. citation (Lazzarini, 2010)
-and outputing audio with the PortAudio library (Maldanado, 2010, 364\sphinxhyphen{}375).
-.. citation (Maldanado, 2010).
+with a library such as the Synthesis Tool Kit (CTN: Cook 2002, 236\sphinxhyphen{}237),
+handling MIDI input and output with PortMidi (CTN: Lazzarini 2011, 784\sphinxhyphen{}795),
+and outputing audio with the PortAudio library (CTN: Maldanado, 2011, 364\sphinxhyphen{}375).
 While the use of these libraries significantly reduces the work needed by the programmer,
 fundamentally they are simply making a C++ application of their own design.
 
@@ -612,13 +619,11 @@ code provided by the programmer \sphinxhyphen{} the programmer “fills in the b
 Non\sphinxhyphen{}musical examples of this are the Ruby\sphinxhyphen{}on\sphinxhyphen{}Rails and Django frameworks for web development,
 in which the programmer need provide only a relatively small amount of Ruby or Python
 code to create a fully functional web application.
-.. citation RoR and Django sites FIX.
 A musical example of this is the Common Music platform, in which
 the composer\sphinxhyphen{}programmer can work in either the Scheme or Common Lisp programming language,
 but the program is executed by the Grace host application, which
 provides an interpreter for the hosted language, along
-with facilities for scheduling, transport controls, outputting MIDI, and so on (Taube, 2009, 451\sphinxhyphen{}454).
-.. citation (Taube, 2009)
+with facilities for scheduling, transport controls, outputting MIDI, and so on (CTN: Taube 2009, 451\sphinxhyphen{}454).
 The framework\sphinxhyphen{}driven approach thus significantly decreases the number
 of decisions the programmer must make and the amount of code that
 must be created, while still preserving the flexibility one gaines from
@@ -636,8 +641,7 @@ Implementing complex algorithms is no more difficult than it is in any
 programming language. Looping, recursion, nested function calls, and complex
 design patterns are all practical, and the programmer has a wealth of resources
 available to help them, drawing from the (vastly) larger documentation
-available for general purpose languages. (CITE dannenburg here on GPPL
-.. citation TODO citation needed
+available for general purpose languages.
 
 \sphinxAtStartPar
 Of course, this comes at the cost of giving of the programmer both a great deal more
@@ -676,9 +680,8 @@ savings of using a patching language may be offset by the power of the
 \sphinxAtStartPar
 Finally, we have what is, in my personal opinion, the most powerful approach to computer music programming:
 the multi\sphinxhyphen{}language, or hybrid, platform.
-As programming tools and computers have improved,
-it has become more and more practical to make computer music using more than one platform at a time
-in an integrated system.
+As programming tools and computers have improved, it has become more and more practical to make computer
+music using more than one platform at a time in an integrated system.
 
 \sphinxAtStartPar
 This multi\sphinxhyphen{}language approach has been explored in a wide variety of schemas.
@@ -686,37 +689,31 @@ The simplest is that of taking the output from one program
 and sending it as input to another. With the Csound platform, this
 is straightforward: instrument input, whether real\sphinxhyphen{}time or rendered,
 comes from textual score statements, and these can be created by programs
-made in other languages that either write to files or pipe to the Csound engine (ffitch, 2011, 655).
-.. citation (ffitch, 2011)
+made in other languages that either write to files or pipe to the Csound engine (ffitch 2011a, 655).
 In many modern platforms tighter integrations are now possible
 through application programming interfaces (APIs) that let languages directly call
 functions in other languages, as they run.
 One can, for example, run Csound from within a C++ or Python program, interacting
-directly with the Csound engine using the Csound API (Gogins, 2013, 43\sphinxhyphen{}46).
-.. citation (Gogins, 2013)
+directly with the Csound engine using the Csound API (CTN: Gogins, 2013, 43\sphinxhyphen{}46).
 One can also run a DSL such as Csound inside a visual patcher, using open\sphinxhyphen{}source
-extensions to Max and Pd that embed the Csound engine in a Max or Pure Data object (Boulanger, 2013, 189).
-.. citation (Boulanger, 2013)
+extensions to Max and Pd that embed the Csound engine in a Max or Pure Data object (CTN: Boulanger 2013, 189).
 And one can even run a general purpose languauge \sphinxstyleemphasis{inside} a DSL or visual platform,
-such as Python inside Csound (Ariza, 2009, 367),
-.. citation (Ariza, 2009)
-or JavaScript inside Max (Cycling74 FIX).
-.. citation FIX (Cycling74 docs) FIX
+such as Python inside Csound (CTN: Ariza 2009, 367).
+or JavaScript inside Max (CTN: Lyon, 13).
 
 \sphinxAtStartPar
 Note that a multi\sphinxhyphen{}language platform differs from the previously discussed practice of
 \sphinxstyleemphasis{extending} a patching language or DSL with a GPPL such as C or C++.
 In the multi\sphinxhyphen{}language hybrid scenario, the embedded GPPL is used
 by the \sphinxstyleemphasis{composer\sphinxhyphen{}programmer} to make potentially piece\sphinxhyphen{}specific code,
-rather than solely by a tools\sphinxhyphen{}programmer creating reusable tools in the environment’s extension language.
+rather than solely by a tools\sphinxhyphen{}programmer who is creating reusable tools in the environment’s extension language.
 (It should be mentioned, however, that it is feasible to prototype algorithms in an embedded high\sphinxhyphen{}level language such as
 JavaScript and port them later to a DSL’s extension language,
 should they reach sufficient complexity and stability to warrant the low\sphinxhyphen{}level work.)
 
 \sphinxAtStartPar
 In the hybrid scenario, the combination of the various platforms
-provides the programmer with a tremendous amount of flexibility (Lazzarini, 2013, 108).
-.. citation (Lazzarini, 2013)
+provides the programmer with a tremendous amount of flexibility (CTN: Lazzarini 2013, 108).
 One can, for example, use visual patching to quickly
 create a performer\sphinxhyphen{}interaction layer, have this layer interact with
 a scored piece in the CSound engine, and simultaneously use an embedded GPPL to
@@ -753,8 +750,8 @@ of algorithms one can use is essentially unlimited.
 \sphinxAtStartPar
 It is in this multi\sphinxhyphen{}language, hybrid space that Scheme for Max sits.
 S4M provides a Max object that embeds an interpreter for
-the s7 Scheme language, a general purpose language in the Lisp family (Schottstaed)
-.. citation (Schottstaedt) FIX website citation
+the s7 Scheme language, a general purpose language in the Lisp family
+(CTN: Schottstaed n.d.).
 With S4M, one gets a general purpose language in a visual patcher, and
 with objects such as the csound\textasciitilde{} object, can interact closely with
 a textual DSL as well.
@@ -781,8 +778,7 @@ and performing music.
 The project requirements were born from my experiences, both positive and negative, with a wide variety
 of tools, both commercial and non\sphinxhyphen{}commercial.
 Broadly, the requirements I set myself for the project are that it should:
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\begin{itemize}
 \item {} 
 \sphinxAtStartPar
 Focus on programming musical events and event\sphinxhyphen{}oriented tools
@@ -811,13 +807,13 @@ Support composing music that is impractical on commercial tools
 \sphinxAtStartPar
 Enable iterative development during musical playback
 
-\end{enumerate}
+\end{itemize}
 
 \sphinxAtStartPar
 These goals will act as our reference when discussing the sucess of design and implementation decisions.
 
 
-\section{1) Focus on programming musical events and event\sphinxhyphen{}oriented tools}
+\section{Focus on programming musical events and event\sphinxhyphen{}oriented tools}
 \label{\detokenize{goals:focus-on-programming-musical-events-and-event-oriented-tools}}
 \sphinxAtStartPar
 While numerous options for programming computer music exist, most domain specific computer music languages are
@@ -837,7 +833,7 @@ for the specific act of \sphinxstyleemphasis{composing}, in that the features of
 are, in my opinion, tremendously helpful when working programmatically with musical abstractions.
 
 
-\section{2) Support multiple contexts, including linear composition, realtime interaction, and live performance}
+\section{Support multiple contexts, including linear composition, realtime interaction, and live performance}
 \label{\detokenize{goals:support-multiple-contexts-including-linear-composition-realtime-interaction-and-live-performance}}
 \sphinxAtStartPar
 As previously discussed, on modern computers it is now possible to run complex computer music processes in realtime,
@@ -858,7 +854,7 @@ And finally, it should be usable on stage, for example to create performances in
 physical instruments or manipulates devices that interact with the program.
 
 
-\section{3) Support advanced functional and object\sphinxhyphen{}oriented programming techniques}
+\section{Support advanced functional and object\sphinxhyphen{}oriented programming techniques}
 \label{\detokenize{goals:support-advanced-functional-and-object-oriented-programming-techniques}}
 \sphinxAtStartPar
 The project should support advanced high\sphinxhyphen{}level programming idioms, many of which are now in the broader
@@ -871,7 +867,7 @@ also make the tool more attractive to advanced programmers who might otherwise
 feel they need to use a general purpose programming language.
 
 
-\section{4) Be linguistically optimized for the target use cases}
+\section{Be linguistically optimized for the target use cases}
 \label{\detokenize{goals:be-linguistically-optimized-for-the-target-use-cases}}
 \sphinxAtStartPar
 Support for higher level functional and object\sphinxhyphen{}oriented programming idioms can be done in a variety of
@@ -890,7 +886,7 @@ and favouring the linguistic tradeoffs appropriate for the solo developer who is
 hold the entire program in one brain.
 
 
-\section{5) Be usable in conjunction with modern, commercial tools}
+\section{Be usable in conjunction with modern, commercial tools}
 \label{\detokenize{goals:be-usable-in-conjunction-with-modern-commercial-tools}}
 \sphinxAtStartPar
 A problem with many of the existing computer music DSLs is that they were designed with the
@@ -898,8 +894,7 @@ expectation that the user would be using only (or principally) the lanugage in q
 the DSL would always get to “be the boss”.
 For example, Common Music enables composing in a high\sphinxhyphen{}level language (Scheme), but to be used in real\sphinxhyphen{}time,
 this Scheme code must be run from the Grace host application, where it uses the Grace scheduler for
-controlling event times (Taube, 2009, 451).
-.. citation (Taube, 2009)
+controlling event times (CTN: Taube 2009, 451).
 Thus combining music coming from Common Music with musical elements coming from a commercial sequencing program such as
 Ableton Live is not terribly practical if one wants tight synchronization and the “clock\sphinxhyphen{}boss” to be Ableton Live.
 As commercial music software becomes more and more sophisticated, especially in the areas of sound design
@@ -912,7 +907,7 @@ The user of the project should not be faced with a binary choice between using t
 having the convenience and audio quality of modern commercial tools available to them.
 
 
-\section{6) Support composing music that is impractical on commercial tools}
+\section{Support composing music that is impractical on commercial tools}
 \label{\detokenize{goals:support-composing-music-that-is-impractical-on-commercial-tools}}
 \sphinxAtStartPar
 While being able to work with commercial tools is a goal, this cannot be at the expense of supporting
@@ -928,7 +923,7 @@ involved can be laborious and discouraging.
 However, these assumptions do not need to be made for a tool using a high\sphinxhyphen{}level textual language.
 
 
-\section{7) Enable iterative development during musical playback}
+\section{Enable iterative development during musical playback}
 \label{\detokenize{goals:enable-iterative-development-during-musical-playback}}
 \sphinxAtStartPar
 Finally, a goal of the project is to ensure that all of the goals listed so far can be achieved in a way that
@@ -939,15 +934,13 @@ This workflow is productive compositionally, and provides the ability to use the
 Languages in the Lisp family (and some others) allow this kind of workflow during software development,
 an idiom know as interactive programming, or REPL\sphinxhyphen{}driven development (REPL being a reference to the Read Evaluate Print Loop).
 In this style of development, code is incrementally updated while the program is running, allowing an exploratory style of development
-that is ideal during early prototyping and during the composition process (Taube, 2004, 8).
-.. citation (Taube, 2004)
+that is ideal during early prototyping and during the composition process (CTN: Taube 2004, 8).
 For the domain of algorithmic music, interactive development provides the same kind of immediacy one
 gets with sequencers that allow updating data during playback.
 Indeed, there exists an entire musical community dedicated to this kind of music programming,
 known as “live coding”, in which the performer takes the stage with minimal advanced material prepared
 and composes in the programming language in view of the audience, often with the code projected on screen
-(Roberts, 2018, 293\sphinxhyphen{}294).
-.. citation (Roberts, 2018)
+(CTN: Roberts and Wakefield 2018, 293\sphinxhyphen{}294).
 While \sphinxstyleemphasis{performing} live coding is not a personal goal of mine, the ability to live code while \sphinxstyleemphasis{composing} is.
 The project should support this style of working.
 
@@ -979,8 +972,7 @@ the first design question: “Why choose Max specifically as the host platform?�
 One driver for choosing Max is the success of Max itself.
 Having been first created in the 1980’s, Max is now one of the most popular platforms world\sphinxhyphen{}wide
 for making computer music, with thousands of Max objects available between those provided by Cycling 74 and
-the broader Max community (www.maxobjects.com).
-.. citation FIX
+the broader Max community (CTN: maxobjects.com 2023).
 This extensive community and breadth of available objects enables a wide variety of ways of working
 with both musical abstractions and digital audio, and even video.
 This includes support for interacting with external hardware through various synchronization and
@@ -990,9 +982,9 @@ the vst\textasciitilde{} object.
 \sphinxAtStartPar
 In addition to being a popular and powerful platform on its own, Max has been available since 2009 as “Max for Live”,
 an embedded runtime within the widely adopted commercial audio workstation and sequencing platform, “Ableton Live”
-(www.ableton.com, 2009).
+(CTN: Ableton 2009).
 Max for Live has been so successful as an addition to Live that it led to Ableton aquiring Cycling 74 in 2017
-(www.ableton.com, 2017).
+(CTN: Ableton 2017).
 When run in Max for Live, Max patches are able to processing both audio
 and MIDI data, can also interact with the host through an application programming interface, the Live API.
 The Live API provides Max patches the ability to control and query the Live engine, read and write to
@@ -1012,8 +1004,7 @@ MIDI data, events from timers and metronomes, and events from audio signals that
 (with various translation objects) all use the high\sphinxhyphen{}priority scheduler thread.
 Events from the user interacting with the GUI run in the low\sphinxhyphen{}priority thread, which is also used for redrawing any UI widgets.
 A Max external can run in any or all of these contexts, and various objects and functions exist to pass events from one to the other
-(cycling74.github.io, 2019).
-.. citation (cycling74.github.io, 2019) FIX
+(CTN: Cycling 74 2019).
 
 \sphinxAtStartPar
 Scheme for Max operates only in the two event oriented threads, receiving and producing only Max messages \sphinxhyphen{}
@@ -1042,8 +1033,7 @@ content that is sequenced, rendered, or recorded with commercial tools.
 \sphinxAtStartPar
 Finally, using Max supports the goal of being usable for real\sphinxhyphen{}time interaction and live performance.
 The Max clocking facilities are highly accurate, with jitter being typically in the 0.5\sphinxhyphen{}1ms range when
-using a typical signal vector size of 32 or 64 samples (Lyon, 2006, 67).
-.. citation (Lyon, 2006)
+using a typical signal vector size of 32 or 64 samples (CTN: Lyon 2006, 67).
 (Signal vector size is user configurable in standalone Max, and is locked to 64 samples in Ableton Live.)
 Max timers are also implemented such that this degree of jitter does not accumulate over time, something
 I have verified in extensives tests during development.
@@ -1077,18 +1067,15 @@ reasons I could not simply use the built\sphinxhyphen{}in js object to satisfy t
 \sphinxAtStartPar
 At first glance, the js objects seems like a comprehensive solution.
 It runs in Max, it can send and receive Max messages, it has access to Max global data structures such as tables and buffers,
-and it has a scheduler facility in the Task object (Taylor, 2020).
-.. citation (Taylor, 2020) FIX
+and it has a scheduler facility in the Task object (Taylor 2020).
 Linguistically, it’s a high\sphinxhyphen{}level language with various modern features such as automatic memory management,
 objects, lexical scoping, and functional programming techiques such as closures, and it is now one of the most popular
-languages in the world (Sun, 2017).
-.. citation (Sun, 2017) CHECK
+languages in the world (Sun 2017).
 
 \sphinxAtStartPar
 Unfortunately, the js object in Max has a serious implementation issue \sphinxhyphen{} in current versions of Max it \sphinxstyleemphasis{only} executes in the
 lower\sphinxhyphen{}priority main thread.  Any messages sent to the js object from the scheduler thread are implicity queued to the
-main thread and handled on its next pass (docs.cycling74.com).
-.. citation (docs.cycling74.com) FIX
+main thread and handled on its next pass (CTN: docs.cycling74.com n.d.).
 The upshot of this is that the short\sphinxhyphen{}term timing of events handled in the js object is not reliable \sphinxhyphen{}
 depending on other activity, execution of messages can be delayed, with this delay large enough to be audibly noticeable as errors.
 While JavaScript is usable for a great many tasks in Max, realtime programmatic note triggering is not one of them.
@@ -1132,8 +1119,7 @@ other candidates share all of these traits with Lisps.)
 \subsection{Symbolic computation and list processing}
 \label{\detokenize{design:symbolic-computation-and-list-processing}}
 \sphinxAtStartPar
-Lisp is unusual in its first\sphinxhyphen{}class support for programming with \sphinxstyleemphasis{symbols} and in its simple, minimal, and consistent syntax (Taube, 2004, 8)
-.. citation (Taube, 2004, 8)
+Lisp is unusual in its first\sphinxhyphen{}class support for programming with \sphinxstyleemphasis{symbols} and in its simple, minimal, and consistent syntax (CTN: Taube 2004, 8).
 Programming with symbols, also known as “symbolic computation” or “symbolic processing”, means
 that programs can work directly with not only program \sphinxstyleemphasis{data} but with the \sphinxstyleemphasis{textual tokens} comprising the program itself.
 For example, as with any high\sphinxhyphen{}level language, we may have a variable named “foo”, at which we have stored the value 99,
@@ -1229,8 +1215,7 @@ A potential return value could be represented by the interactive Lisp interprete
 
 \sphinxAtStartPar
 Further, because this form of symbolic computation is so central to the language \sphinxhyphen{} one of the classic texts is even subtitled
-“A Gentle Introduction to Symbolic Computation” \sphinxhyphen{} Lisps include numerous functions for manipulating and transforming lists (Touretzky, 1984).
-.. citation (Touretzky, 1984)
+“A Gentle Introduction to Symbolic Computation” \sphinxhyphen{} Lisps include numerous functions for manipulating and transforming lists (CTN: Touretzky 1984).
 For example, we might transpose a list by applying a transposition function, which itself might be built by a function\sphinxhyphen{}building function
 called \sphinxstylestrong{make\sphinxhyphen{}transposer}, and we might apply this function to a list of symbols.
 This sounds complicated, and indeed, expressing this in most languages is cumbersome, but in Scheme this is both readable and succint:
@@ -1250,10 +1235,9 @@ This sounds complicated, and indeed, expressing this in most languages is cumber
 \sphinxAtStartPar
 This demonstrates thats Lisps are particularly well\sphinxhyphen{}suited to expressing musical data, relationships, and algorithms in
 computer code, and a result of this suitability, there is a rich history of Lisp use in musical programming.
-Examples of Lisp\sphinxhyphen{}based musical programming environments, both historical and current, include Common Music,
-Nyquist, Common Lisp Music, MIDI\sphinxhyphen{}Lisp, PatchWork, OpenMusic, Extempore, Slippery Chicken, the Bach Project, MozLib,
-and cl\sphinxhyphen{}collider.
-.. TODO multi part citation for this
+Examples of Lisp\sphinxhyphen{}based musical programming environments abound, both historical and current. In addition
+to those already mentioned (Common Music and Nyquist), others include
+Common Lisp Music, Common Music Notation, MIDI\sphinxhyphen{}Lisp, PatchWork, OpenMusic, cl\sphinxhyphen{}collider, and many more (CTN: CLiki n.d.).
 
 \sphinxAtStartPar
 Thus the choice of Scheme as the language for the project has several important advantages:
@@ -1284,8 +1268,7 @@ the state of the Lisp environment, and then prints the return value of evaluatin
 These expressions can define new functions, redefine functions already in use, change state data, or
 interactively inspect or alter the current environment. While this iteractive style of development is possible
 to some degrees in other high level languages (such as Python and Ruby), it has been available to a deeper degree in Lisp going
-back as far as the the 1970’s! (Sandewell, 1978, 35\sphinxhyphen{}39)
-.. citation (Sandewell, 1978)
+back as far as the the 1970’s! (CTN: Sandewell 1978, 35\sphinxhyphen{}39)
 
 \sphinxAtStartPar
 For example, the composer\sphinxhyphen{}programmer might separate work into files that contain score data and files
@@ -1319,7 +1302,7 @@ they are first called in a special evaluation pass known as the macro\sphinxhyph
 This runs the code in the body of the macro over the \sphinxstyleemphasis{symbolic arguments} passed in to it, returning a
 programmatically created list structure (the macro\sphinxhyphen{}expansion) that is then evaluated.
 Essentially, macros are code blocks that execute twice \sphinxhyphen{} first to build the code, then to evaluate it \sphinxhyphen{} though
-technically they can be nested to repeat the expansion step an arbitrary number of times (Touretsky, 1984, 405\sphinxhyphen{}417).
+technically they can be nested to repeat the expansion step an arbitrary number of times (CTN: Touretsky 1984, 405\sphinxhyphen{}417).
 
 \sphinxAtStartPar
 Macros enable programmers to create their \sphinxstyleemphasis{own} domain specific languages \sphinxhyphen{}
@@ -1346,8 +1329,7 @@ This \sphinxstyleemphasis{is Scheme code} \sphinxhyphen{} it can include \sphinx
 Thus the use of a language with macro facilities enables the composer to work with different kinds of code
 \sphinxhyphen{} function defining code and score code \sphinxhyphen{} in one language, without giving up the expressive power of high\sphinxhyphen{}level language
 facilities. This use of a general programming language that can function additionally \sphinxstyleemphasis{as a readable score language}
-provides tremendous flexibility to the programmer, breaking the dichotomy between score data and running program  (Dannenberg, 1997, 5\sphinxhyphen{}9).
-.. citation (Dannenberg, 1997)
+provides tremendous flexibility to the programmer, breaking the dichotomy between score data and running program  (CTN: Dannenberg 1997, 50\sphinxhyphen{}60).
 
 
 \subsection{Max and Lisp syntax compability}
@@ -1400,8 +1382,7 @@ as it is named after a Yamaha motorcycle!)
 s7 was created by, and is maintained by, Bill Schottstaedt, a professor emeritus of the Stanford music centre (CCRMA),
 and the author of Common Lisp Music and the Snd editor.
 s7 is used in in Snd editor (essentially an Emacs\sphinxhyphen{}like audio editing tool), and in Common Music 3, an algorithmic composition
-platform created by Henrik Taube. (Schottstaedt,)
-.. citation, s7 website
+platform created by Henrik Taube (Schottstaedt n.d.).
 This has meant that there is a significant body of code from Common Music that can be used with very minimal adjustment in Scheme for Max.
 Indeed, if I were to describe S4M in one sentence, it would be that it is a cross between Common Music and the Max js object.
 
@@ -1416,12 +1397,10 @@ s7 also uses Common Lisp style macros (a.k.a. “defmacro” macros), rather tha
 in many other Scheme implementations.
 To support CL macros safely (without inadvertent variable capture), s7 includes support for first\sphinxhyphen{}class environments
 (lexical environments that can be used as values for variables), and the “gensym” function, which is used to create
-guaranteed\sphinxhyphen{}unique symbols for use in a macroexpansion.
-.. citatation FIX TODO s7 site
+guaranteed\sphinxhyphen{}unique symbols for use in a macroexpansion (Schottstaedt n.d.).
 Interestingly, and perhaps fortunately for the purpose of adoption, these are features also shared with Clojure,
-a modern Lisp variant with much in common with Scheme, and with wide use in business and web application circles.
-(Miller, 2018)
-.. citation (Miller, 2018) Programming Clojure
+a modern Lisp variant with much in common with Scheme, and with wide use in business and web application circles
+(Miller et al. 2018).
 
 \sphinxAtStartPar
 We can assume these features were chosen by Bill as appropriate for his use case \sphinxhyphen{} the solo composer\sphinxhyphen{}programmer \sphinxhyphen{}
@@ -1439,8 +1418,7 @@ and there thus exists a wide variety of embeddable Scheme intepreters.
 A functional Scheme interpreter can be created in a very small amount of code \sphinxhyphen{}
 there is even an implementation named SIOD, for “Scheme In One Defun” (but also referred to as “Scheme in One Day”).
 SIOD was a project by computer science professor George Carrette, started in 1988, intended to make
-the smallest possible Scheme interpreter that could be embedded in a C or C++ program. (Carrette, 2007)
-.. citation (Carrette) FIX
+the smallest possible Scheme interpreter that could be embedded in a C or C++ program (CTN: Carrette 2007).
 
 \sphinxAtStartPar
 The s7 project in particular is a Scheme distribution intended expressly for embedding in C host programs, and
@@ -1449,8 +1427,7 @@ The core s7 interpreter is distributed as only two files, s7.h and s7.c, that ca
 The foreign function interface (FFI) is very straightforward, making adding Scheme functions to S4M simple.
 And, importantly, s7 is fully thread\sphinxhyphen{}safe and re\sphinxhyphen{}entrant \sphinxhyphen{} meaning that there is no issue having multiple, isolated s7 interpreters
 running in the same application, a situation common in a Max patch where many s4m object may coexist, but a feature
-not common across all candidate implementations.
-.. citation (s7 website) FIX
+not common across all candidate implementations (CTN: Schottstaedt n.d.).
 
 
 \subsection{License}
@@ -1458,8 +1435,9 @@ not common across all candidate implementations.
 \sphinxAtStartPar
 Finally, s7 uses the BSD license, a permissive free software license.
 The BSD license imposes no redistribution restrictions the way the GPL family of licenses do, thus user\sphinxhyphen{}developers wishing to
-use s7 in a commercial project are free to do so with no obligations.
-.. TODO citation (s7.html) FIX
+use s7 in a commercial project are free to do so with no obligations (CTN: Schottstaedt n.d.).
+
+\sphinxAtStartPar
 This is a point in s7’s favour as many Ableton Live device developers sell devices, and many Max developers sell standalone Max
 applications, thus I would also like to allow use of S4M in these contexts.
 
@@ -1602,8 +1580,14 @@ of the s4m object.
 Typing the number 99 into the number box will now result in Scheme calls to set the my\sphinxhyphen{}var variable to 99, as the s4m object
 will receive the message \sphinxstylestrong{set! my\sphinxhyphen{}var 99} and will treat this as \sphinxstylestrong{(set! my\sphinxhyphen{}var 99)}, evaluating accordingly.
 This capability significantly reduces the amount of code the user must write to make interactive patches when compared to the Max js object,
-as the js object requires explicit handler methods to be made for any input.
-.. citation cycling site FIX
+as the js object requires explicit handler methods to be made for any input (Cycling 74 n.d.).
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{figure_2_setting_variables_max_patch}.png}
+\caption{Figure 2: Setting Scheme variables using Max message interpolation.}\label{\detokenize{features_usage:id1}}\end{figure}
 
 \sphinxAtStartPar
 A result of this input facility is that when one uses a symbol in a Max message sent to inlet 0, the interpreter will take symbol
@@ -2020,6 +2004,13 @@ In my personal experiments, comparison with the Max built in jit.cellblock
 increases \sphinxhyphen{} from unusable with one 64 x 16 grid, to usable with
 four 64 x 16 grids with minimal CPU impact.
 
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics{{figure_3_s4m_grid}.png}
+\caption{Figure 3: The s4m.grid display object.}\label{\detokenize{features_usage:id2}}\end{figure}
+
 
 \section{Scheduling Functions}
 \label{\detokenize{features_usage:scheduling-functions}}
@@ -2082,8 +2073,7 @@ For optimal real\sphinxhyphen{}time audio performance in Max, the recommended
 settings are to have “audio in interrupt” and “overdrive” enabled.
 When both of these are turned on, the Max engine alternately runs
 a DSP pass (calculating a signal vector of samples), and a scheduler
-thread pass. (docs.cycling74.scom)
-.. citation cycling site, FIX ME
+thread pass (CTN: Cycling 74 n.d.).
 
 \sphinxAtStartPar
 This means that real time of events stemming from
@@ -2152,8 +2142,7 @@ they have already been scheduled.
 \sphinxAtStartPar
 Finally, these facilities enable a workflow known as
 “self\sphinxhyphen{}scheduling” or “temporal recursion”,
-in which a repeating function schedules the next pass of itself (Lazzarini, 2016, 115\sphinxhyphen{}116).
-.. citation (Lazzarini, 2016)
+in which a repeating function schedules the next pass of itself (CTN: Lazzarini 2016, 115\sphinxhyphen{}116).
 This enables the composer to create evolving
 processes, as each pass of a function can change the data,
 (or even the code!) of the next pass of the function. One might think
@@ -2222,9 +2211,8 @@ uses large amounts of data.
 Further complicating things, garbage collection is of indeterminate duration,
 as the work that the gc must do is heavily dependent on the particular algorithms
 and data structures used in the program over which it is running
-(i.e., a program of some given size and memory use may require more or less
-garbage collection processing, depending on how precisely it is written). (Deutsch, 1976, 522\sphinxhyphen{}523)
-.. citation (Deutsch) FIX BIB (was ACM)
+That is to say, a program of some given size and memory use may require more or less
+garbage collection processing, depending on how precisely it is written. (CTN: Deutsch and Bobrow 1976, 522\sphinxhyphen{}523)
 
 \sphinxAtStartPar
 For theses reasons, the use of garbage\sphinxhyphen{} collected languages is not common
@@ -2339,7 +2327,7 @@ I will briefly discuss the success of the project in the context of the previous
 project goals.
 
 
-\subsection{1) Focus on programming musical events and event\sphinxhyphen{}oriented tools}
+\subsection{Focus on programming musical events and event\sphinxhyphen{}oriented tools}
 \label{\detokenize{conclusion:focus-on-programming-musical-events-and-event-oriented-tools}}
 \sphinxAtStartPar
 This goal has been met well by working in Scheme, and in the event\sphinxhyphen{}domain of Max.
@@ -2349,7 +2337,7 @@ I am able to work in traditional musical constructs (notes, bars, sections, etc.
 but also able to concoct programmatic support for whatever other musical abstractions I choose to think in.
 
 
-\subsection{2) Support multiple contexts, including linear composition, real\sphinxhyphen{}time interaction, and live performance}
+\subsection{Support multiple contexts, including linear composition, real\sphinxhyphen{}time interaction, and live performance}
 \label{\detokenize{conclusion:support-multiple-contexts-including-linear-composition-real-time-interaction-and-live-performance}}
 \sphinxAtStartPar
 Scoring compositions with Max is an area I have been recently exploring by creating
@@ -2390,7 +2378,7 @@ rendering audio on the same computer. These issues are discussed further
 below.
 
 
-\subsection{3) Support advanced functional and object\sphinxhyphen{}oriented programming techniques}
+\subsection{Support advanced functional and object\sphinxhyphen{}oriented programming techniques}
 \label{\detokenize{conclusion:support-advanced-functional-and-object-oriented-programming-techniques}}
 \sphinxAtStartPar
 This is an area in which the project has been successful beyond my expectations.
@@ -2403,7 +2391,7 @@ Scheme’s multi\sphinxhyphen{}paradigm approach has been particularly welcome \
 of imperative, functional, object\sphinxhyphen{}oriented, and language\sphinxhyphen{}oriented development as the situation warrants.
 
 
-\subsection{4) Be linguistically optimized for the target use cases}
+\subsection{Be linguistically optimized for the target use cases}
 \label{\detokenize{conclusion:be-linguistically-optimized-for-the-target-use-cases}}
 \sphinxAtStartPar
 Having now developed a substantial body of work in Scheme, both music and tools for music,
@@ -2421,7 +2409,7 @@ the trade\sphinxhyphen{}offs between Lisp and ML languages make the Lisp family 
 productive and satisfying for the immediate needs of the composer\sphinxhyphen{}programmer.
 
 
-\subsection{5) Be usable in conjunction with modern, commercial tools}
+\subsection{Be usable in conjunction with modern, commercial tools}
 \label{\detokenize{conclusion:be-usable-in-conjunction-with-modern-commercial-tools}}
 \sphinxAtStartPar
 In this area, the project has again been resoundingly successful.
@@ -2440,8 +2428,7 @@ been particularly successful. The Live API provides a way for Max patches to pro
 most elements of the host in real\sphinxhyphen{}time, including mixer settings, device settings, the system transport,
 sequencer data, and much more. It uses an object model, the Live Object Model (or LOM), that
 is based on hierarchal lists of symbols. Users construct lists of numbers and symbols, and send
-these to special Max objects to query and control elements of the API (Cipriani, 2020, 676\sphinxhyphen{}680).
-.. citation (Cipriani, 2020)
+these to special Max objects to query and control elements of the API (CTN: Cipriani 2020, 676\sphinxhyphen{}680).
 Given that the fundamental model is of lists of symbols, it thus lends itself well to implementation in Lisp.
 I have created a low\sphinxhyphen{}level interface object for working with the Live API, \sphinxstylestrong{live\sphinxhyphen{}api}, and an accompanying
 Max subpatch (provided with S4M), which together provide the functions
@@ -2470,7 +2457,7 @@ requires minimal code:
 \end{sphinxVerbatim}
 
 
-\subsection{6) Support composing music that is impractical on commercial tools}
+\subsection{Support composing music that is impractical on commercial tools}
 \label{\detokenize{conclusion:support-composing-music-that-is-impractical-on-commercial-tools}}
 \sphinxAtStartPar
 I have found Scheme for Max particularly appropriate for composing and programming works that are
@@ -2495,7 +2482,7 @@ and that S4M has the potential to be a significant contribution to the computer 
 in this area.
 
 
-\subsection{7) Enable iterative development during musical playback}
+\subsection{Enable iterative development during musical playback}
 \label{\detokenize{conclusion:enable-iterative-development-during-musical-playback}}
 \sphinxAtStartPar
 The support for interactive development has been another area area in which Scheme for Max has succeeded beyond
@@ -2562,8 +2549,7 @@ a wide variety of objects for working with these lists, including sophisticated 
 elements such as staff notation displays and piano rolls.
 Bach uses lllls in a similar fashion to how Max uses dictionaires
 and S4M uses s4m\sphinxhyphen{}arrays: the data is stored in a global Bach\sphinxhyphen{}controlled registry,
-and objects can pass references to these between them (Agostini, 2015, 11\sphinxhyphen{}27).
-.. citation (Agostini, 2015)
+and objects can pass references to these between them (CTN: Agostini 2015, 11\sphinxhyphen{}27).
 However, while being inspired by Lisp data structures and Lisp\sphinxhyphen{}based platforms,
 Bach is notably missing an interactive Lisp interpreter itself.
 Were Scheme for Max also able to work with Bach lllls, the capabilities of both Bach
@@ -2627,8 +2613,7 @@ Were it possible to run an instance in the audio thread, S4M could be
 used to produce audio signals at single sample temporal accuracy.
 The previously discussed jitter of event onsets in Max is only an issue
 for Max \sphinxstyleemphasis{event messages}. Generating timing data as part of an audio stream
-is not affected. (Lyon, 2012, 121\sphinxhyphen{}179)
-.. citation (Lyon, 2012)
+is not affected. (CTN: Lyon 2012, 121\sphinxhyphen{}179)
 This could be useful for those wishing to sequence synthesizers controlled
 by control voltages, as this is done in modern audio workstations by outputing
 control voltage signals as audio streams.
@@ -2639,8 +2624,7 @@ sample rate as regular audio to be useful. For example, in the Csound language,
 it is common to use \sphinxstyleemphasis{k\sphinxhyphen{}rate} signals, generated at a divisor of the sample
 rate, to control many attributes of synthesis. These can be generated
 at lower resolution, and one can use interpolation when a smoother output
-signal is needed (Smaragdis, 2000, 126\sphinxhyphen{}128).
-.. citation (Smaragdis, 2000)
+signal is needed (CTN: Smaragdis 2000, 126\sphinxhyphen{}128).
 It is thus possible that creating
 control rate signals for purposes such as control\sphinxhyphen{}volt gates (controlling note onsets),
 envelopes, and low frequency oscillators could all be practical in Scheme.
@@ -2710,142 +2694,145 @@ joy of programming music in Lisp.
 \sphinxstepscope
 
 
-\chapter{Bibilography}
-\label{\detokenize{bibliography:bibilography}}\label{\detokenize{bibliography::doc}}
+\chapter{References}
+\label{\detokenize{bibliography:references}}\label{\detokenize{bibliography::doc}}
 \sphinxAtStartPar
-Ableton.com, 2017, \sphinxurl{https://www.ableton.com/en/blog/ableton-cycling-74-new-partnership/}
+Ableton. 2009. “Ableton releases Max for Live.” Press Archives. Last modified November 23, 2009. \sphinxurl{https://www.ableton.com/en/press/press-archive/press-archive-mfl-release/}
 
 \sphinxAtStartPar
-Ableton.com, 2009, \sphinxurl{https://www.ableton.com/en/press/press-archive/press-archive-mfl-release/}
+Ableton. 2017. “Ableton and Cycling ‘74 Form a New Partnership”. News. Last modified June 7, 2017. \sphinxurl{https://www.ableton.com/en/blog/ableton-cycling-74-new-partnership/}
 
 \sphinxAtStartPar
-Agostini, Andrea, and Daniele Ghisi. “A Max Library for Musical Notation and Computer\sphinxhyphen{}Aided Composition.” Computer music journal 39, no. 2 (2015): 11\textendash{}27.
+Agostini, Andrea, and Daniele Ghisi. 2015. “A Max Library for Musical Notation and Computer\sphinxhyphen{}Aided Composition.” \sphinxstyleemphasis{Computer music journal} 39, no. 2 (2015): 11\textendash{}27.
 
 \sphinxAtStartPar
-Boulanger, 2013, Introducing Csound for Live, from Ways Ahead
+Ariza, Christopher. 2009. “Sonifying Sieves: Synthesis and Signal Processing Applications of the Xenakis Sieve with Python and Csound.” In \sphinxstyleemphasis{International Computer Music Conference Proceedings.} Vol. 2009. Ann Arbor, MI: Michigan Publishing, University of Michigan Library.
 
 \sphinxAtStartPar
-Carrette, George, SIOD: Scheme in One Defun, \sphinxurl{http://people.delphiforums.com/gjc//siod.html}
+Boulanger, Richard. 2013. “Introducing Csound for Live.” In \sphinxstyleemphasis{Ways Ahead Proceedings of the First International Csound Conference}, edited by Joachim Heintz, Alex Hofmann, and Iain McCurdy, 188. Newcastle: Cambridge Scholars Publishing.
 
 \sphinxAtStartPar
-Cipriani, 2019, Electronic Music and Sound Design V1.
+Carrette, George. 2007. “SIOD: Scheme in One Defun.” Last modified April 5, 2007. \sphinxurl{http://people.delphiforums.com/gjc//siod.html}
 
 \sphinxAtStartPar
-Cipriani, 2020, Electronic Music and Sound Design V2.
+Cipriani, Alessandro, and Maurizio Giri. 2019. \sphinxstyleemphasis{Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 1}. Rome: ConTempoNet.
 
 \sphinxAtStartPar
-Cook, 2002, Real Sound Synthesis
+Cipriani, Alessandro, and Maurizio Giri. 2020. \sphinxstyleemphasis{Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 2}. Rome: ConTempoNet.
 
 \sphinxAtStartPar
-Cycling74 article “JavaScript in Max”
+CLiki. n.d. “Music.” The Common Lisp Wiki. Last accessed July 2, 2023. \sphinxurl{https://www.cliki.net/music}
 
 \sphinxAtStartPar
-cycling74.github.io, \sphinxurl{http://cycling74.github.io/min-devkit/guide/threading}
+Cook, Perry R. 2017. \sphinxstyleemphasis{Real Sound Synthesis for Interactive Applications.} Abingdon: CRC Press.
 
 \sphinxAtStartPar
-Dannenburg 2018 \sphinxhyphen{} Languages for computer music
+Cycling 74. n.d. “Javascript and Threading.”  Max v8.5.5 Documentation. Last accessed July 2, 2023. \sphinxurl{https://docs.cycling74.com/max8/vignettes/jsthreading}
 
 \sphinxAtStartPar
-docs.cycling74.com/max8/vignettes/jsthreading “JavaScript and Threading” Max v8.5.5 Documentation
+Cycling 74. n.d. “Max JS Tutorial 1: Basic JavaScript.”  Max v8.5.5 Documentation. Last accessed July 2, 2023. \sphinxurl{https://docs.cycling74.com/max8/tutorials/javascriptchapter01}
 
 \sphinxAtStartPar
-docs.cycling74.com/max8/vignettes/scheduler\_settings “Scheduler Settings”
+Cycling 74. n.d. “Scheduler Settings.” Max v8.5.5 Documentation. Last accessed July 2, 2023. \sphinxurl{https://docs.cycling74.com/max8/vignettes/scheduler\_settings}
 
 \sphinxAtStartPar
-Deutsch, L. Peter and Daniel G. Bobrow. 1976. An efficient, incremental, automatic garbage collector. Commun. ACM 19, 9 (Sept. 1976), 522\textendash{}526. \sphinxurl{https://doi.org/10.1145/360336.360345}
+Cycling 74. 2019. “Min Guide to Threading in Max.” Min Development Kit. \sphinxurl{http://cycling74.github.io/min-devkit/guide/threading}
 
 \sphinxAtStartPar
-Django website TODO
+Dannenberg, Roger B. 1997. “Machine Tongues XIX: Nyquist, a Language for Composition and Sound Synthesis.” \sphinxstyleemphasis{Computer music journal} 21, no. 3 (1997): 50\textendash{}60.
 
 \sphinxAtStartPar
-Farnell, 2010, Designing Sound
+Dannenberg, Roger B. 2018. “Languages for Computer Music.” \sphinxstyleemphasis{Frontiers in digital humanities} 5 (2018).
 
 \sphinxAtStartPar
-ffitch, 2011, Understanding and Opcode in Csound, Audio Programming Book
+Dannenberg, Roger B., Peter Desain, and Henkjan Honing. 1997. “Programming Language Design for Music.” In \sphinxstyleemphasis{Musical Signal Processing}, edited by Curtis Roads, 291. London: Routledge.
 
 \sphinxAtStartPar
-ffitch, 2011, Using C to generate scores (audio programming book)
+Deutsch, L. Peter and Daniel G. Bobrow. 1976. “An efficient, incremental, automatic garbage collector”. \sphinxstyleemphasis{Communications of the ACM} 19, 9 (Sept. 1976), 522\textendash{}526.
 
 \sphinxAtStartPar
-Gogins, Michael, 2013
+Farnell, Andy. 2010. \sphinxstyleemphasis{Designing Sound.} Cambridge, Mass: MIT Press.
 
 \sphinxAtStartPar
-Lazzarini 2013, Development of Computer Music Programming Systems
+Gogins, Michael. 2013. “The Csound API: Interview with Michael Gogins.” In \sphinxstyleemphasis{Ways Ahead Proceedings of the First International Csound Conference}, edited by Joachim Heintz, Alex Hofmann, and Iain McCurdy, 43. Newcastle: Cambridge Scholars Publishing.
 
 \sphinxAtStartPar
-Lazzarini, 2010 \sphinxhyphen{} MIDI programming with PortMidi (in Audio Programming Book)
+ffitch, John. 2011. “Using C To Generate Scores.” In \sphinxstyleemphasis{The Audio Programming Book.}, edited by Richard Boulanger and Victor Lazzarini, 655. Cambridge, Mass: MIT Press.
 
 \sphinxAtStartPar
-Lazzarini, 2016 (Csound: A sound and music computing system)
+ffitch, John. 2011. “Understanding an Opcode in Csound.” In \sphinxstyleemphasis{The Audio Programming Book.}, edited by Richard Boulanger and Victor Lazzarini, 581. Cambridge, Mass: MIT Press.
 
 \sphinxAtStartPar
-Lazzarini, 2017 (Computer Music Instruments)
+Lazzarini, Victor. 2011. “MIDI Programming with PortMIDI.” In \sphinxstyleemphasis{The Audio Programming Book.}, edited by Richard Boulanger and Victor Lazzarini, 783. Cambridge, Mass: MIT Press.
 
 \sphinxAtStartPar
-Lyon, Eric. Designing Audio Objects for Max/MSP and Pd. Middleton, Wisconsin: A\sphinxhyphen{}R Editions, Inc., 2012.
+Lazzarini, Victor. 2013. “The Development of Computer Music Programming Systems.” \sphinxstyleemphasis{Journal of new music research} 42, no. 1 (2013): 97\sphinxhyphen{}110.
 
 \sphinxAtStartPar
-Lyon, Eric, and Coupland Street. “A sample accurate triggering system for pd and max/msp.” In LAC2006 Proceedings, p. 67. 2006.
+Lazzarini, Victor. 2016. \sphinxstyleemphasis{Csound A Sound and Music Computing System.} Cham: Springer International Publishing.
 
 \sphinxAtStartPar
-Maldanado, 2010 Working WIth Audio Streams (in Audio Programming Book)
+Lazzarini, Victor. 2017. \sphinxstyleemphasis{Computer Music Instruments: Foundations, Design and Development}. Cham: Springer International Publishing.
 
 \sphinxAtStartPar
-Manning 2013, Electronic and Computer Music
+Lyon, Eric. 2006. “A Sample Accurate Triggering System for Pd and Max/MSP.” In \sphinxstyleemphasis{International Computer Music Conference Proceedings.} Vol. 2006. Ann Arbor, MI: Michigan Publishing, University of Michigan Library.
 
 \sphinxAtStartPar
-Max SDK
+Lyon, Eric. 2012. \sphinxstyleemphasis{Designing Audio Objects for Max/MSP and Pd.} Middleton, Wisconsin: A\sphinxhyphen{}R Editions.
 
 \sphinxAtStartPar
-Maxobjects.com website
+Maldonado, Gabriel. 2011. “Working With Audio Streams.” In \sphinxstyleemphasis{The Audio Programming Book.}, edited by Richard Boulanger and Victor Lazzarini, 329. Cambridge, Mass: MIT Press.
 
 \sphinxAtStartPar
-Miller, Alex, Stuart Halloway, Aaron Bedra, and Jacquelyn Carter. Programming Clojure. Edited by Jacquelyn Carter. Third edition. Place of publication not identified: Pragmatic Programmers, 2018.
+Manning, Peter. 2004. \sphinxstyleemphasis{Electronic and Computer Music}. New York: Oxford University Press.
 
 \sphinxAtStartPar
-Puckette, 1991 \sphinxhyphen{} Combining Event and Signal Processing in the MAX Graphical Programming Environment
+maxobjects.com. n.d. “Max Objects Database.” Last modified May 4th, 2023. \sphinxurl{http://maxobjects.com/}
 
 \sphinxAtStartPar
-Puckette, 2002 \sphinxhyphen{} Max at Seventeen
+McLean, Alex, and R. T. Dean. 2018. \sphinxstyleemphasis{The Oxford Handbook of Algorithmic Music.} Edited by Alex McLean. New York, NY: Oxford University Press.
 
 \sphinxAtStartPar
-Roads, Curtis \sphinxhyphen{} Composing Electronic Music 2015
+Miller, Alex, Stuart Halloway, Aaron Bedra, and Jacquelyn Carter. 2018. \sphinxstyleemphasis{Programming Clojure.} Edited by Jacquelyn Carter. Third edition. Place of publication not identified: Pragmatic Programmers.
 
 \sphinxAtStartPar
-Roberts, Charlie, and Graham Wakefield. “Tensions and Techniques in Live Coding Performance.” In The Oxford Handbook of Algorithmic Music. Oxford University Press, 2018.
+Puckette, Miller. 1991. “Combining Event and Signal Processing in the MAX Graphical Programming Environment.” \sphinxstyleemphasis{Computer music journal} 15, no. 3 (1991): 68\textendash{}77.
 
 \sphinxAtStartPar
-Ruby on Rails website TODO
+Puckette, Miller. 2002. “Max at Seventeen.” \sphinxstyleemphasis{Computer music journal} 26, no. 4 (2002): 31\textendash{}43.
 
 \sphinxAtStartPar
-Sandewall, Erik. “Programming in an Interactive Environment: The ‘Lisp’ Experience.” ACM computing surveys 10, no. 1 (1978): 35\textendash{}71.
+Roads, Curtis. 2015. \sphinxstyleemphasis{Composing Electronic Music : a New Aesthetic.} Oxford: Oxford University Press.
 
 \sphinxAtStartPar
-Schottstaedt, Snd website
+Roberts, Charlie, and Graham Wakefield. 2018. “Tensions and Techniques in Live Coding Performance.” In \sphinxstyleemphasis{The Oxford Handbook of Algorithmic Music.}, edited by Alex McLean, 293. Oxford: Oxford University Press.
 
 \sphinxAtStartPar
-Schottstaedt, s7 website
+Sandewall, Erik. 1978. “Programming in an Interactive Environment: The Lisp Experience.” \sphinxstyleemphasis{ACM computing surveys} 10, no. 1 (1978): 35\textendash{}71.
 
 \sphinxAtStartPar
-Smaragdis, Paris. “Optimizing Your Csound Instruments” in The Csound Book, 2000
+Schottstaedt, William. n.d. “s7.” Accessed July 2, 2023. \sphinxurl{https://ccrma.stanford.edu/software/snd/snd/s7.html}
 
 \sphinxAtStartPar
-Sun, Kwangwon, and Sukyoung Ryu. “Analysis of JavaScript Programs: Challenges and Research Trends.” ACM computing surveys 50, no. 4 (2017): 1\textendash{}34.
+Smaragdis, Paris. 2000. “Optimizing Your Csound Instruments” In \sphinxstyleemphasis{The Csound Book}, edited by Richard Boulanger, 123. Cambridge Mass: MIT Press.
 
 \sphinxAtStartPar
-Taube, 2004 Notes from the Metalevel
+Sun, Kwangwon, and Sukyoung Ryu. 2017. “Analysis of JavaScript Programs: Challenges and Research Trends.” \sphinxstyleemphasis{ACM computing surveys} 50, no. 4 (2017): 1\textendash{}34.
 
 \sphinxAtStartPar
-Taube, 2009 Common Music 3
+Taube, Heinrich. 2009. \sphinxstyleemphasis{Common Music 3. International Computer Music Conference Proceedings.} Vol. 2009. Ann Arbor, MI: Michigan Publishing, University of Michigan Library.
 
 \sphinxAtStartPar
-Touretzkly, David S. LISP : a Gentle Introduction to Symbolic Computation. New York: Harper \& Row, 1984.
+Taylor, Gregory. 2020. “JavaScript: A Brief Resource Guide for Max Users.” Cycling74 Articles. Last modified Nov 10, 2020. \sphinxurl{https://cycling74.com/articles/javascript-a-resource-guide-for-max-users}
 
 \sphinxAtStartPar
-Wang 2008, A History of Programming and Music
+Touretzky, David S. \sphinxstyleemphasis{LISP: a Gentle Introduction to Symbolic Computation}. New York: Harper \& Row, 1984.
 
 \sphinxAtStartPar
-Zicarelli, 2002, How I Learned…
+Wang, Ge. 2017. “A History of Programming and Music.” In \sphinxstyleemphasis{Cambridge Companion to Electronic Music}, edited by Nick Collins and Julio D’escrivan, 58\sphinxhyphen{}74. Cambridge: Cambridge University Press.
+
+\sphinxAtStartPar
+Zicarelli, David. 2002. “How I Learned to Love a Program That Does Nothing.” \sphinxstyleemphasis{Computer music journal} 26, no. 4 (2002): 44\textendash{}51.
 
 
 

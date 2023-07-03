@@ -24,7 +24,7 @@ music programming platform.
 I will briefly discuss the success of the project in the context of the previously discussed
 project goals. 
 
-1) Focus on programming musical events and event-oriented tools
+Focus on programming musical events and event-oriented tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 This goal has been met well by working in Scheme, and in the event-domain of Max.
 Lisp has made creating my own abstractions of musical events simple to do and has made
@@ -32,7 +32,7 @@ exploring various algorithmic music techniques fruitful and enjoyable.
 I am able to work in traditional musical constructs (notes, bars, sections, etc.) 
 but also able to concoct programmatic support for whatever other musical abstractions I choose to think in.
 
-2) Support multiple contexts, including linear composition, real-time interaction, and live performance
+Support multiple contexts, including linear composition, real-time interaction, and live performance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Scoring compositions with Max is an area I have been recently exploring by creating
 scoring tools with Lisp macros. 
@@ -69,7 +69,7 @@ particularly long pieces that use large Scheme sequencing programs and are
 rendering audio on the same computer. These issues are discussed further
 below.
 
-3) Support advanced functional and object-oriented programming techniques
+Support advanced functional and object-oriented programming techniques
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 This is an area in which the project has been successful beyond my expectations.
 While there is some work required of the programmer to learn advanced programming in Scheme,
@@ -80,7 +80,7 @@ and reimplementing patterns and algorithms that I have previously used in other 
 Scheme's multi-paradigm approach has been particularly welcome - I use a mixture
 of imperative, functional, object-oriented, and language-oriented development as the situation warrants.
 
-4) Be linguistically optimized for the target use cases
+Be linguistically optimized for the target use cases
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Having now developed a substantial body of work in Scheme, both music and tools for music,
 I personally feel that the linguistic tradeoffs of Lisp, and of Scheme in particular,
@@ -95,7 +95,7 @@ of the ML-family (e.g., OCaml, Haskell, SML), I suspect from my personal experie
 the trade-offs between Lisp and ML languages make the Lisp family more 
 productive and satisfying for the immediate needs of the composer-programmer.
 
-5) Be usable in conjunction with modern, commercial tools 
+Be usable in conjunction with modern, commercial tools 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In this area, the project has again been resoundingly successful. 
 I have spent much of the last year (2022-2023) developing a large-scale platform for creating music
@@ -141,7 +141,7 @@ requires minimal code:
        `(set value ,value)))
   
 
-6) Support composing music that is impractical on commercial tools
+Support composing music that is impractical on commercial tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 I have found Scheme for Max particularly appropriate for composing and programming works that are
 not practical or are difficult on mainstream sequencers (e.g., Live, Logic, Reaper). 
@@ -163,7 +163,7 @@ and that S4M has the potential to be a significant contribution to the computer 
 in this area.
 
 
-7) Enable iterative development during musical playback
+Enable iterative development during musical playback
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The support for interactive development has been another area area in which Scheme for Max has succeeded beyond
 my expectations.

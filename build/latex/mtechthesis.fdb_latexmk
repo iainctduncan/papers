@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex mtechthesis.idx"] 1688319708 "mtechthesis.idx" "mtechthesis.ind" "mtechthesis" 1688320031 0
-  "mtechthesis.idx" 1688320030 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex mtechthesis.idx"] 1688319708 "mtechthesis.idx" "mtechthesis.ind" "mtechthesis" 1688352520 0
+  "mtechthesis.idx" 1688352520 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "mtechthesis.ilg"
   "mtechthesis.ind"
   (rewritten before read)
-["pdflatex"] 1688320030 "mtechthesis.tex" "mtechthesis.pdf" "mtechthesis" 1688320031 0
+["pdflatex"] 1688352519 "mtechthesis.tex" "mtechthesis.pdf" "mtechthesis" 1688352520 0
   "/Users/iainduncan/Library/texlive/2023basic/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk" 1688320030 23784 afe7779796d38ad8f7fc08488474244e ""
   "/Users/iainduncan/Library/texlive/2023basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1688320029 11524 154828afad749d7c0977cee2845c2132 ""
   "/usr/local/texlive/2023basic/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc" 1529098226 2457 aaabbccba4df2a7f7371410ee4e075a3 ""
@@ -132,13 +132,16 @@
   "/usr/local/texlive/2023basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1688319192 119779 0e2d2d64efcdc2d77920c555a9dfb535 ""
   "/usr/local/texlive/2023basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1688318579 7200388 e4a5429cd6e4a607f75786ad7c648243 ""
   "/usr/local/texlive/2023basic/texmf.cnf" 1678817979 628 bde3cc671e29677eea4172140533535c ""
-  "mtechthesis.aux" 1688320031 20012 6224b40dbd4579cd2e32a74b3003cac6 "pdflatex"
+  "figure_1_interactive_max_patch.png" 1688350629 35864 fc8e307b47190f91a085076123df4db8 ""
+  "figure_2_setting_variables_max_patch.png" 1688350592 28032 fb119322726817101131592997181950 ""
+  "figure_3_s4m_grid.png" 1688351207 36874 b9e8d367eb334cf385399ab810df6a86 ""
+  "mtechthesis.aux" 1688352520 20774 e622ab5a774f7f0c03f884966774e476 "pdflatex"
   "mtechthesis.ind" 1688319709 0 d41d8cd98f00b204e9800998ecf8427e "makeindex mtechthesis.idx"
-  "mtechthesis.out" 1688320031 15740 0274afcf6a53ae1d1b334acdac966085 "pdflatex"
-  "mtechthesis.tex" 1688320026 181798 170ba31897a1cb9bc5b122d4ab85a31c ""
-  "mtechthesis.toc" 1688320031 7054 03a883e600589c00031557be8d1d3a5a "pdflatex"
+  "mtechthesis.out" 1688352520 15436 f61ac3da6357265f965249e259bd1bda "pdflatex"
+  "mtechthesis.tex" 1688352518 187704 fbaee5dc3db337cb2bf282db01d280a8 ""
+  "mtechthesis.toc" 1688352520 7010 d4426d4128934e1af365b5e35e26a93a "pdflatex"
   "sphinx.sty" 1665106468 32189 d0cac7437f49bba7eff72a1cb5cf27a0 ""
-  "sphinxhighlight.sty" 1688320026 7490 72d023191655734567e0798eade2a1f7 ""
+  "sphinxhighlight.sty" 1688352517 7490 72d023191655734567e0798eade2a1f7 ""
   "sphinxlatexadmonitions.sty" 1665106468 10155 37f3cbe6b251ec0f2ce20d0b8c4fa3d7 ""
   "sphinxlatexcontainers.sty" 1665106468 901 d3a3a1b7b2547f47ade2499350b5c420 ""
   "sphinxlatexgraphics.sty" 1665106468 4840 a9578332b6f3b35e198751fb632c9b79 ""
@@ -153,7 +156,7 @@
   "sphinxlatexstyletext.sty" 1665106468 6310 230e9c67ef82453e767773679e1f6816 ""
   "sphinxlatextables.sty" 1665106468 21848 2827eb0b11b99b185a8b77317d3e131c ""
   "sphinxmanual.cls" 1665106468 4241 7b0d7a37df7b5715fb0dbd585c52ecdb ""
-  "sphinxmessages.sty" 1688320026 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1688352518 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1665106468 2061 47bb34b8ed8a78823eb0c886abfb9f4d ""
   "sphinxoptionshyperref.sty" 1665106468 1094 79beb8b8a3f10784f8cce804e0f9d3aa ""
   "sphinxpackageboxes.sty" 1665106468 18408 cacf96116848f46194438f1e659006ed ""

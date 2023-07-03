@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.2)  2 JUL 2023 10:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.7.2)  2 JUL 2023 19:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -825,78 +825,104 @@ Chapter 1.
 Chapter 2.
 [5
 
-] [6] [7] [8] [9] [10] [11] [12]
-Chapter 3.
-[13
-
-] [14] [15] [16]
-Chapter 4.
-[17
-
-] [18]
-LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
-160.
-LaTeX Font Info:    No file T1txtt.fd. on input line 1160.
+] [6] [7]
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 3
+94.
+LaTeX Font Info:    No file T1txtt.fd. on input line 394.
 
 
 LaTeX Font Warning: Font shape `T1/txtt/m/n' undefined
-(Font)              using `T1/cmr/m/n' instead on input line 1160.
-
-
-LaTeX Font Warning: Font shape `T1/txtt/m/it' undefined
-(Font)              using `T1/txtt/m/n' instead on input line 1161.
-
-LaTeX Font Info:    Trying to load font information for TS1+txtt on input line 
-1163.
-LaTeX Font Info:    No file TS1txtt.fd. on input line 1163.
-
-LaTeX Font Warning: Font shape `TS1/txtt/m/n' undefined
-(Font)              using `TS1/cmr/m/n' instead
-(Font)              for symbol `textquotesingle' on input line 1163.
+(Font)              using `T1/cmr/m/n' instead on input line 394.
 
 
 LaTeX Font Warning: Font shape `T1/txtt/b/n' undefined
-(Font)              using `T1/txtt/m/n' instead on input line 1167.
+(Font)              using `T1/txtt/m/n' instead on input line 398.
 
-[19] [20]
-LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 1
-261.
- (/usr/local/texlive/2023basic/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
+
+LaTeX Font Warning: Font shape `T1/txtt/m/it' undefined
+(Font)              using `T1/txtt/m/n' instead on input line 399.
+
+[8]
+<figure_1_interactive_max_patch.png, id=391, 371.13657pt x 347.79938pt>
+File: figure_1_interactive_max_patch.png Graphic file (type png)
+<use figure_1_interactive_max_patch.png>
+Package pdftex.def Info: figure_1_interactive_max_patch.png  used on input line
+ 532.
+(pdftex.def)             Requested size: 371.13565pt x 347.79852pt.
+ [9] [10 <./figure_1_interactive_max_patch.png>] [11] [12] [13] [14
+
+]
+Chapter 3.
+LaTeX Font Info:    Trying to load font information for TS1+qtm on input line 7
+82.
+(/usr/local/texlive/2023basic/texmf-dist/tex/latex/tex-gyre/ts1qtm.fd
 File: ts1qtm.fd 2009/09/25 v1.2 font definition file for TS1/qtm
-) [21{/usr/local/texlive/2023basic/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.en
-c}] [22] [23] [24]
-Chapter 5.
-[25
+) [15{/usr/local/texlive/2023basic/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.en
+c}]
+[16] [17] [18]
+Chapter 4.
+[19
 
-] [26] [27] [28]
+] [20]
+LaTeX Font Info:    Trying to load font information for TS1+txtt on input line 
+1149.
+LaTeX Font Info:    No file TS1txtt.fd. on input line 1149.
+
+
+LaTeX Font Warning: Font shape `TS1/txtt/m/n' undefined
+(Font)              using `TS1/cmr/m/n' instead
+(Font)              for symbol `textquotesingle' on input line 1149.
+
+[21] [22] [23] [24] [25] [26]
+Chapter 5.
+[27
+
+] [28]
+<figure_2_setting_variables_max_patch.png, id=484, 321.45094pt x 336.50719pt>
+File: figure_2_setting_variables_max_patch.png Graphic file (type png)
+<use figure_2_setting_variables_max_patch.png>
+Package pdftex.def Info: figure_2_setting_variables_max_patch.png  used on inpu
+t line 1589.
+(pdftex.def)             Requested size: 321.45015pt x 336.50635pt.
+ [29 <./figure_2_setting_variables_max_patch.png>]
+Overfull \vbox (1.9171pt too high) detected at line 1683
+ []
+
+[30]
 
 LaTeX Font Warning: Font shape `TS1/txtt/m/it' undefined
 (Font)              using `TS1/txtt/m/n' instead
-(Font)              for symbol `textquotesingle' on input line 1741.
+(Font)              for symbol `textquotesingle' on input line 1725.
 
-[29] [30] [31] [32] [33] [34] [35] [36]
+[31] [32] [33] [34]
+<figure_3_s4m_grid.png, id=512, 385.44pt x 294.34969pt>
+File: figure_3_s4m_grid.png Graphic file (type png)
+<use figure_3_s4m_grid.png>
+Package pdftex.def Info: figure_3_s4m_grid.png  used on input line 2011.
+(pdftex.def)             Requested size: 385.43906pt x 294.34895pt.
+ [35] [36 <./figure_3_s4m_grid.png>] [37] [38] [39] [40
+
+]
 Chapter 6.
-[37
-
-] [38] [39] [40] [41] [42]
+[41] [42] [43] [44] [45] [46]
 Chapter 7.
-[43
+[47
 
-] (./mtechthesis.ind) [44] (./mtechthesis.aux)
+] [48] (./mtechthesis.ind) [49] (./mtechthesis.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `mtechthesis.out' has not changed.
-(rerunfilecheck)             Checksum: 0274AFCF6A53AE1D1B334ACDAC966085;15740.
+(rerunfilecheck)             Checksum: F61AC3DA6357265F965249E259BD1BDA;15436.
  ) 
 Here is how much of TeX's memory you used:
- 15365 strings out of 477476
- 255850 string characters out of 5824245
- 1902388 words of memory out of 5000000
- 35124 multiletter control sequences out of 15000+600000
+ 15394 strings out of 477476
+ 256826 string characters out of 5824245
+ 1900388 words of memory out of 5000000
+ 35148 multiletter control sequences out of 15000+600000
  566153 words of font info for 72 fonts, out of 8000000 for 9000
  320 hyphenation exceptions out of 8191
- 72i,12n,76p,666b,694s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,12n,76p,645b,661s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/iainduncan/Library/texlive/2023basic/texmf-var/fonts/pk/ljfour/jknap
 pen/ec/tcrm1000.600pk> </Users/iainduncan/Library/texlive/2023basic/texmf-var/f
 onts/pk/ljfour/jknappen/ec/ecrm1000.600pk></usr/local/texlive/2023basic/texmf-d
@@ -904,10 +930,10 @@ ist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/local/texlive/2023basic/texmf-di
 st/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2023basic/texmf-dis
 t/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2023basic/texmf-dist
 /fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on mtechthesis.pdf (48 pages, 287820 bytes).
+Output written on mtechthesis.pdf (53 pages, 360276 bytes).
 PDF statistics:
- 719 PDF objects out of 1000 (max. 8388607)
- 587 compressed objects within 6 object streams
- 128 named destinations out of 1000 (max. 500000)
- 585 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 723 PDF objects out of 1000 (max. 8388607)
+ 578 compressed objects within 6 object streams
+ 129 named destinations out of 1000 (max. 500000)
+ 600 words of extra memory for PDF output out of 10000 (max. 10000000)
 
