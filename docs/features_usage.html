@@ -138,8 +138,13 @@ of the s4m object.
 Typing the number 99 into the number box will now result in Scheme calls to set the my-var variable to 99, as the s4m object
 will receive the message <strong>set! my-var 99</strong> and will treat this as <strong>(set! my-var 99)</strong>, evaluating accordingly.
 This capability significantly reduces the amount of code the user must write to make interactive patches when compared to the Max js object,
-as the js object requires explicit handler methods to be made for any input.
-.. citation cycling site FIX</p>
+as the js object requires explicit handler methods to be made for any input (Cycling 74 n.d.).</p>
+<figure class="align-default" id="id1">
+<img alt="_images/figure_2_setting_variables_max_patch.png" class="with-border" src="_images/figure_2_setting_variables_max_patch.png" />
+<figcaption>
+<p><span class="caption-text">Figure 2: Setting Scheme variables using Max message interpolation.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>A result of this input facility is that when one uses a symbol in a Max message sent to inlet 0, the interpreter will take symbol
 to be a variable name in the running Scheme programs top-level environment.
 Should the user wish to pass in a <em>symbol</em> (i.e., not refer to a variable), they can use the standard Scheme leading single
@@ -494,6 +499,12 @@ In my personal experiments, comparison with the Max built in jit.cellblock
 (the built in tabular display element) showed very significant speed
 increases - from unusable with one 64 x 16 grid, to usable with
 four 64 x 16 grids with minimal CPU impact.</p>
+<figure class="align-default" id="id2">
+<img alt="_images/figure_3_s4m_grid.png" class="with-border" src="_images/figure_3_s4m_grid.png" />
+<figcaption>
+<p><span class="caption-text">Figure 3: The s4m.grid display object.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="scheduling-functions">
 <h2>Scheduling Functions<a class="headerlink" href="#scheduling-functions" title="Permalink to this heading">¶</a></h2>
@@ -545,8 +556,7 @@ time and the actual execution time as one would see if analyzing recorded audio.
 settings are to have “audio in interrupt” and “overdrive” enabled.
 When both of these are turned on, the Max engine alternately runs
 a DSP pass (calculating a signal vector of samples), and a scheduler
-thread pass. (docs.cycling74.scom)
-.. citation cycling site, FIX ME</p>
+thread pass (CTN: Cycling 74 n.d.).</p>
 <p>This means that real time of events stemming from
 the scheduler thread execution can be off by up to a signal
 vector of samples, resulting in small timing discrepencies.
@@ -602,8 +612,7 @@ to edit algorithms used in a performance in interesting ways, even once
 they have already been scheduled.</p>
 <p>Finally, these facilities enable a workflow known as
 “self-scheduling” or “temporal recursion”,
-in which a repeating function schedules the next pass of itself (Lazzarini, 2016, 115-116).
-.. citation (Lazzarini, 2016)
+in which a repeating function schedules the next pass of itself (CTN: Lazzarini 2016, 115-116).
 This enables the composer to create evolving
 processes, as each pass of a function can change the data,
 (or even the code!) of the next pass of the function. One might think
@@ -663,9 +672,8 @@ uses large amounts of data.
 Further complicating things, garbage collection is of indeterminate duration,
 as the work that the gc must do is heavily dependent on the particular algorithms
 and data structures used in the program over which it is running
-(i.e., a program of some given size and memory use may require more or less
-garbage collection processing, depending on how precisely it is written). (Deutsch, 1976, 522-523)
-.. citation (Deutsch) FIX BIB (was ACM)</p>
+That is to say, a program of some given size and memory use may require more or less
+garbage collection processing, depending on how precisely it is written. (CTN: Deutsch and Bobrow 1976, 522-523)</p>
 <p>For theses reasons, the use of garbage- collected languages is not common
 in real-time audio programming, where the program must be doing constant calculations
 to produce streams of samples.
@@ -754,21 +762,12 @@ linked from the main GitHub project page.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="background.html">Background - Computer Music Programming Languages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="goals.html">Project Motivation and Goals and Motivation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goals.html">Project Motivation and Goals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">High-Level Design</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Features and Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#object-initialization">Object Initialization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#bootstrap-files">Bootstrap files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#source-files">Source Files</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#inlets-and-outlets">Inlets and Outlets</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#input">Input</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#inlet-0-scheme-expressions">Inlet 0 Scheme Expressions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#inlet-1">Inlet 1+</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#object-initialization">Object Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#input">Input</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#output">Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sending-messages">Sending Messages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#buffers-tables">Buffers &amp; Tables</a></li>
@@ -781,7 +780,7 @@ linked from the main GitHub project page.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibilography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">References</a></li>
 </ul>
 
 <div class="relations">

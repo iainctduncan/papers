@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Project Motivation and Goals and Motivation &#8212; M.Tech Thesis  documentation</title>
+    <title>Project Motivation and Goals &#8212; M.Tech Thesis  documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -35,8 +35,8 @@
 
           <div class="body" role="main">
             
-  <section id="project-motivation-and-goals-and-motivation">
-<h1>Project Motivation and Goals and Motivation<a class="headerlink" href="#project-motivation-and-goals-and-motivation" title="Permalink to this heading">¶</a></h1>
+  <section id="project-motivation-and-goals">
+<h1>Project Motivation and Goals<a class="headerlink" href="#project-motivation-and-goals" title="Permalink to this heading">¶</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">¶</a></h2>
 <p>Scheme for Max is the result of many years of exploring computer music platforms for composing, producing,
@@ -44,7 +44,7 @@ and performing music.
 The project requirements were born from my experiences, both positive and negative, with a wide variety
 of tools, both commercial and non-commercial.
 Broadly, the requirements I set myself for the project are that it should:</p>
-<ol class="arabic simple">
+<ul class="simple">
 <li><p>Focus on programming musical events and event-oriented tools</p></li>
 <li><p>Support multiple contexts, including linear composition, real-time interaction, and live performance</p></li>
 <li><p>Support advanced functional and object-oriented programming techniques</p></li>
@@ -52,11 +52,11 @@ Broadly, the requirements I set myself for the project are that it should:</p>
 <li><p>Be usable in conjunction with modern, commercial tools</p></li>
 <li><p>Support composing music that is impractical on commercial tools</p></li>
 <li><p>Enable iterative development during musical playback</p></li>
-</ol>
+</ul>
 <p>These goals will act as our reference when discussing the sucess of design and implementation decisions.</p>
 </section>
 <section id="focus-on-programming-musical-events-and-event-oriented-tools">
-<h2>1) Focus on programming musical events and event-oriented tools<a class="headerlink" href="#focus-on-programming-musical-events-and-event-oriented-tools" title="Permalink to this heading">¶</a></h2>
+<h2>Focus on programming musical events and event-oriented tools<a class="headerlink" href="#focus-on-programming-musical-events-and-event-oriented-tools" title="Permalink to this heading">¶</a></h2>
 <p>While numerous options for programming computer music exist, most domain specific computer music languages are
 designed principally around rendering audio, essentially acting as higher level langauges for digital signal processing (DSP).
 Examples of these include SuperCollider, Chuck, Faust, and to a lesser degree, Csound.
@@ -74,7 +74,7 @@ for the specific act of <em>composing</em>, in that the features of high-level l
 are, in my opinion, tremendously helpful when working programmatically with musical abstractions.</p>
 </section>
 <section id="support-multiple-contexts-including-linear-composition-realtime-interaction-and-live-performance">
-<h2>2) Support multiple contexts, including linear composition, realtime interaction, and live performance<a class="headerlink" href="#support-multiple-contexts-including-linear-composition-realtime-interaction-and-live-performance" title="Permalink to this heading">¶</a></h2>
+<h2>Support multiple contexts, including linear composition, realtime interaction, and live performance<a class="headerlink" href="#support-multiple-contexts-including-linear-composition-realtime-interaction-and-live-performance" title="Permalink to this heading">¶</a></h2>
 <p>As previously discussed, on modern computers it is now possible to run complex computer music processes in realtime,
 where acceptable realtime performance means there are not any audible audio issues from missed rendering deadlines, and the system can run with a
 latency low enough for the user to interract with the music with an immediacy appropriate to playing instruments (i.e., between 5 and 20 ms).
@@ -91,7 +91,7 @@ And finally, it should be usable on stage, for example to create performances in
 physical instruments or manipulates devices that interact with the program.</p>
 </section>
 <section id="support-advanced-functional-and-object-oriented-programming-techniques">
-<h2>3) Support advanced functional and object-oriented programming techniques<a class="headerlink" href="#support-advanced-functional-and-object-oriented-programming-techniques" title="Permalink to this heading">¶</a></h2>
+<h2>Support advanced functional and object-oriented programming techniques<a class="headerlink" href="#support-advanced-functional-and-object-oriented-programming-techniques" title="Permalink to this heading">¶</a></h2>
 <p>The project should support advanced high-level programming idioms, many of which are now in the broader
 programming mainstream, having been adopted into mainstream languages such as JavaScript, Java, Python, and Ruby.
 This could potentially include support for first-class functions, lexical closures,
@@ -102,7 +102,7 @@ also make the tool more attractive to advanced programmers who might otherwise
 feel they need to use a general purpose programming language.</p>
 </section>
 <section id="be-linguistically-optimized-for-the-target-use-cases">
-<h2>4) Be linguistically optimized for the target use cases<a class="headerlink" href="#be-linguistically-optimized-for-the-target-use-cases" title="Permalink to this heading">¶</a></h2>
+<h2>Be linguistically optimized for the target use cases<a class="headerlink" href="#be-linguistically-optimized-for-the-target-use-cases" title="Permalink to this heading">¶</a></h2>
 <p>Support for higher level functional and object-oriented programming idioms can be done in a variety of
 general programming languages, with the differences between these languages having ramifications on the development process.
 All language design involves tradeoffs - what is most convenient for a small team of expert users early
@@ -117,14 +117,13 @@ and favouring the linguistic tradeoffs appropriate for the solo developer who is
 hold the entire program in one brain.</p>
 </section>
 <section id="be-usable-in-conjunction-with-modern-commercial-tools">
-<h2>5) Be usable in conjunction with modern, commercial tools<a class="headerlink" href="#be-usable-in-conjunction-with-modern-commercial-tools" title="Permalink to this heading">¶</a></h2>
+<h2>Be usable in conjunction with modern, commercial tools<a class="headerlink" href="#be-usable-in-conjunction-with-modern-commercial-tools" title="Permalink to this heading">¶</a></h2>
 <p>A problem with many of the existing computer music DSLs is that they were designed with the
 expectation that the user would be using only (or principally) the lanugage in question - that in effect,
 the DSL would always get to “be the boss”.
 For example, Common Music enables composing in a high-level language (Scheme), but to be used in real-time,
 this Scheme code must be run from the Grace host application, where it uses the Grace scheduler for
-controlling event times (Taube, 2009, 451).
-.. citation (Taube, 2009)
+controlling event times (CTN: Taube 2009, 451).
 Thus combining music coming from Common Music with musical elements coming from a commercial sequencing program such as
 Ableton Live is not terribly practical if one wants tight synchronization and the “clock-boss” to be Ableton Live.
 As commercial music software becomes more and more sophisticated, especially in the areas of sound design
@@ -137,7 +136,7 @@ The user of the project should not be faced with a binary choice between using t
 having the convenience and audio quality of modern commercial tools available to them.</p>
 </section>
 <section id="support-composing-music-that-is-impractical-on-commercial-tools">
-<h2>6) Support composing music that is impractical on commercial tools<a class="headerlink" href="#support-composing-music-that-is-impractical-on-commercial-tools" title="Permalink to this heading">¶</a></h2>
+<h2>Support composing music that is impractical on commercial tools<a class="headerlink" href="#support-composing-music-that-is-impractical-on-commercial-tools" title="Permalink to this heading">¶</a></h2>
 <p>While being able to work with commercial tools is a goal, this cannot be at the expense of supporting
 compositions that are impractical to render purely on commercial platforms.
 Naturally, commercial music tools are designed around the needs of the majority of users.
@@ -151,7 +150,7 @@ involved can be laborious and discouraging.
 However, these assumptions do not need to be made for a tool using a high-level textual language.</p>
 </section>
 <section id="enable-iterative-development-during-musical-playback">
-<h2>7) Enable iterative development during musical playback<a class="headerlink" href="#enable-iterative-development-during-musical-playback" title="Permalink to this heading">¶</a></h2>
+<h2>Enable iterative development during musical playback<a class="headerlink" href="#enable-iterative-development-during-musical-playback" title="Permalink to this heading">¶</a></h2>
 <p>Finally, a goal of the project is to ensure that all of the goals listed so far can be achieved in a way that
 allows <em>interactive development</em> during audio playback.
 As with a hardware or commercial step sequencer, I should be able to update a looped sequence during playback,
@@ -160,15 +159,13 @@ This workflow is productive compositionally, and provides the ability to use the
 Languages in the Lisp family (and some others) allow this kind of workflow during software development,
 an idiom know as interactive programming, or REPL-driven development (REPL being a reference to the Read Evaluate Print Loop).
 In this style of development, code is incrementally updated while the program is running, allowing an exploratory style of development
-that is ideal during early prototyping and during the composition process (Taube, 2004, 8).
-.. citation (Taube, 2004)
+that is ideal during early prototyping and during the composition process (CTN: Taube 2004, 8).
 For the domain of algorithmic music, interactive development provides the same kind of immediacy one
 gets with sequencers that allow updating data during playback.
 Indeed, there exists an entire musical community dedicated to this kind of music programming,
 known as “live coding”, in which the performer takes the stage with minimal advanced material prepared
 and composes in the programming language in view of the audience, often with the code projected on screen
-(Roberts, 2018, 293-294).
-.. citation (Roberts, 2018)
+(CTN: Roberts and Wakefield 2018, 293-294).
 While <em>performing</em> live coding is not a personal goal of mine, the ability to live code while <em>composing</em> is.
 The project should support this style of working.</p>
 </section>
@@ -200,22 +197,22 @@ and subsequently evaluate whether the project as a whole is successful.</p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="background.html">Background - Computer Music Programming Languages</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Motivation and Goals and Motivation</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Project Motivation and Goals</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#focus-on-programming-musical-events-and-event-oriented-tools">1) Focus on programming musical events and event-oriented tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#support-multiple-contexts-including-linear-composition-realtime-interaction-and-live-performance">2) Support multiple contexts, including linear composition, realtime interaction, and live performance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#support-advanced-functional-and-object-oriented-programming-techniques">3) Support advanced functional and object-oriented programming techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#be-linguistically-optimized-for-the-target-use-cases">4) Be linguistically optimized for the target use cases</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#be-usable-in-conjunction-with-modern-commercial-tools">5) Be usable in conjunction with modern, commercial tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#support-composing-music-that-is-impractical-on-commercial-tools">6) Support composing music that is impractical on commercial tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#enable-iterative-development-during-musical-playback">7) Enable iterative development during musical playback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#focus-on-programming-musical-events-and-event-oriented-tools">Focus on programming musical events and event-oriented tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#support-multiple-contexts-including-linear-composition-realtime-interaction-and-live-performance">Support multiple contexts, including linear composition, realtime interaction, and live performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#support-advanced-functional-and-object-oriented-programming-techniques">Support advanced functional and object-oriented programming techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#be-linguistically-optimized-for-the-target-use-cases">Be linguistically optimized for the target use cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#be-usable-in-conjunction-with-modern-commercial-tools">Be usable in conjunction with modern, commercial tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#support-composing-music-that-is-impractical-on-commercial-tools">Support composing music that is impractical on commercial tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-iterative-development-during-musical-playback">Enable iterative development during musical playback</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">High-Level Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="features_usage.html">Features and Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibilography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">References</a></li>
 </ul>
 
 <div class="relations">
