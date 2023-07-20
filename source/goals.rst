@@ -17,12 +17,12 @@ Broadly, the requirements I set myself for the project are that it should:
 * Support composing music that is impractical on commercial tools
 * Enable iterative development during musical playback
 
-These goals will act as our reference when discussing the sucess of design and implementation decisions.
+These goals will act as our reference when discussing the success of design and implementation decisions.
 
 Focus on programming musical events and event-oriented tools
 -----------------------------------------------------------------
 While numerous options for programming computer music exist, most domain specific computer music languages are 
-designed principally around rendering audio, essentially acting as higher level langauges for digital signal processing (DSP).
+designed principally around rendering audio, essentially acting as higher level languages for digital signal processing (DSP).
 Examples of these include SuperCollider, Chuck, Faust, and to a lesser degree, Csound. 
 My goal for the project is instead to focus the design decisions first around the programming of musical *events*,
 unencumbered by the need to also support DSP programming.
@@ -41,8 +41,8 @@ Support multiple contexts, including linear composition, realtime interaction, a
 -------------------------------------------------------------------------------------------------------
 As previously discussed, on modern computers it is now possible to run complex computer music processes in realtime, 
 where acceptable realtime performance means there are not any audible audio issues from missed rendering deadlines, and the system can run with a 
-latency low enough for the user to interract with the music with an immediacy appropriate to playing instruments (i.e., between 5 and 20 ms). 
-Meeting this goal thus implies that the project will enable one to iteract with a composition while it plays, 
+latency low enough for the user to interact with the music with an immediacy appropriate to playing instruments (i.e., between 5 and 20 ms). 
+Meeting this goal thus implies that the project will enable one to interact with a composition while it plays, 
 and that an instrumentalist ought to be able to perform with objects created in the tool with a latency that allows accurate performances.
 However, there also exist types of music where a predetermined score of great complexity is the most 
 appropriate tool, and where this complexity may exceed the capabilities of human players. 
@@ -70,7 +70,7 @@ Be linguistically optimized for the target use cases
 --------------------------------------------------------------------------------------------------------
 Support for higher level functional and object-oriented programming idioms can be done in a variety of 
 general programming languages, with the differences between these languages having ramifications on the development process. 
-All language design involves tradeoffs - what is most convenient for a small team of expert users early 
+All language design involves trade-offs - what is most convenient for a small team of expert users early 
 in the process of development can be a hindrance for a large team of mixed expertise working on a very large code base.
 Design of the project should take this into account. 
 
@@ -79,13 +79,13 @@ The work of a composer-programmer likely consists of building many smaller proje
 commercial code base that is), all of which may build on some common set of tools and processes reused across pieces.
 The linguistic design of the project should take this into account and be optimized for this scenario, 
 favouring whatever is most efficient for the process of composing and interacting with the system while the program runs,
-and favouring the linguistic tradeoffs appropriate for the solo developer who is likely to be able to
+and favouring the linguistic trade-offs appropriate for the solo developer who is likely to be able to
 hold the entire program in one brain.
 
 Be usable in conjunction with modern, commercial tools 
 ----------------------------------------------------------------------------------------------------
 A problem with many of the existing computer music DSLs is that they were designed with the
-expectation that the user would be using only (or principally) the lanugage in question - that in effect,
+expectation that the user would be using only (or principally) the language in question - that in effect,
 the DSL would always get to "be the boss".
 For example, Common Music enables composing in a high-level language (Scheme), but to be used in real-time,
 this Scheme code must be run from the Grace host application, where it uses the Grace scheduler for 

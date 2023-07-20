@@ -83,7 +83,7 @@ of imperative, functional, object-oriented, and language-oriented development as
 Be linguistically optimized for the target use cases
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Having now developed a substantial body of work in Scheme, both music and tools for music,
-I personally feel that the linguistic tradeoffs of Lisp, and of Scheme in particular,
+I personally feel that the linguistic trade-offs of Lisp, and of Scheme in particular,
 are eminently suited to balancing the needs of the composer-programmer and tools-programmer.
 In particular, Lisp macros 
 enable the tools-programmer to create high-level abstractions that require
@@ -101,11 +101,11 @@ In this area, the project has again been resoundingly successful.
 I have spent much of the last year (2022-2023) developing a large-scale platform for creating music
 in Ableton Live in which S4M is used for improvised sequencing, hardware control, algorithmic processes,
 mix automation, and scoring. This has not only worked well, but I am able to combine
-it with material coming from regular Ableton Live clips with near-perfect synchronization (infact,
+it with material coming from regular Ableton Live clips with near-perfect synchronization (in fact,
 as close to perfect as it is possible to get when using message-events in Max for Live of any kind).
-Scheme for Max introduces no further timing discrepencies than does Max for Live itself, where 
-jiter of up to one signal vector (approximately 1.5 ms at 44100 samples per second) is possible, and is
-usually musically neglible. 
+Scheme for Max introduces no further timing discrepancies than does Max for Live itself, where 
+jitter of up to one signal vector (approximately 1.5 ms at 44100 samples per second) is possible, and is
+usually musically negligible. 
 
 Of particular note, being able to control the Live environment through the Live API with S4M has
 been particularly successful. The Live API provides a way for Max patches to programmatically control
@@ -154,9 +154,9 @@ Similarly, S4M is well suited to exploring spectral music and other techniques i
 component of a sound and a note from an instrument is blurred. For example, if one wants to apply spectral composition
 techniques such as controlling many partials of many sounds independently, this is straightforward by combining
 Scheme for Max with the csound~ object, and far simpler than would be the case with plain Max.
-Scheme programs can create programmtic loops that send Csound score messages representing activations
+Scheme programs can create programmatic loops that send Csound score messages representing activations
 of sine waves. Having previously experimented with this using Max, Csound, and the combination of the two, I have
-found the addition of S4M to be a tremendous improvment.
+found the addition of S4M to be a tremendous improvement.
 
 Overall, I feel that the achievement of this goal is one of Scheme for Max's strongest points, 
 and that S4M has the potential to be a significant contribution to the computer music tool landscape 
@@ -165,7 +165,7 @@ in this area.
 
 Enable iterative development during musical playback
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The support for interactive development has been another area area in which Scheme for Max has succeeded beyond
+The support for interactive development has been another area in which Scheme for Max has succeeded beyond
 my expectations.
 For my personal work configuration, I have created two small scripts in Python and Vim respectively,
 which enable me to send Scheme code to Max directly from my text editor.
@@ -194,7 +194,7 @@ in meeting its stated goals.
 The one area of concern that remains is suitability for live performances that use realtime interaction with
 large programs and would benefit from being able to run with lower latency. 
 However, as the current s7 interpreter was not designed for realtime use (indeed upon the first release
-of S4M, its success in this regard was received with suprise and enthusiasm by its author),
+of S4M, its success in this regard was received with surprise and enthusiasm by its author),
 I believe this is an area in which future work on optimizing
 s7 and Scheme for Max for realtime performance will bear fruit.
 
@@ -218,7 +218,7 @@ data type corresponding to the Lisp list in its ability to nest and to hold hete
 In addition, the Bach project, and its extensions such as Cage and Dada, provide
 a wide variety of objects for working with these lists, including sophisticated graphical
 elements such as staff notation displays and piano rolls.
-Bach uses lllls in a similar fashion to how Max uses dictionaires 
+Bach uses lllls in a similar fashion to how Max uses dictionairies 
 and S4M uses s4m-arrays: the data is stored in a global Bach-controlled registry,
 and objects can pass references to these between them (CTN: Agostini 2015, 11-27).
 However, while being inspired by Lisp data structures and Lisp-based platforms,
@@ -246,7 +246,7 @@ so, CPU use becomes too high for realtime rendering.
 The behaviour is similar to what happens when the audio latency is too low or
 the heap size is too high, both situations where the garbage collector cannot finish in time.
 It thus seems likely (though at this point this is speculation) that the memory
-over which the GC is running has inadvertenly grown, and there is a bug in my 
+over which the GC is running has inadvertently grown, and there is a bug in my 
 implementation of the scheduled function callback handling that prevents the garbage
 collection of already scheduled functions.
 This is the most serious limitation at the moment and is something on which I will be actively
@@ -257,7 +257,7 @@ Garbage Collection
 In addition to the bug in my implementation, there is the fact that the s7 garbage
 collector is not designed for realtime use. There has been significant work
 in recent years on garbage collection algorithms, including the development
-of various approaches for soft-realtime gargage collectors such as incremental collectors. 
+of various approaches for soft-realtime garbage collectors such as incremental collectors. 
 An incremental collector does not finish
 all its work on every pass, and would likely perform better in an audio situation
 as the work can be distributed over time. Audio computation is, by its nature,
@@ -280,7 +280,7 @@ The previously discussed jitter of event onsets in Max is only an issue
 for Max *event messages*. Generating timing data as part of an audio stream
 is not affected. (CTN: Lyon 2012, 121-179)
 This could be useful for those wishing to sequence synthesizers controlled
-by control voltages, as this is done in modern audio workstations by outputing
+by control voltages, as this is done in modern audio workstations by outputting
 control voltage signals as audio streams. 
 While Scheme, as a high-level language with a garbage collector, is unlikely 
 to be appropriate for heavy digital signal processing, control voltage
@@ -298,7 +298,7 @@ This would require creating a variant of the Scheme for Max object that would
 run the Scheme interpreter within the Max audio rendering loop,
 and use some form of thread-safe queuing to pass Max messages in and out of the
 scheduler or main thread.
-It is likely that this would be more practical when used in conjuction with
+It is likely that this would be more practical when used in conjunction with
 an improved garbage collector. 
 While control rate signals generated from Scheme are unlikely to be possible
 with the same latency as those generated from C (given the unavoidable extra

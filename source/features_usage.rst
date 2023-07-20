@@ -27,7 +27,7 @@ Bootstrap files
 ^^^^^^^^^^^^^^^
 When the s4m object is created in a Max patch, it will initialize itself by loading the bootstrap file, **s4m.scm**.
 This file contains Scheme code on which the documented s4m functionality depends, and also loads several other Scheme dependencies.
-This boostrap file is available for inspection and alteration by the user, and it is expected that advanced users will 
+This bootstrap file is available for inspection and alteration by the user, and it is expected that advanced users will 
 alter their bootstrap file, allowing them to automatically load additional files that they would like to have available automatically. 
 
 By default, the bootstrap file additionally loads the file **s74.scm**, which contains Scheme definitions that are not specific to Max.
@@ -78,7 +78,7 @@ Inlets and Outlets
 ^^^^^^^^^^^^^^^^^^
 By default, the s4m object will be created with 1 inlet and 1 outlet. 
 The **@ins** and **@outs** attribute arguments can be used at instantiation time to create additional inlets and outlets,
-to a maxium of 32 outlets.
+to a maximum of 32 outlets.
 While these are implemented as Max *attributes*, they cannot be changed in the Max object inspector as their number must be set
 before object initialization. They can only be set as **@** arguments in the object box.
 
@@ -217,7 +217,7 @@ is synonymous with a message of a single symbol atom consisting of the symbol "b
 
 Sending Messages
 --------------------------------------------------------------------------------
-In addition to outputing messages via Max patch cables through the s4m object's outlets, 
+In addition to outputting messages via Max patch cables through the s4m object's outlets, 
 the s4m object can also send messages directly to Max objects that have been given a Max **scripting name**. 
 On instantiation, and additionally on receipt of a **scan** message, s4m objects
 iterate over all objects in the same patcher and recursively through
@@ -288,7 +288,7 @@ can update their displays accordingly.
 Consequently, interacting with a collection of samples from the same 
 buffer with a Scheme loop that makes repeat
 calls to buffer-ref or buffer-set! is slower than necessary,
-as locking, unlocking, and notifying will happen on every loop interation.
+as locking, unlocking, and notifying will happen on every loop iteration.
 For these scenarios, s4m functions exist to copy blocks of samples between
 Scheme vectors (Scheme's basic array type) and buffers, in
 which optional starting index points and sample counts are provided as arguments.
@@ -321,12 +321,12 @@ While buffers (and to a lesser degree, tables) are implemented around the primar
 of storing sample data, they can in fact be used for storing numerical
 data in arrays for any purpose. The s4m facilities thus provide a complement to the
 Max functions, enabling iterative array manipulation with more convenient
-looping constructs than are built in to Max.
+looping constructs than are built into Max.
 
 
 Dictionaries
 --------------------------------------------------------------------------------
-Another higher-order data abstration provided by Max is the
+Another higher-order data abstraction provided by Max is the
 **dictionary**, a key-value store in which one can store a wide variety
 of Max data types as values, and use integers, floats, symbols, or strings 
 as keys. Max provides a rich API for working with dictionaries, including
@@ -433,7 +433,7 @@ where speed of access is the top priority, leaving synchronization issues
 (and safety!) up to the programmer. 
 
 The motivating use case for s4m-arrays is that of driving graphic displays
-of tabular data as quickly as possible, such as one
+of tabular data as quickly as possible, such as
 one would when making a visual display for a step sequencer.
 In this scenario, one might have one s4m instance
 that contains a sequencer engine which works with sequence data stored in vectors,
@@ -579,13 +579,13 @@ thread pass (CTN: Cycling 74 n.d.).
 
 This means that real time of events stemming from 
 the scheduler thread execution can be off by up to a signal
-vector of samples, resulting in small timing discrepencies.
+vector of samples, resulting in small timing discrepancies.
 At a signal-vector size of 64 samples (the default for Ableton Live) and
 a sample rate of 44100 samples per second, this is 1.5 milliseconds,
-and is thus a musically acceptable discrepency. 
+and is thus a musically acceptable discrepancy. 
 Note though that the clock functions
 in current versions of Max compensate for this in the long run such
-that this discrepency does not accumulate. 
+that this discrepancy does not accumulate. 
 Tests I made during development confirmed that even after long
 playback times, clock driven functions did not accumulate jitter,
 and that if one sets the Max signal vector size to 1 sample, 
@@ -595,7 +595,7 @@ The Scheme for Max functions use these clock facilities by putting
 a reference to the Scheme callback function (the function passed to the delay function)
 into a special internal registry, keyed by their handles. 
 When the C clock callback runs, the stored handle is retrieved 
-and used to retrive the Scheme callback, which is then exectued. 
+and used to retrieve the Scheme callback, which is then executed. 
 
 There is a powerful but not immediately obvious capability granted by 
 the combination of this facility 
@@ -681,15 +681,15 @@ and the temporal recursion will stop when the variable **playing** is set to fal
     (set! playing #f))
 
 The above can, of course, be combined with the previously mentioned
-lexical scoping capabilites, enabling implementations of complex,
-interactive, algorithmic process music in succint and flexible code.
+lexical scoping capabilities, enabling implementations of complex,
+interactive, algorithmic process music in succinct and flexible code.
 The Scheme for Max online documentation and example repositories contain
 examples of interactive algorithmic sequencers implemented in this way.
       
 Garbage collector functions 
 --------------------------------------------------------------------------------
 I have previously referred to the fact that, as a high-level, dynamically-typed language, Scheme includes a 
-**garbage collector** (a.k.a. a **gc**).
+**garbage collector** (a.k.a. **gc**).
 The garbage collector is a language subsystem that finds and
 frees memory which has previously been allocated by the program but is no longer needed.
 Garbage collection spares the programmer the tedious work of manually allocating,
@@ -709,7 +709,7 @@ and data structures used in the program over which it is running
 That is to say, a program of some given size and memory use may require more or less
 garbage collection processing, depending on how precisely it is written. (CTN: Deutsch and Bobrow 1976, 522-523)
 
-For theses reasons, the use of garbage- collected languages is not common
+For these reasons, the use of garbage- collected languages is not common
 in real-time audio programming, where the program must be doing constant calculations
 to produce streams of samples. 
 Scheme for Max, however, is intended to be used at the *note level*,
@@ -730,7 +730,7 @@ in many situations.
 
 Nonetheless, a heavy Scheme for Max program can run out of time for
 the garbage collector, resulting in audio underruns and audible clicks.
-For these cases, Scheme for Max provides some additional facitilites
+For these cases, Scheme for Max provides some additional facilities
 for controlling whether and when the gc runs.
 
 The first of these, perhaps counterintuitively, allows one to control 
@@ -744,7 +744,7 @@ running of the gc, leaving one to explicitly force a run by sending
 the **gc-run** message, which can be triggered off a timer such as a
 Max metronome. In my experience, setting this to somewhere between
 200 and 300 ms works well and provides better real-time performance
-than is posssible using the automatic gc, which may wait many seconds between runs.
+than is possible using the automatic gc, which may wait many seconds between runs.
 
 A second facility is the ability to change the starting heap size of the Scheme for Max object.
 The lower the heap size, the faster the gc runs, as it must run over less
@@ -766,7 +766,7 @@ following it by any forced gc runs. In this case, the heap will likely
 need to be rather large, as the memory use of the program will grow as it
 runs, with unused memory never getting freed. In programming parlance, 
 this is referred to as a "memory leak", and is normally considered 
-a bug. However, given that the the size of audio sample libraries and personal computer RAM
+a bug. However, given that the size of audio sample libraries and personal computer RAM
 is now commonly in the gigabytes, it is certainly
 not unreasonable for one to pre-allocate a larger heap and let a program grow 
 in memory on the order of megabytes.

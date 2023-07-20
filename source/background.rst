@@ -3,7 +3,7 @@ Background - Computer Music Programming Languages
 
 What is Computer Music Programming?
 -----------------------------------
-To frame the discussion of the the motivation and goals of the Scheme for Max project, I will 
+To frame the discussion of the motivation and goals of the Scheme for Max project, I will 
 first briefly survey the computer music programming landscape, discussing several families of 
 language, their approaches to programming computer music, and the advantages and disadvantages of these
 for various kinds of user and projects. 
@@ -90,11 +90,11 @@ difficult on standard commercial tools.
 
 Support for Performer Interaction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The platform should make it possible for a performer to interact with a 
+The platform should make it possible for a performer to interact with 
 a piece while it plays. Various computer music languages support interaction through 
 manipulating a computer directly (through text, network input, or graphical devices), 
 through physical input devices such as MIDI controllers and network-connected hardware, 
-and even through audio input, allowing the perfomer to interact with the program by playing
+and even through audio input, allowing the performer to interact with the program by playing
 an acoustic instrument.
 
 Again, the importance of this varies with the composer and the platform.
@@ -115,7 +115,7 @@ Support for Complex Algorithms
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Finally, the platform should provide support for programming algorithms of significant complexity.
 It should be possible to make the platform, for example, do things that are impractical
-or impossible for the human perfomer or for the composer working at a piano with score paper.
+or impossible for the human performer or for the composer working at a piano with score paper.
 My personal goals include creating music that combines algorithmically generated 
 material with traditionally scored and improvised material. 
 For my algorithmic work, I want to explore techniques and forms that would be impractical
@@ -123,7 +123,7 @@ if one is individually entering notes, thus instead requiring programmatic imple
 algorithms. 
 However, it is also important to me that a performer be able to interact with the algorithms.
 That, to quote Miller Puckette on his original design goals for Max, 
-basic musical material should be "controllable physcially, sequentially, or algorithmically;
+basic musical material should be "controllable physically, sequentially, or algorithmically;
 if they are to be controlled algorithmically, the inputs to the algorithm should 
 themselves be controllable in any way" (CTN: Puckette 1991, 68).
 
@@ -134,7 +134,7 @@ around which we can discuss how Scheme for Max complements existing options.
 Computer Music Platform Families
 --------------------------------
 For the purpose of keeping this discussion within a reasonable length,
-I will likewise categorize the historical and currently popular computer music programmimg
+I will likewise categorize the historical and currently popular computer music programming
 environments into three general categories: domain-specific textual languages, visual patching
 environments, and general purpose programming languages that are run with music-specific libraries
 or within musical frameworks. 
@@ -152,7 +152,7 @@ expressly for making music with a computer (CTN: Wang 2017, 58).
 The first historical example of programming computer music (that one might reasonably
 consider as more than an audio experiment) used a music DSL, namely Max Matthew's MUSIC I
 language, created in 1957. 
-MUSIC I (originally refered to as simply MUSIC) was a domain specific language written in assembly 
+MUSIC I (originally referred to as simply MUSIC) was a domain specific language written in assembly 
 language for the IBM 704 mainframe at Bell Labs.
 It was able to translate a high-level textual language with musical abstractions to assembly code,
 and could (through various intermediary steps) output digital audio. 
@@ -169,7 +169,7 @@ of creating a composition, and has a particular way in which it is run to make t
 Historically, running such a program meant rendering a piece to an audio file, but
 with modern computers (and versions of Csound) the rendering can be done in realtime.
 While originally these programs were not something with which a performer could interact while the music rendered,
-facilties now exist in Csound for performers to interact with the programs while they play (CTN: Lazzarini 2016, 171-179).
+facilities now exist in Csound for performers to interact with the programs while they play (CTN: Lazzarini 2016, 171-179).
 
 In addition to Csound, some other actively developed examples from this general family of language
 include SuperCollider, ChucK, and Faust, each of which has a particular focus or approach to the problems
@@ -244,7 +244,7 @@ compiling it such that it can be used in the same way as any built in opcode tha
 
 It should also be noted that the ease with which composer-programmers can work 
 with DSLs has led to broad popularity in the music community, and this
-in turn has led to many programmers creating publically available extensions, thus providing
+in turn has led to many programmers creating publicly available extensions, thus providing
 a rich library of freely-available tools for the programmer to use.
 Csound, for example, is still actively used and developed today, which is
 remarkable for a language first developed in 1986, and now has thousands of objects available (CTN Manning 2013, 189).
@@ -260,7 +260,7 @@ in a general purpose language must be done in an unusual manner to fit in the no
 For example,  making a component to receive, parse, and translate MIDI input according
 to some arbitrary rules requires making an "instrument" and having the
 score turn on "always-on" notes (CTN: Lazzarini 2016, 175).
-Clearly we are bending the built in abstractions to other purposes, 
+Clearly, we are bending the built in abstractions to other purposes, 
 at the expense of easily comprehensible code.
 
 Likewise, expressing complex algorithmic processes can be difficult.
@@ -279,7 +279,7 @@ but cumbersome for making *programs*.
 Visual Patching Environments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 A quite different family of computer music languages comprises the visual "patching" environments,
-such as Max and PureData (a.k.a Pd). 
+such as Max and PureData (a.k.a. Pd). 
 First created by Miller Puckett while at IRCAM in 1985, 
 Max was designed from the outset to support realtime interactions with performers.
 In a typical use case, the Max program would output messages (which could be MIDI data, but were not 
@@ -385,13 +385,13 @@ musically-oriented libraries to accomplish musical tasks.
 In this case, the structure and operation of the program is entirely up to the programmer.
 For example, a programmer might use C++ to create an application, creating sounds
 with a library such as the Synthesis Tool Kit (CTN: Cook 2002, 236-237),
-handling MIDI input and output with PortMidi (CTN: Lazzarini 2011, 784-795),
-and outputing audio with the PortAudio library (CTN: Maldanado, 2011, 364-375).
+handling MIDI input and output with PortMIDI (CTN: Lazzarini 2011, 784-795),
+and outputting audio with the PortAudio library (CTN: Maldonado, 2011, 364-375).
 While the use of these libraries significantly reduces the work needed by the programmer,
 fundamentally they are simply making a C++ application of their own design.
 
 In the second approach, a general purpose language is still used,
-but it is run from a muscially-oriented host, which could be either
+but it is run from a musically-oriented host, which could be either
 a running program or a scaffolding of outer code (i.e., the host
 is in the same language and code base but has been provided to the programmer).
 The term "inversion-of-control" for framework-based development of this type refers to the fact
@@ -407,7 +407,7 @@ provides an interpreter for the hosted language, along
 with facilities for scheduling, transport controls, outputting MIDI, and so on (CTN: Taube 2009, 451-454).
 The framework-driven approach thus significantly decreases the number
 of decisions the programmer must make and the amount of code that
-must be created, while still preserving the flexibility one gaines from
+must be created, while still preserving the flexibility one gains from
 working in a general purpose language.
 
 While the framework-oriented approach is less flexible than the
@@ -416,7 +416,7 @@ constraints imposed by the framework, the strength of GPPLs compared to either
 textual DSLs or visual patching platforms is in both cases flexibility, especially with
 regard to implementing complex algorithms.
 With a general purpose language, the programmer has far more in the way
-of programming contructs and techniques available to them. 
+of programming constructs and techniques available to them. 
 Implementing complex algorithms is no more difficult than it is in any 
 programming language. Looping, recursion, nested function calls, and complex
 design patterns are all practical, and the programmer has a wealth of resources
@@ -445,7 +445,7 @@ However, the amount of work and code required to use these is significantly
 higher than doing the same thing in a patching environment.
 It is worth noting that, *relatively speaking*, the additional work required decreases as the complexity
 of the desired interaction grows. Given a sufficiently complex interactive
-installatation, at some point the tradeoff swings in favour of the general
+installation, at some point the trade-off swings in favour of the general
 purpose language. Where precisely this point is depends a great deal
 on the expertise of the programmer - to a professional C++ programmer, the
 savings of using a patching language may be offset by the power of the 
@@ -472,7 +472,7 @@ One can, for example, run Csound from within a C++ or Python program, interactin
 directly with the Csound engine using the Csound API (CTN: Gogins, 2013, 43-46).
 One can also run a DSL such as Csound inside a visual patcher, using open-source
 extensions to Max and Pd that embed the Csound engine in a Max or Pure Data object (CTN: Boulanger 2013, 189).
-And one can even run a general purpose languauge *inside* a DSL or visual platform,
+And one can even run a general purpose language *inside* a DSL or visual platform,
 such as Python inside Csound (CTN: Ariza 2009, 367).
 or JavaScript inside Max (CTN: Lyon, 13). 
 
@@ -528,7 +528,7 @@ a textual DSL as well.
 Given the myriad options existing already in the hybrid space,
 we might well ask why a new tool is justified, why 
 specifically it ought to use an uncommon language, and why it should
-be embedded in Max specifically rather than some other platform or langauge.
+be embedded in Max specifically rather than some other platform or language.
 To answer these questions, first we will look at my personal motivations,
 and following that, at why I chose Max and s7 Scheme to fulfill them.
 
