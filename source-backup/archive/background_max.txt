@@ -1,0 +1,6 @@
+Audio data is comprised of blocks of samples computed by each object, calculated once for each X samples, where X is the signal vector size (typically on the order of 8 to 64 samples), and this is rendered in the audio (DSP) thread, clocked by the underlying audio subsystem. 
+Event data on the other hand are synchronous messages composed of integers, floating point numbers, symbols, or lists thereof.  
+In Max parlance, event data are called "messages", and indeed are analogous to message passing object oriented software design, with receiving objects implementing methods to respond to various messages. 
+Max thus exists on two levels, as an audio DSP rendering system in which a stream of audio is constantly rendered,  and as a event oriented system that responds to events, where events could originate from user interface input, external input (MIDI or network messages), and from clocking objects (such as the metronome).
+Externals can be created to run methods in response to messages, and also can provide a DSP rendering function used when they are added to the audio rendering graph and receive blocks of samples from other objects.
+

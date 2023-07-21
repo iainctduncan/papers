@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Masters in Music Tech Thesis
-=========================================
+Master of Music Technology - Final Project 
+==========================================
 Iain C.T. Duncan, University of Victoria
 
 .. toctree::
