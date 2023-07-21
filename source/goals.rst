@@ -89,7 +89,7 @@ expectation that the user would be using only (or principally) the language in q
 the DSL would always get to "be the boss".
 For example, Common Music enables composing in a high-level language (Scheme or SAL), but to be used in real-time,
 this Scheme code must be run from the Grace host application, where it uses the Grace scheduler for 
-controlling event times (CTN: Taube 2009, 451).
+controlling event times (Taube 2009, 451).
 Thus combining music coming from Common Music with musical elements coming from a commercial sequencing program such as 
 Ableton Live is not terribly practical if one wants tight synchronization and the "clock-boss" to be Ableton Live.
 As commercial music software becomes more and more sophisticated, especially in the areas of sound design 
@@ -125,13 +125,13 @@ This workflow is productive compositionally, and provides the ability to use the
 Languages in the Lisp family (and some others) allow this kind of workflow during software development, 
 an idiom know as *interactive programming*, or *REPL-driven development* (REPL being a reference to the Read-Evaluate-Print Loop).
 In this style of development, code is incrementally updated while the program is running, allowing an exploratory style of development 
-that is ideal during early prototyping and during the composition process (CTN: Taube 2004, 8).
+that is ideal during early prototyping and during the composition process (Taube 2004, 8).
 For the domain of algorithmic music, interactive development provides the same kind of immediacy one
 gets with sequencers that allow updating data during playback. 
 Indeed, there exists an entire musical community dedicated to this kind of music programming, 
 known as "live coding", in which the performer takes the stage with minimal or no material prepared in advance
 and composes in the programming language in view of the audience, often with the code projected on screen
-(CTN: Roberts and Wakefield 2018, 293-294).
+(Roberts and Wakefield 2018, 293-294).
 While *performing* live coding is not a personal goal of mine, the ability to live code while *composing* is.
 The project should support this style of working.
 

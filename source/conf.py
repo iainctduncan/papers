@@ -6,9 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'M.Tech Thesis'
+project = 'Master of Music Technology, Final Project.'
 copyright = '2022, Iain C. T. Duncan'
-author = 'Iain C. T. Duncan'
+author = 'Iain C. T. Duncan, University of Victoria'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

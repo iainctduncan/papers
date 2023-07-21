@@ -577,7 +577,7 @@ For optimal real-time audio performance in Max, the recommended
 settings are to have "audio in interrupt" and "overdrive" enabled. 
 When both of these are turned on, the Max engine alternately runs
 a DSP pass (calculating a signal vector of samples), and a scheduler
-thread pass (CTN: Cycling 74 n.d.). 
+thread pass (Cycling 74 n.d.). 
 This means that the actual onset time of events triggered from 
 scheduler thread processes can be off by up to a signal
 vector of samples, resulting in small timing discrepancies.
@@ -643,7 +643,7 @@ they have already been scheduled.
 
 Finally, these facilities enable a workflow known as
 "self-scheduling" or "temporal recursion", 
-in which a repeating function schedules the next pass of itself (CTN: Lazzarini 2016, 115-116). 
+in which a repeating function schedules the next pass of itself (Lazzarini 2016, 115-116). 
 This enables the composer to create evolving
 processes, as each pass of a function can change the data,
 (or even the code!) of the next pass of the function. One might think 
@@ -711,7 +711,7 @@ Further complicating things, garbage collection is of indeterminate duration,
 as the work that the gc must do is heavily dependent on the particular algorithms
 and data structures used in the program over which it is running
 That is to say, a program of some given size and memory use may require more or less
-garbage collection processing, depending on how precisely it is written. (CTN: Deutsch and Bobrow 1976, 522-523)
+garbage collection processing, depending on how precisely it is written. (Deutsch and Bobrow 1976, 522-523)
 
 For these reasons, the use of garbage-collected languages is not common
 in realtime audio programming, where the program must be doing constant calculations

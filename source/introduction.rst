@@ -17,7 +17,7 @@ feasible even in a realtime scenario.
 One of these, the one with which I am involved, is the programming of computer music in the
 Lisp family of languages.
 With its support for symbolic processing, recursion, and interactive development,
-Lisp has always been an elegant and productive way to represent and build music (CTN: Dannenberg 1997, 291). 
+Lisp has always been an elegant and productive way to represent and build music (Dannenberg 1997, 291). 
 However, the generally accepted wisdom has been that one does not have a computer 
 generate significant amounts of digital audio in realtime driven from a Lisp 
 or other high-level, garbage-collected language. 

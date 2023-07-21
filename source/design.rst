@@ -12,7 +12,7 @@ the first design question: "Why choose Max specifically as the host platform?"
 One driver for choosing Max is the success of Max itself.
 Having been first created in the 1980's, Max is now one of the most popular platforms world-wide 
 for making computer music, with thousands of Max objects available between those provided by Cycling 74 and 
-the broader Max community (CTN: maxobjects.com 2023).
+the broader Max community (maxobjects.com 2023).
 This extensive community and breadth of available objects enables a wide variety of ways of working 
 with both musical abstractions and digital audio, and even video.
 This includes support for interacting with external hardware through various synchronization and
@@ -21,9 +21,9 @@ the vst~ object.
 
 In addition to being a popular and powerful platform on its own, Max has been available since 2009 as "Max for Live",
 an embedded runtime within the very widely-adopted commercial audio workstation and sequencing platform, "Ableton Live"
-(CTN: Ableton 2009).
+(Ableton 2009).
 Max for Live has been so successful as an addition to Live that it led to Ableton acquiring Cycling 74 in 2017
-(CTN: Ableton 2017).
+(Ableton 2017).
 When run in Max for Live, Max patches are able to process both audio 
 and MIDI data, and can also interact with the host through an application programming interface, the Live API. 
 The Live API provides Max patches the ability to control and query the Live engine, read and write to 
@@ -42,7 +42,7 @@ MIDI data, events from timers and metronomes, and events from audio signals that
 (with various translation objects) all use the high-priority scheduler thread. 
 Events from the user interacting with the GUI run in the low-priority thread, which is also used for redrawing any UI widgets.
 A Max external can run in any or all of these contexts, and various objects and functions exist to queue messages from one to the other
-(CTN: Cycling 74 2019).
+(Cycling 74 2019).
 
 Scheme for Max operates only in the two event oriented threads, receiving and producing only Max messages - 
 that is, it does not render blocks of samples in the audio thread.
@@ -67,7 +67,7 @@ content that is sequenced, rendered, or recorded with commercial tools.
 
 Finally, using Max supports the goal of being usable for real-time interaction and live performance. 
 The Max clocking facilities are highly accurate, with jitter being typically in the 0.5-1ms range when 
-using a typical signal vector size of 32 or 64 samples (CTN: Lyon 2006, 67).
+using a typical signal vector size of 32 or 64 samples (Lyon 2006, 67).
 (Signal vector size is user configurable in standalone Max, and is locked to 64 samples in Ableton Live.)
 Max timers are also implemented such that this degree of jitter does not accumulate over time, something
 I have verified in extensive tests during development. 
@@ -103,7 +103,7 @@ languages in the world (Sun 2017).
 
 Unfortunately, the js object in Max has a serious implementation issue - in current versions of Max it *only* executes in the 
 lower-priority main thread.  Any messages sent to the js object from the scheduler thread are implictly queued to the 
-main thread and handled on its next pass (CTN: docs.cycling74.com n.d.).
+main thread and handled on its next pass (docs.cycling74.com n.d.).
 The upshot of this is that the short-term timing of events handled in the js object is not reliable - 
 depending on other activity, execution of messages can be delayed, with this delay large enough to be audibly noticeable as errors.
 Thus, while JavaScript is usable for a great many tasks in Max, realtime programmatic note triggering is not one of them.
@@ -140,7 +140,7 @@ other candidates share all of these traits with Lisps.)
 Symbolic computation and list processing 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Lisp is unusual in its first-class support for programming with *symbols* and in its simple, minimal, and consistent syntax (CTN: Taube 2004, 8).
+Lisp is unusual in its first-class support for programming with *symbols* and in its simple, minimal, and consistent syntax (Taube 2004, 8).
 Programming with symbols, also known as "symbolic computation" or "symbolic processing", means
 that programs can work directly with not only program *data* but with the *textual tokens* comprising the program itself.
 For example, as with any high-level language, we may have a variable named **foo**, at which we have stored the value **99**,
@@ -225,7 +225,7 @@ A potential return value could be represented by the interactive Lisp interprete
 ``'( (C E G) (A C E) (D F A) (G B D F))``
 
 Further, because this form of symbolic computation is so central to the language - one of the classic texts is even subtitled 
-"A Gentle Introduction to Symbolic Computation" - Lisps include numerous functions for manipulating and transforming lists (CTN: Touretzky 1984). 
+"A Gentle Introduction to Symbolic Computation" - Lisps include numerous functions for manipulating and transforming lists (Touretzky 1984). 
 For example, we might transpose a list by applying a transposition function, which itself might be built by a function-building function
 called **make-transposer**, and we might apply this function to a list of symbols. 
 This sounds complicated, and indeed, expressing this in most languages is cumbersome, but in Scheme this is both readable and succinct:
@@ -247,7 +247,7 @@ computer code.
 As a result of this suitability, there is a rich history of Lisp use in musical programming, 
 and Lisp-based musical programming environments abound, both historical and current. In addition
 to those already mentioned, others include
-Common Lisp Music, Common Music Notation, MIDI-Lisp, PatchWork, OpenMusic, cl-collider, and many more (CTN: CLiki n.d.). 
+Common Lisp Music, Common Music Notation, MIDI-Lisp, PatchWork, OpenMusic, cl-collider, and many more (CLiki n.d.). 
 
 Thus the choice of Scheme as the language for the project has several important advantages:
 
@@ -266,7 +266,7 @@ the state of the Lisp environment, and then prints the return value of evaluatin
 These expressions can define new functions, redefine functions already in use, change state data, or 
 interactively inspect or alter the current environment. While this interactive style of development is possible
 to some degrees in other high level languages (such as Python and Ruby), it has been available to a deeper degree in Lisp going
-back as far as the 1970's! (CTN: Sandewell 1978, 35-39)
+back as far as the 1970's! (Sandewell 1978, 35-39)
 
 For example, the composer-programmer might separate work into files that contain score data and files 
 that contain functions for altering or creating music, where the functions might be musical transformations of 
@@ -297,7 +297,7 @@ This runs the code in the body of the macro over the *symbolic arguments* passed
 programmatically created list structure (the macro expansion) that is then evaluated. 
 Essentially, macros are code blocks that execute twice - first to build the code by working with symbols,
 and then to run the code by evaluating it (though 
-technically this can be more than twice if macros are nested (CTN: Touretsky 1984, 405-417). 
+technically this can be more than twice if macros are nested (Touretsky 1984, 405-417). 
 
 Macros enable programmers to create their *own* domain-specific languages - 
 miniature languages within a language that are closer in syntax and semantics to the problem domain than to the host language. 
@@ -322,7 +322,7 @@ This *is Scheme code* - it can include *any* Scheme functions and even be built 
 Thus the use of a language with macro facilities enables the composer to work with different kinds of code 
 - function defining code and score code - in one language, without giving up the expressive power of high-level language 
 facilities. This use of a general-programming language that can function additionally *as a readable score language*
-provides tremendous flexibility to the programmer, breaking the dichotomy between score data and running program  (CTN: Dannenberg 1997, 50-60).
+provides tremendous flexibility to the programmer, breaking the dichotomy between score data and running program  (Dannenberg 1997, 50-60).
 
 Max and Lisp syntax compatibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -397,7 +397,7 @@ and there thus exists a wide variety of embeddable Scheme interpreters.
 A functional Scheme interpreter can be created in a very small amount of code -
 there is even an implementation named SIOD, for "Scheme In One Defun" (but also referred to as "Scheme in One Day").
 SIOD was a project by computer science professor George Carrette, started in 1988, intended to make 
-the smallest possible Scheme interpreter that could be embedded in a C or C++ program (CTN: Carrette 2007).
+the smallest possible Scheme interpreter that could be embedded in a C or C++ program (Carrette 2007).
 
 The s7 project in particular is a Scheme distribution intended expressly for embedding in C host programs, and
 designed to make that use case as simple as possible.
@@ -405,13 +405,13 @@ The core s7 interpreter is distributed as only two files, **s7.h** and **s7.c**,
 The foreign function interface (FFI) is very straightforward, making adding Scheme functions to S4M simple.
 And, importantly, s7 is fully thread-safe and re-entrant - meaning that there is no issue having multiple, isolated s7 interpreters 
 running in the same application, a situation common in a Max patch where many s4m object may coexist, but a feature
-not common across all candidate implementations (CTN: Schottstaedt n.d.).
+not common across all candidate implementations (Schottstaedt n.d.).
 
 License
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Finally, s7 uses the BSD license, a permissive free software license. 
 The BSD license imposes no redistribution restrictions the way the GPL family of licenses do, thus user-developers wishing to 
-use s7 in a commercial project are free to do so with no obligations (CTN: Schottstaedt n.d.).
+use s7 in a commercial project are free to do so with no obligations (Schottstaedt n.d.).
 
 This is a point in s7's favour as many Ableton Live device developers sell devices, and many Max developers sell standalone Max
 applications, thus I would also like to allow use of S4M in these contexts.
