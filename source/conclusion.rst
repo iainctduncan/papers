@@ -62,12 +62,12 @@ does not happen anymore. I would not hesitate to run S4M on stage,
 provided programs were adequately tested.
 However, running *large* Scheme programs while also rendering audio does, in the current incarnation,
 require running with some significant latency (for garbage collection), and certain
-program behaviour, such as over a hundred delay calls per second, can lead
+program behaviour, such as over a hundred self-scheduling delay calls per second, can lead
 to garbage collection issues after some period of running.
 This would likely be an issue for users wishing to perform
-particularly long pieces that use large Scheme sequencing programs and are
-rendering audio on the same computer. These issues are discussed further
-below.
+particularly long pieces that use large Scheme sequencing programs involving temporal recursion
+where Max is also rendering audio on the same computer.
+These issues are discussed further below.
 
 Support advanced functional and object-oriented programming techniques
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -109,7 +109,7 @@ usually musically negligible.
 
 Of particular note, being able to control the Live environment through the Live API with S4M has
 been particularly successful. The Live API provides a way for Max patches to programmatically control
-most elements of the host in real-time, including mixer settings, device settings, the system transport,
+most elements of the host in real time, including mixer settings, device settings, the system transport,
 sequencer data, and much more. It uses an object model, the Live Object Model (or LOM), that
 is based on hierarchal lists of symbols. Users construct lists of numbers and symbols, and send
 these to special Max objects to query and control elements of the API (CTN: Cipriani 2020, 676-680).
@@ -117,8 +117,8 @@ Given that the fundamental model is of lists of symbols, it thus lends itself we
 I have created a low-level interface object for working with the Live API, **live-api**, and an accompanying
 Max subpatch (provided with S4M), which together provide the functions
 **send-path** and **call**, to which LOM paths can be passed. 
-Building on this, adding specific functions to accomplish various tasks with the Live API 
-requires minimal code:
+Adding functions to accomplish various tasks with the Live API 
+requires minimal code, as shown in the example below:
 
 .. code:: Scheme
 
@@ -144,7 +144,7 @@ requires minimal code:
 Support composing music that is impractical on commercial tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 I have found Scheme for Max particularly appropriate for composing and programming works that are
-not practical or are difficult on mainstream sequencers (e.g., Live, Logic, Reaper). 
+not practical or are difficult on mainstream sequencers (e.g., Live, Logic, Reaper, Cubase). 
 By using Scheme as the top-level orchestration layer, whether through score facilities
 or algorithmic processes, implementing pieces with complexities such as shifting or multiple concurrent
 meters is straightforward, as is manipulating time across multiple scales at once, such as gradually
@@ -167,10 +167,10 @@ Enable iterative development during musical playback
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The support for interactive development has been another area in which Scheme for Max has succeeded beyond
 my expectations.
-For my personal work configuration, I have created two small scripts in Python and Vim respectively,
+For my personal work configuration, I have created two small scripts in Python and Vim (a text editor) respectively,
 which enable me to send Scheme code to Max directly from my text editor.
 This is achieved by having Vim commands send a selected area (the enclosing parenthetical expression)
-to standard input (STDIN) of a short Python program, which in turn sends the text over the local
+to standard input (STDIN) of a short Python program, which in turn formats and sends the text over the local
 network as an Open Sound Control message to the Max **udp** object, from where it is passed
 to an s4m object for evaluation.
 
@@ -229,7 +229,8 @@ for Max would likely also increase significantly.
 
 One of the next major initiatives planned for S4M development is 
 developing an integration layer for Bach, and I have met with Andrea Agostini, one
-of the Bach developers, to discuss plans already. This work is planned for the summer and fall of 2023.
+of the Bach developers, to discuss plans already. This work is planned to begin
+in the fall of 2023.
 
 
 Real-time Scheduling 
@@ -267,7 +268,7 @@ business until a subsequent pass, and giving the user the opportunity to configu
 how this is done, has the potential to significantly lower
 the latency at which Scheme for Max can be used.
 This, however, will require major development work, and should be considered
-a long-term potential area of exploration.
+a long-term potential area of exploration. 
 
 Thread Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -278,7 +279,7 @@ Were it possible to run an instance in the audio thread, S4M could be
 used to produce audio signals at single sample temporal accuracy.
 The previously discussed jitter of event onsets in Max is only an issue
 for Max *event messages*. Generating timing data as part of an audio stream
-is not affected. (CTN: Lyon 2012, 121-179)
+is not affected (CTN: Lyon 2012, 121-179).
 This could be useful for those wishing to sequence synthesizers controlled
 by control voltages, as this is done in modern audio workstations by outputting
 control voltage signals as audio streams. 
@@ -315,7 +316,7 @@ with the scenario of a separate s4m and csound~ object.
 Difficulty of Extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Scheme for Max is open-source software, licensed under the permissive BSD license,
-enabling any one to extend it if desired. 
+enabling anyone to extend it. 
 This is potentially attractive to users who would like to integrate Scheme code
 with processes that will be faster to execute in C.
 The s7 foreign function interface makes this quite straightforward - it does not
@@ -323,7 +324,8 @@ require much in the way of code to add a C function that can be called from
 Scheme and vice versa, and this was indeed one of the motivations for choosing s7.
 However, the programming logistics around doing so are prohibitively cumbersome:
 one must go through all the setup necessary to create a Max extension with the
-Max SDK, and one must also navigate and alter the main s4m.c file.
+Max SDK, and one must also navigate and alter the main s4m.c file, recompiling
+the complete extension.
 
 A potential area of work to address this would be the creation of plugin system
 or automated compilation system for Scheme for Max extensions. 

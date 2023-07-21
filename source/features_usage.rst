@@ -17,7 +17,7 @@ Scheme for Max is released as a Max Package which contains: the s4m and s4m.grid
 a collection of Scheme source files; a Max help patch demonstrating features and use;
 and some example patches and Max for Live devices using S4M.
 In order to use S4M, the Max user must download the package file and uncompress it in their Max 
-"Packages" directory, after which it will be possible to create an **s4m** object in a Max patch
+Packages directory, after which it will be possible to create an **s4m** object in a Max patch
 and to open the s4m help patch for assistance.
 
 Object Initialization
@@ -28,16 +28,16 @@ Bootstrap files
 When the s4m object is created in a Max patch, it will initialize itself by loading the bootstrap file, **s4m.scm**.
 This file contains Scheme code on which the documented s4m functionality depends, and also loads several other Scheme dependencies.
 This bootstrap file is available for inspection and alteration by the user, and it is expected that advanced users will 
-alter their bootstrap file, allowing them to automatically load additional files that they would like to have available automatically. 
+alter their bootstrap file, allowing them to automatically load additional files that they would like to have available by default. 
 
-By default, the bootstrap file additionally loads the file **s74.scm**, which contains Scheme definitions that are not specific to Max.
-s74 is intended to be an extension to s7 to provide convenience features that I assume most users will want available. 
+The bootstrap file additionally loads the file **s74.scm**, which contains Scheme definitions that are not specific to Max.
+s74 is intended to be an extension to s7 to provide convenience functions that a typical user will want available. 
 It adds various higher-level functions taken from, or inspired by, less minimal Scheme implementations, such as Chez and Chicken,
 as well as from the related Lisp dialects of Clojure, Racket, and Common Lisp.
 
 The bootstrap file also loads several files that are packaged with s7 itself but are optional: **stuff.scm**, **loop.scm**, 
 and **utilities.scm**.
-These files come as optional extensions int s7 distribution itself, and define several macros borrowed from Common Lisp 
+These files come as optional extensions in s7 itself, and define several macros borrowed from Common Lisp 
 and used in Common Music, such as **loop**, **dolist**, and **dotimes**.  
 
 Once the s4m object has loaded s4m.scm and its subsequent dependencies, it is ready to be used.
@@ -76,9 +76,9 @@ load files from the search path.)
 
 Inlets and Outlets
 ^^^^^^^^^^^^^^^^^^
-By default, the s4m object will be created with 1 inlet and 1 outlet. 
+By default, the s4m object will be created with one inlet and one outlet. 
 The **@ins** and **@outs** attribute arguments can be used at instantiation time to create additional inlets and outlets,
-to a maximum of 32 outlets.
+to a maximum of thirty-two outlets.
 While these are implemented as Max *attributes*, they cannot be changed in the Max object inspector as their number must be set
 before object initialization. They can only be set as **@** arguments in the object box.
 
@@ -91,16 +91,16 @@ Inlet 0 Scheme Expressions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 Input to the s4m object works differently depending on whether one uses the main left-most inlet (a.k.a. inlet 0) or subsequent inlets. 
 A common pattern in Max objects is for objects to accept "meta" messages in inlet 0 - messages that configure the object,
-but are not calls to execute the objects main functionality.
+but are not calls to execute the object's main functionality.
 S4M follows this pattern, and supports a number of meta messages, such as the previously mentioned **reset** and **source** messages.
 While these message have an effect on the Scheme interpreter, they are handled by the s4m object's C functions,
 rather than being passed to the Scheme interpreter for evaluation. 
-I refer to messages that are handled this way as "reserved messages", as they are not meant to be used
+I refer to messages that are handled this way as *reserved messages*, as they are not meant to be used
 as function names in Scheme (technically, there is nothing preventing this, but it is not recommended 
-as tracing which component is handling the message will not be obvious).
+as it will not be obvious how a message is being handled).
 
 Any messages to inlet 0 that are not reserved messages are evaluated as expressions by the Scheme interpreter.
-As previously discussed, S4M adds implicit enclosing parentheses around any non-reserved messages that do not already start
+S4M adds implicit enclosing parentheses around any non-reserved messages that do not already start
 and end with parentheses, and then passes the message to the s7 interpreter for evaluation.
 This convenience feature allows users to make calls from Max messages to Scheme more visually readable - for example, 
 a message of **my-fun 99** will be treated as **(my-fun 99)**. This also make it possible for users
@@ -109,7 +109,7 @@ a symbol at the beginning of some list.
 The return value from evaluation is normally printed to the Max console, though S4M provides various facilities for controlling
 how much is printed to the console (see the documentation).
 
-This facility makes it very straightforward for a user to add input mechanisms to their programs. 
+This facility makes it very straightforward for users to add input mechanisms to their programs. 
 For example, if they want a number box to update a Scheme variable, they can use Max's dollar sign interpolation facility
 in a message such as **set! my-var $1**, connecting a number box or dial to this message, and connecting the message box to inlet 0
 of the s4m object.
@@ -126,14 +126,14 @@ as the js object requires explicit handler methods to be made for any input (Cyc
    Figure 2: Setting Scheme variables using Max message interpolation.
 
 
-A result of this input facility is that when one uses a symbol in a Max message sent to inlet 0, the interpreter will take symbol
-to be a variable name in the running Scheme programs top-level environment. 
+A result of this input facility is that when one uses a symbol in a Max message sent to inlet 0, the interpreter will take the symbol
+to be a variable name in the running Scheme program's top-level environment. 
 Should the user wish to pass in a *symbol* (i.e., not refer to a variable), they can use the standard Scheme leading single 
 quotation mark to quote the symbol.
 They can also use an s7 *keyword* (a symbol beginning with a colon, that always evaluates to itself), in which case evaluation 
 does not change the fact that the keyword is a symbol.
-Rather fortunately for us, Max does not assign any special meaning to either single quotation marks or colons, thus this 
-presents no issue from Max messages.  One can, for example, even name various Max objects such as buffers with colon-prefixed names.
+Rather fortunately for us, Max does not assign any special meaning to either single quotation marks or colons.
+One can, for example, even name various Max objects such as buffers with colon-prefixed names.
 
 For the majority of use cases, this is the easiest way to send input to the Scheme interpreter.
 When one wants to do something with an argument from Max, one can use message interpolation or the **prepend** object 
@@ -145,19 +145,19 @@ The **f-int**, **f-float**, **f-bang**, and **f-list** handlers are automaticall
 integer, float, bang, or list respectively in inlet 0.
 If the user has defined such a function, it will be invoked, if they have not, the default handlers will be invoked, which
 simply print an error message.
-(These are named **f-{{type}}** simply to avoid the inconsistency that would result had we used **int**, **float**, and **bang**, 
+(These are named **f-int**, **f-float**, etc. to avoid the inconsistency that would result had we used **int**, **float**, and **bang**, 
 as **list** is a built in Scheme function.)
 
 Inlet 1+ 
 ^^^^^^^^
 There are times when it is not desirable that the incoming symbols in Max messages be taken as Scheme variable names.
-An example of this is dealing with incoming Open Sound Control (OSC) messages, where one may not have full control over 
-the text formatting of the incoming message,
+An example of this is dealing with incoming Open Sound Control (OSC) messages, where one may not have control over 
+the text of the incoming message,
 and thus inserting single quotation marks to indicate symbols is not possible.
-For this kind of situation, messages to inlets over 0 are not automatically evaluated as Scheme code.
+For this reason, messages to inlets over 0 are not automatically evaluated as Scheme code.
 This means that in order to accept input in inlets over 0, one must create a handler function and register it with 
 Scheme for Max using the **listen** function. 
-The call to **listen** takes arguments for the inlet, type of incoming
+The call to **listen** takes arguments for the inlet number, the type of incoming
 message, and the handler function, where the type of incoming message can be one of: integer, float, symbol, or list.
 The handler function must be a single-arity function as it always receives its arguments as a single bundled list.
 This allows handlers to be generic and also allows the same handler to be registered for multiple types of message.
@@ -212,8 +212,8 @@ Code to output various messages from outlet 0 is shown below.
   ;; output the max message "set 99"
   (out 0 (list 'set 99))
 
-(Note that in Max, the special message type "bang", such as one gets by clicking on a bang object,
-is synonymous with a message of a single symbol atom consisting of the symbol "bang".)
+Note that in Max, the special message type "bang", such as one gets by clicking on a bang object,
+is synonymous with a message of a single symbol atom consisting of the symbol "bang".
 
 Sending Messages
 --------------------------------------------------------------------------------
@@ -231,7 +231,7 @@ Attempting to send to an unrecognized object will produce an error.
 This uses the message sending functionality in the Max SDK, and is functionally no different 
 from sending a message to a destination object via a patch cable. 
 As with regular patch-cable messages, execution will pass to the receiving object and 
-will not return to the caller until all subsequent message handling has finished.
+will not return to the caller until all subsequent processing in the receiving object has finished.
 A variant of send exists, **send***, which flattens all arguments to allow conveniently
 sending list messages.
 
@@ -249,11 +249,12 @@ Code to send messages to a named destination is shown below:
   (send 'msg-target 'set 'foobar 1 2 3)
   
   ;; or if we had the list ('foobar 1 2 3) in a variable named "msg":
+  (define msg '(foobar 1 2 3))
   (send* 'msg-target 'set msg)
   
 This facility allows one to orchestrate complex activity in a Max patch without
-having predetermined connection paths. The results of messages so sent (as
-with patch-cable messages) are determined entirely by the semantics of the receiver.
+having predetermined connection paths. The results of messages sent this way (as
+with patch-cable messages) are determined entirely by the receiver.
 
 Buffers & Tables
 --------------------------------------------------------------------------------
@@ -268,7 +269,7 @@ manipulated programmatically by reading from and writing to them.
 An interesting feature of buffers is that the abstraction of the buffer
 of samples can be accessed by multiple Max objects by referring to the
 buffer by name, the name being provided as an argument to the **buffer**
-object that instantiates the buffer, allowing, for example, many objects to access
+object that instantiates the buffer. This allows many objects to access
 the same audio sample.
 
 Scheme for Max provides a collection of functions for reading and writing
@@ -327,7 +328,7 @@ looping constructs than are built into Max.
 Dictionaries
 --------------------------------------------------------------------------------
 Another higher-order data abstraction provided by Max is the
-**dictionary**, a key-value store in which one can store a wide variety
+**dictionary**, a key-value store in which one can store a variety
 of Max data types as values, and use integers, floats, symbols, or strings 
 as keys. Max provides a rich API for working with dictionaries, including
 the ability to refer to them by name across many objects, serialize them
@@ -342,17 +343,17 @@ convert between Max dictionaries and Scheme hash-tables.
 Notably, these are recursively implemented: converting a Max
 dictionary to a Scheme hash-table will convert all values in the 
 dictionary, including nested dictionaries, regardless of the depth of nesting.
-Interesting, Max supports numerically indexed arrays of heterogenous type as values in dictionaries,
+Interestingly, Max supports numerically indexed arrays of heterogenous type as values in dictionaries,
 even though there is no convenient way of directly working with arrays of heterogenous types 
-in the visual patcher (one can though in JavaScript).
+in the visual patcher (though one can in JavaScript using JavaScript arrays or objects).
 Thus, using a dictionary as a container is one way to have simple arrays in regular
-in Max programming. If these are encountered during the conversion from 
+Max. If these are encountered during the conversion from 
 a Max dictionary to a Scheme hash-table (or vice versa), S4M converts the nested arrays
 to Scheme vectors, where these vectors may contain a mix of types,
 including further nested dictionaries and arrays.
 
 Similar to Common Lisp and Clojure, s7 Scheme (but not all Schemes) provides
-a **keyword** data-type, which is a symbol starting with a colon that
+a **keyword** data-type, which is a symbol that starts with a colon, and that
 always evaluates to itself. These are commonly used as keys in
 hash-tables. This is a convenient practice in Max, as one does not have to worry about
 quoting or unquoting as data passes through evaluation boundaries, such
@@ -362,7 +363,7 @@ S4M provides the functions **dict-ref**, **dict-set!**,
 **dict->hash-table**, **hash-table->dict**, and **dict-replace**
 for working with dictionaries.
 Of note is that these provide some convenience capabilities
-for dealing with nested dictionaries without having to nest
+for getting and setting values in nested dictionaries without having to nest
 calls to dict-ref and dict-set!, as shown below.
 
 .. code:: Scheme
@@ -446,7 +447,7 @@ s4m-array, and only the consumer will read the data.
 We also know that if the consumer should get partially updated data
 (perhaps its thread runs part way through an update from the producer),
 this is not a serious problem - some ripple in the display as data refreshes
-is acceptable to the user in the name of realtime performance.
+is acceptable to the user as a cost for realtime performance.
 Given our strict producer and consumer scheme, and our acceptance of ripple,
 the s4m-array is preferable to using data structures such as buffer or table,
 which will run more slowly on account of the thread-synchronization code
@@ -495,7 +496,9 @@ a data structure that virtually represents a display element, and
 the entire system acts as an immediate-mode GUI. 
 An immediate-mode GUIs decouples the display from the data model,
 making it possible for the display to accurate reflect the current
-state of sequencing data, regardless of how it was set. 
+state of sequencing data, regardless of how it was set
+- that is, the system makes no assumptions that the graphical
+widget *displaying* data is also responsible for *updating* data.
 This is desirable in an algorithmic music platform as one cannot
 assume that the state of the sequencing data originates from
 GUI actions - it could come from autonomous processes, network
@@ -521,14 +524,13 @@ four 64 x 16 grids with minimal CPU impact.
 Scheduling Functions 
 --------------------------------------------------------------------------------
 
-Arguably the most important feature of Scheme for Max
-is its scheduling and timing features, and their integration
+Arguably the most important features of Scheme for Max
+are its scheduling and timing capabilities and their integration
 with the Max threading and transport subsystems. 
 On a surface level, they are quite straightforward: s4m provides
 functions that allow one to schedule execution of a zero-arity Scheme
-function at some point in the future, the simplest of these being the
-**delay** function.
-
+function at some point in the future. The simplest of these is the
+**delay** function. 
 In the example below, an anonymous function is created (in order to make
 a zero-arity function) and put on the scheduler
 to execute in 1000 milliseconds. The call to delay returns a
@@ -576,12 +578,11 @@ settings are to have "audio in interrupt" and "overdrive" enabled.
 When both of these are turned on, the Max engine alternately runs
 a DSP pass (calculating a signal vector of samples), and a scheduler
 thread pass (CTN: Cycling 74 n.d.). 
-
-This means that real time of events stemming from 
-the scheduler thread execution can be off by up to a signal
+This means that the actual onset time of events triggered from 
+scheduler thread processes can be off by up to a signal
 vector of samples, resulting in small timing discrepancies.
 At a signal-vector size of 64 samples (the default for Ableton Live) and
-a sample rate of 44100 samples per second, this is 1.5 milliseconds,
+a sample rate of 44100 samples per second, this is ~1.5 milliseconds,
 and is thus a musically acceptable discrepancy. 
 Note though that the clock functions
 in current versions of Max compensate for this in the long run such
@@ -589,7 +590,8 @@ that this discrepancy does not accumulate.
 Tests I made during development confirmed that even after long
 playback times, clock driven functions did not accumulate jitter,
 and that if one sets the Max signal vector size to 1 sample, 
-the timing on the clock functions is sample accurate.
+the timing on the clock functions is sample accurate (at the
+cost of much higher CPU use).
 
 The Scheme for Max functions use these clock facilities by putting
 a reference to the Scheme callback function (the function passed to the delay function)
@@ -606,16 +608,17 @@ from the environment at the time of scheduling,
 or at the time of execution for which it is scheduled. 
 This is not possible in regular Max patching, and while it is technically
 possible using JavaScript, it is of limited practical use given the
-problematic levels of jitter one may have with js object.
+problematic levels of jitter one may have when using the js object.
 (As previously discussed, this is because it is always executing in the low-priority thread.)
 
 This facility makes musical algorithms and real-time interaction possible in
 interesting ways. For example, one might create a patch in which
-dials or hardware change some musical value. This can be captured,
-so to speak, at scheduling time, such that when the function executes in the future,
+dials or hardware change some musical value. This value can be captured
+at scheduling time, such that when the function executes in the future,
 the value *where the dial was* is used. Alternatively, one can
 use a function that explicitly looks in the global environment 
-for settings at run time.
+for settings at run time of *where the dial is now*.
+
 Below is an example of a function that uses both of these facilities.
 The value read from **dial-1** will be used as it was at scheduling
 time, while the value from **dial-2** will be looked up in the future.
@@ -692,25 +695,26 @@ I have previously referred to the fact that, as a high-level, dynamically-typed 
 **garbage collector** (a.k.a. **gc**).
 The garbage collector is a language subsystem that finds and
 frees memory which has previously been allocated by the program but is no longer needed.
-Garbage collection spares the programmer the tedious work of manually allocating,
+Garbage collection spares the programmer the tedious and error-prone work of manually allocating,
 tracking, and freeing the memory used by variables in the language.
-It is a standard feature of most modern high-level programming languages,
-such as Java, C#, Python, Ruby, JavaScript. 
+Garbage collection was first implemented in the Lisp-family of languages,
+but is now a standard feature of almost all modern high-level programming languages,
+including Java, C#, Python, Ruby, and JavaScript. 
 
-The problem with garbage collection in soft real-time
+The problem with garbage collection in soft-realtime
 work (such as music, where missed deadlines are undesirable, but not catastrophic)
 is that the gc must periodically do its work, in which it scans over the program
-memory, looking for unused memory allocations and freeing them, and
-this can be a computationally expensive process when the program is large or
-uses large amounts of data.
+memory, looking for unused memory allocations and freeing them. 
+This can be a computationally expensive process when the program is large or
+uses large amounts of data, thus taking time and potentially leading to missed deadlines.
 Further complicating things, garbage collection is of indeterminate duration,
 as the work that the gc must do is heavily dependent on the particular algorithms
 and data structures used in the program over which it is running
 That is to say, a program of some given size and memory use may require more or less
 garbage collection processing, depending on how precisely it is written. (CTN: Deutsch and Bobrow 1976, 522-523)
 
-For these reasons, the use of garbage- collected languages is not common
-in real-time audio programming, where the program must be doing constant calculations
+For these reasons, the use of garbage-collected languages is not common
+in realtime audio programming, where the program must be doing constant calculations
 to produce streams of samples. 
 Scheme for Max, however, is intended to be used at the *note level*,
 rather than the *audio level*, thus the typical time between blocks of computation
@@ -718,7 +722,7 @@ is potentially much higher (i.e., the temporal gap between notes rather than bet
 giving us potentially adequate time for a garbage collector to run.
 Modern audio workstations allow a user to configure the output audio buffer size,
 corresponding to the number of samples the program pre-computes in one block, and thus
-also corresponding to the latency of real-time operation.
+also corresponding to the latency of realtime operation.
 This essentially provides the program with a buffer of time during which it can catch up 
 on "bursty" work.
 While the s7 garbage collector will cause issues if attempting to run
@@ -743,16 +747,16 @@ Sending the **gc-disable** message to the s4m object disables automatic
 running of the gc, leaving one to explicitly force a run by sending
 the **gc-run** message, which can be triggered off a timer such as a
 Max metronome. In my experience, setting this to somewhere between
-200 and 300 ms works well and provides better real-time performance
+200 and 300 ms works well and provides better realtime performance
 than is possible using the automatic gc, which may wait many seconds between runs.
 
 A second facility is the ability to change the starting heap size of the Scheme for Max object.
 The lower the heap size, the faster the gc runs, as it must run over less
-memory. The s4m object takes an initial
+memory. The s4m object accepts an initial
 **@heap** attribute to set the starting heap size. This works well so 
 long as one checks whether the heap allocated will be big enough.
 If it is not, a *heap reallocation* will be required when s4m is out of memory,
-which is likely to cause audio issues. 
+which is likely to cause audio issues as this allocation takes some time. 
 Users can use s7's built in gc reporting by turning on the **gc-stats** flag,
 which will result in output to the console on each gc pass, including the
 amount of memory it must run over. This can be used to ensure the initial
@@ -771,14 +775,14 @@ is now commonly in the gigabytes, it is certainly
 not unreasonable for one to pre-allocate a larger heap and let a program grow 
 in memory on the order of megabytes.
 
-Summary
---------
+Conclusion
+-----------
 This covers the main features and capabilities of Scheme for Max
 in version 0.4.
 Additional functions and variations on those discussed here are
 covered in both the official online documentation and in the Max help file.  
 Additionally, various tutorials with examples are available, and 
-linked from the main GitHub project page.
+are linked from the main GitHub project page.
 
 
 
