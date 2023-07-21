@@ -4,7 +4,7 @@ References
 
 Ableton. 2009. "Ableton releases Max for Live." Press Archives. Last modified November 23, 2009. https://www.ableton.com/en/press/press-archive/press-archive-mfl-release/
 
-Ableton. 2017. "Ableton and Cycling '74 Form a New Partnership". News. Last modified June 7, 2017. https://www.ableton.com/en/blog/ableton-cycling-74-new-partnership/
+------ 2017. "Ableton and Cycling '74 Form a New Partnership". News. Last modified June 7, 2017. https://www.ableton.com/en/blog/ableton-cycling-74-new-partnership/
 
 Agostini, Andrea, and Daniele Ghisi. 2015. "A Max Library for Musical Notation and Computer-Aided Composition." *Computer music journal* 39, no. 2 (2015): 11–27.
 
@@ -16,7 +16,7 @@ Carrette, George. 2007. "SIOD: Scheme in One Defun." Last modified April 5, 2007
 
 Cipriani, Alessandro, and Maurizio Giri. 2019. *Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 1*. Rome: ConTempoNet.
 
-Cipriani, Alessandro, and Maurizio Giri. 2020. *Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 2*. Rome: ConTempoNet.
+------. 2020. *Electronic Music and Sound Design : Theory and Practice with Max/MSP Volume 2*. Rome: ConTempoNet.
 
 CLiki. n.d. "Music." The Common Lisp Wiki. Last accessed July 2, 2023. https://www.cliki.net/music
 
@@ -24,15 +24,15 @@ Cook, Perry R. 2017. *Real Sound Synthesis for Interactive Applications.* Abingd
 
 Cycling 74. n.d. "Javascript and Threading."  Max v8.5.5 Documentation. Last accessed July 2, 2023. https://docs.cycling74.com/max8/vignettes/jsthreading
 
-Cycling 74. n.d. "Max JS Tutorial 1: Basic JavaScript."  Max v8.5.5 Documentation. Last accessed July 2, 2023. https://docs.cycling74.com/max8/tutorials/javascriptchapter01 
+------. n.d. "Max JS Tutorial 1: Basic JavaScript."  Max v8.5.5 Documentation. Last accessed July 2, 2023. https://docs.cycling74.com/max8/tutorials/javascriptchapter01 
 
-Cycling 74. n.d. "Scheduler Settings." Max v8.5.5 Documentation. Last accessed July 2, 2023. https://docs.cycling74.com/max8/vignettes/scheduler_settings
+------. n.d. "Scheduler Settings." Max v8.5.5 Documentation. Last accessed July 2, 2023. https://docs.cycling74.com/max8/vignettes/scheduler_settings
 
-Cycling 74. 2019. "Min Guide to Threading in Max." Min Development Kit. http://cycling74.github.io/min-devkit/guide/threading
+------. 2019. "Min Guide to Threading in Max." Min Development Kit. http://cycling74.github.io/min-devkit/guide/threading
 
 Dannenberg, Roger B. 1997. “Machine Tongues XIX: Nyquist, a Language for Composition and Sound Synthesis.” *Computer music journal* 21, no. 3 (1997): 50–60.
 
-Dannenberg, Roger B. 2018. “Languages for Computer Music.” *Frontiers in digital humanities* 5 (2018).
+------. 2018. “Languages for Computer Music.” *Frontiers in digital humanities* 5 (2018).
 
 Dannenberg, Roger B., Peter Desain, and Henkjan Honing. 1997. "Programming Language Design for Music." In *Musical Signal Processing*, edited by Curtis Roads, 291. London: Routledge.
 
@@ -44,19 +44,19 @@ Gogins, Michael. 2013. "The Csound API: Interview with Michael Gogins." In *Ways
 
 ffitch, John. 2011. "Using C To Generate Scores." In *The Audio Programming Book.*, edited by Richard Boulanger and Victor Lazzarini, 655. Cambridge, Mass: MIT Press.
 
-ffitch, John. 2011. "Understanding an Opcode in Csound." In *The Audio Programming Book.*, edited by Richard Boulanger and Victor Lazzarini, 581. Cambridge, Mass: MIT Press.
+------. 2011. "Understanding an Opcode in Csound." In *The Audio Programming Book.*, edited by Richard Boulanger and Victor Lazzarini, 581. Cambridge, Mass: MIT Press.
 
 Lazzarini, Victor. 2011. "MIDI Programming with PortMIDI." In *The Audio Programming Book.*, edited by Richard Boulanger and Victor Lazzarini, 783. Cambridge, Mass: MIT Press.
 
-Lazzarini, Victor. 2013. “The Development of Computer Music Programming Systems.” *Journal of new music research* 42, no. 1 (2013): 97-110.
+------. 2013. “The Development of Computer Music Programming Systems.” *Journal of new music research* 42, no. 1 (2013): 97-110.
 
-Lazzarini, Victor. 2016. *Csound A Sound and Music Computing System.* Cham: Springer International Publishing.
+------. 2016. *Csound A Sound and Music Computing System.* Cham: Springer International Publishing.
 
-Lazzarini, Victor. 2017. *Computer Music Instruments: Foundations, Design and Development*. Cham: Springer International Publishing.
+------. 2017. *Computer Music Instruments: Foundations, Design and Development*. Cham: Springer International Publishing.
 
 Lyon, Eric. 2006. "A Sample Accurate Triggering System for Pd and Max/MSP." In *International Computer Music Conference Proceedings.* Vol. 2006. Ann Arbor, MI: Michigan Publishing, University of Michigan Library.
 
-Lyon, Eric. 2012. *Designing Audio Objects for Max/MSP and Pd.* Middleton, Wisconsin: A-R Editions.
+------. 2012. *Designing Audio Objects for Max/MSP and Pd.* Middleton, Wisconsin: A-R Editions.
 
 Maldonado, Gabriel. 2011. "Working With Audio Streams." In *The Audio Programming Book.*, edited by Richard Boulanger and Victor Lazzarini, 329. Cambridge, Mass: MIT Press.
 
@@ -70,7 +70,7 @@ Miller, Alex, Stuart Halloway, Aaron Bedra, and Jacquelyn Carter. 2018. *Program
 
 Puckette, Miller. 1991. “Combining Event and Signal Processing in the MAX Graphical Programming Environment.” *Computer music journal* 15, no. 3 (1991): 68–77.
 
-Puckette, Miller. 2002. “Max at Seventeen.” *Computer music journal* 26, no. 4 (2002): 31–43.
+------. 2002. “Max at Seventeen.” *Computer music journal* 26, no. 4 (2002): 31–43.
 
 Roads, Curtis. 2015. *Composing Electronic Music : a New Aesthetic.* Oxford: Oxford University Press.
 
@@ -84,7 +84,9 @@ Smaragdis, Paris. 2000. "Optimizing Your Csound Instruments" In *The Csound Book
 
 Sun, Kwangwon, and Sukyoung Ryu. 2017. “Analysis of JavaScript Programs: Challenges and Research Trends.” *ACM computing surveys* 50, no. 4 (2017): 1–34.
 
-Taube, Heinrich. 2009. *Common Music 3. International Computer Music Conference Proceedings.* Vol. 2009. Ann Arbor, MI: Michigan Publishing, University of Michigan Library.
+Taube, Heinrich. 2004. *Notes from the Metalevel: Introduction to Algorithmic Music Composition.* Taylor & Francis, London UK.
+
+------. 2009. *Common Music 3. International Computer Music Conference Proceedings.* Vol. 2009. Ann Arbor, MI: Michigan Publishing, University of Michigan Library.
 
 Taylor, Gregory. 2020. "JavaScript: A Brief Resource Guide for Max Users." Cycling74 Articles. Last modified Nov 10, 2020. https://cycling74.com/articles/javascript-a-resource-guide-for-max-users 
 
