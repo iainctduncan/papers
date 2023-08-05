@@ -477,7 +477,10 @@ One can, for example, run Csound from within a C++ or Python program, interactin
 directly with the Csound engine using the Csound API (Gogins, 2013, 43-46).
 One can also run a DSL such as Csound inside a visual patcher, using open-source
 extensions to Max and Pd that embed the Csound engine in a Max or Pure Data object (Boulanger 2013, 189).
-And one can even run a general-purpose language *inside* a DSL or visual platform,
+One can run a general-purpose language alongside a DSL or visual platform using
+a bi-directional integration layer, such as is done with Node for Max (a part of Max), or with 
+Julien Vincenot's MozLib, which enables interacting with Common Lisp from a Max patch.
+And finally, one can even run a general-purpose language *inside* a DSL or visual platform,
 such as Python inside Csound (Ariza 2009, 367)
 or JavaScript inside Max (Lyon, 13). 
 
