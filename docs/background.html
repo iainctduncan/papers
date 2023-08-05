@@ -474,7 +474,10 @@ One can, for example, run Csound from within a C++ or Python program, interactin
 directly with the Csound engine using the Csound API (Gogins, 2013, 43-46).
 One can also run a DSL such as Csound inside a visual patcher, using open-source
 extensions to Max and Pd that embed the Csound engine in a Max or Pure Data object (Boulanger 2013, 189).
-And one can even run a general-purpose language <em>inside</em> a DSL or visual platform,
+One can run a general-purpose language alongside a DSL or visual platform using
+a bi-directional integration layer, such as is done with Node for Max (a part of Max), or with
+Julien Vincenot’s MozLib, which enables interacting with Common Lisp from a Max patch.
+And finally, one can even run a general-purpose language <em>inside</em> a DSL or visual platform,
 such as Python inside Csound (Ariza 2009, 367)
 or JavaScript inside Max (Lyon, 13).</p>
 <p>Note that a multi-language platform differs from the previously discussed practice of
@@ -554,8 +557,19 @@ and following that, at why I chose Max and s7 Scheme to fulfill them.</p>
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Background - Computer Music Programming Languages</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#what-is-computer-music-programming">What is Computer Music Programming?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#requirements-for-a-computer-music-platform">Requirements for a Computer Music Platform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#computer-music-platform-families">Computer Music Platform Families</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requirements-for-a-computer-music-platform">Requirements for a Computer Music Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-musical-abstractions">Support for Musical Abstractions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-performer-interaction">Support for Performer Interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#support-for-complex-algorithms">Support for Complex Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#computer-music-platform-families">Computer Music Platform Families</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#domain-specific-textual-languages">Domain-Specific Textual Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visual-patching-environments">Visual Patching Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#general-purpose-programming-languages">General-Purpose Programming Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-language-platforms">Multi-Language Platforms</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>

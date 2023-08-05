@@ -8,7 +8,7 @@ Master of Music Technology - Final Project
 Iain C.T. Duncan, University of Victoria
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 4
  
     introduction.rst
     background.rst

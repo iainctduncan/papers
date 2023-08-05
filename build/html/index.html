@@ -42,8 +42,19 @@
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="background.html">Background - Computer Music Programming Languages</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="background.html#what-is-computer-music-programming">What is Computer Music Programming?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="background.html#requirements-for-a-computer-music-platform">Requirements for a Computer Music Platform</a></li>
-<li class="toctree-l2"><a class="reference internal" href="background.html#computer-music-platform-families">Computer Music Platform Families</a></li>
+<li class="toctree-l2"><a class="reference internal" href="background.html#requirements-for-a-computer-music-platform">Requirements for a Computer Music Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="background.html#support-for-musical-abstractions">Support for Musical Abstractions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#support-for-performer-interaction">Support for Performer Interaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#support-for-complex-algorithms">Support for Complex Algorithms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="background.html#computer-music-platform-families">Computer Music Platform Families</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="background.html#domain-specific-textual-languages">Domain-Specific Textual Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#visual-patching-environments">Visual Patching Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#general-purpose-programming-languages">General-Purpose Programming Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="background.html#multi-language-platforms">Multi-Language Platforms</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="background.html#conclusion">Conclusion</a></li>
 </ul>
 </li>
@@ -62,14 +73,35 @@
 <li class="toctree-l1"><a class="reference internal" href="design.html">High-Level Design</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="design.html#why-a-max-extension">Why a Max extension?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design.html#why-not-use-javascript">Why not use JavaScript?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="design.html#why-use-a-lisp-language">Why use a Lisp language?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="design.html#of-the-possible-lisp-languages-why-use-s7-scheme">Of the possible Lisp languages, why use s7 Scheme?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#why-use-a-lisp-language">Why use a Lisp language?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#symbolic-computation-and-list-processing">Symbolic computation and list processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#dynamic-code-loading-and-the-repl">Dynamic code loading and the REPL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#macros-and-domain-specific-languages">Macros and Domain Specific Languages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#max-and-lisp-syntax-compatibility">Max and Lisp syntax compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#of-the-possible-lisp-languages-why-use-s7-scheme">Of the possible Lisp languages, why use s7 Scheme?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#use-in-computer-music">Use in Computer Music</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#linguistic-features">Linguistic Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#ease-of-embedding">Ease of embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#license">License</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="features_usage.html">Features and Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="features_usage.html#installation">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="features_usage.html#object-initialization">Object Initialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="features_usage.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features_usage.html#object-initialization">Object Initialization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#bootstrap-files">Bootstrap files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#source-files">Source Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#inlets-and-outlets">Inlets and Outlets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="features_usage.html#input">Input</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#inlet-0-scheme-expressions">Inlet 0 Scheme Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features_usage.html#inlet-1">Inlet 1+</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="features_usage.html#output">Output</a></li>
 <li class="toctree-l2"><a class="reference internal" href="features_usage.html#sending-messages">Sending Messages</a></li>
 <li class="toctree-l2"><a class="reference internal" href="features_usage.html#buffers-tables">Buffers &amp; Tables</a></li>
@@ -82,8 +114,25 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="conclusion.html">Conclusion</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="conclusion.html#evaluation">Evaluation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="conclusion.html#limitations-and-future-work">Limitations and Future Work</a></li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html#evaluation">Evaluation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#focus-on-programming-musical-events-and-event-oriented-tools">Focus on programming musical events and event-oriented tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#support-multiple-contexts-including-linear-composition-real-time-interaction-and-live-performance">Support multiple contexts, including linear composition, real-time interaction, and live performance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#support-advanced-functional-and-object-oriented-programming-techniques">Support advanced functional and object-oriented programming techniques</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#be-linguistically-optimized-for-the-target-use-cases">Be linguistically optimized for the target use cases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#be-usable-in-conjunction-with-modern-commercial-tools">Be usable in conjunction with modern, commercial tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#support-composing-music-that-is-impractical-on-commercial-tools">Support composing music that is impractical on commercial tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#enable-iterative-development-during-musical-playback">Enable iterative development during musical playback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#evaluation-summary">Evaluation Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="conclusion.html#limitations-and-future-work">Limitations and Future Work</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#limited-integrations">Limited Integrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#real-time-scheduling">Real-time Scheduling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#garbage-collection">Garbage Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#thread-limitations">Thread Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="conclusion.html#difficulty-of-extension">Difficulty of Extension</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="conclusion.html#id1">Conclusion</a></li>
 </ul>
 </li>
